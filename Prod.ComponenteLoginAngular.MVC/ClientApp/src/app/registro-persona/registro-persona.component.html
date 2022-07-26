@@ -82,7 +82,7 @@
         <div>
           <label for="rep_contrasena">REPETIR CONTRASEÑA</label>
           <input type="password"  id="rep_contrasena" name="rep_contrasena" placeholder="" [(ngModel)]="rep_contrasena" (change)="changeContrasenaRep($event)" maxlength="8">
-          <p class="validador" *ngIf="validadorContrasenaRep">Debe ingresar la contraseña repetida.</p>
+          <p class="validador" *ngIf="validadorContrasenaRep">Debe repetir la contraseña </p>
         </div>
         <div class="column">
           <div class="left">
@@ -114,6 +114,9 @@
            <span class="checkradio"></span>
           </label>
         </div>
+      </div>
+
+
         <label class="check" id="c1">Acepto los términos y la <a href="#">Política de Protección de Datos</a>
           <input type="checkbox">
           <span class="checkmark"></span>
@@ -129,7 +132,7 @@
           <button class="buttonCancelar"  (click)="clickPaso1()">Regresar</button>      
         </div>
  
-        </div>
+    
       </div>
       <div class="center">
         <p>¿Ya tienes una cuenta?</p>  
@@ -137,5 +140,5 @@
       </div>
     </div>
   </div>
-  </body>
+</body>
   
