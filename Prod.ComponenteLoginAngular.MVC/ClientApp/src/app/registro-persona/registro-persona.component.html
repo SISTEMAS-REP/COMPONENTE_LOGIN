@@ -1,6 +1,6 @@
 <body class="align">
     <div class="login">
-      <form action="#" class="login__form" method="POST">      
+      <form action="#" class="login__form" method="POST" [formGroup]="validateForm">      
       <header class="login__header">
           <div class="logo-produce">
               <img src="https://www.jymcontadores.pe/wp-content/uploads/2020/06/PRODUCE-2-770x160.jpg" alt="Logo" title="Logo" width="138">
@@ -23,54 +23,52 @@
       </label>
   
       <div >
-          <label for="ruc">RUC</label>
-          <input type="textB" id="ruc" name="ruc" placeholder="Ej.:10152346872">
+          <label class="control-label" >RUC</label>
+          <input type="text" id="ruc" name="ruc" placeholder="Ej.:10152346872" maxlength="11" formControlName="ruc"   [(ngModel)]="ruc" required >
        </div>
   
        <div class="column">
           <div class="left">
               <label for="tipoDoc">TIPO DOCUMENTO</label>
-              <select type="tipoDoc" name="select" placeholder="Seleccionar">
-                  <option value="Seleccionar">--Seleccionar--</option>
-                  <option value="Opción1">Opción 1</option>
-                  <option value="Opción2">Opción 2</option>
-                  <option value="Opción3">Opción 3</option>
+              <select name="select" placeholder="Seleccionar" formControlName="tipoDoc" [(ngModel)]="tipoDoc" required >
+                  <option value="Opción1">DNI</option>
+                  <option value="Opción2">Carnet de Extranjería</option>
                 </select>
           </div>        
           <div class="right">
               <label for="numeroDoc">NÚMERO DOCUMENTO</label>
-              <input type="textB" id="numeroDoc" name="numeroDoc" placeholder="Ej.:15234687">
+              <input type="text" id="numeroDoc" name="numeroDoc" placeholder="Ej.:15234687" formControlName="numeroDoc" [(ngModel)]="numeroDoc"  required>
           </div>
       </div>
   
         <div>
           <label for="apellidos">APELLIDOS</label>
-          <input type="textP" id="apellidos" name="apellidos" placeholder="Ejm:Flores Sánchez">
+          <input type="text" id="apellidos" name="apellidos" placeholder="Ejm:Flores Sánchez" formControlName="apellidos" [(ngModel)]="apellidos"  required>
         </div>
   
         <div>
           <label for="nombres">NOMBRES</label>
-          <input type="textP" id="nombres" name="nombres" placeholder="Ej.:Camila">
+          <input type="text" id="nombres" name="nombres" placeholder="Ej.:Camila" formControlName="nombres" [(ngModel)]="nombres"  required>
         </div>
   
         <div>
           <label for="celular">CELULAR</label>
-          <input type="textB" id="celular" name="celular" placeholder="Ej.:999123045">
+          <input type="text" id="celular" name="celular" placeholder="Ej.:999123045" formControlName="celular" [(ngModel)]="celular" required>
         </div>
   
         <div>
           <label for="correo">CORREO</label>
-          <input type="textB" id="correo" name="correo" placeholder="Ej.:camila.flores@ejemplo.com">
+          <input type="text" id="correo" name="correo" placeholder="Ej.:camila.flores@ejemplo.com"  formControlName="correo" [(ngModel)]="correo" required>
         </div>
   
         <div>
-          <label for="contraseña">CONTRASEÑA</label>
-          <input type="textB" id="contraseña" name="contraseña" placeholder="">
+          <label for="contrasena">CONTRASEÑA</label>
+          <input type="password"  id="contrasena" name="contrasena" placeholder="" formControlName="contrasena" [(ngModel)]="contrasena"  required>
         </div>
   
         <div>
-          <label for="rep_contraseña">REPETIR CONTRASEÑA</label>
-          <input type="textB" id="rep_contraseña" name="rep_contraseña" placeholder="">
+          <label for="rep_contrasena">REPETIR CONTRASEÑA</label>
+          <input type="password"  id="rep_contrasena" name="rep_contrasena" placeholder="" formControlName="rep_contrasena" [(ngModel)]="rep_contrasena"  required>
         </div>
   
         <div class="column">
@@ -88,7 +86,6 @@
             </label>
          </div>
        </div>
-  
   
        <div class="columnRadio">
         <div class="left">
@@ -118,8 +115,8 @@
    
   
         <div>
-          <button class="buttonSiguiente" disabled>Siguiente</button>
-          <button class="buttonSiguiente" disabled>Registrar</button>
+          <button class="buttonSiguiente" disabled >Siguiente</button>
+          <button class="buttonSiguiente" (click)="registroPersona()">Registrar</button>
           <button class="buttonCancelar" disabled>Cancelar</button> 
           <button class="buttonCancelar" disabled>Regresar</button>      
         </div>

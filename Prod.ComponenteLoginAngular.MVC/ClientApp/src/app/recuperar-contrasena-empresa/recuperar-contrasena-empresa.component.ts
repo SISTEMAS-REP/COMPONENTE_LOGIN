@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {  FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-recuperar-contrasena-empresa',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recuperar-contrasena-empresa.component.css']
 })
 export class RecuperarContrasenaEmpresaComponent implements OnInit {
+  validateForm: FormGroup;
 
   constructor() { }
 
