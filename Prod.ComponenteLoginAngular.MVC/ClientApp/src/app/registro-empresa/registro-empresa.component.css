@@ -8,12 +8,12 @@ html {
 }
 
 body {
-  background-color: #fff;
   font-family: 'Varela Round', sans-serif;
   line-height: 1.5;
   margin: 0;
-  padding: 2vmin;
+  padding: 0vmin;
 }
+
 
 /*min-block-size: 10vh;*/
 
@@ -23,6 +23,13 @@ h2 {
 
 h5 {
     margin: 0%;
+}
+
+.validador{
+  font-size: 10px;
+  color: #f90000;
+  text-align: left;
+  margin-bottom: 10px;
 }
 
 input {
@@ -57,42 +64,45 @@ a {
 .align {
   display: grid;
   place-items: center;
+  background-color: #eee;
+  margin-left: 180px;
 }
 
 /* ---------- BUTTON ---------- */
 
 .buttonSiguiente {
-    background-color: #58595B;
-    color: #FFFFFF;
-    margin-bottom: 5px;
-    width: 95.8%;
-    font-size: 12px;
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
-    border-radius: 4px;
-    padding: 3px 6px;
-    
-  }
+  background-color: #58595B;
+  color: #FFFFFF;
+  margin: 12px 0px 6px 0px;
+  width: 100%;
+  font-size: 12px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 1px;
+  padding: 3px 6px;
+  border: 2px solid #58595B;
+}
   
-  .buttonCancelar {
-    background-color: #eee;
-    color: #000;
-    margin-bottom: 5px;
-    width: 95.8%;
-    font-size: 12px;
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
-    border-radius: 4px;
-    padding: 3px 06px;
-  }
+.buttonCancelar {
+  background-color: #eee;
+  color: #000;
+  margin-bottom: 5px;
+  width: 100%;
+  font-size: 12px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 1px;
+  padding: 3px 6px;
+  border: 2px solid #ccc;
+}
 
 .buttonPaso {
   background-color: #000000; /* Green */
   border: none;
   color: white;
-  padding: 6px 10px;
+  padding: 6px 12px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -121,7 +131,8 @@ a {
 
 /* ---------- LOGIN ---------- */
 .login {
-  width: 450px;
+  width: 465px;
+
 }
 
 .login__header {
@@ -160,16 +171,15 @@ a {
 
 .login__form {
   background-color: #fff;
-  border-bottom-left-radius: 1.25em;
-  border-bottom-right-radius: 1.25em;
+  border-bottom-left-radius: 0em;
+  border-bottom-right-radius: 0em;
   color: #777;
   display: grid;
   gap: 0.875em;
-  padding: 0em 2.90em;
-  border-left:10px #28ad63;
+  padding: 1em 1em;
+  
 }
-
-
+ 
 .login label{
   text-align: left;
   font-size: 12px;
@@ -177,35 +187,49 @@ a {
 }
 
 
-.login input[type=textB] {
-    background-color: #fff;
-    width: 100%;
-    padding: 4px 7px;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 1px;
-    box-sizing: border-box;
-    font-size: 12px;
-  }
+.login input {
+  background-color: #fff;
+  width: 100%;
+  padding: 5px 7px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 1px;
+  box-sizing: border-box;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
   
-  .login input[type=textP] {
-    background-color: #eee;
-    width: 100%;
-    padding: 4px 7px;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 1px;
-    box-sizing: border-box;
-    font-size: 12px;
-  }
+.login input:required {
+  border: 1px solid #EB1E23;
+}
 
-.login select[type="tipoDoc"] {
+.login input:invalid {
+  border: 1px solid #EB1E23;
+}
+
+.login input:valid {
+  border: 1px solid #ccc;
+}
+
+.login select {
   padding: 5px 7px;
   width: 80%;
   font-size: 12px;
   border: 1px solid #ccc;
   border-radius: 1px;
   box-sizing: border-box;
+}
+
+.login select:required {
+  border: 1px solid #EB1E23;
+}
+
+.login select:invalid {
+  border: 2px solid #EB1E23;
+}
+
+.login select:valid {
+  border: 2px solid #ccc;
 }
 
 
@@ -262,66 +286,59 @@ a {
     }
     
     /* escondemos el default checkbox */
-    .check input {
-      position: absolute;
-      opacity: 0;
-      cursor: pointer;
-      height: 0;
-      width: 0;
-    }
+  .check input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
     
-    /* creamos un custom checkbox */
-    .checkmark {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 15px;
-      width: 15px;
-      background-color: #ccc;
-      border-radius: 50%;
-    }
+     /* creamos un custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    background-color: #ccc;
+    border-radius: 50%;
+  }
     
-    /* Al pasar el mouse encima, lo ponemos gris */
-    .check:hover input ~ .checkmark {
-      background-color: #ccc;
-    }
-    
-    /* creamos el marcador (escondido al no seleccionar) */
-    .checkmark:after {
-      content: "";
-      position: absolute;
-      display: none;
-    }
-    
-    /* mostramos el marcador al seleccionar */
-    .check input:checked ~ .checkmark:after {
-      display: block;
-    }
-    
-    /* estilo del marcador */
-    .check .checkmark:after {
-      left: 6px;
-      top: 3px;
-      width: 1px;
-      height: 5px;
-      border: solid white;
-      border-width: 0 3px 3px 0;
-      -webkit-transform: rotate(45deg);
-      -ms-transform: rotate(45deg);
-      transform: rotate(45deg);
-    }
+   /* Al pasar el mouse encima, lo ponemos gris */
+  .check:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  /* creamos el marcador (escondido al no seleccionar) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* mostramos el marcador al seleccionar */
+  .check input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* estilo del marcador */
+  .check .checkmark:after {
+    left: 7px;
+    top: 4px;
+    width: 1px;
+    height: 7px;
+    border: solid #fff;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
 
     /* -------------Radio----------------*/
-
-    .columnRadio {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        margin-bottom: 20px;
-      }
-      
-/* El contenedor */
-.radio{
+  
+  /* El contenedor */
+  .radio{
     display: block;
     position: relative;
     padding-left: 22px;
@@ -361,7 +378,7 @@ a {
   
   /* Cuando el botón de radio está marcado, agrega un fondo azul */
   .radio input:checked ~ .checkradio {
-    background-color: #3ec77c;
+    background-color: #000;
   }
   
   /* Crea el indicador (el punto/círculo - oculto cuando no está marcado) */
