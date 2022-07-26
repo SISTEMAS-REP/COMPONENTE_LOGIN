@@ -24,18 +24,24 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
         private readonly IPersonasServicio personasServicio;
         private readonly IProduceVirtualServicio produceVirtualServicio;
         private readonly IRolesServicio rolesServicio;
+        private readonly IReniecServicio _reniecServicio;
+        private readonly ISunatServicio _sunatServicio;
 
         public ComponenteLoginController(
             ILogger<ComponenteLoginController> logger,
 			IPersonasServicio personasServicio,
             IProduceVirtualServicio produceVirtualServicio,
-            IRolesServicio rolesServicio
+            IRolesServicio rolesServicio,
+            IReniecServicio reniecServicio,
+            ISunatServicio sunatServicio
             )
         {
             _logger = logger;
             this.personasServicio = personasServicio;
             this.produceVirtualServicio = produceVirtualServicio;
             this.rolesServicio = rolesServicio;
+            this._reniecServicio = reniecServicio;
+            this._sunatServicio = sunatServicio;
         }
 
         [HttpPost]
@@ -164,16 +170,25 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
             return _Response(respuesta);
         }
 
-		//[AllowAnonymous]
-		//[HttpPost]
-		//[Route("IniciarSesionExtranet")]
-		//public IActionResult IniciarSesionExtranetAsync([FromBody] LoginRequest request)
-		//{
-		//	//var sr = loginProxy.IniciarSesionExtranet(request);
-		//	//return Ok(sr);
-			
-		//}
-	}
+        [HttpPost]
+        [Route("buscarReniec")]
+        public IActionResult buscarReniec(PersonaRequest request)
+        {
+            var reniec = _reniecServicio.Buscar(request.NroDocumento);
+            return _Response(reniec);
+        }
+        //[AllowAnonymous]
+        //[HttpPost]
+        //[Route("IniciarSesionExtranet")]
+        //public IActionResult IniciarSesionExtranetAsync([FromBody] LoginRequest request)
+        //{
+        //	//var sr = loginProxy.IniciarSesionExtranet(request);
+        //	//return Ok(sr);
+
+        //}
+
+
+    }
 
     
 }
