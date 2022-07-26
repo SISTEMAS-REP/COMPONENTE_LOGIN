@@ -21,6 +21,11 @@
     font-size: 1.75rem;
   }
   
+  .validador{
+    font-size: 10px;
+    color: #f90000;
+    text-align: left;
+  }
   
   input {
     background-image: none;

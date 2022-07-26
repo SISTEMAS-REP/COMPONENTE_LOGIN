@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-registro-persona',
@@ -17,56 +16,33 @@ export class RegistroPersonaComponent implements OnInit {
   correo: string = null;
   contrasena: string = null;
   rep_contrasena: string = null;
+  tengoRuc: boolean = false;
 
-  validateForm: FormGroup;
+  isVisiblePaso1 : boolean = true;
+  isVisiblePaso2 : boolean = false;
+
+  //Varibles validador
+  validadorRuc :  boolean = true;
+  validadorTipoDocumento :  boolean = true;
+  validadorNroDocumento :  boolean = true;
+  validadorApellidos :  boolean = true;
+  validadorNombres :  boolean = true;
+  validadorCelular :  boolean = true;
+
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string,
-  private fb: FormBuilder,
-  ) { 
-    this.configuracionFormularioValidacion();
+  ) {
   }
 
   ngOnInit() {
     //this.registroPersonaService();
   }
 
-  configuracionFormularioValidacion = (): void => {
-    debugger;
-    this.validateForm = this.fb.group({
-      ruc: [null, [Validators.required]],
-      tipoDoc: [null, [Validators.required]],
-      numeroDoc: [null, [Validators.required]],
-      apellidos: [null, [Validators.required]],
-      nombres: [null, [Validators.required]],
-      celular: [null, [Validators.required]],
-      correo: [null, [Validators.required]],
-      contrasena: [null, [Validators.required]],
-      rep_contrasena: [null, [Validators.required]]
-
-    });
-  };
-
-  isFormValid = (): boolean => {   
-    debugger; 
-    this.submitForm();
-    return this.validateForm.valid;
-  };
-
-  submitForm = () => {
-    debugger;
-    for (const i in this.validateForm.controls) {
-      this.validateForm.controls[i].markAsDirty();
-      this.validateForm.controls[i].updateValueAndValidity();
-    }
-  };
-
-  registroPersona = () => {
-    debugger;
-    if (this.isFormValid()) {
-      this.registroPersonaService();
-    }    
-  };
-
   registroPersonaService = () =>{
+    if(!this.validadorRuc){
+      return;
+    }
+
+
     let Data = {
       Id: 0,
       IdSector: 2,
@@ -86,24 +62,85 @@ export class RegistroPersonaComponent implements OnInit {
       NroDocPerNatural: this.numeroDoc,
       Contrasena: this.contrasena
     }
-    debugger;
     const formData = {...Data};
     this.http.post(this.baseUrl + 'ComponenteLogin/RegistroPersona', formData).subscribe(result => {
-      debugger;
     }, error => console.error(error));
   }
 
-  // registroPersonaService = () =>{
-  //   debugger
-  //    this.http.post(this.baseUrl + 'ComponenteLogin/RegistroPersona', null)
-  //    .pipe(
-  //      map((response) => {
-  //       debugger
-  //      }),
-  //      catchError((error) => {
-  //        return throwError(error);
-  //      })
-  //    );
-  //  }
+  changeTipoDocumento = (item) =>
+  {   
+    if(this.tipoDoc == 0){
+      this.validadorTipoDocumento = true;
+    }
+    else{
+      this.validadorTipoDocumento = false;
+    }
+  }
+
+  changeTengoRuc= (item) =>
+  {
+    this.tengoRuc;
+  }
+
+  clickPaso1 = () =>{
+    this.isVisiblePaso1 = true;
+    this.isVisiblePaso2 = false;
+  }
+  clickPaso2 = () =>{
+    this.isVisiblePaso1 = false;
+    this.isVisiblePaso2 = true;
+  }
+
+
+
+
+
+  //validador
+
+  changeRuc = (item) =>{
+    if(this.ruc.length == 0){
+      this.validadorRuc = true;
+    }
+    else{
+      this.validadorRuc = false;
+    }
+  } 
+
+  changeNroDocumento = (item) =>{
+    if(this.numeroDoc.length == 0){
+      this.validadorNroDocumento = true;
+    }
+    else{
+      this.validadorNroDocumento = false;
+    }
+  }
+  
+  changeApeliidos = (item) =>{
+    if(this.apellidos.length == 0){
+      this.validadorApellidos = true;
+    }
+    else{
+      this.validadorApellidos = false;
+    }
+  }
+
+  changeNombres = (item) =>{
+    if(this.nombres.length == 0){
+      this.validadorNombres = true;
+    }
+    else{
+      this.validadorNombres = false;
+    }
+  }
+  
+
+  changeCelular = (item) =>{
+    if(this.celular.length == 0){
+      this.validadorCelular = true;
+    }
+    else{
+      this.validadorCelular = false;
+    }
+  }
 
 }
