@@ -37,7 +37,7 @@
             </div>        
             <div class="right">
                 <label for="numeroDoc">NÚMERO DOCUMENTO</label>
-                <input type="text" id="numeroDoc" name="numeroDoc" placeholder="Ej.:15234687" [(ngModel)]="numeroDoc" (change)="changeNroDocumento($event)">
+                 <input type="text" id="numeroDoc" name="numeroDoc" placeholder="Ej.:15234687" [(ngModel)]="numeroDoc" (change)="changeNroDocumento($event)">  <!--(blur)="buscarReniec()" -->
                 <p class="validador" *ngIf="validadorNroDocumento">Debe ingresar el número de documento.</p>
             </div>
         </div>
@@ -68,29 +68,32 @@
       <div *ngIf="isVisiblePaso2">
         <div>
           <label for="correo">CORREO</label>
-          <input type="text" id="correo" name="correo" placeholder="Ej.:camila.flores@ejemplo.com"  [(ngModel)]="correo">
+          <input type="text" id="correo" name="correo" placeholder="Ej.:camila.flores@ejemplo.com"  [(ngModel)]="correo"  (change)="changeCorreo($event)">
+          <p class="validador" *ngIf="validadorCorreo">Debe ingresar el correo.</p>
         </div>
   
         <div>
           <label for="contrasena">CONTRASEÑA</label>
-          <input type="password"  id="contrasena" name="contrasena" placeholder="" [(ngModel)]="contrasena">
+          <input type="password"  id="contrasena" name="contrasena" placeholder="" [(ngModel)]="contrasena" (change)="changeContrasena($event)">
+          <p class="validador" *ngIf="validadorContrasena">Debe ingresar la contraseña.</p>
         </div>
   
         <div>
           <label for="rep_contrasena">REPETIR CONTRASEÑA</label>
-          <input type="password"  id="rep_contrasena" name="rep_contrasena" placeholder="" [(ngModel)]="rep_contrasena">
+          <input type="password"  id="rep_contrasena" name="rep_contrasena" placeholder="" [(ngModel)]="rep_contrasena" (change)="changeContrasenaRep($event)" maxlength="8">
+          <p class="validador" *ngIf="validadorContrasenaRep">Debe ingresar la contraseña repetida.</p>
         </div>
         <div class="column">
           <div class="left">
             <label class="radio">Al menos un simbolo
-             <input type="radio"  name="radio">
+             <input type="radio"  name="radioSimbolo"  disabled>
              <span class="checkradio"></span>
             </label>
          </div>
           
           <div class="right">
             <label class="radio">Al menos un número
-             <input type="radio"  name="radio">
+             <input type="radio"  name="radioNumero" [checked]="ValidarNumeros" disabled>
              <span class="checkradio"></span>
             </label>
          </div>
@@ -99,14 +102,14 @@
         <div class="columnRadio">
         <div class="left">
           <label class="radio">Al menos una mayuscula
-           <input type="radio"  name="radio">
+           <input type="radio"  name="radioMayus" [checked]="ValidarMayuscula" disabled>
            <span class="checkradio"></span>
           </label>
         </div>
         
         <div class="right">
           <label class="radio">Más de 8 digitos
-           <input type="radio"  name="radio">
+           <input type="radio"  name="radioDigitos" [checked]="Validar8Digitos" disabled>
            <span class="checkradio"></span>
           </label>
         </div>

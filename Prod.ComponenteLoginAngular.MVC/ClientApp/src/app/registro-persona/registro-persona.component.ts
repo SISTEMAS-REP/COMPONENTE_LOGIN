@@ -23,26 +23,32 @@ export class RegistroPersonaComponent implements OnInit {
 
   //Varibles validador
   validadorRuc :  boolean = true;
-  validadorTipoDocumento :  boolean = true;
+  validadorTipoDocumento :  boolean = false;
   validadorNroDocumento :  boolean = true;
   validadorApellidos :  boolean = true;
   validadorNombres :  boolean = true;
   validadorCelular :  boolean = true;
+  validadorCorreo :  boolean = true;
+  validadorContrasena :  boolean = true;
+  validadorContrasenaRep :  boolean = true;
 
+  //Validador Contraseña
+  Validar8Digitos : boolean = false;
+  ValidarNumeros : boolean = false;
+  ValidarMayuscula: boolean = false;
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string,
   ) {
   }
 
   ngOnInit() {
     //this.registroPersonaService();
+    this.tipoDoc = 1;
   }
 
   registroPersonaService = () =>{
     if(!this.validadorRuc){
       return;
     }
-
-
     let Data = {
       Id: 0,
       IdSector: 2,
@@ -51,11 +57,11 @@ export class RegistroPersonaComponent implements OnInit {
       CodigoProvincia: "01",
       CodigoDistrito: "01",
       IdTipoIdentificacion: 1,
-      RazonSocial: "RazonSocial",
+      RazonSocial: "",
       Nombres: this.nombres,
       Apellidos: this.apellidos,
       NroDocumento: this.numeroDoc,
-      Direccion: "Direccion",
+      Direccion: "Direccion reniec",
       Celular: this.celular,
       Email: this.correo,
       Flag: "A",
@@ -63,9 +69,29 @@ export class RegistroPersonaComponent implements OnInit {
       Contrasena: this.contrasena
     }
     const formData = {...Data};
-    this.http.post(this.baseUrl + 'ComponenteLogin/RegistroPersona', formData).subscribe(result => {
+    this.http.post(this.baseUrl + 'ComponenteLogin/RegistroPersona', formData).subscribe((result : any) => {
+      if(result.data != null){
+        alert("El registro se guardo con exito.");
+      }
+      else{
+        alert(result.messages[0]);
+      }
+      
     }, error => console.error(error));
   }
+
+
+  buscarReniec = () =>{
+    let Data = {
+      NroDocumento : this.numeroDoc
+    }
+    const formData = {...Data};
+    this.http.post(this.baseUrl + 'ComponenteLogin/buscarReniec', formData).subscribe(result => {
+    }, error => console.error(error));
+  }
+
+
+
 
   changeTipoDocumento = (item) =>
   {   
@@ -140,6 +166,65 @@ export class RegistroPersonaComponent implements OnInit {
     }
     else{
       this.validadorCelular = false;
+    }
+  }
+
+  changeCorreo = (item) =>{
+    if(this.correo.length == 0){
+      this.validadorCorreo = true;
+    }
+    else{
+      this.validadorCorreo = false;
+    }
+  }
+
+  changeContrasena = (item) =>{
+    var name=this.contrasena;
+    var regex = /(\d+)/g;
+    var pr = name.match(regex);
+
+    if(pr != null){
+      this.ValidarNumeros = true;
+    }
+    else{
+      this.ValidarNumeros = false;
+    }
+
+    var regexMayusc = /[A-Z]/g;
+    var pr2 = name.match(regexMayusc);
+   
+    if(pr2 != null){
+      this.ValidarMayuscula = true;
+    }
+    else{
+      this.ValidarMayuscula = false;
+    }
+
+    debugger
+
+    if(this.contrasena.length > 8){
+      this.Validar8Digitos = true;
+    }
+    else{
+      this.Validar8Digitos = false;
+    }
+
+
+
+    if(this.contrasena.length == 0){
+      this.validadorContrasena = true;
+    }
+    else{
+      this.validadorContrasena = false;
+    }
+  }
+
+  changeContrasenaRep = (item) =>{
+    if(this.rep_contrasena.length == 0){
+      this.validadorContrasenaRep = true;
+    }
+    else{
+      this.validadorContrasenaRep = false;
     }
   }
 
