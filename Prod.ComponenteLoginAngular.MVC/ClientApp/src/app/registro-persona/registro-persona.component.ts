@@ -24,10 +24,10 @@ export class RegistroPersonaComponent implements OnInit {
   //Varibles validador
   validadorRuc :  boolean = true;
   validadorTipoDocumento :  boolean = false;
-  validadorNroDocumento :  boolean = true;
-  validadorApellidos :  boolean = true;
-  validadorNombres :  boolean = true;
-  validadorCelular :  boolean = true;
+  validadorNroDocumento :  boolean = false;
+  validadorApellidos :  boolean = false;
+  validadorNombres :  boolean = false;
+  validadorCelular :  boolean = false;
   validadorCorreo :  boolean = true;
   validadorContrasena :  boolean = true;
   validadorContrasenaRep :  boolean = true;
@@ -36,6 +36,7 @@ export class RegistroPersonaComponent implements OnInit {
   Validar8Digitos : boolean = false;
   ValidarNumeros : boolean = false;
   ValidarMayuscula: boolean = false;
+  ValidarSimbolo: boolean = false;
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string,
   ) {
   }
@@ -113,8 +114,25 @@ export class RegistroPersonaComponent implements OnInit {
     this.isVisiblePaso2 = false;
   }
   clickPaso2 = () =>{
-    this.isVisiblePaso1 = false;
-    this.isVisiblePaso2 = true;
+
+    debugger
+    this.changeNroDocumento();
+    this.changeApeliidos();
+    this.changeNombres();
+    this.changeCelular();
+
+    if(this.tengoRuc){
+        if(!this.validadorRuc  &&  !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular){
+          this.isVisiblePaso1 = false;
+          this.isVisiblePaso2 = true;
+        }     
+    }  
+    else{
+      if(!this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular){
+        this.isVisiblePaso1 = false;
+        this.isVisiblePaso2 = true;
+      } 
+    }  
   }
 
 
@@ -123,8 +141,9 @@ export class RegistroPersonaComponent implements OnInit {
 
   //validador
 
-  changeRuc = (item) =>{
-    if(this.ruc.length == 0){
+  changeRuc = () =>{
+    debugger
+    if(this.ruc == null || this.ruc == ""){
       this.validadorRuc = true;
     }
     else{
@@ -132,8 +151,9 @@ export class RegistroPersonaComponent implements OnInit {
     }
   } 
 
-  changeNroDocumento = (item) =>{
-    if(this.numeroDoc.length == 0){
+  changeNroDocumento = () =>{
+    debugger
+    if(this.numeroDoc == null || this.numeroDoc == ""){
       this.validadorNroDocumento = true;
     }
     else{
@@ -141,8 +161,8 @@ export class RegistroPersonaComponent implements OnInit {
     }
   }
   
-  changeApeliidos = (item) =>{
-    if(this.apellidos.length == 0){
+  changeApeliidos = () =>{
+    if(this.apellidos == null || this.apellidos == ""){
       this.validadorApellidos = true;
     }
     else{
@@ -150,8 +170,8 @@ export class RegistroPersonaComponent implements OnInit {
     }
   }
 
-  changeNombres = (item) =>{
-    if(this.nombres.length == 0){
+  changeNombres = () =>{
+    if(this.nombres == null || this.nombres == ""){
       this.validadorNombres = true;
     }
     else{
@@ -160,8 +180,8 @@ export class RegistroPersonaComponent implements OnInit {
   }
   
 
-  changeCelular = (item) =>{
-    if(this.celular.length == 0){
+  changeCelular = () =>{
+    if(this.celular == null || this.celular == ""){
       this.validadorCelular = true;
     }
     else{
@@ -200,7 +220,18 @@ export class RegistroPersonaComponent implements OnInit {
       this.ValidarMayuscula = false;
     }
 
-    debugger
+    var regexSimbolo = /[^\w]/g;
+    var pr3 = name.match(regexSimbolo);
+
+   
+    if(pr3 != null){
+      this.ValidarSimbolo = true;
+    }
+    else{
+      this.ValidarSimbolo = false;
+    }
+
+
 
     if(this.contrasena.length > 8){
       this.Validar8Digitos = true;
