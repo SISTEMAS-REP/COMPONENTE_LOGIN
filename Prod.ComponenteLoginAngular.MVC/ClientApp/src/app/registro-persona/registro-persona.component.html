@@ -13,7 +13,7 @@
       </header>
       <div class="center">
         <button class="buttonPaso" (click)="clickPaso1()" >1</button>
-        <button class="buttonPaso" (click)="clickPaso2()" >2</button>
+        <button class="buttonPaso" [ngClass]="ispaso2 === true ? 'disabled' : 'null'" (click)="clickPaso2()">2</button>
       </div>
       <div *ngIf="isVisiblePaso1">
         <label class="check" id="c1">TENGO RUC
@@ -81,8 +81,9 @@
   
         <div>
           <label for="rep_contrasena">REPETIR CONTRASEÑA</label>
-          <input type="password"  id="rep_contrasena" name="rep_contrasena" placeholder="" [(ngModel)]="rep_contrasena" (change)="changeContrasenaRep($event)" maxlength="8">
-          <p class="validador" *ngIf="validadorContrasenaRep">Debe repetir la contraseña </p>
+          <input type="password"  id="rep_contrasena" name="rep_contrasena" placeholder="" [(ngModel)]="rep_contrasena" (change)="changeContrasenaRep($event)">
+          <p class="validador" *ngIf="validadorContrasenaRep">Debe ingresar la contraseña </p>
+          <p class="validador" *ngIf="validadorContrasenaRepetir">Debe repetir la contraseña </p>
         </div>
         <div class="column">
           <div class="left">

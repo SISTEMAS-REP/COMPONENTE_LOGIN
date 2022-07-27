@@ -22,21 +22,24 @@ export class RegistroPersonaComponent implements OnInit {
   isVisiblePaso2 : boolean = false;
 
   //Varibles validador
-  validadorRuc :  boolean = true;
+  validadorRuc :  boolean = false;
   validadorTipoDocumento :  boolean = false;
   validadorNroDocumento :  boolean = false;
   validadorApellidos :  boolean = false;
   validadorNombres :  boolean = false;
   validadorCelular :  boolean = false;
-  validadorCorreo :  boolean = true;
-  validadorContrasena :  boolean = true;
-  validadorContrasenaRep :  boolean = true;
+  validadorCorreo :  boolean = false;
+  validadorContrasena :  boolean = false;
+  validadorContrasenaRep :  boolean = false;
+  validadorContrasenaRepetir : boolean = false;
 
   //Validador Contraseña
   Validar8Digitos : boolean = false;
   ValidarNumeros : boolean = false;
   ValidarMayuscula: boolean = false;
   ValidarSimbolo: boolean = false;
+
+  ispaso2: boolean = true;
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string,
   ) {
   }
@@ -47,8 +50,17 @@ export class RegistroPersonaComponent implements OnInit {
   }
 
   registroPersonaService = () =>{
-    if(!this.validadorRuc){
-      return;
+    debugger
+    this.changeCorreo();
+    this.changeContrasena();
+    this.changeContrasenaRep();
+
+    if(!this.validadorCorreo && !this.validadorContrasena && !this.validadorContrasenaRep){
+      if(!this.ValidarNumeros || !this.Validar8Digitos || !this.ValidarMayuscula || !this.ValidarSimbolo || this.validadorContrasenaRepetir)
+      {
+        return;
+      }
+      
     }
     let Data = {
       Id: 0,
@@ -94,7 +106,7 @@ export class RegistroPersonaComponent implements OnInit {
 
 
 
-  changeTipoDocumento = (item) =>
+  changeTipoDocumento = () =>
   {   
     if(this.tipoDoc == 0){
       this.validadorTipoDocumento = true;
@@ -104,9 +116,8 @@ export class RegistroPersonaComponent implements OnInit {
     }
   }
 
-  changeTengoRuc= (item) =>
+  changeTengoRuc= () =>
   {
-    this.tengoRuc;
   }
 
   clickPaso1 = () =>{
@@ -114,8 +125,6 @@ export class RegistroPersonaComponent implements OnInit {
     this.isVisiblePaso2 = false;
   }
   clickPaso2 = () =>{
-
-    debugger
     this.changeNroDocumento();
     this.changeApeliidos();
     this.changeNombres();
@@ -125,12 +134,14 @@ export class RegistroPersonaComponent implements OnInit {
         if(!this.validadorRuc  &&  !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular){
           this.isVisiblePaso1 = false;
           this.isVisiblePaso2 = true;
+          this.ispaso2 = false;
         }     
     }  
     else{
       if(!this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular){
         this.isVisiblePaso1 = false;
         this.isVisiblePaso2 = true;
+        this.ispaso2 = false;
       } 
     }  
   }
@@ -142,7 +153,6 @@ export class RegistroPersonaComponent implements OnInit {
   //validador
 
   changeRuc = () =>{
-    debugger
     if(this.ruc == null || this.ruc == ""){
       this.validadorRuc = true;
     }
@@ -152,7 +162,6 @@ export class RegistroPersonaComponent implements OnInit {
   } 
 
   changeNroDocumento = () =>{
-    debugger
     if(this.numeroDoc == null || this.numeroDoc == ""){
       this.validadorNroDocumento = true;
     }
@@ -189,8 +198,8 @@ export class RegistroPersonaComponent implements OnInit {
     }
   }
 
-  changeCorreo = (item) =>{
-    if(this.correo.length == 0){
+  changeCorreo = () =>{
+    if(this.correo == null || this.correo == ""){
       this.validadorCorreo = true;
     }
     else{
@@ -198,51 +207,52 @@ export class RegistroPersonaComponent implements OnInit {
     }
   }
 
-  changeContrasena = (item) =>{
-    var name=this.contrasena;
-    var regex = /(\d+)/g;
-    var pr = name.match(regex);
+  changeContrasena = () =>{
+    if(this.contrasena != null)
+    {
+        var name=this.contrasena;
+        var regex = /(\d+)/g;
+        var pr = name.match(regex);
 
-    if(pr != null){
-      this.ValidarNumeros = true;
+        if(pr != null){
+          this.ValidarNumeros = true;
+        }
+        else{
+          this.ValidarNumeros = false;
+        }
+
+        var regexMayusc = /[A-Z]/g;
+        var pr2 = name.match(regexMayusc);
+      
+        if(pr2 != null){
+          this.ValidarMayuscula = true;
+        }
+        else{
+          this.ValidarMayuscula = false;
+        }
+
+        var regexSimbolo = /[^\w]/g;
+        var pr3 = name.match(regexSimbolo);
+
+      
+        if(pr3 != null){
+          this.ValidarSimbolo = true;
+        }
+        else{
+          this.ValidarSimbolo = false;
+        }
+
+
+
+        if(this.contrasena.length > 8){
+          this.Validar8Digitos = true;
+        }
+        else{
+          this.Validar8Digitos = false;
+        }
     }
-    else{
-      this.ValidarNumeros = false;
-    }
-
-    var regexMayusc = /[A-Z]/g;
-    var pr2 = name.match(regexMayusc);
-   
-    if(pr2 != null){
-      this.ValidarMayuscula = true;
-    }
-    else{
-      this.ValidarMayuscula = false;
-    }
-
-    var regexSimbolo = /[^\w]/g;
-    var pr3 = name.match(regexSimbolo);
-
-   
-    if(pr3 != null){
-      this.ValidarSimbolo = true;
-    }
-    else{
-      this.ValidarSimbolo = false;
-    }
-
-
-
-    if(this.contrasena.length > 8){
-      this.Validar8Digitos = true;
-    }
-    else{
-      this.Validar8Digitos = false;
-    }
-
-
-
-    if(this.contrasena.length == 0){
+    
+    if(this.contrasena == null || this.contrasena == ""){
       this.validadorContrasena = true;
     }
     else{
@@ -250,12 +260,22 @@ export class RegistroPersonaComponent implements OnInit {
     }
   }
 
-  changeContrasenaRep = (item) =>{
-    if(this.rep_contrasena.length == 0){
+  changeContrasenaRep = () =>{
+    debugger
+    if(this.rep_contrasena == null || this.rep_contrasena == ""){
       this.validadorContrasenaRep = true;
     }
     else{
       this.validadorContrasenaRep = false;
+    }
+
+    if(this.contrasena != null || this.rep_contrasena != null){
+      if(this.contrasena != this.rep_contrasena){
+        this.validadorContrasenaRepetir = true;
+      }
+      else{
+        this.validadorContrasenaRepetir = false;
+      }
     }
   }
 
