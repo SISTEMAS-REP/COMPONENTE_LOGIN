@@ -31,8 +31,9 @@
             <div class="left">
                 <label for="tipoDoc">TIPO DOCUMENTO</label>
                 <select name="select" placeholder="Seleccionar" [(ngModel)]="tipoDoc" (change)="changeTipoDocumento($event)">
-                    <option value="1">DNI</option>
-                    <option value="2">Carnet de Extranjería</option>
+                   <option value="0">--Seleccionar--</option>
+                   <option value="1">DNI</option>
+                   <option value="2">Carnet de Extranjería</option>
                 </select>
                 <p class="validador" *ngIf="validadorTipoDocumento">Debe ingresar el tipo de documento.</p>
             </div>        
