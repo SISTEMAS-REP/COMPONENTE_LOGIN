@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, Inject, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-registro-empresa',
@@ -12,7 +13,9 @@ export class RegistroEmpresaComponent implements OnInit {
   isVisiblePaso3 : boolean = false;
   isVisiblePaso4 : boolean = false;
 
-  constructor() { }
+  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string,
+  ) {
+  }
 
   ngOnInit(): void {
   }

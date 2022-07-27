@@ -12,7 +12,7 @@ using Http = Microsoft.AspNetCore.Http;
 using sep = Prod.ServiciosExternos.Personas;
 using roles = Prod.ServiciosExternos.PRODUCE_VIRTUAL.Roles;
 using Prod.ServiciosExternos.PRODUCE_VIRTUAL.Roles;
-using Microsoft.AspNetCore.Authorization;
+using Prod.ComponenteLogin.MVC.Configuracion.Proxy;
 
 namespace Prod.ComponenteLoginAngular.MVC.Controllers
 {
@@ -26,6 +26,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
         private readonly IRolesServicio rolesServicio;
         private readonly IReniecServicio _reniecServicio;
         private readonly ISunatServicio _sunatServicio;
+        private readonly LoginProxy loginProxy;
 
         public ComponenteLoginController(
             ILogger<ComponenteLoginController> logger,
@@ -33,7 +34,8 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
             IProduceVirtualServicio produceVirtualServicio,
             IRolesServicio rolesServicio,
             IReniecServicio reniecServicio,
-            ISunatServicio sunatServicio
+            ISunatServicio sunatServicio,
+            LoginProxy loginProxy
             )
         {
             _logger = logger;
@@ -42,6 +44,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
             this.rolesServicio = rolesServicio;
             this._reniecServicio = reniecServicio;
             this._sunatServicio = sunatServicio;
+            this.loginProxy = loginProxy;
         }
 
         [HttpPost]
@@ -177,15 +180,16 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
             var reniec = _reniecServicio.Buscar(request.NroDocumento);
             return _Response(reniec);
         }
-        //[AllowAnonymous]
-        //[HttpPost]
-        //[Route("IniciarSesionExtranet")]
-        //public IActionResult IniciarSesionExtranetAsync([FromBody] LoginRequest request)
-        //{
-        //	//var sr = loginProxy.IniciarSesionExtranet(request);
-        //	//return Ok(sr);
 
-        //}
+
+        [HttpPost]
+        [Route("IniciarSesionExtranet")]
+        public IActionResult IniciarSesionExtranetAsync([FromBody] ComponenteLogin.MVC.Configuracion.Proxy.LoginRequest request)
+        {
+            var sr = loginProxy.IniciarSesionExtranet(request);
+            return Ok(sr);
+
+        }
 
 
     }
