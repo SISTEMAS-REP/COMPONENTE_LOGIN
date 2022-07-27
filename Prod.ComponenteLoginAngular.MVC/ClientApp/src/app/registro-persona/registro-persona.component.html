@@ -23,8 +23,8 @@
     
         <div *ngIf="tengoRuc">
             <label class="control-label" >RUC</label>
-            <input type="text" id="ruc" name="ruc" placeholder="Ej.:10152346872" maxlength="11" [(ngModel)]="ruc" (change)="changeRuc($event)" >
-            <p class="validador" *ngIf="validadorRuc">Debe ingresar el RUC</p>
+            <input type="text" id="ruc" name="ruc" placeholder="Ej.:10152346872"  [(ngModel)]="ruc" (change)="changeRuc($event)" maxlength="11" (keypress)="restrictNumeric($event)">
+            <p class="validador" *ngIf="validadorRuc">Debe ingresar el RUC.app-fetch-data</p>
          </div>
     
          <div class="column">
@@ -39,26 +39,26 @@
             </div>        
             <div class="right">
                 <label for="numeroDoc">NÚMERO DOCUMENTO</label>
-                 <input type="text" id="numeroDoc" name="numeroDoc" placeholder="Ej.:15234687" [(ngModel)]="numeroDoc" (change)="changeNroDocumento($event)">  <!--(blur)="buscarReniec()" -->
+                 <input type="text" id="numeroDoc" name="numeroDoc" placeholder="Ej.:15234687" [(ngModel)]="numeroDoc" (change)="changeNroDocumento($event)" maxlength="30" (keypress)="restrictNumeric($event)">  <!--(blur)="buscarReniec()" -->
                 <p class="validador" *ngIf="validadorNroDocumento">Debe ingresar el número de documento.</p>
             </div>
         </div>
     
           <div>
             <label for="apellidos">APELLIDOS</label>
-            <input type="text" id="apellidos" name="apellidos" placeholder="Ejm:Flores Sánchez" [(ngModel)]="apellidos" (change)="changeApeliidos($event)">
+            <input type="text" id="apellidos" name="apellidos" placeholder="Ejm:Flores Sánchez" [(ngModel)]="apellidos" (change)="changeApeliidos($event)" maxlength="150">
             <p  class="validador" *ngIf="validadorApellidos">Debe ingresar los apellidos.</p>
           </div>
     
           <div>
             <label for="nombres">NOMBRES</label>
-            <input type="text" id="nombres" name="nombres" placeholder="Ej.:Camila" [(ngModel)]="nombres" (change)="changeNombres($event)">
+            <input type="text" id="nombres" name="nombres" placeholder="Ej.:Camila" [(ngModel)]="nombres" (change)="changeNombres($event)" maxlength="150">
             <p class="validador" *ngIf="validadorNombres">Debe ingresar los nombres.</p>
           </div>
     
           <div>
             <label for="celular">CELULAR</label>
-            <input type="text" id="celular" name="celular" placeholder="Ej.:999123045"  [(ngModel)]="celular" (change)="changeCelular($event)">
+            <input type="text" id="celular" name="celular" placeholder="Ej.:999123045"  [(ngModel)]="celular" (change)="changeCelular($event)" maxlength="9" (keypress)="restrictNumeric($event)">
             <p class="validador" *ngIf="validadorCelular">Debe ingresar el celular.</p>
           </div>
     
@@ -70,21 +70,21 @@
       <div *ngIf="isVisiblePaso2">
         <div>
           <label for="correo">CORREO</label>
-          <input type="text" id="correo" name="correo" placeholder="Ej.:camila.flores@ejemplo.com"  [(ngModel)]="correo"  (change)="changeCorreo($event)">
+          <input type="text" id="correo" name="correo" placeholder="Ej.:camila.flores@ejemplo.com"  [(ngModel)]="correo"  (change)="changeCorreo($event)" maxlength="150" >
           <p class="validador" *ngIf="validadorCorreo">Debe ingresar el correo.</p>
           <p class="validador" *ngIf="validadorCorreo2">Correo inválido.</p>
         </div>
   
         <div>
           <label for="contrasena">CONTRASEÑA</label>
-          <input type="password"  id="contrasena" name="contrasena" placeholder="" [(ngModel)]="contrasena" (change)="changeContrasena($event)">
+          <input type="password"  id="contrasena" name="contrasena" placeholder="" [(ngModel)]="contrasena" (change)="changeContrasena($event)" maxlength="150" >
           <button (click)="mostrarContrasena()">mostrar</button>
           <p class="validador" *ngIf="validadorContrasena">Debe ingresar la contraseña.</p>
         </div>
   
         <div>
           <label for="rep_contrasena">REPETIR CONTRASEÑA</label>
-          <input type="password"  id="rep_contrasena" name="rep_contrasena" placeholder="" [(ngModel)]="rep_contrasena" (change)="changeContrasenaRep($event)">
+          <input type="password"  id="rep_contrasena" name="rep_contrasena" placeholder="" [(ngModel)]="rep_contrasena" (change)="changeContrasenaRep($event)" maxlength="150" >
           <button (click)="mostrarContrasenaRepe()">mostrar</button>
           <p class="validador" *ngIf="validadorContrasenaRep">Debe ingresar la contraseña </p>
           <p class="validador" *ngIf="validadorContrasenaRepetir">Debe repetir la contraseña </p>

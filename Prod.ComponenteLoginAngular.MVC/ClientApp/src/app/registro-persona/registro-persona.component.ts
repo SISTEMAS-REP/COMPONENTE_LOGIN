@@ -21,7 +21,7 @@ export class RegistroPersonaComponent implements OnInit {
   isVisiblePaso1 : boolean = true;
   isVisiblePaso2 : boolean = false;
 
-  //Varibles validador
+  //Variables validador
   validadorRuc :  boolean = true;
   validadorTipoDocumento :  boolean = false;
   validadorNroDocumento :  boolean = false;
@@ -95,8 +95,6 @@ export class RegistroPersonaComponent implements OnInit {
 
 
 
-
-
   changeTengoRuc= (item) =>
   {
     this.tengoRuc;
@@ -105,6 +103,7 @@ export class RegistroPersonaComponent implements OnInit {
   clickPaso1 = () =>{
     this.isVisiblePaso1 = true;
     this.isVisiblePaso2 = false;
+    this.ispaso2 = true;
   }
   clickPaso2 = () =>{
 
@@ -130,9 +129,6 @@ export class RegistroPersonaComponent implements OnInit {
       } 
     }  
   }
-
-
-
 
 
   //validador
@@ -314,5 +310,32 @@ export class RegistroPersonaComponent implements OnInit {
       elemento.type = "password";
     }
   }
+
+  public restrictNumeric(e) {
+    let input;
+    if (e.metaKey || e.ctrlKey) {
+      return true;
+    }
+    if (e.which === 32) {
+     return false;
+    }
+    if (e.which === 0) {
+     return true;
+    }
+    if (e.which === 46) {
+      return true;
+     }
+    if (e.which < 33) {
+      return true;
+    }
+    if (e.which === 188){
+        return true;
+      }
+     
+
+    input = String.fromCharCode(e.which);
+    return !!/[\d\s]/.test(input);
+   }
+
 
 }
