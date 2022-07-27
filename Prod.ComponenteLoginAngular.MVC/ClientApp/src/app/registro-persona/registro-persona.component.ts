@@ -107,6 +107,7 @@ export class RegistroPersonaComponent implements OnInit {
   clickPaso2 = () =>{
 
     debugger
+    this.changeTipoDocumento(0);
     this.changeNroDocumento();
     this.changeApeliidos();
     this.changeNombres();
