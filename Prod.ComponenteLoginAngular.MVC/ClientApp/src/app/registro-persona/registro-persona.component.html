@@ -71,17 +71,20 @@
           <label for="correo">CORREO</label>
           <input type="text" id="correo" name="correo" placeholder="Ej.:camila.flores@ejemplo.com"  [(ngModel)]="correo"  (change)="changeCorreo($event)">
           <p class="validador" *ngIf="validadorCorreo">Debe ingresar el correo.</p>
+          <p class="validador" *ngIf="validadorCorreo2">Correo inválido.</p>
         </div>
   
         <div>
           <label for="contrasena">CONTRASEÑA</label>
           <input type="password"  id="contrasena" name="contrasena" placeholder="" [(ngModel)]="contrasena" (change)="changeContrasena($event)">
+          <button (click)="mostrarContrasena()">mostrar</button>
           <p class="validador" *ngIf="validadorContrasena">Debe ingresar la contraseña.</p>
         </div>
   
         <div>
           <label for="rep_contrasena">REPETIR CONTRASEÑA</label>
           <input type="password"  id="rep_contrasena" name="rep_contrasena" placeholder="" [(ngModel)]="rep_contrasena" (change)="changeContrasenaRep($event)">
+          <button (click)="mostrarContrasenaRepe()">mostrar</button>
           <p class="validador" *ngIf="validadorContrasenaRep">Debe ingresar la contraseña </p>
           <p class="validador" *ngIf="validadorContrasenaRepetir">Debe repetir la contraseña </p>
         </div>

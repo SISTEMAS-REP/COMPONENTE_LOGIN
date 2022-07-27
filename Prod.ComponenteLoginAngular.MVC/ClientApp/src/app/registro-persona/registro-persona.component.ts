@@ -198,7 +198,25 @@ export class RegistroPersonaComponent implements OnInit {
     }
   }
 
+  validadorCorreo2 : boolean = false;
   changeCorreo = () =>{
+    if(this.correo != null)
+    {
+      var reg = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+      var regOficial = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+  
+      if (reg.test(this.correo) && regOficial.test(this.correo)) {
+        this.validadorCorreo2 = false;
+      } else if (reg.test(this.correo)) {
+        this.validadorCorreo2 = false;
+  
+      } else {
+        this.validadorCorreo2 = true;
+      }
+    }
+  
+
     if(this.correo == null || this.correo == ""){
       this.validadorCorreo = true;
     }
@@ -276,6 +294,28 @@ export class RegistroPersonaComponent implements OnInit {
       else{
         this.validadorContrasenaRepetir = false;
       }
+    }
+  }
+
+  mostrarContrasena(){
+    let elemento :any = document.getElementById('contrasena');
+    
+    if(elemento.type == "password"){
+      elemento.type = "text";
+    }
+    else{
+      elemento.type = "password";
+    }
+  }
+
+  mostrarContrasenaRepe(){
+    let elemento :any = document.getElementById('rep_contrasena');
+    
+    if(elemento.type == "password"){
+      elemento.type = "text";
+    }
+    else{
+      elemento.type = "password";
     }
   }
 
