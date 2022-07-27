@@ -13,12 +13,14 @@
       </header>
   
       <div class="center">
-        <button class="buttonPaso" disabled >1</button>
-        <button class="buttonPaso disabled" disabled >2</button>
-        <button class="buttonPaso disabled" disabled >3</button>
-        <button class="buttonPaso disabled" disabled >4</button>
+        <button class="buttonPaso" (click)="clickPaso1()" >1</button>
+        <button class="buttonPaso" (click)="clickPaso2()" >2</button>
+        <button class="buttonPaso" (click)="clickPaso3()" >3</button>
+        <button class="buttonPaso" (click)="clickPaso4()" >4</button>
       </div>
   
+    <div *ngIf="isVisiblePaso1">
+
       <h5 class="center">DATOS EMPRESA</h5>
   
       <div>
@@ -35,7 +37,17 @@
         <label for="nombres">DIRECCIÓN</label>
         <input type="text" id="nombres" name="nombres" placeholder="Ej.:Camila">
       </div>
-  
+
+      <div>
+        <button class="buttonSiguiente" (click)="clickPaso2()">Siguiente</button>
+        <button class="buttonCancelar">Cancelar</button>
+      </div>
+
+    </div>
+
+
+    <div *ngIf="isVisiblePaso2">
+
       <h5 class="center">DATOS REPRESENTANTE LEGAL</h5>
 
        <div class="column">
@@ -63,7 +75,16 @@
           <label for="nombres">NOMBRES</label>
           <input type="text" id="nombres" name="nombres" placeholder="Ej.:Camila">
         </div>
-  
+
+        <div>
+          <button class="buttonSiguiente" (click)="clickPaso3()">Siguiente</button>
+          <button class="buttonCancelar">Regresar</button>
+        </div>
+
+    </div>
+
+    <div *ngIf="isVisiblePaso3">
+
         <h5 class="center">DATOS DE CONTACTO</h5>
 
         <div>
@@ -80,7 +101,16 @@
           <label for="rep_correo">REPETIR CORREO</label>
           <input type="text" id="rep_correo" name="rep_correo" placeholder="Ej.:camila.flores@ejemplo.com">
         </div>
+
+        <div>
+          <button class="buttonSiguiente" (click)="clickPaso4()">Siguiente</button>
+          <button class="buttonCancelar">Regresar</button>
+        </div>
+
+      </div>
   
+
+      <div *ngIf="isVisiblePaso4">
         <div>
           <label for="contraseña">CONTRASEÑA</label>
           <input type="text" id="contraseña" name="contraseña" placeholder="">
@@ -132,14 +162,15 @@
         <label class="check" id="c1">Acepto los términos y la mensajeria
           <input type="checkbox" >
           <span class="checkmark"></span>
-        </label>
-        
+        </label>  
+       
         <div>
-          <button class="buttonSiguiente" disabled>Siguiente</button>
-          <button class="buttonSiguiente" disabled>Registrar</button>
-          <button class="buttonCancelar" disabled>Cancelar</button> 
-          <button class="buttonCancelar" disabled>Regresar</button>      
+          <button class="buttonSiguiente">Registrar</button>
+          <button class="buttonCancelar">Regresar</button>
         </div>
+
+      </div>
+    
   
         <div class="center">
           <p>¿Ya tienes una cuenta?</p>  
