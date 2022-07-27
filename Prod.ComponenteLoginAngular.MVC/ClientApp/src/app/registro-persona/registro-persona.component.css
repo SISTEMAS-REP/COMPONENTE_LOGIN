@@ -405,7 +405,7 @@
   
   /* Cuando el botón de radio está marcado, agrega un fondo azul */
   .radio input:checked ~ .checkradio {
-    background-color: #000;
+    background-color: #34b434ee;
   }
   
   /* Crea el indicador (el punto/círculo - oculto cuando no está marcado) */
