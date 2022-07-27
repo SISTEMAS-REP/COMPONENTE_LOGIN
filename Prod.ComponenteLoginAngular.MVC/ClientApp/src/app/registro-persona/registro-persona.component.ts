@@ -28,15 +28,17 @@ export class RegistroPersonaComponent implements OnInit {
   validadorApellidos :  boolean = false;
   validadorNombres :  boolean = false;
   validadorCelular :  boolean = false;
-  validadorCorreo :  boolean = true;
-  validadorContrasena :  boolean = true;
-  validadorContrasenaRep :  boolean = true;
-
+  validadorCorreo :  boolean = false;
+  validadorContrasena :  boolean = false;
+  validadorContrasenaRep :  boolean = false;
+  validadorContrasenaRepetir : boolean = false;
   //Validador Contraseña
   Validar8Digitos : boolean = false;
   ValidarNumeros : boolean = false;
   ValidarMayuscula: boolean = false;
   ValidarSimbolo: boolean = false;
+
+  ispaso2 : boolean = true;
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string,
   ) {
   }
@@ -117,12 +119,14 @@ export class RegistroPersonaComponent implements OnInit {
         if(!this.validadorRuc  &&  !this.validadorTipoDocumento &&  !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular){
           this.isVisiblePaso1 = false;
           this.isVisiblePaso2 = true;
+          this.ispaso2 = false;
         }     
     }  
     else{
       if(!this.validadorTipoDocumento && !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular){
         this.isVisiblePaso1 = false;
         this.isVisiblePaso2 = true;
+        this.ispaso2 = false;
       } 
     }  
   }
@@ -271,7 +275,7 @@ export class RegistroPersonaComponent implements OnInit {
     }
   }
 
-  changeContrasenaRep = (item) =>{
+  changeContrasenaRep = () =>{
     if(this.rep_contrasena.length == 0){
       this.validadorContrasenaRep = true;
     }
