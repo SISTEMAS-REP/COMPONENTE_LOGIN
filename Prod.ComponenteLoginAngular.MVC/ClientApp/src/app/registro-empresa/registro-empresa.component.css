@@ -262,6 +262,11 @@ a {
 }
 .center {
   text-align: center;
+  margin-bottom: 12px;
+}
+
+.Pasos{
+  text-align: center;
 }
 
 .disabled {
@@ -379,7 +384,7 @@ a {
   
   /* Cuando el botón de radio está marcado, agrega un fondo azul */
   .radio input:checked ~ .checkradio {
-    background-color: #000;
+    background-color: #34b434ee;
   }
   
   /* Crea el indicador (el punto/círculo - oculto cuando no está marcado) */
@@ -392,6 +397,17 @@ a {
   /* Mostrar el indicador (punto/círculo) cuando está marcado */
   .radio input:checked ~ .checkradio:after {
     display: block;
+  }
+  
+  .login .radio {
+    font-size: 10px;
+  }
+  
+  .columnRadio {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
   }
   
   
