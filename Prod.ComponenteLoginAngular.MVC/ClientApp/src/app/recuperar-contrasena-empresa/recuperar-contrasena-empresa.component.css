@@ -359,16 +359,7 @@ background-color: #000;
   transform: rotate(45deg);
 }
 
-.login .radio {
-  font-size: 10px;
-}
 
-.columnRadio {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-}
 
 /* -------------Radio----------------*/
 
@@ -428,3 +419,13 @@ background-color: #000;
   display: block;
 }
 
+.login .radio {
+  font-size: 10px;
+}
+
+.columnRadio {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
