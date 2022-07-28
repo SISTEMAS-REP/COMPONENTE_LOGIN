@@ -115,14 +115,14 @@ export class RegistroPersonaComponent implements OnInit {
     this.changeCelular();
 
     if(this.tengoRuc){
-        if(!this.validadorRuc  &&  !this.validadorTipoDocumento &&  !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular){
+        if(!this.validadorRuc  &&  !this.validadorTipoDocumento &&  !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular && !this.validadorCelularLength){
           this.isVisiblePaso1 = false;
           this.isVisiblePaso2 = true;
           this.ispaso2 = false;
         }     
     }  
     else{
-      if(!this.validadorTipoDocumento && !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular){
+      if(!this.validadorTipoDocumento && !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular  && !this.validadorCelularLength){
         this.isVisiblePaso1 = false;
         this.isVisiblePaso2 = true;
         this.ispaso2 = false;
@@ -183,6 +183,7 @@ export class RegistroPersonaComponent implements OnInit {
   }
   
 
+  validadorCelularLength : boolean = false;
   changeCelular = () =>{
     if(this.celular == null || this.celular == ""){
       this.validadorCelular = true;
@@ -190,9 +191,15 @@ export class RegistroPersonaComponent implements OnInit {
     else{
       this.validadorCelular = false;
     }
-  }
 
-  validadorCorreo2 : boolean = false;
+    if( this.celular.length < 9){
+      this.validadorCelularLength = true;
+    }
+    else{
+      this.validadorCelularLength = false;
+    }
+  }
+  validadorCorreoInvalido : boolean = false;
   changeCorreo = () =>{
     if(this.correo != null)
     {
@@ -201,12 +208,12 @@ export class RegistroPersonaComponent implements OnInit {
       var regOficial = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   
       if (reg.test(this.correo) && regOficial.test(this.correo)) {
-        this.validadorCorreo2 = false;
+        this.validadorCorreoInvalido = false;
       } else if (reg.test(this.correo)) {
-        this.validadorCorreo2 = false;
+        this.validadorCorreoInvalido = false;
   
       } else {
-        this.validadorCorreo2 = true;
+        this.validadorCorreoInvalido = true;
       }
     }
   

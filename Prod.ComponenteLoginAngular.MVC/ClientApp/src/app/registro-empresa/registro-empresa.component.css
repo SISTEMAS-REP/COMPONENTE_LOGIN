@@ -28,7 +28,7 @@ h5 {
 
 .validador{
   font-size: 10px;
-  color: #f90000;
+  color: #EB1E23;
   text-align: left;
   margin-bottom: 10px;
 }
@@ -200,6 +200,31 @@ a {
   margin-bottom: 5px;
 }
   
+.login .input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+
+.login .input.password {
+  padding: 15px 35px 15px 15px;
+}
+
+.login .input-icon {
+  color: #191919;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 12px;
+  top: 66%;
+  transform: translateY(-50%);
+}
+
+.login .input-icon.password {
+  left: unset;
+  right: 12px;
+}
+
 .login input:required {
   border: 1px solid #EB1E23;
 }
@@ -372,7 +397,7 @@ a {
     left: 0;
     height: 10px;
     width: 10px;
-    background-color: #eee;
+    background-color: #FFBEBA;
     border-radius: 50%;
     margin-top: 3px;
   }

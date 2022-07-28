@@ -109,7 +109,7 @@ export class RegistroEmpresaComponent implements OnInit {
     this.changeCorreo();
     this.changeCorreoRep();
  
-      if(!this.validadorCelular && !this.validadorCorreo && !this.validadorCorreo2 && !this.validadorCorreoRep&& !this.validadorCorreoRepetir){
+      if(!this.validadorCelular &&   !this.validadorCelularLength && !this.validadorCorreo && !this.validadorCorreoInvalido && !this.validadorCorreoRep&& !this.validadorCorreoRepetir){
         this.isVisiblePaso1 = false;
         this.isVisiblePaso2 = false;
         this.isVisiblePaso3 = false;
@@ -190,8 +190,8 @@ export class RegistroEmpresaComponent implements OnInit {
       this.validadorNombres = false;
     }
   }
-  
 
+  validadorCelularLength : boolean = false;
   changeCelular = () =>{
     if(this.celular == null || this.celular == ""){
       this.validadorCelular = true;
@@ -199,9 +199,16 @@ export class RegistroEmpresaComponent implements OnInit {
     else{
       this.validadorCelular = false;
     }
+
+    if( this.celular.length < 9){
+      this.validadorCelularLength = true;
+    }
+    else{
+      this.validadorCelularLength = false;
+    }
   }
 
-  validadorCorreo2 : boolean = false;
+  validadorCorreoInvalido : boolean = false;
   changeCorreo = () =>{
     if(this.correo != null)
     {
@@ -210,12 +217,12 @@ export class RegistroEmpresaComponent implements OnInit {
       var regOficial = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   
       if (reg.test(this.correo) && regOficial.test(this.correo)) {
-        this.validadorCorreo2 = false;
+        this.validadorCorreoInvalido = false;
       } else if (reg.test(this.correo)) {
-        this.validadorCorreo2 = false;
+        this.validadorCorreoInvalido = false;
   
       } else {
-        this.validadorCorreo2 = true;
+        this.validadorCorreoInvalido = true;
       }
     }
   
@@ -318,6 +325,7 @@ export class RegistroEmpresaComponent implements OnInit {
   }
 
   mostrarContrasena(){
+    debugger;
     let elemento :any = document.getElementById('contrasena');
     
     if(elemento.type == "password"){
@@ -329,6 +337,7 @@ export class RegistroEmpresaComponent implements OnInit {
   }
 
   mostrarContrasenaRepe(){
+    debugger;
     let elemento :any = document.getElementById('rep_contrasena');
     
     if(elemento.type == "password"){
