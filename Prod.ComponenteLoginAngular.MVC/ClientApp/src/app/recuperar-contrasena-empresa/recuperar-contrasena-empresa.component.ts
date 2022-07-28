@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, Inject, OnInit } from '@angular/core';
 import {  FormGroup } from '@angular/forms';
 
 @Component({
@@ -9,9 +10,22 @@ import {  FormGroup } from '@angular/forms';
 export class RecuperarContrasenaEmpresaComponent implements OnInit {
   validateForm: FormGroup;
 
-  constructor() { }
-
+  numeroDocumento : string = null;
+  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string,
+  ) {
+  }
   ngOnInit(): void {
   }
+
+  
+  fnBtnRecuperarContrasena = () => {
+    let Data = {
+      numeroDocumento: this.numeroDocumento,
+    }
+    
+    const formData = {...Data};
+    this.http.post(this.baseUrl + 'ComponenteLogin/RecuperarContrasena', formData).subscribe(result => {
+    }, error => console.error(error));
+   }
 
 }

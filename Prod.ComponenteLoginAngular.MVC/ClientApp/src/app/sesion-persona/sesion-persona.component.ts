@@ -19,7 +19,6 @@ export class SesionPersonaComponent implements OnInit {
   }
 
   iniciarSesionPersonaNatural = () =>{
-    debugger
     let Data = {
       dni: this.numero_documento,
       clave: this.contrasena

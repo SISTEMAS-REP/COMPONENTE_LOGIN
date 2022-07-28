@@ -16,17 +16,17 @@
 
         <div>
              <label for="ruc">N° de RUC del cliente</label>
-            <input type="text" id="ruc" name="ruc" placeholder="Ej.:10152346872">
+            <input type="text" id="ruc" name="ruc"  [(ngModel)]="ruc"  placeholder="Ej.:10152346872">
         </div>
     
           <div>
               <label for="numeroDoc">NÚMERO DOCUMENTO</label>
-              <input type="text" id="numeroDoc" name="numeroDoc" placeholder="Ej.:15234687">
+              <input type="text" id="numeroDoc" name="numeroDoc" [(ngModel)]="numero_documento"  placeholder="Ej.:15234687">
           </div>
     
         <div>
           <label for="contraseña">CONTRASEÑA</label>
-          <input type="text" id="contraseña" name="contraseña" placeholder="">
+          <input type="text" id="contraseña" name="contraseña" [(ngModel)]="contrasena"  placeholder="">
           <a style="text-align:left" href="#"></a>
         </div>
     
@@ -35,7 +35,7 @@
         </div>
         
         <div>
-          <button class="buttonSiguiente" disabled>Ingresar</button>    
+          <button class="buttonSiguiente" (click)="iniciarSesionPersonaJuridica()" >Ingresar</button>    
         </div>
   
         <div class="center">

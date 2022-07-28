@@ -18,6 +18,12 @@ export class RegistroPersonaComponent implements OnInit {
   rep_contrasena: string = null;
   tengoRuc: boolean = false;
 
+  cod_departamento : string = null;
+  cod_provincia : string = null;
+  cod_distrito : string = null;
+
+  direccion : string = null;
+
   isVisiblePaso1 : boolean = true;
   isVisiblePaso2 : boolean = false;
 
@@ -49,26 +55,32 @@ export class RegistroPersonaComponent implements OnInit {
   }
 
   registroPersonaService = () =>{
-    if(!this.validadorRuc){
+    this.changeCorreo();
+    this.changeContrasena();
+    this.changeContrasenaRep();
+
+    if(this.validadorCorreo || this.validadorContrasena || this.validadorContrasenaRep || this.validadorContrasenaRepetir || !this.ValidarNumeros || !this.Validar8Digitos || !this.ValidarMayuscula || !this.ValidarSimbolo)
+    {
+      alert("Debe cumplir las validaciones.");
       return;
     }
     let Data = {
       Id: 0,
-      IdSector: 2,
+      IdSector: 2, // 1: persona Natural // 2: persona juridica
       IdTipoPersona: 1,
-      CodigoDepartamento: "01",
-      CodigoProvincia: "01",
-      CodigoDistrito: "01",
+      CodigoDepartamento: this.cod_departamento,
+      CodigoProvincia: this.cod_provincia,
+      CodigoDistrito: this.cod_distrito,
       IdTipoIdentificacion: 1,
       RazonSocial: "",
       Nombres: this.nombres,
       Apellidos: this.apellidos,
-      NroDocumento: this.numeroDoc,
-      Direccion: "Direccion reniec",
+      NroDocumento: this.numeroDoc, //para persona juridica mandas el ruc
+      Direccion: this.direccion,
       Celular: this.celular,
       Email: this.correo,
       Flag: "A",
-      NroDocPerNatural: this.numeroDoc,
+      NroDocPerNatural: this.numeroDoc,//para persona juridica mandas el dni
       Contrasena: this.contrasena
     }
     const formData = {...Data};
@@ -89,7 +101,25 @@ export class RegistroPersonaComponent implements OnInit {
       NroDocumento : this.numeroDoc
     }
     const formData = {...Data};
-    this.http.post(this.baseUrl + 'ComponenteLogin/buscarReniec', formData).subscribe(result => {
+    this.http.post(this.baseUrl + 'ComponenteLogin/buscarReniec', formData).subscribe((result : any) => {
+      debugger
+      if(result.data.data != null){
+        this.nombres = result.data.data.nombre;
+        this.apellidos = result.data.data.apellidoPaterno + " " + result.data.data.apellidoMaterno;
+        this.cod_departamento = result.data.data.codigoDepartamento;
+        this.cod_provincia = result.data.data.codigoProvincia;
+        this.cod_distrito = result.data.data.codigoDistrito;
+        this.direccion = result.data.data.direccion;
+      }
+      else{
+        alert("El número de DNI es incorrecto.");
+        this.nombres = null;
+        this.apellidos = null;
+        this.cod_departamento = null;
+        this.cod_provincia = null;
+        this.cod_distrito = null;
+        this.direccion = null;
+      }
     }, error => console.error(error));
   }
 
@@ -106,9 +136,7 @@ export class RegistroPersonaComponent implements OnInit {
     this.ispaso2 = true;
   }
   clickPaso2 = () =>{
-
-    debugger
-    this.changeTipoDocumento(0);
+    this.changeTipoDocumento();
     this.changeNroDocumento();
     this.changeApeliidos();
     this.changeNombres();
@@ -134,7 +162,6 @@ export class RegistroPersonaComponent implements OnInit {
   //validador
 
   changeRuc = () =>{
-    debugger
     if(this.ruc == null || this.ruc == ""){
       this.validadorRuc = true;
     }
@@ -144,7 +171,7 @@ export class RegistroPersonaComponent implements OnInit {
   } 
 
   
-  changeTipoDocumento = (item) =>
+  changeTipoDocumento = () =>
   {   
     if(this.tipoDoc == 0){
       this.validadorTipoDocumento = true;
@@ -155,7 +182,6 @@ export class RegistroPersonaComponent implements OnInit {
   }
 
   changeNroDocumento = () =>{
-    debugger
     if(this.numeroDoc == null || this.numeroDoc == ""){
       this.validadorNroDocumento = true;
     }
@@ -226,51 +252,55 @@ export class RegistroPersonaComponent implements OnInit {
     }
   }
 
-  changeContrasena = (item) =>{
+  changeContrasena = () =>{
     var name=this.contrasena;
-    var regex = /(\d+)/g;
-    var pr = name.match(regex);
+    if(this.contrasena != null){
 
-    if(pr != null){
-      this.ValidarNumeros = true;
+      var regex = /(\d+)/g;
+      var pr = name.match(regex);
+  
+      if(pr != null){
+        this.ValidarNumeros = true;
+      }
+      else{
+        this.ValidarNumeros = false;
+      }
+  
+      var regexMayusc = /[A-Z]/g;
+      var pr2 = name.match(regexMayusc);
+     
+      if(pr2 != null){
+        this.ValidarMayuscula = true;
+      }
+      else{
+        this.ValidarMayuscula = false;
+      }
+  
+      var regexSimbolo = /[^\w]/g;
+      var pr3 = name.match(regexSimbolo);
+  
+     
+      if(pr3 != null){
+        this.ValidarSimbolo = true;
+      }
+      else{
+        this.ValidarSimbolo = false;
+      }
+  
+  
+  
+      if(this.contrasena.length > 8){
+        this.Validar8Digitos = true;
+      }
+      else{
+        this.Validar8Digitos = false;
+      }
     }
-    else{
-      this.ValidarNumeros = false;
-    }
-
-    var regexMayusc = /[A-Z]/g;
-    var pr2 = name.match(regexMayusc);
-   
-    if(pr2 != null){
-      this.ValidarMayuscula = true;
-    }
-    else{
-      this.ValidarMayuscula = false;
-    }
-
-    var regexSimbolo = /[^\w]/g;
-    var pr3 = name.match(regexSimbolo);
-
-   
-    if(pr3 != null){
-      this.ValidarSimbolo = true;
-    }
-    else{
-      this.ValidarSimbolo = false;
-    }
 
 
 
-    if(this.contrasena.length > 8){
-      this.Validar8Digitos = true;
-    }
-    else{
-      this.Validar8Digitos = false;
-    }
 
-
-
-    if(this.contrasena.length == 0){
+    if(this.contrasena == null || this.contrasena == "" ){
       this.validadorContrasena = true;
     }
     else{
@@ -279,7 +309,7 @@ export class RegistroPersonaComponent implements OnInit {
   }
 
   changeContrasenaRep = () =>{
-    if(this.rep_contrasena.length == 0){
+    if(this.rep_contrasena == null || this.rep_contrasena == ""){
       this.validadorContrasenaRep = true;
     }
     else{

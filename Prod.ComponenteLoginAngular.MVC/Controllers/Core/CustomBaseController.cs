@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
+using Prod.ComponenteLogin.MVC.Configuracion;
 using Prod.ComponenteLoginAngular.MVC.Model;
 using Release.Helper.WebKoMvc.Controllers;
 using System;
@@ -109,40 +110,6 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers.Core
             }
         }
 
-        public class AppConfig
-        {
-            public Urls Urls { get; set; }
-            public MyReportConfig MyReportConfig { get; set; }
-            public MySecurityConfig MySecurityConfig { get; set; }
-        }
-        public class MySecurityConfig
-        {
-            public int IdApp { get; set; }
-        }
-
-        public class Urls
-        {
-            public string URL_GA_UI { get; set; }
-            public string URL_Arquetipo_Core_API { get; set; }
-            public string URL_RENIEC_API { get; set; }
-            public string URL_SUNAT_API { get; set; }
-            public string URL_UBIGEO { get; set; }
-            public string URL_CORREO_API { get; set; }
-            public string URL_ANIO_API { get; set; }
-            public string URL_PDF { get; set; }
-            public string URL_ST_GENERAL { get; set; }
-            public string URL_ST_PRODUCE_VIRTUAL { get; set; }
-        }
-
-        public class MyReportConfig
-        {
-            public string UrlReportServer { get; set; }
-            public string User { get; set; }
-            public string Password { get; set; }
-            public string Domain { get; set; }
-            public string ReportFolder { get; set; }
-
-        }
-
+      
     }
 }

@@ -13,6 +13,7 @@ using sep = Prod.ServiciosExternos.Personas;
 using roles = Prod.ServiciosExternos.PRODUCE_VIRTUAL.Roles;
 using Prod.ServiciosExternos.PRODUCE_VIRTUAL.Roles;
 using Prod.ComponenteLogin.MVC.Configuracion.Proxy;
+using Prod.ComponenteLogin.MVC.Configuracion;
 
 namespace Prod.ComponenteLoginAngular.MVC.Controllers
 {
@@ -27,6 +28,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
         private readonly IReniecServicio _reniecServicio;
         private readonly ISunatServicio _sunatServicio;
         private readonly LoginProxy loginProxy;
+        private readonly AppConfig appConfig;
 
         public ComponenteLoginController(
             ILogger<ComponenteLoginController> logger,
@@ -35,7 +37,8 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
             IRolesServicio rolesServicio,
             IReniecServicio reniecServicio,
             ISunatServicio sunatServicio,
-            LoginProxy loginProxy
+            LoginProxy loginProxy,
+            AppConfig appConfig
             )
         {
             _logger = logger;
@@ -45,6 +48,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
             this._reniecServicio = reniecServicio;
             this._sunatServicio = sunatServicio;
             this.loginProxy = loginProxy;
+            this.appConfig = appConfig;
         }
 
         [HttpPost]
@@ -189,6 +193,62 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
             var sr = loginProxy.IniciarSesionExtranet(request);
             return Ok(sr);
 
+        }
+
+
+        [HttpPost]
+        [Route("RecuperarContrasena")]
+        public IActionResult RecuperarContrasena([FromBody] ComponenteLogin.MVC.Configuracion.Proxy.LoginRequest request)
+        {
+            var guid = Guid.NewGuid();
+            var sr = new StatusResponse();
+            var user = new StatusResponse<UsuarioExtranet>();
+            user = produceVirtualServicio.GetUsuarioUserName(request.numeroDocumento);
+
+            if (user.Success)
+            {
+                if (user.Success && !string.IsNullOrEmpty(request.numeroDocumento) && (request.numeroDocumento.Length == 8) && (user.Data.PersonaNatural != null))
+                {
+                    if (user.Data.PersonaNatural.Email == request.email)
+                    {
+                        var correo = produceVirtualServicio.EnviarCorreoVerificacion(new CorreoConfirmacionRequest
+                        {
+                            Url = appConfig.Urls.URL_PRODUCE_VIRTUAL_WEB + "Verificaciones/EmailVUSP/[" + request.numeroDocumento + "]",
+                            Correo = request.email,
+                            Identificador = guid
+                        });
+                        if (correo.Success)
+                        {
+                            sr.Success = true;
+                        }
+                    }
+                    else
+                    {
+                        sr.Success = true;
+                        sr.Messages.Add("El correo ingresado no coincide con el correo registrado al usuario.");
+                    }
+                }
+                else if (user.Success && !string.IsNullOrEmpty(request.numeroDocumento) && (request.numeroDocumento.Length == 11) && (user.Data.IdPersonaJuridica != null))
+                {
+                    var correo = produceVirtualServicio.EnviarCorreoVerificacion(new CorreoConfirmacionRequest
+                    {
+                        Url = appConfig.Urls.URL_PRODUCE_VIRTUAL_WEB + "Verificaciones/EmailVUSP/[" + request.numeroDocumento + "]",
+                        Correo = request.email,
+                        Identificador = guid
+                    });
+                    if (correo.Success)
+                    {
+                        sr.Success = true;
+                    }
+
+                }
+            }
+            else
+            {
+                sr.Success = true;
+                sr.Messages.Add("Error al obtener información del usuario, por favor vuelve a intentar en unos minutos.");
+            }
+            return Ok(sr);
         }
 
 
