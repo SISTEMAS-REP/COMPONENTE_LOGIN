@@ -24,7 +24,7 @@
         <div *ngIf="tengoRuc">
             <label class="control-label" >RUC</label>
             <input type="text" id="ruc" name="ruc" placeholder="Ej.:10152346872"  [(ngModel)]="ruc" (change)="changeRuc($event)" maxlength="11" (keypress)="restrictNumeric($event)">
-            <p class="validador" *ngIf="validadorRuc">Debe ingresar el RUC.app-fetch-data</p>
+            <p class="validador" *ngIf="validadorRuc">Debe ingresar el RUC</p>
          </div>
     
          <div class="column">
