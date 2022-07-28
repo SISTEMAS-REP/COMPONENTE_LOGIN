@@ -101,8 +101,8 @@
         <div>
           <label for="correo">CORREO</label>
           <input type="text" id="correo" name="correo" placeholder="Ej.:camila.flores@ejemplo.com" [(ngModel)]="correo" (change)="changeCorreo($event)">
-          <!--<p class="validador" *ngIf="validadorCorreo">Debe ingresar el correo.</p>-->
-          <p class="validador" *ngIf="validadorCorreo || validadorCorreoInvalido">Correo inválido.</p> 
+          <p class="validador" *ngIf="validadorCorreo">Debe ingresar el correo.</p>
+          <p class="validador" *ngIf="validadorCorreoInvalido">Correo inválido.</p> 
         </div>
   
         <div>
@@ -130,7 +130,7 @@
           </svg>
           </div>
           <p class="validador" *ngIf="validadorContrasena">Debe ingresar la contraseña.</p>
-          <p class="validador" *ngIf="validadorRequisitos">La contraseña debe cumplir con los requistos</p>
+          <p class="validador" *ngIf="validadorRequisitosContrasena">La contraseña debe cumplir con los requistos</p>
         </div>
   
         <div>

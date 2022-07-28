@@ -14,7 +14,7 @@
             <button class="buttonPaso" [ngClass]="ispaso2 === true ? 'disabled' : 'null'" (click)="clickPaso2()">2</button>
           </div>
     </header>  
-    
+
       <div class="login__form">  
       <div *ngIf="isVisiblePaso1">
         <label class="check" id="c1">TENGO RUC
@@ -73,8 +73,8 @@
         <div>
           <label for="correo">CORREO</label>
           <input type="text" id="correo" name="correo" placeholder="Ej.:camila.flores@ejemplo.com"  [(ngModel)]="correo"  (change)="changeCorreo($event)" maxlength="150" >
-             <!--<p class="validador" *ngIf="validadorCorreo">Debe ingresar el correo.</p>-->
-             <p class="validador" *ngIf="validadorCorreo || validadorCorreoInvalido">Correo inválido.</p> 
+             <p class="validador" *ngIf="validadorCorreo">Debe ingresar el correo.</p>
+             <p class="validador" *ngIf="validadorCorreoInvalido">Correo inválido.</p> 
         </div>
   
       <div>
@@ -87,7 +87,7 @@
         </svg>
         </div>
         <p class="validador" *ngIf="validadorContrasena">Debe ingresar la contraseña.</p>
-        <p class="validador" *ngIf="validadorRequisitos">La contraseña debe cumplir con los requistos</p>
+        <p class="validador" *ngIf="validadorRequisitosContrasena">La contraseña debe cumplir con los requistos</p>
       </div>
 
       <div>
@@ -106,14 +106,14 @@
         <div class="column">
           <div class="left">
             <label class="radio">Al menos un simbolo
-             <input type="radio"  name="radioSimbolo" [checked]="ValidadorSimbolo" (change)="changeRequisitosContrasena($event)" disabled>
+             <input type="radio"  name="radioSimbolo" [checked]="ValidadorSimbolo"  disabled>
              <span class="checkradio"></span>
             </label>
          </div>
           
           <div class="right">
             <label class="radio">Al menos un número
-             <input type="radio"  name="radioNumero" [checked]="ValidadorNumeros" (change)="changeRequisitosContrasena($event)" disabled>
+             <input type="radio"  name="radioNumero" [checked]="ValidadorNumeros"  disabled>
              <span class="checkradio"></span>
             </label>
          </div>
@@ -122,14 +122,14 @@
         <div class="columnRadio">
         <div class="left">
           <label class="radio">Al menos una mayuscula
-           <input type="radio"  name="radioMayus" [checked]="ValidadorMayuscula" (change)="changeRequisitosContrasena($event)" disabled>
+           <input type="radio"  name="radioMayus" [checked]="ValidadorMayuscula"  disabled>
            <span class="checkradio"></span>
           </label>
         </div>
         
         <div class="right">
           <label class="radio">Más de 8 digitos
-           <input type="radio"  name="radioDigitos" [checked]="Validador8Digitos" (change)="changeRequisitosContrasena($event)" disabled>
+           <input type="radio"  name="radioDigitos" [checked]="Validador8Digitos"  disabled>
            <span class="checkradio"></span>
           </label>
         </div>

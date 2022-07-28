@@ -37,9 +37,11 @@ export class RegistroEmpresaComponent implements OnInit {
   validadorApellidos :  boolean = false;
   validadorNombres :  boolean = false;
   validadorCelular :  boolean = false;
+  validadorCelularLength : boolean = false;
   validadorCorreo :  boolean = false;
   validadorCorreoRep :  boolean = false;
   validadorCorreoRepetir : boolean = false;
+  validadorCorreoInvalido : boolean = false;
   validadorContrasena :  boolean = false;
   validadorContrasenaRep :  boolean = false;
   validadorContrasenaRepetir : boolean = false;
@@ -49,7 +51,7 @@ export class RegistroEmpresaComponent implements OnInit {
   ValidadorMayuscula: boolean = false;
   ValidadorSimbolo: boolean = false;
   validadorTerminos: boolean = false;
-  validadorRequisitos: boolean = false;
+  validadorRequisitosContrasena : boolean = false;
 
   ispaso1 : boolean = true;
   ispaso2 : boolean = true;
@@ -198,7 +200,6 @@ export class RegistroEmpresaComponent implements OnInit {
     }
   }
 
-  validadorCelularLength : boolean = false;
   
   changeCelular = () =>{
     debugger;
@@ -218,32 +219,33 @@ export class RegistroEmpresaComponent implements OnInit {
     }
   }
 
-  validadorCorreoInvalido : boolean = false;
-  changeCorreo = () =>{
-    if(this.correo != null)
-    {
-      var reg = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
+
+  changeCorreo = () =>{
+    debugger;
+    if(this.correo == null || this.correo == ""){
+      this.validadorCorreo = true;
+      this.validadorCorreoInvalido = false;
+    }
+    else{
+      
+      var reg = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       var regOficial = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   
       if (reg.test(this.correo) && regOficial.test(this.correo)) {
         this.validadorCorreoInvalido = false;
+        this.validadorCorreo = false;
       } else if (reg.test(this.correo)) {
         this.validadorCorreoInvalido = false;
+        this.validadorCorreo = false;
   
       } else {
         this.validadorCorreoInvalido = true;
-      }
-    }
-  
-
-    if(this.correo == null || this.correo == ""){
-      this.validadorCorreo = true;
-    }
-    else{
-      this.validadorCorreo = false;
+        this.validadorCorreo = false;
+      }    
     }
   }
+
 
   changeCorreoRep = () =>{
     if(this.rep_correo == null || this.rep_correo == ""){
@@ -264,57 +266,70 @@ export class RegistroEmpresaComponent implements OnInit {
   }
 
 
-  changeContrasena = (item) =>{
+   changeContrasena = () =>{
+    debugger;
     var name=this.contrasena;
-    var regex = /(\d+)/g;
-    var pr = name.match(regex);
+    if(this.contrasena != null){
 
-    if(pr != null){
-      this.ValidadorNumeros = true;
+      var regex = /(\d+)/g;
+      var pr = name.match(regex);
+  
+      if(pr != null){
+        this.ValidadorNumeros = true;
+      }
+      else{
+        this.ValidadorNumeros = false;
+      }
+  
+      var regexMayusc = /[A-Z]/g;
+      var pr2 = name.match(regexMayusc);
+     
+      if(pr2 != null){
+        this.ValidadorMayuscula = true;
+      }
+      else{
+        this.ValidadorMayuscula = false;
+      }
+  
+      var regexSimbolo = /[^\w]/g;
+      var pr3 = name.match(regexSimbolo);
+  
+     
+      if(pr3 != null){
+        this.ValidadorSimbolo = true;
+      }
+      else{
+        this.ValidadorSimbolo = false;
+      }
+  
+  
+      if(this.contrasena.length > 8){
+        this.Validador8Digitos = true;
+      }
+      else{
+        this.Validador8Digitos = false;
+      }
     }
-    else{
-      this.ValidadorNumeros = false;
-    }
-
-    var regexMayusc = /[A-Z]/g;
-    var pr2 = name.match(regexMayusc);
-   
-    if(pr2 != null){
-      this.ValidadorMayuscula = true;
-    }
-    else{
-      this.ValidadorMayuscula = false;
-    }
-
-    var regexSimbolo = /[^\w]/g;
-    var pr3 = name.match(regexSimbolo);
-
-   
-    if(pr3 != null){
-      this.ValidadorSimbolo = true;
-    }
-    else{
-      this.ValidadorSimbolo = false;
-    }
 
 
-
-    if(this.contrasena.length > 8){
-      this.Validador8Digitos = true;
-    }
-    else{
-      this.Validador8Digitos = false;
-    }
-
-
-
-    if(this.contrasena.length == 0){
+    if(this.contrasena == null || this.contrasena == ""){
       this.validadorContrasena = true;
+      this.validadorRequisitosContrasena = false;
     }
     else{
-      this.validadorContrasena = false;
+      
+      if ( this.ValidadorSimbolo && this.ValidadorMayuscula && this.ValidadorNumeros && this.Validador8Digitos ) {
+        this.validadorRequisitosContrasena = false;
+        this.validadorContrasena = false;
+      } 
+      else {
+        this.validadorRequisitosContrasena = true;
+        this.validadorContrasena = false;
+      }    
     }
+
   }
+
 
   changeContrasenaRep = () =>{
     if(this.rep_contrasena.length == 0){
@@ -343,20 +358,6 @@ export class RegistroEmpresaComponent implements OnInit {
     }
   }
 
-  changeRequisitosContrasena= () =>{
-
-    if(this.contrasena == null || this.contrasena == ""){
-      this.validadorRequisitos = false; 
-    }
-    else {
-      if(this.ValidadorSimbolo == true && this.ValidadorNumeros == true && this.ValidadorMayuscula == true && this.Validador8Digitos == true  ){
-        this.validadorRequisitos = false ;
-      }
-      else{
-        this.validadorRequisitos = true;
-      }
-    }
-  }
 
   mostrarContrasena(){
     debugger;
