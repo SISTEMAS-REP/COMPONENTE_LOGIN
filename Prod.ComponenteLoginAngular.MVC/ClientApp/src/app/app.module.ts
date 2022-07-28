@@ -16,6 +16,11 @@ import { RecuperarContrasenaEmpresaComponent } from './recuperar-contrasena-empr
 
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CambiarContrasenaPersonaComponent } from './cambiar-contrasena-persona/cambiar-contrasena-persona.component';
+import { CambiarContrasenaEmpresaComponent } from './cambiar-contrasena-empresa/cambiar-contrasena-empresa.component';
+import { EdicionPerfilPersonaComponent } from './edicion-perfil-persona/edicion-perfil-persona.component';
+import { EdicionPerfilEmpresaComponent } from './edicion-perfil-empresa/edicion-perfil-empresa.component';
+import { AdministracionUsuarioEmpresaComponent } from './administracion-usuario-empresa/administracion-usuario-empresa.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +33,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     SesionPersonaComponent,
     SesionEmpresaComponent,
     RecuperarContrasenaPersonaComponent,
-    RecuperarContrasenaEmpresaComponent
+    RecuperarContrasenaEmpresaComponent,
+    CambiarContrasenaPersonaComponent,
+    CambiarContrasenaEmpresaComponent,
+    EdicionPerfilPersonaComponent,
+    EdicionPerfilEmpresaComponent,
+    AdministracionUsuarioEmpresaComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -39,12 +49,17 @@ import { ReactiveFormsModule } from '@angular/forms';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
-      { path: 'registro-persona', component: RegistroPersonaComponent },
       { path: 'registro-empresa', component: RegistroEmpresaComponent },
-      { path: 'sesion-persona', component: SesionPersonaComponent },
+      { path: 'registro-persona', component: RegistroPersonaComponent },
       { path: 'sesion-empresa', component: SesionEmpresaComponent },
-      { path: 'recuperar-contrasena-persona', component: RecuperarContrasenaPersonaComponent },
+      { path: 'sesion-persona', component: SesionPersonaComponent },
       { path: 'recuperar-contrasena-empresa', component: RecuperarContrasenaEmpresaComponent },
+      { path: 'recuperar-contrasena-persona', component: RecuperarContrasenaPersonaComponent },
+      { path: 'cambiar-contrasena-empresa', component: CambiarContrasenaEmpresaComponent },
+      { path: 'cambiar-contrasena-persona', component: CambiarContrasenaPersonaComponent },
+      { path: 'edicion-perfil-empresa', component: EdicionPerfilEmpresaComponent },
+      { path: 'edicion-perfil-persona', component: EdicionPerfilPersonaComponent },
+      { path: 'administracion-usuario-empresa', component: AdministracionUsuarioEmpresaComponent },    
       { path: 'fetch-data', component: FetchDataComponent },
     ])
   ],

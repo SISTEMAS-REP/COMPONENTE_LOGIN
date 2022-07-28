@@ -7,11 +7,12 @@ html {
   }
   
   body {
-    padding: 30px;
+    padding: 15px 30px ;
     font-family: "Open Sans", sans-serif;
     font-size: 14px;
     line-height: 1.5;
     background: #eee;
+    height: 655px;
   }
   
 ul {
@@ -21,7 +22,7 @@ ul {
   width: 25%;
   background-color: #FFF;
   position: fixed;
-  height: 91%;
+  height: 95%;
   overflow: auto;
 }
 

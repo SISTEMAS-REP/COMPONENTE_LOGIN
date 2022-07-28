@@ -1,16 +1,21 @@
 
 <body>
   <nav>
-   <ul>
-    <li><a  class="active" disable>Componentes</a></li>
-    <li><a [routerLink]="['/registro-persona']">Registro Persona</a></li>
-    <li><a [routerLink]="['/registro-empresa']">Registro Empresa</a></li>
-    <li><a [routerLink]="['/sesion-persona']">Sesión Persona</a></li>
-    <li><a [routerLink]="['/sesion-empresa']">Sesión Empresa</a></li>
-    <li><a [routerLink]="['/recuperar-contrasena-persona']">Recuperar Contraseña Persona</a></li>
-    <li><a [routerLink]="['/recuperar-contrasena-empresa']">Recuperar Contraseña Empresa</a></li>
-  </ul>    
+    <ul>
+       <li><a  class="active" disable>Componentes</a></li>
+       <li><a [routerLink]="['/registro-empresa']">Registro Persona Jurídica</a></li>
+       <li><a [routerLink]="['/registro-persona']">Registro Persona Natural</a></li>
+       <li><a [routerLink]="['/sesion-empresa']">Sesión Persona Jurídica</a></li>
+       <li><a [routerLink]="['/sesion-persona']">Sesión Persona Natural</a></li>
+       <li><a [routerLink]="['/recuperar-contrasena-empresa']">Recuperar Contraseña Persona Jurídica </a></li>
+       <li><a [routerLink]="['/recuperar-contrasena-persona']">Recuperar Contraseña Persona Natural</a></li>
+       <li><a [routerLink]="['/cambiar-contrasena-empresa']">Cambiar Contraseña Persona Jurídica</a></li>
+       <li><a [routerLink]="['/cambiar-contrasena-persona']">Cambiar Contraseña Persona Natural</a></li>
+       <li><a [routerLink]="['/edicion-perfil-empresa']">Edición Perfil Persona Jurídica</a></li>
+       <li><a [routerLink]="['/edicion-perfil-persona']">Edición Perfil Persona Natural</a></li>
+       <li><a [routerLink]="['/administracion-usuario-empresa']">Adiministración Usuario Persona Jurídica</a></li>
+      </ul>    
       <router-outlet></router-outlet>
-</nav>
+  </nav>
 </body>
 
