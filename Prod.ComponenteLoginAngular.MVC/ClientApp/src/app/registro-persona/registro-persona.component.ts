@@ -17,15 +17,18 @@ export class RegistroPersonaComponent implements OnInit {
   contrasena: string = null;
   rep_contrasena: string = null;
   tengoRuc: boolean = false;
+  terminos_politica : boolean = false;
+  terminos_mensajeria : boolean = false;
 
   cod_departamento : string = null;
   cod_provincia : string = null;
   cod_distrito : string = null;
-
   direccion : string = null;
+
 
   isVisiblePaso1 : boolean = true;
   isVisiblePaso2 : boolean = false;
+  ispaso2 : boolean = true;
 
   //Variables validador
   validadorRuc :  boolean = true;
@@ -39,12 +42,14 @@ export class RegistroPersonaComponent implements OnInit {
   validadorContrasenaRep :  boolean = false;
   validadorContrasenaRepetir : boolean = false;
   //Validador Contraseña
-  Validar8Digitos : boolean = false;
-  ValidarNumeros : boolean = false;
-  ValidarMayuscula: boolean = false;
-  ValidarSimbolo: boolean = false;
+  Validador8Digitos : boolean = false;
+  ValidadorNumeros : boolean = false;
+  ValidadorMayuscula: boolean = false;
+  ValidadorSimbolo: boolean = false;
+  validadorTerminos: boolean = false;
+  validadorRequisitos: boolean = false;
 
-  ispaso2 : boolean = true;
+
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string,
   ) {
   }
@@ -55,15 +60,21 @@ export class RegistroPersonaComponent implements OnInit {
   }
 
   registroPersonaService = () =>{
-    this.changeCorreo();
-    this.changeContrasena();
-    this.changeContrasenaRep();
 
-    if(this.validadorCorreo || this.validadorContrasena || this.validadorContrasenaRep || this.validadorContrasenaRepetir || !this.ValidarNumeros || !this.Validar8Digitos || !this.ValidarMayuscula || !this.ValidarSimbolo)
-    {
-      alert("Debe cumplir las validaciones.");
-      return;
-    }
+    debugger;
+     this.changeCorreo();
+     this.changeContrasena();
+     this.changeContrasenaRep();
+     this.changeRequisitosContrasena();
+     this.changeTerminos();
+
+    // if(!this.validadorRuc  &&  !this.validadorTipoDocumento &&  !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular && !this.validadorCelularLength && this.validadorCorreo && this.validadorContrasena && this.validadorContrasenaRep && this.validadorContrasenaRepetir && !this.ValidadorNumeros && !this.Validador8Digitos && !this.ValidadorMayuscula && !this.ValidadorSimbolo && !this.ValidadorRequisitos)
+    // {
+    //   alert("Debe cumplir las validaciones.");
+    //   return;
+    // }
+
+    if(!this.validadorTipoDocumento && !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular  && !this.validadorCelularLength  && !this.validadorCorreo && !this.validadorContrasena && !this.validadorContrasenaRep && !this.validadorContrasenaRepetir && this.ValidadorNumeros && this.Validador8Digitos && this.ValidadorMayuscula && this.ValidadorSimbolo && !this.validadorRequisitos){
     let Data = {
       Id: 0,
       IdSector: 2, // 1: persona Natural // 2: persona juridica
@@ -94,6 +105,7 @@ export class RegistroPersonaComponent implements OnInit {
       
     }, error => console.error(error));
   }
+}
 
 
   buscarReniec = () =>{
@@ -211,20 +223,23 @@ export class RegistroPersonaComponent implements OnInit {
 
   validadorCelularLength : boolean = false;
   changeCelular = () =>{
+    debugger;
     if(this.celular == null || this.celular == ""){
       this.validadorCelular = true;
-    }
-    else{
-      this.validadorCelular = false;
-    }
-
-    if( this.celular.length < 9){
-      this.validadorCelularLength = true;
-    }
-    else{
       this.validadorCelularLength = false;
     }
+    else{
+      if( this.celular.length < 9){    
+        this.validadorCelularLength = true;
+        this.validadorCelular = false;
+      }
+      else {
+        this.validadorCelular = false;
+        this.validadorCelularLength = false;
+      }     
+    }
   }
+
   validadorCorreoInvalido : boolean = false;
   changeCorreo = () =>{
     if(this.correo != null)
@@ -260,20 +275,20 @@ export class RegistroPersonaComponent implements OnInit {
       var pr = name.match(regex);
   
       if(pr != null){
-        this.ValidarNumeros = true;
+        this.ValidadorNumeros = true;
       }
       else{
-        this.ValidarNumeros = false;
+        this.ValidadorNumeros = false;
       }
   
       var regexMayusc = /[A-Z]/g;
       var pr2 = name.match(regexMayusc);
      
       if(pr2 != null){
-        this.ValidarMayuscula = true;
+        this.ValidadorMayuscula = true;
       }
       else{
-        this.ValidarMayuscula = false;
+        this.ValidadorMayuscula = false;
       }
   
       var regexSimbolo = /[^\w]/g;
@@ -281,19 +296,19 @@ export class RegistroPersonaComponent implements OnInit {
   
      
       if(pr3 != null){
-        this.ValidarSimbolo = true;
+        this.ValidadorSimbolo = true;
       }
       else{
-        this.ValidarSimbolo = false;
+        this.ValidadorSimbolo = false;
       }
   
   
   
       if(this.contrasena.length > 8){
-        this.Validar8Digitos = true;
+        this.Validador8Digitos = true;
       }
       else{
-        this.Validar8Digitos = false;
+        this.Validador8Digitos = false;
       }
     }
 
@@ -326,6 +341,30 @@ export class RegistroPersonaComponent implements OnInit {
     }
   }
 
+  changeTerminos = () =>{
+    if(this.terminos_mensajeria == null || this.terminos_mensajeria == false || this.terminos_politica == null || this.terminos_politica == false  ){
+      this.validadorTerminos = true;
+    }
+    else{
+      this.validadorTerminos = false;
+    }
+  }
+
+  changeRequisitosContrasena= () =>{
+
+    if(this.contrasena == null || this.contrasena == ""){
+      this.validadorRequisitos = false; 
+    }
+    else {
+      if(this.ValidadorSimbolo == true && this.ValidadorNumeros == true && this.ValidadorMayuscula == true && this.Validador8Digitos == true  ){
+        this.validadorRequisitos = false ;
+      }
+      else{
+        this.validadorRequisitos = true;
+      }
+    }
+  }
+
   mostrarContrasena(){
     let elemento :any = document.getElementById('contrasena');
     
@@ -347,6 +386,8 @@ export class RegistroPersonaComponent implements OnInit {
       elemento.type = "password";
     }
   }
+
+  
 
   public restrictNumeric(e) {
     let input;

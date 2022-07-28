@@ -19,6 +19,8 @@ export class RegistroEmpresaComponent implements OnInit {
   rep_correo: string = null;
   contrasena: string = null;
   rep_contrasena: string = null;
+  terminos_politica : boolean = false;
+  terminos_mensajeria : boolean = false;
 
   isVisiblePaso1 : boolean = true;
   isVisiblePaso2 : boolean = false;
@@ -42,10 +44,12 @@ export class RegistroEmpresaComponent implements OnInit {
   validadorContrasenaRep :  boolean = false;
   validadorContrasenaRepetir : boolean = false;
   //Validador Contraseña
-  Validar8Digitos : boolean = false;
-  ValidarNumeros : boolean = false;
-  ValidarMayuscula: boolean = false;
-  ValidarSimbolo: boolean = false;
+  Validador8Digitos : boolean = false;
+  ValidadorNumeros : boolean = false;
+  ValidadorMayuscula: boolean = false;
+  ValidadorSimbolo: boolean = false;
+  validadorTerminos: boolean = false;
+  validadorRequisitos: boolean = false;
 
   ispaso1 : boolean = true;
   ispaso2 : boolean = true;
@@ -101,7 +105,7 @@ export class RegistroEmpresaComponent implements OnInit {
         this.ispaso3 = false;
         this.ispaso4 = true;
         this.ispaso2 = false;
-      }       
+      }    
   }
 
   clickPaso4 = () =>{
@@ -110,7 +114,7 @@ export class RegistroEmpresaComponent implements OnInit {
     this.changeCorreo();
     this.changeCorreoRep();
  
-      if(!this.validadorRuc && !this.validadorRazonSocial && !this.validadorDireccion && !this.validadorTipoDocumento && !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular &&   !this.validadorCelularLength && !this.validadorCorreo && !this.validadorCorreoInvalido && !this.validadorCorreoRep&& !this.validadorCorreoRepetir){
+      if(!this.validadorRuc && !this.validadorRazonSocial && !this.validadorDireccion && !this.validadorTipoDocumento && !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular &&   !this.validadorCelularLength && !this.validadorCorreo && !this.validadorCorreoInvalido && !this.validadorCorreoRep && !this.validadorCorreoRepetir){
         this.isVisiblePaso1 = false;
         this.isVisiblePaso2 = false;
         this.isVisiblePaso3 = false;
@@ -195,19 +199,22 @@ export class RegistroEmpresaComponent implements OnInit {
   }
 
   validadorCelularLength : boolean = false;
+  
   changeCelular = () =>{
+    debugger;
     if(this.celular == null || this.celular == ""){
       this.validadorCelular = true;
-    }
-    else{
-      this.validadorCelular = false;
-    }
-
-    if( this.celular.length < 9){
-      this.validadorCelularLength = true;
-    }
-    else{
       this.validadorCelularLength = false;
+    }
+    else{
+      if( this.celular.length < 9){    
+        this.validadorCelularLength = true;
+        this.validadorCelular = false;
+      }
+      else {
+        this.validadorCelular = false;
+        this.validadorCelularLength = false;
+      }     
     }
   }
 
@@ -263,20 +270,20 @@ export class RegistroEmpresaComponent implements OnInit {
     var pr = name.match(regex);
 
     if(pr != null){
-      this.ValidarNumeros = true;
+      this.ValidadorNumeros = true;
     }
     else{
-      this.ValidarNumeros = false;
+      this.ValidadorNumeros = false;
     }
 
     var regexMayusc = /[A-Z]/g;
     var pr2 = name.match(regexMayusc);
    
     if(pr2 != null){
-      this.ValidarMayuscula = true;
+      this.ValidadorMayuscula = true;
     }
     else{
-      this.ValidarMayuscula = false;
+      this.ValidadorMayuscula = false;
     }
 
     var regexSimbolo = /[^\w]/g;
@@ -284,19 +291,19 @@ export class RegistroEmpresaComponent implements OnInit {
 
    
     if(pr3 != null){
-      this.ValidarSimbolo = true;
+      this.ValidadorSimbolo = true;
     }
     else{
-      this.ValidarSimbolo = false;
+      this.ValidadorSimbolo = false;
     }
 
 
 
     if(this.contrasena.length > 8){
-      this.Validar8Digitos = true;
+      this.Validador8Digitos = true;
     }
     else{
-      this.Validar8Digitos = false;
+      this.Validador8Digitos = false;
     }
 
 
@@ -323,6 +330,30 @@ export class RegistroEmpresaComponent implements OnInit {
       }
       else{
         this.validadorContrasenaRepetir = false;
+      }
+    }
+  }
+
+  changeTerminos = () =>{
+    if(this.terminos_mensajeria == null || this.terminos_mensajeria == false || this.terminos_politica == null || this.terminos_politica == false  ){
+      this.validadorTerminos = true;
+    }
+    else{
+      this.validadorTerminos = false;
+    }
+  }
+
+  changeRequisitosContrasena= () =>{
+
+    if(this.contrasena == null || this.contrasena == ""){
+      this.validadorRequisitos = false; 
+    }
+    else {
+      if(this.ValidadorSimbolo == true && this.ValidadorNumeros == true && this.ValidadorMayuscula == true && this.Validador8Digitos == true  ){
+        this.validadorRequisitos = false ;
+      }
+      else{
+        this.validadorRequisitos = true;
       }
     }
   }
