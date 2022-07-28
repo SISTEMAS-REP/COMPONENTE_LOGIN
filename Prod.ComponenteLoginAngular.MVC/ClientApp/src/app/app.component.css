@@ -7,7 +7,7 @@ html {
   }
   
   body {
-    padding: 15px 30px ;
+    padding: 15px 15px ;
     font-family: "Open Sans", sans-serif;
     font-size: 14px;
     line-height: 1.5;
@@ -19,7 +19,7 @@ ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  width: 25%;
+  width: 22%;
   background-color: #FFF;
   position: fixed;
   height: 95%;

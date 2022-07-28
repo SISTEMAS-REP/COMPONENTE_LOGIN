@@ -14,6 +14,7 @@ body {
   padding: 0vmin;
 }
 
+
 /*min-block-size: 10vh;*/
 
 h2 {
@@ -27,13 +28,6 @@ h3 {
   margin-bottom: 0%;
 }
  
-
-.validador{
-  font-size: 10px;
-  color: #f90000;
-  text-align: left;
-  margin-bottom: 10px;
-}
 
 input {
   background-image: none;
@@ -70,7 +64,6 @@ a {
   display: grid;
   place-items: center;
   background-color: #eee;
-  margin-left: 180px;
 }
 
 /* ---------- BUTTON ---------- */
@@ -143,9 +136,8 @@ a {
 
 .login__header {
   background-color: #fff;
-  border-top-left-radius: 1.25em;
-  border-top-right-radius: 1.25em;
   color: #000;
+  padding-top: 0.5em;
 }
 
 .login__header h3 {
@@ -161,6 +153,7 @@ a {
   margin-bottom: 0%;
   padding-top: 0%;
 }
+
 
 
 .login__header :first-child {
@@ -181,8 +174,8 @@ a {
   border-bottom-right-radius: 0em;
   color: #777;
   display: grid;
-  gap: 0.875em;
-  padding: 1em 1em;
+  gap: 0.5em;
+  padding: 1.4em 1.4em 1.4em 1.4em;
   
 }
 
@@ -207,19 +200,6 @@ a {
 }
 
 
-/*   
-.login input[type=text] {
-  background-color: #fff;
-  width: 100%;
-  padding: 4px 7px;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 1px;
-  box-sizing: border-box;
-  font-size: 12px;
-} */
-
-
 .login input:required {
   border: 1px solid #EB1E23;
 }
@@ -232,6 +212,10 @@ a {
   border: 1px solid #ccc;
 }
 
+.login input:disabled {
+  background: #eee;
+}
+
 .login select {
   padding: 5px 7px;
   width: 80%;
@@ -239,6 +223,7 @@ a {
   border: 1px solid #ccc;
   border-radius: 1px;
   box-sizing: border-box;
+  margin-bottom: 5px;
 }
 
 
@@ -261,16 +246,16 @@ a {
 }
 
 
-
 .logo-produce, h1, p {
   text-align: left;
-  padding-top: 0px;
+  padding-bottom: 5px;
 } 
 
 .logo-aplicacion, h1, p {
   text-align: center;
-  padding-top: 0px;
+  padding-bottom: 5px;
 } 
+
 
 .column {
   display: flex;
@@ -285,6 +270,7 @@ a {
 }
 .center {
   text-align: center;
+  margin-bottom: 12px;
 }
 
 .disabled {
@@ -304,7 +290,7 @@ background-color: #000;
   display: block;
   position: relative;
   padding-left: 20px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   cursor: pointer;
   font-size: 22px;
 }
@@ -428,4 +414,11 @@ background-color: #000;
   flex-direction: row;
   flex-wrap: wrap;
   margin-bottom: 20px;
+}
+
+.validador{
+  font-size: 10px;
+  color: #EB1E23;
+  text-align: left;
+  margin-bottom: 8px;
 }

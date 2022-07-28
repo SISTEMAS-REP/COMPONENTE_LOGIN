@@ -20,12 +20,7 @@
     font-size: 1.75rem;
   }
   
-  .validador{
-    font-size: 10px;
-    color: #EB1E23;
-    text-align: left;
-    margin-bottom: 10px;
-  }
+
   
   input {
     background-image: none;
@@ -62,7 +57,6 @@
     display: grid;
     place-items: center;
     background-color: #eee;
-    margin-left: 180px;
   }
   
   /* ---------- BUTTON ---------- */
@@ -135,9 +129,8 @@
   
   .login__header {
     background-color: #fff;
-    border-top-left-radius: 1.25em;
-    border-top-right-radius: 1.25em;
     color: #000;
+    padding-top: 0.5em;
   }
   
   .login__header h3 {
@@ -173,8 +166,8 @@
     border-bottom-right-radius: 0em;
     color: #777;
     display: grid;
-    gap: 0.875em;
-    padding: 1em 1em;
+    gap: 0.5em;
+    padding: 1.4em 1.4em 1.4em 1.4em;
     
   }
   
@@ -235,6 +228,11 @@
     border: 1px solid #ccc;
   }
 
+  .login input:disabled {
+    background: #eee;
+  }
+
+
   .login select {
     padding: 5px 7px;
     width: 80%;
@@ -268,12 +266,12 @@
 
   .logo-produce, h1, p {
     text-align: left;
-    padding-top: 0px;
+    padding-bottom: 5px;
   } 
   
   .logo-aplicacion, h1, p {
     text-align: center;
-    padding-top: 0px;
+    padding-bottom: 5px;
   } 
   
   .column {
@@ -281,14 +279,18 @@
     flex-direction: row;
     flex-wrap: wrap;
   }
+  
   .left {
     width: 50%;
+    margin-top: 5px;
   }
   .right {
     width: 50%;
+    margin-top: 5px;
   }
   .center {
     text-align: center;
+    margin-bottom: 12px;
   }
   
   .disabled {
@@ -308,9 +310,9 @@
     display: block;
     position: relative;
     padding-left: 20px;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     cursor: pointer;
-    font-size: 22px;
+    font-size: 12px;
   }
   
   /* escondemos el default checkbox */
@@ -363,6 +365,9 @@
     transform: rotate(45deg);
   }
   
+ 
+  /* -------------Radio----------------*/
+
   .login .radio {
     font-size: 10px;
   }
@@ -374,7 +379,6 @@
     margin-bottom: 20px;
   }
   
-  /* -------------Radio----------------*/
   
   /* El contenedor */
   .radio{
@@ -432,4 +436,9 @@
     display: block;
   }
   
-  
+  .validador{
+    font-size: 10px;
+    color: #EB1E23;
+    text-align: left;
+    margin-bottom: 8px;
+  }
