@@ -167,7 +167,7 @@
     color: #777;
     display: grid;
     gap: 0.5em;
-    padding: 1.4em 1.4em 1.4em 1.4em;
+    padding: 1.3em 1.4em 1.4em 1.4em;
     
   }
   
@@ -288,6 +288,7 @@
     width: 50%;
     margin-top: 5px;
   }
+
   .center {
     text-align: center;
     margin-bottom: 12px;
@@ -434,6 +435,11 @@
   /* Mostrar el indicador (punto/círculo) cuando está marcado */
   .radio input:checked ~ .checkradio:after {
     display: block;
+  }
+
+  .footer {
+    text-align: center;
+    margin-bottom: 0px;
   }
   
   .validador{

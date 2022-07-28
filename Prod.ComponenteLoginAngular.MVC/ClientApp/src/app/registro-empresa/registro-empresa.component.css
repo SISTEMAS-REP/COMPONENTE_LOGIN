@@ -437,6 +437,11 @@ a {
     margin-bottom: 20px;
   }
   
+  .footer {
+    text-align: center;
+    margin-bottom: 0px;
+  }
+  
   .validador{
     font-size: 10px;
     color: #EB1E23;
