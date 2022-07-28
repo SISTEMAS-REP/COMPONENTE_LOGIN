@@ -93,13 +93,14 @@ export class RegistroEmpresaComponent implements OnInit {
     this.changeApeliidos();
     this.changeNombres();
  
-      if(!this.validadorTipoDocumento && !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres){
+      if(!this.validadorRuc && !this.validadorRazonSocial && !this.validadorDireccion && !this.validadorTipoDocumento && !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres){
         this.isVisiblePaso1 = false;
         this.isVisiblePaso2 = false;
         this.isVisiblePaso3 = true;
         this.isVisiblePaso4 = false;
         this.ispaso3 = false;
         this.ispaso4 = true;
+        this.ispaso2 = false;
       }       
   }
 
@@ -109,12 +110,14 @@ export class RegistroEmpresaComponent implements OnInit {
     this.changeCorreo();
     this.changeCorreoRep();
  
-      if(!this.validadorCelular &&   !this.validadorCelularLength && !this.validadorCorreo && !this.validadorCorreoInvalido && !this.validadorCorreoRep&& !this.validadorCorreoRepetir){
+      if(!this.validadorRuc && !this.validadorRazonSocial && !this.validadorDireccion && !this.validadorTipoDocumento && !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular &&   !this.validadorCelularLength && !this.validadorCorreo && !this.validadorCorreoInvalido && !this.validadorCorreoRep&& !this.validadorCorreoRepetir){
         this.isVisiblePaso1 = false;
         this.isVisiblePaso2 = false;
         this.isVisiblePaso3 = false;
         this.isVisiblePaso4 = true;
         this.ispaso4 = false;
+        this.ispaso2 = false;
+        this.ispaso3 = false;
       }       
   }
 
