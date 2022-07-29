@@ -83,10 +83,10 @@ a:hover {
   text-decoration: none;
   cursor: pointer;
   border-radius: 1px;
-  padding: 3px 6px;
+  padding: 5px 7px;
   border: 2px solid #58595B;
 }
-
+  
 .buttonCancelar {
   background-color: #eee;
   color: #000;
@@ -97,9 +97,10 @@ a:hover {
   text-decoration: none;
   cursor: pointer;
   border-radius: 1px;
-  padding: 3px 6px;
+  padding: 5px 7px;
   border: 2px solid #ccc;
 }
+
 
 .buttonPaso {
   background-color: #000000; /* Green */
@@ -135,14 +136,14 @@ a:hover {
 
 /* ---------- LOGIN ---------- */
 .login {
-  width: 465px;
+  width: 410px;
 
 }
 
 .login__header {
   background-color: #fff;
   color: #000;
-  padding-top: 0.5em;
+  padding: 0.5em 0.5em 0em 0.5em;
 }
 
 .login__header h3 {
@@ -158,7 +159,6 @@ a:hover {
   margin-bottom: 0%;
   padding-top: 0%;
 }
-
 
 
 .login__header :first-child {
@@ -180,10 +180,9 @@ a:hover {
   color: #777;
   display: grid;
   gap: 0.5em;
-  padding: 1.4em 1.4em 1.4em 1.4em;
+  padding: 1.7em 1.6em 0.5em 1.6em;
   
 }
-
 
 .login label{
   text-align: left;
@@ -322,7 +321,7 @@ background-color: #000;
   display: block;
   position: relative;
   padding-left: 20px;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
   cursor: pointer;
   font-size: 22px;
 }
@@ -458,5 +457,5 @@ background-color: #000;
   font-size: 10px;
   color: #EB1E23;
   text-align: left;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }

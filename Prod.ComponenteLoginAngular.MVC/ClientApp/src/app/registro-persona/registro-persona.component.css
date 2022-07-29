@@ -77,10 +77,10 @@
     text-decoration: none;
     cursor: pointer;
     border-radius: 1px;
-    padding: 3px 6px;
+    padding: 5px 7px;
     border: 2px solid #58595B;
   }
-  
+    
   .buttonCancelar {
     background-color: #eee;
     color: #000;
@@ -91,9 +91,10 @@
     text-decoration: none;
     cursor: pointer;
     border-radius: 1px;
-    padding: 3px 6px;
+    padding: 5px 7px;
     border: 2px solid #ccc;
   }
+  
   
   .buttonPaso {
     background-color: #000000; /* Green */
@@ -129,14 +130,14 @@
   
   /* ---------- LOGIN ---------- */
   .login {
-    width: 465px;
+    width: 410px;
 
   }
   
   .login__header {
     background-color: #fff;
     color: #000;
-    padding-top: 0.5em;
+    padding: 0.5em 0.5em 0em 0.5em;
   }
   
   .login__header h3 {
@@ -173,7 +174,7 @@
     color: #777;
     display: grid;
     gap: 0.5em;
-    padding: 1.3em 1.4em 1.4em 1.4em;
+    padding: 1.7em 1.6em 0.5em 1.6em;
     
   }
   
@@ -251,18 +252,6 @@
   }
 
 
-  .login select:required {
-    border: 1px solid #EB1E23;
-  }
-
-  .login select:invalid {
-    border: 2px solid #EB1E23;
-  }
-  
-  .login select:valid {
-    border: 2px solid #ccc;
-  }
-
   
   .login input[type="submit"] {
     display: block;
@@ -318,7 +307,8 @@
     display: block;
     position: relative;
     padding-left: 20px;
-    margin-bottom: 14px;
+    padding-bottom: 10px;
+    
     cursor: pointer;
     font-size: 12px;
   }
@@ -454,5 +444,6 @@
     font-size: 10px;
     color: #EB1E23;
     text-align: left;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
+
