@@ -10,6 +10,11 @@ export class CambiarContrasenaEmpresaComponent implements OnInit {
   contrasenaNueva: string = null;
   contrasenaRep: string = null;
 
+
+  isVisiblePaso1 : boolean = true;
+  isVisiblePaso2 : boolean = false;
+  isVisiblePaso3 : boolean = false;
+
   validadorContrasenaActual :  boolean = false;
   validadorContrasenaNueva :  boolean = false;
   validadorContrasenaRep :  boolean = false;
@@ -27,6 +32,28 @@ export class CambiarContrasenaEmpresaComponent implements OnInit {
   }
 
 
+  clickPaso2 = () =>{
+    this.changeContrasenaActual();
+ 
+      if(!this.validadorContrasenaActual){
+        this.isVisiblePaso1 = false;
+        this.isVisiblePaso2 = true;
+        //this.isVisiblePaso3 = false;
+      }       
+  }
+
+  clickPaso3 = () =>{
+    debugger;
+    this.changeContrasenaNueva();
+    this.changeContrasenaRep();
+ 
+      if(!this.validadorContrasenaNueva && !this.validadorContrasenaRep && !this.validadorContrasenaRepetir && !this.validadorRequisitosContrasenaNueva){
+        //this.isVisiblePaso1 = false;
+        this.isVisiblePaso2 = false;
+        this.isVisiblePaso3 = true;
+      }    
+  }
+
   changeContrasenaActual = () =>{
       if(this.contrasenaActual == null || this.contrasenaActual == ""){
         this.validadorContrasenaActual = true;
@@ -36,21 +63,7 @@ export class CambiarContrasenaEmpresaComponent implements OnInit {
       }
     }
 
-  mostrarContrasenaActual(){
-      let contrasenaActual :any = document.getElementById('contrasenaActual');
-      let eyeContrasenaActual :any = document.getElementById('eyeContrasenaActual');
-      
-      if(contrasenaActual.type == "password"){
-        contrasenaActual.type = "text";
-        eyeContrasenaActual.style.opacity=0.8;
-      }
-      else{
-        contrasenaActual.type = "password";
-        eyeContrasenaActual.style.opacity=0.4;
-      }
-    }
 
-  
     changeContrasenaNueva = () =>{
       var name=this.contrasenaNueva;
       if(this.contrasenaNueva != null){
@@ -113,9 +126,8 @@ export class CambiarContrasenaEmpresaComponent implements OnInit {
       }
   
     }
-
     changeContrasenaRep = () =>{
-      if(this.contrasenaRep.length == 0){
+      if(this.contrasenaRep == null || this.contrasenaRep == ""){
         this.validadorContrasenaRep = true;
       }
       else{
@@ -129,6 +141,20 @@ export class CambiarContrasenaEmpresaComponent implements OnInit {
         else{
           this.validadorContrasenaRepetir = false;
         }
+      }
+    }
+
+    mostrarContrasenaActual(){
+      let contrasenaActual :any = document.getElementById('contrasenaActual');
+      let eyeContrasenaActual :any = document.getElementById('eyeContrasenaActual');
+      
+      if(contrasenaActual.type == "password"){
+        contrasenaActual.type = "text";
+        eyeContrasenaActual.style.opacity=0.8;
+      }
+      else{
+        contrasenaActual.type = "password";
+        eyeContrasenaActual.style.opacity=0.4;
       }
     }
 

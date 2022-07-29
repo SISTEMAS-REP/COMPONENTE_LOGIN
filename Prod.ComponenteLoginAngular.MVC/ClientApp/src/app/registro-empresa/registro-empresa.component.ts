@@ -438,7 +438,7 @@ export class RegistroEmpresaComponent implements OnInit {
 
 
   changeContrasenaRep = () =>{
-    if(this.contrasena_rep.length == 0){
+    if(this.contrasena_rep == null || this.contrasena_rep == ""){
       this.validadorContrasenaRep = true;
     }
     else{

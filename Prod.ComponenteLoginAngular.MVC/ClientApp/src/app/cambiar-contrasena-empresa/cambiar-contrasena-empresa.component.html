@@ -1,17 +1,20 @@
 <body class="align">
     <div class="login">
-      <header class="login__header">
-        <div class="logo-produce">
+      <div *ngIf="isVisiblePaso1 || isVisiblePaso2 ">
+        <header class="login__header">
+           <div class="logo-produce">
             <img src="https://www.jymcontadores.pe/wp-content/uploads/2020/06/PRODUCE-2-770x160.jpg" alt="Logo" title="Logo" width="138">
-          </div>  
-        <div class="logo-aplicacion">
+           </div>  
+          <div class="logo-aplicacion">
           <img src="https://vusp.produce.gob.pe/Content/img/logo.png" alt="Logo" title="Logo" width="138">
-        </div>
+         </div>
           <h3>Cambiar contraseña</h3>
           <p>Persona Jurídica</p>
-    </header>
+       </header>
+    </div>
 
-      <form class="login__form" >      
+      <form class="login__form" >     
+        <div *ngIf="isVisiblePaso1">
         <div>
             <div class="input-wrapper">
               <label for="contrasenaActual">CONTRASEÑA ACTUAL</label>
@@ -29,9 +32,11 @@
         </div>
         
         <div>
-          <button class="buttonSiguiente" >Siguiente</button>    
+          <button class="buttonSiguiente" (click)="clickPaso2()" >Siguiente</button>    
         </div>
+      </div> 
 
+      <div *ngIf="isVisiblePaso2">
         <div>
             <div class="input-wrapper">
               <label for="contrasenaNueva">CONTRASEÑA NUEVA</label>
@@ -86,17 +91,20 @@
          </div>
 
          <div>
-            <button class="buttonSiguiente" >Cambiar contraseña</button>    
+            <button class="buttonSiguiente" (click)="clickPaso3()" >Cambiar contraseña</button>    
           </div>
+    </div>
     
-          <div class="center">
-          <h3>Contraseña cambiada</h3>
-          <label class="center">Tu contraseña fue guardada con exito</label>
-          </div>
+        <div *ngIf="isVisiblePaso3">
+            <div class="center">
+              <h3>Contraseña cambiada</h3>
+              <label class="center">Tu contraseña fue guardada con exito</label>
+            </div>
 
-          <div>
-            <button class="buttonSiguiente" >Ir a inicio</button>    
-          </div>
+           <div>
+             <button class="buttonSiguiente" >Ir a inicio</button>    
+           </div>
+        </div>
       </form>
     </div>
   </body>
