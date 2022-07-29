@@ -21,7 +21,12 @@
     font-size: 1.75rem;
   }
   
-    
+  h3 {
+    color: #000000;
+    text-align: center;
+    margin-top: 0%;
+    margin-bottom: 0%;
+  }
   
   input {
     background-image: none;
