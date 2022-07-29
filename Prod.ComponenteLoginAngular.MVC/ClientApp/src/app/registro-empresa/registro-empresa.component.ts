@@ -70,7 +70,6 @@ export class RegistroEmpresaComponent implements OnInit {
   }
 
   registroEmpresaService = () =>{
-    debugger;
     this.changeContrasena();
     this.changeContrasenaRep();
     this.changeTerminos();
