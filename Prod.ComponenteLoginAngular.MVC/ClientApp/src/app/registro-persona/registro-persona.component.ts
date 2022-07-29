@@ -96,6 +96,7 @@ export class RegistroPersonaComponent implements OnInit {
     const formData = {...Data};
     this.http.post(this.baseUrl + 'ComponenteLogin/RegistroPersona', formData).subscribe((result : any) => {
       if(result.data != null){
+        this.limpiar();
         alert("El registro se guardo con exito.");
 
 
