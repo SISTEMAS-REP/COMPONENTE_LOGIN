@@ -191,7 +191,7 @@
       <p class="validador" *ngIf="validadorTerminos">Marcar los términos y condiciones.</p>
        
         <div>
-          <button class="buttonSiguiente">Registrar</button>
+          <button class="buttonSiguiente" (click)="registroEmpresaService()">Registrar</button>
           <button class="buttonCancelar" (click)="clickPaso3()">Regresar</button>
         </div>
 

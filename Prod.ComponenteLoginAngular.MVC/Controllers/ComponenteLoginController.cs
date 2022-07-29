@@ -112,7 +112,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                 var result1 = new StatusResponse<Prod.ServiciosExternos.PRODUCE_VIRTUAL.Roles.Paginado<Prod.ServiciosExternos.PRODUCE_VIRTUAL.Roles.UsuarioRolesResponse>>();
                 var userName = "";
 
-                if (request.IdTipoPersona == 2) //(int)TIPO_PERSONA.JURIDICA
+                if (request.IdTipoPersona == (int)TIPO_PERSONA.JURIDICA)
                 {
                     userName = request.NroDocumento + request.NroDocPerNatural;
                 }

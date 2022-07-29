@@ -69,6 +69,50 @@ export class RegistroEmpresaComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  registroEmpresaService = () =>{
+    debugger;
+    this.changeContrasena();
+    this.changeContrasenaRep();
+    this.changeTerminos();
+
+   // if(!this.validadorRuc  &&  !this.validadorTipoDocumento &&  !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular && !this.validadorCelularLength && this.validadorCorreo && this.validadorContrasena && this.validadorContrasenaRep && this.validadorContrasenaRepetir && !this.ValidadorNumeros && !this.Validador8Digitos && !this.ValidadorMayuscula && !this.ValidadorSimbolo && !this.ValidadorRequisitos)
+   // {
+   //   alert("Debe cumplir las validaciones.");
+   //   return;
+   // }
+
+   if(!this.validadorRuc && !this.validadorRazonSocial &&  !this.validadorDireccion && !this.validadorTipoDocumento && !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular  && !this.validadorCelularLength  && !this.validadorCorreo && !this.validadorContrasena && !this.validadorContrasenaRep && !this.validadorContrasenaRepetir  && !this.validadorRequisitosContrasena && !this.validadorTerminos ){
+   let Data = {
+     Id: 0,
+     IdSector: 1, // 1: persona Natural // 2: persona juridica
+     IdTipoPersona: 1,
+     CodigoDepartamento: this.cod_departamento,
+     CodigoProvincia: this.cod_provincia,
+     CodigoDistrito: this.cod_distrito,
+     IdTipoIdentificacion: 1,
+     RazonSocial: "",
+     Nombres: this.nombres,
+     Apellidos: this.apellidos,
+     NroDocumento: this.ruc, //para persona juridica mandas el ruc
+     Direccion: this.direccion,
+     Celular: this.celular,
+     Email: this.correo,
+     Flag: "A",
+     NroDocPerNatural: this.numeroDoc,//para persona juridica mandas el dni
+     Contrasena: this.contrasena
+   }
+   const formData = {...Data};
+   this.http.post(this.baseUrl + 'ComponenteLogin/RegistroPersona', formData).subscribe((result : any) => {
+     if(result.data != null){
+       alert("El registro se guardo con exito.");
+     }
+     else{
+       alert(result.messages[0]);
+     }
+     
+   }, error => console.error(error));
+ }
+}
 
   btnBuscarRUC = () =>{
     let Data = {
