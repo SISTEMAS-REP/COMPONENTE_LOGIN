@@ -80,7 +80,7 @@ a:hover {
   text-decoration: none;
   cursor: pointer;
   border-radius: 1px;
-  padding: 3px 6px;
+  padding: 5px 7px;
   border: 2px solid #58595B;
 }
   
@@ -94,7 +94,7 @@ a:hover {
   text-decoration: none;
   cursor: pointer;
   border-radius: 1px;
-  padding: 3px 6px;
+  padding: 5px 7px;
   border: 2px solid #ccc;
 }
 
@@ -131,14 +131,14 @@ a:hover {
 
 /* ---------- LOGIN ---------- */
 .login {
-  width: 465px;
+  width: 410px;
 
 }
 
 .login__header {
   background-color: #fff;
   color: #000;
-  padding-top: 0.5em;
+  padding: 0.5em 0.5em 0em 0.5em;
 }
 
 .login__header h3 {
@@ -155,6 +155,29 @@ a:hover {
   padding-top: 0%;
 }
 
+
+.login__header :first-child {
+  margin-top: 0;
+}
+.login__header {
+  background-color: #fff;
+  color: #000;
+  padding: 0.5em 0.5em 0em 0.5em;
+}
+
+.login__header h3 {
+  text-align: center;
+  margin-top: 0%;
+  margin-bottom: 0%;
+}
+
+
+.login__header p {
+  text-align: center;
+  margin-top: 0%;
+  margin-bottom: 0%;
+  padding-top: 0%;
+}
 
 
 .login__header :first-child {
@@ -176,7 +199,7 @@ a:hover {
   color: #777;
   display: grid;
   gap: 0.5em;
-  padding: 1.4em 1.4em 1.4em 1.4em;
+  padding: 1em 1.6em 0.5em 1.6em;
   
 }
 
@@ -320,7 +343,7 @@ a:hover {
       display: block;
       position: relative;
       padding-left: 20px;
-      margin-bottom: 14px;
+      margin-bottom: 10px;
       cursor: pointer;
       font-size: 22px;
     }
@@ -454,5 +477,5 @@ a:hover {
     font-size: 10px;
     color: #EB1E23;
     text-align: left;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
