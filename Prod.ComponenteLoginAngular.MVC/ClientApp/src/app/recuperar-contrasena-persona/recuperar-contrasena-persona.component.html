@@ -14,13 +14,15 @@
       <form action="#" class="login__form" method="POST">              
           <div>
               <label for="numeroDoc">NÚMERO DE DOCUMENTO</label>
-              <input type="text" id="numeroDoc" name="numeroDoc"  [(ngModel)]="numeroDocumento" placeholder="Ej.:15234687">
+              <input type="text" id="numeroDoc" name="numeroDoc"  [(ngModel)]="numeroDocumento" placeholder="Ej.:15234687" (change)="changeNroDocumento()" maxlength="12">
+              <p class="validador" *ngIf="validarNroDocumento">Debe ingresar el número de documento.</p>
           </div>
     
      
           <div>
             <label for="correo">CORREO ELECTRONICO</label>
-            <input type="text" id="correo" name="correo"  [(ngModel)]="email" placeholder="Ej.:camila.flores@ejemplo.com">
+            <input type="text" id="correo" name="correo"  [(ngModel)]="email" placeholder="Ej.:camila.flores@ejemplo.com" (change)="changeEmail()">
+            <p class="validador" *ngIf="validarEmail">Debe ingresar el correo electronico.</p>
           </div>
     
         <div>

@@ -14,12 +14,14 @@
       <form class="login__form">      
           <div>
               <label for="numeroDoc">NÚMERO DOCUMENTO</label>
-              <input type="text" id="numeroDoc" name="numeroDoc" [(ngModel)]="numero_documento" placeholder="Ej.:15234687">
+              <input type="text" id="numeroDoc" name="numeroDoc" [(ngModel)]="numero_documento" placeholder="Ej.:15234687" (change)="changeNroDocumento()" maxlength="12">
+              <p class="validador" *ngIf="validarNroDocumento">Debe ingresar el número de documento.</p>
           </div>
     
         <div>
           <label for="contraseña">CONTRASEÑA</label>
-          <input type="text" id="contraseña" name="contraseña" [(ngModel)]="contrasena" placeholder="">
+          <input type="text" id="contraseña" name="contraseña" [(ngModel)]="contrasena" placeholder="" (change)="changeContrasena()">
+          <p class="validador" *ngIf="validarContrasena">Debe ingresar la contraseña.</p>
           <a style="text-align:left" href="#"></a>
         </div>
     
