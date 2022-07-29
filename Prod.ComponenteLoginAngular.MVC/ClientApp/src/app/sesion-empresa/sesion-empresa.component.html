@@ -14,17 +14,20 @@
       <form class="login__form" >      
         <div>
              <label for="ruc">N° de RUC del cliente</label>
-            <input type="text" id="ruc" name="ruc"  [(ngModel)]="ruc"  placeholder="Ej.:10152346872">
+            <input type="text" id="ruc" name="ruc"  [(ngModel)]="ruc"  placeholder="Ej.:10152346872" maxlength="11" (change)="changeRuc()">
+            <p class="validador" *ngIf="validarRuc">Debe ingresar el número de RUC.</p>
         </div>
     
           <div>
               <label for="numeroDoc">NÚMERO DOCUMENTO</label>
-              <input type="text" id="numeroDoc" name="numeroDoc" [(ngModel)]="numero_documento"  placeholder="Ej.:15234687">
+              <input type="text" id="numeroDoc" name="numeroDoc" [(ngModel)]="numero_documento"  placeholder="Ej.:15234687" (change)="changeNroDocumento()" maxlength="12">
+              <p class="validador" *ngIf="validarNroDocumento">Debe ingresar el número de documento.</p>
           </div>
     
         <div>
           <label for="contraseña">CONTRASEÑA</label>
-          <input type="text" id="contraseña" name="contraseña" [(ngModel)]="contrasena"  placeholder="">
+          <input type="text" id="contraseña" name="contraseña" [(ngModel)]="contrasena"  placeholder="" (change)="changeContrasena()">
+          <p class="validador" *ngIf="validarContrasena">Debe ingresar la contraseña.</p>
           <a style="text-align:left" href="#"></a>
         </div>
     
