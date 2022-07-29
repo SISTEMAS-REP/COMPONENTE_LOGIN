@@ -16,9 +16,9 @@ export class RegistroEmpresaComponent implements OnInit {
   nombres: string = null;
   celular: string = null;
   correo: string = null;
-  rep_correo: string = null;
+  correo_rep: string = null;
   contrasena: string = null;
-  rep_contrasena: string = null;
+  contrasena_rep: string = null;
   terminos_politica : boolean = false;
   terminos_mensajeria : boolean = false;
 
@@ -171,7 +171,6 @@ export class RegistroEmpresaComponent implements OnInit {
   }
 
   clickPaso2 = () =>{
-    debugger
     this.changeRuc();
     this.changeRazonSocial();
     this.changeDireccion();
@@ -188,7 +187,6 @@ export class RegistroEmpresaComponent implements OnInit {
   }
 
   clickPaso3 = () =>{
-    debugger
     this.changeTipoDocumento(0);
     this.changeNroDocumento();
     this.changeApeliidos();
@@ -206,7 +204,6 @@ export class RegistroEmpresaComponent implements OnInit {
   }
 
   clickPaso4 = () =>{
-    debugger
     this.changeCelular();
     this.changeCorreo();
     this.changeCorreoRep();
@@ -237,7 +234,6 @@ export class RegistroEmpresaComponent implements OnInit {
   } 
 
   changeRazonSocial = () =>{
-    debugger
     if(this.razonSocial== null || this.razonSocial == ""){
       this.validadorRazonSocial = true;
     }
@@ -247,7 +243,6 @@ export class RegistroEmpresaComponent implements OnInit {
   } 
 
   changeDireccion = () =>{
-    debugger
     if(this.direccion == null || this.direccion == ""){
       this.validadorDireccion = true;
     }
@@ -267,7 +262,6 @@ export class RegistroEmpresaComponent implements OnInit {
   }
 
   changeNroDocumento = () =>{
-    debugger
     if(this.numeroDoc == null || this.numeroDoc == ""){
       this.validadorNroDocumento = true;
     }
@@ -296,7 +290,6 @@ export class RegistroEmpresaComponent implements OnInit {
 
   
   changeCelular = () =>{
-    debugger;
     if(this.celular == null || this.celular == ""){
       this.validadorCelular = true;
       this.validadorCelularLength = false;
@@ -316,7 +309,6 @@ export class RegistroEmpresaComponent implements OnInit {
 
 
   changeCorreo = () =>{
-    debugger;
     if(this.correo == null || this.correo == ""){
       this.validadorCorreo = true;
       this.validadorCorreoInvalido = false;
@@ -342,15 +334,15 @@ export class RegistroEmpresaComponent implements OnInit {
 
 
   changeCorreoRep = () =>{
-    if(this.rep_correo == null || this.rep_correo == ""){
+    if(this.correo_rep == null || this.correo_rep == ""){
       this.validadorCorreoRep = true;
     }
     else{
       this.validadorCorreoRep = false;
     }
 
-    if(this.correo != null || this.rep_correo != null){
-      if(this.correo != this.rep_correo){
+    if(this.correo != null || this.correo_rep != null){
+      if(this.correo != this.correo_rep){
         this.validadorCorreoRepetir = true;
       }
       else{
@@ -361,7 +353,6 @@ export class RegistroEmpresaComponent implements OnInit {
 
 
    changeContrasena = () =>{
-    debugger;
     var name=this.contrasena;
     if(this.contrasena != null){
 
@@ -426,15 +417,15 @@ export class RegistroEmpresaComponent implements OnInit {
 
 
   changeContrasenaRep = () =>{
-    if(this.rep_contrasena.length == 0){
+    if(this.contrasena_rep.length == 0){
       this.validadorContrasenaRep = true;
     }
     else{
       this.validadorContrasenaRep = false;
     }
 
-    if(this.contrasena != null || this.rep_contrasena != null){
-      if(this.contrasena != this.rep_contrasena){
+    if(this.contrasena != null || this.contrasena_rep != null){
+      if(this.contrasena != this.contrasena_rep){
         this.validadorContrasenaRepetir = true;
       }
       else{
@@ -454,26 +445,30 @@ export class RegistroEmpresaComponent implements OnInit {
 
 
   mostrarContrasena(){
-    debugger;
-    let elemento :any = document.getElementById('contrasena');
+    let contrasena :any = document.getElementById('contrasena');
+    let eyeContrasena :any = document.getElementById('eyeContrasena');
     
-    if(elemento.type == "password"){
-      elemento.type = "text";
+    if(contrasena.type == "password"){
+      contrasena.type = "text";
+      eyeContrasena.style.opacity=0.8;
     }
     else{
-      elemento.type = "password";
+      contrasena.type = "password";
+      eyeContrasena.style.opacity=0.4;
     }
   }
 
   mostrarContrasenaRepe(){
-    debugger;
-    let elemento :any = document.getElementById('rep_contrasena');
+    let contrasena_rep :any = document.getElementById('contrasena_rep');
+    let eyeContrasena_rep :any = document.getElementById('eyeContrasena_rep');
     
-    if(elemento.type == "password"){
-      elemento.type = "text";
+    if(contrasena_rep.type == "password"){
+      contrasena_rep.type = "text";
+      eyeContrasena_rep.style.opacity=0.8;
     }
     else{
-      elemento.type = "password";
+      contrasena_rep.type = "password";
+      eyeContrasena_rep.style.opacity=0.4;
     }
   }
 

@@ -198,6 +198,31 @@ a:hover {
   margin-bottom: 5px;
 }
 
+.login .input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+
+.login .input.password {
+  padding: 15px 35px 15px 15px;
+}
+
+.login .input-icon {
+  color: #191919;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 12px;
+  top: 66%;
+  transform: translateY(-50%);
+}
+
+.login .input-icon.password {
+  left: unset;
+  right: 12px;
+  opacity: 0.4;
+}
 
 
 .login input:required {

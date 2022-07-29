@@ -15,7 +15,7 @@ export class RegistroPersonaComponent implements OnInit {
   celular: string = null;
   correo: string = null;
   contrasena: string = null;
-  rep_contrasena: string = null;
+  contrasena_rep: string = null;
   tengoRuc: boolean = false;
   terminos_politica : boolean = false;
   terminos_mensajeria : boolean = false;
@@ -325,15 +325,15 @@ export class RegistroPersonaComponent implements OnInit {
   }
 
   changeContrasenaRep = () =>{
-    if(this.rep_contrasena == null || this.rep_contrasena == ""){
+    if(this.contrasena_rep == null || this.contrasena_rep == ""){
       this.validadorContrasenaRep = true;
     }
     else{
       this.validadorContrasenaRep = false;
     }
 
-    if(this.contrasena != null || this.rep_contrasena != null){
-      if(this.contrasena != this.rep_contrasena){
+    if(this.contrasena != null || this.contrasena_rep != null){
+      if(this.contrasena != this.contrasena_rep){
         this.validadorContrasenaRepetir = true;
       }
       else{
@@ -353,27 +353,32 @@ export class RegistroPersonaComponent implements OnInit {
 
 
   mostrarContrasena(){
-    let elemento :any = document.getElementById('contrasena');
+    let contrasena :any = document.getElementById('contrasena');
+    let eyeContrasena :any = document.getElementById('eyeContrasena');
     
-    if(elemento.type == "password"){
-      elemento.type = "text";
+    if(contrasena.type == "password"){
+      contrasena.type = "text";
+      eyeContrasena.style.opacity=0.8;
     }
     else{
-      elemento.type = "password";
+      contrasena.type = "password";
+      eyeContrasena.style.opacity=0.4;
     }
   }
 
   mostrarContrasenaRepe(){
-    let elemento :any = document.getElementById('rep_contrasena');
+    let contrasena_rep :any = document.getElementById('contrasena_rep');
+    let eyeContrasena_rep :any = document.getElementById('eyeContrasena_rep');
     
-    if(elemento.type == "password"){
-      elemento.type = "text";
+    if(contrasena_rep.type == "password"){
+      contrasena_rep.type = "text";
+      eyeContrasena_rep.style.opacity=0.8;
     }
     else{
-      elemento.type = "password";
+      contrasena_rep.type = "password";
+      eyeContrasena_rep.style.opacity=0.4;
     }
   }
-
   
 
   public restrictNumeric(e) {

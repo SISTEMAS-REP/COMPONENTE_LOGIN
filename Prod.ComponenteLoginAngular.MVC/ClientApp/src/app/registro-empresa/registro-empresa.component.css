@@ -224,6 +224,7 @@ a:hover {
 .login .input-icon.password {
   left: unset;
   right: 12px;
+  opacity: 0.4;
 }
 
 .login input:required {
