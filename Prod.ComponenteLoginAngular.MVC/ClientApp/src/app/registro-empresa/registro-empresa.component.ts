@@ -62,6 +62,8 @@ export class RegistroEmpresaComponent implements OnInit {
   ispaso3 : boolean = true;
   ispaso4 : boolean = true;
 
+ isDisableNroDocumento: boolean = true;
+
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string,
   ) {
   }
@@ -103,6 +105,7 @@ export class RegistroEmpresaComponent implements OnInit {
    const formData = {...Data};
    this.http.post(this.baseUrl + 'ComponenteLogin/RegistroPersona', formData).subscribe((result : any) => {
      if(result.data != null){
+        this.limpiar();
        alert("El registro se guardo con exito.");
      }
      else{
@@ -114,6 +117,17 @@ export class RegistroEmpresaComponent implements OnInit {
 }
 
   btnBuscarRUC = () =>{
+    if(this.ruc.length != 11){
+      this.validadorRuc = true;
+      this.razonSocial = null;
+      this.cod_departamento = null;
+      this.cod_provincia = null;
+      this.cod_distrito = null;
+      this.direccion = null;
+      return;
+    }
+
+
     let Data = {
       NroDocumento : this.ruc,
       IdTipoIdentificacion : 8
@@ -130,7 +144,7 @@ export class RegistroEmpresaComponent implements OnInit {
       else{
         alert("El número de RUC es incorrecto.");
         this.razonSocial = null;
-        this.cod_provincia = null;
+        this.cod_departamento = null;
         this.cod_provincia = null;
         this.cod_distrito = null;
         this.direccion = null;
@@ -140,6 +154,12 @@ export class RegistroEmpresaComponent implements OnInit {
 
 
   btnBuscarDNI = () =>{
+    if(this.numeroDoc.length != 8){
+      this.validadorTipoDocumento = true;
+      this.nombres = null;
+      this.apellidos = null;
+    }
+
     let Data = {
       NroDocumento : this.numeroDoc,
       IdTipoIdentificacion : 1
@@ -159,7 +179,7 @@ export class RegistroEmpresaComponent implements OnInit {
   }
 
 
-  clickPaso1 = () =>{
+  clickPaso1 = () =>{ 
     this.isVisiblePaso1 = true;
     this.isVisiblePaso2 = false;
     this.isVisiblePaso3 = false;
@@ -186,7 +206,7 @@ export class RegistroEmpresaComponent implements OnInit {
   }
 
   clickPaso3 = () =>{
-    this.changeTipoDocumento(0);
+    this.changeTipoDocumento();
     this.changeNroDocumento();
     this.changeApeliidos();
     this.changeNombres();
@@ -250,13 +270,15 @@ export class RegistroEmpresaComponent implements OnInit {
     }
   } 
 
-  changeTipoDocumento = (item) =>
+  changeTipoDocumento = () =>
   {   
     if(this.tipoDoc == 0){
       this.validadorTipoDocumento = true;
+      this.isDisableNroDocumento = true;
     }
     else{
       this.validadorTipoDocumento = false;
+      this.isDisableNroDocumento = false;
     }
   }
 
@@ -495,6 +517,66 @@ export class RegistroEmpresaComponent implements OnInit {
 
     input = String.fromCharCode(e.which);
     return !!/[\d\s]/.test(input);
+   }
+
+
+   limpiar =()=>{
+    this.ruc= null;
+    this.razonSocial = null;
+    this.direccion = null;
+    this.tipoDoc = 0;
+    this.numeroDoc = null;
+    this.apellidos = null;
+    this.nombres = null;
+    this.celular = null;
+    this.correo = null;
+    this.correo_rep = null;
+    this.contrasena = null;
+    this.contrasena_rep = null;
+    this.terminos_politica = false;
+    this.terminos_mensajeria = false;
+  
+    this.isVisiblePaso1 = true;
+    this.isVisiblePaso2 = false;
+    this.isVisiblePaso3 = false;
+    this.isVisiblePaso4 = false;
+  
+    this.cod_departamento = null;
+    this.cod_provincia = null;
+    this.cod_distrito = null;
+  
+  
+    //Variables validador
+    this.validadorRuc = false;
+    this.validadorRazonSocial = false;
+    this.validadorDireccion = false;
+    this.validadorTipoDocumento = false;
+    this.validadorNroDocumento = false;
+    this.validadorApellidos = false;
+    this.validadorNombres = false;
+    this.validadorCelular = false;
+    this.validadorCelularLength = false;
+    this.validadorCorreo = false;
+    this.validadorCorreoRep = false;
+    this.validadorCorreoRepetir = false;
+    this.validadorCorreoInvalido = false;
+    this.validadorContrasena = false;
+    this.validadorContrasenaRep = false;
+    this.validadorContrasenaRepetir = false;
+    //Validador Contraseña
+    this.Validador8Digitos = false;
+    this.ValidadorNumeros = false;
+    this.ValidadorMayuscula = false;
+    this.ValidadorSimbolo = false;
+    this.validadorTerminos = false;
+    this.validadorRequisitosContrasena = false;
+  
+    this.ispaso1 = true;
+    this.ispaso2 = true;
+    this.ispaso3 = true;
+    this.ispaso4 = true;
+  
+    this.isDisableNroDocumento = true;
    }
 
 }
