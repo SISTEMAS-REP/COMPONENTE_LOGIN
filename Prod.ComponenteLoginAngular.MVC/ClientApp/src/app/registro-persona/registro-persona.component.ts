@@ -61,8 +61,6 @@ export class RegistroPersonaComponent implements OnInit {
   }
 
   registroPersonaService = () =>{
-
-    debugger;
      this.changeCorreo();
      this.changeContrasena();
      this.changeContrasenaRep();
@@ -114,7 +112,6 @@ export class RegistroPersonaComponent implements OnInit {
     }
     const formData = {...Data};
     this.http.post(this.baseUrl + 'ComponenteLogin/buscarReniec', formData).subscribe((result : any) => {
-      debugger
       if(result.data.data != null){
         this.nombres = result.data.data.nombre;
         this.apellidos = result.data.data.apellidoPaterno + " " + result.data.data.apellidoMaterno;
@@ -223,7 +220,6 @@ export class RegistroPersonaComponent implements OnInit {
 
  
   changeCelular = () =>{
-    debugger;
     if(this.celular == null || this.celular == ""){
       this.validadorCelular = true;
       this.validadorCelularLength = false;
@@ -241,7 +237,6 @@ export class RegistroPersonaComponent implements OnInit {
   }
 
   changeCorreo = () =>{
-    debugger;
     if(this.correo == null || this.correo == ""){
       this.validadorCorreo = true;
       this.validadorCorreoInvalido = false;
@@ -267,7 +262,6 @@ export class RegistroPersonaComponent implements OnInit {
 
 
   changeContrasena = () =>{
-    debugger;
     var name=this.contrasena;
     if(this.contrasena != null){
 

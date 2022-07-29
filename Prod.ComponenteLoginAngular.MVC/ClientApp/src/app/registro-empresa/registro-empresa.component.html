@@ -22,19 +22,19 @@
       <h5 class="center">DATOS EMPRESA</h5>
       <div>
           <label for="ruc">RUC</label>
-          <input type="text" id="ruc" name="ruc" placeholder="Ej. : 20543216789"  [(ngModel)]="ruc" (change)="changeRuc($event)"  maxlength="11" (keypress)="restrictNumeric($event)">
+          <input type="text" id="ruc" name="ruc" placeholder="Ej. : 20543216789"  [(ngModel)]="ruc" (change)="changeRuc($event)"  maxlength="11" (blur)="btnBuscarRUC()" (keypress)="restrictNumeric($event)">
           <p class="validador" *ngIf="validadorRuc">Debe ingresar el RUC.</p>
         </div>
       
        <div>
         <label for="razonSocial">RAZÓN SOCIAL</label>
-        <input type="text" id="razonSocial" name="razonSocial" placeholder="Ej. : Base - Base Corporation" [(ngModel)]="razonSocial" (change)="changeRazonSocial($event)" maxlength="300">
+        <input type="text" id="razonSocial" name="razonSocial" placeholder="Ej. : Base - Base Corporation" [(ngModel)]="razonSocial" (change)="changeRazonSocial($event)" maxlength="300" disabled>
         <p  class="validador" *ngIf="validadorRazonSocial">Debe ingresar la razón social.</p>
       </div>
 
       <div>
         <label for="direccion">DIRECCIÓN</label>
-        <input type="text" id="direccion" name="direccion" placeholder="Ej. : Calle C 3517 , Lima"  [(ngModel)]="direccion" (change)="changeDireccion($event)"  maxlength="300">
+        <input type="text" id="direccion" name="direccion" placeholder="Ej. : Calle C 3517 , Lima"  [(ngModel)]="direccion" (change)="changeDireccion($event)"  maxlength="300" disabled>
         <p  class="validador" *ngIf="validadorDireccion">Debe ingresar la dirección.</p>
       </div>
 
@@ -63,20 +63,20 @@
 
           <div class="right">
               <label for="numeroDoc">NÚMERO DOCUMENTO</label>
-              <input type="text" id="numeroDoc" name="numeroDoc" placeholder="Ej.:15234687" [(ngModel)]="numeroDoc" (change)="changeNroDocumento($event)" maxlength="12" (keypress)="restrictNumeric($event)">
+              <input type="text" id="numeroDoc" name="numeroDoc" placeholder="Ej.:15234687" [(ngModel)]="numeroDoc" (change)="changeNroDocumento($event)" maxlength="12" (blur)="btnBuscarDNI()"  (keypress)="restrictNumeric($event)">
               <p class="validador" *ngIf="validadorNroDocumento">Debe ingresar el número de documento.</p>
             </div>
       </div>
   
         <div>
           <label for="apellidos">APELLIDOS</label>
-          <input type="text" id="apellidos" name="apellidos" placeholder="Ejm:Flores Sánchez" [(ngModel)]="apellidos" (change)="changeApeliidos($event)" maxlength="150">
+          <input type="text" id="apellidos" name="apellidos" placeholder="Ejm:Flores Sánchez" [(ngModel)]="apellidos" (change)="changeApeliidos($event)" maxlength="150" disabled>
           <p  class="validador" *ngIf="validadorApellidos">Debe ingresar los apellidos.</p>
         </div>
   
         <div>
           <label for="nombres">NOMBRES</label>
-          <input type="text" id="nombres" name="nombres" placeholder="Ej.:Camila" [(ngModel)]="nombres" (change)="changeNombres($event)" maxlength="150" >
+          <input type="text" id="nombres" name="nombres" placeholder="Ej.:Camila" [(ngModel)]="nombres" (change)="changeNombres($event)" maxlength="150" disabled>
           <p class="validador" *ngIf="validadorNombres">Debe ingresar los nombres.</p>
         </div>
 

@@ -27,6 +27,10 @@ export class RegistroEmpresaComponent implements OnInit {
   isVisiblePaso3 : boolean = false;
   isVisiblePaso4 : boolean = false;
 
+  cod_departamento: string = null;
+  cod_provincia : string = null;
+  cod_distrito : string = null;
+
 
   //Variables validador
   validadorRuc :  boolean = false;
@@ -64,6 +68,53 @@ export class RegistroEmpresaComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+
+  btnBuscarRUC = () =>{
+    let Data = {
+      NroDocumento : this.ruc,
+      IdTipoIdentificacion : 8
+    }
+    const formData = {...Data};
+    this.http.post(this.baseUrl + 'ComponenteLogin/BuscarPersonaEmpresa', formData).subscribe((result : any) => {
+      if(result.data != null){
+        this.razonSocial = result.data.razonSocial;
+        this.cod_departamento = result.data.codigoDepartamento;
+        this.cod_provincia = result.data.codigoProvincia;
+        this.cod_distrito  = result.data.codigo_distrito;
+        this.direccion = result.data.direccion;
+      }
+      else{
+        alert("El número de RUC es incorrecto.");
+        this.razonSocial = null;
+        this.cod_provincia = null;
+        this.cod_provincia = null;
+        this.cod_distrito = null;
+        this.direccion = null;
+      }
+    }, error => console.error(error));
+  }
+
+
+  btnBuscarDNI = () =>{
+    let Data = {
+      NroDocumento : this.numeroDoc,
+      IdTipoIdentificacion : 1
+    }
+    const formData = {...Data};
+    this.http.post(this.baseUrl + 'ComponenteLogin/BuscarPersonaEmpresa', formData).subscribe((result : any) => {
+      if(result.data!= null){
+        this.nombres = result.data.nombres;
+        this.apellidos = result.data.apellidos;
+      }
+      else{
+        alert("El número de DNI es incorrecto.");
+        this.nombres = null;
+        this.apellidos = null;
+      }
+    }, error => console.error(error));
+  }
+
 
   clickPaso1 = () =>{
     this.isVisiblePaso1 = true;
@@ -133,7 +184,6 @@ export class RegistroEmpresaComponent implements OnInit {
   //validador
 
   changeRuc = () =>{
-    debugger
     if(this.ruc == null || this.ruc == ""){
       this.validadorRuc = true;
     }

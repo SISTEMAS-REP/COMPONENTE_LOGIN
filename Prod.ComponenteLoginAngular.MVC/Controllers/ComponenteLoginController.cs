@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using se = Prod.ServiciosExternos;
 using Prod.ComponenteLoginAngular.MVC.Controllers.Core;
 using Prod.ComponenteLoginAngular.MVC.Model;
 using Prod.ServiciosExternos;
@@ -14,6 +15,7 @@ using roles = Prod.ServiciosExternos.PRODUCE_VIRTUAL.Roles;
 using Prod.ServiciosExternos.PRODUCE_VIRTUAL.Roles;
 using Prod.ComponenteLogin.MVC.Configuracion.Proxy;
 using Prod.ComponenteLogin.MVC.Configuracion;
+using PersonaResponse = Prod.ComponenteLoginAngular.MVC.Model.PersonaResponse;
 
 namespace Prod.ComponenteLoginAngular.MVC.Controllers
 {
@@ -251,8 +253,83 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
             return Ok(sr);
         }
 
+        [HttpPost]
+        [Route("BuscarPersonaEmpresa")]
+        public StatusResponse<PersonaResponse> BuscarPersonaEmpresa([FromBody] PersonaRequest request)
+        {
+            var sr = new StatusResponse<PersonaResponse>();
+            var persona = personasServicio.ObtenerPersona(new se.Personas.PersonaGeneralRequest
+            {
+                nro_documento = request.NroDocumento
+            });
+
+            if (persona.Success && persona.Data?.id_persona > 0)
+            {
+                sr.Success = true;
+                sr.Data = new PersonaResponse()
+                {
+                    Id = persona.Data.id_persona,
+                    IdTipoIdentificacion = persona.Data.id_tipo_identificacion,
+                    IdTipoPersona = persona.Data.id_tipo_persona,
+                    RazonSocial = persona.Data.razon_social,
+                    Nombres = persona.Data.nombres,
+                    Apellidos = persona.Data.apellidos,
+                    Direccion = persona.Data.direccion,
+                    CodigoDepartamento = persona.Data.codigo_departamento,
+                    CodigoProvincia = persona.Data.codigo_provincia,
+                    CodigoDistrito = persona.Data.codigo_distrito,
+                    Email = persona.Data.email,
+                    Celular = persona.Data.celular
+                };
+                return sr;
+            }
+            //Validar Sunat
+            if (request.IdTipoIdentificacion == (int)TIPO_DOCUMENTO_PERSONA.RUC)
+            {
+
+                var data = _sunatServicio.Buscar(request.NroDocumento);
+                if (data.Success)
+                {
+                    sr.Success = true;
+                    sr.Data = new PersonaResponse()
+                    {
+                        //EsValidoReniec = true,
+                        RazonSocial = data.Data.razonSocial,
+                        Direccion = string.IsNullOrEmpty(data.Data.domicilio) ? "-" : data.Data.domicilio,
+                        CodigoDepartamento = string.IsNullOrEmpty(data.Data.departamento) ? "00" : data.Data.departamento,
+                        CodigoProvincia = string.IsNullOrEmpty(data.Data.departamento) ? "00" : (string.IsNullOrEmpty(data.Data.provincia) ? "00" : (data.Data.provincia.Substring(data.Data.provincia.Length - 2, 2))),
+                        CodigoDistrito = (string.IsNullOrEmpty(data.Data.departamento) || string.IsNullOrEmpty(data.Data.provincia)) ? "00" : (string.IsNullOrEmpty(data.Data.ubigeo) ? "00" : (data.Data.ubigeo.Substring(data.Data.ubigeo.Length - 2, 2)))
+                    };
+                    //Validar Servicio Persona
+                    //var respuestaAccesos = _AccesosServicio.GetAdministradoFiltros(new AccesoRequest { tipoBusqueda = 2, filtro = data.Data.numeroRuc });
+                    //sr.Data.IdPersona = respuestaAccesos.userName;
+                }
+            }
+            //Validar Reniec
+            else if (request.IdTipoIdentificacion == (int)TIPO_DOCUMENTO_PERSONA.DNI)
+            {
+                var data = _reniecServicio.Buscar(request.NroDocumento);
+                if (data.Success)
+                {
+                    sr.Success = true;
+                    sr.Data = new PersonaResponse()
+                    {
+                        //EsValidoReniec = true,
+                        Nombres = data.Data.nombre,
+                        Apellidos = (data.Data.apellidoPaterno + " " + data.Data.apellidoMaterno ?? "").Trim(),
+                        Direccion = string.IsNullOrEmpty(data.Data.direccion) ? "-" : data.Data.direccion,
+                        CodigoDepartamento = string.IsNullOrEmpty(data.Data.codigoDepartamento) ? "00" : data.Data.codigoDepartamento,
+                        CodigoProvincia = string.IsNullOrEmpty(data.Data.codigoDepartamento) ? "00" : (string.IsNullOrEmpty(data.Data.codigoProvincia) ? "00" : (data.Data.codigoProvincia.Substring(data.Data.codigoProvincia.Length - 2, 2))),
+                        CodigoDistrito = (string.IsNullOrEmpty(data.Data.codigoDistrito) || string.IsNullOrEmpty(data.Data.codigoProvincia)) ? "00" : (string.IsNullOrEmpty(data.Data.codigoDistrito) ? "00" : (data.Data.codigoDistrito.Substring(data.Data.codigoDistrito.Length - 2, 2)))
+                    };
+                    //Validar Servicio Persona
+                    //var respuestaAccesos = _AccesosServicio.GetAdministradoFiltros(new AccesoRequest { tipoBusqueda = 2, filtro = data.Data.dni });
+                    //sr.Data.IdPersona = respuestaAccesos.userName;
+                }
+            }
+            return sr;
+        }
 
     }
-
-    
+  
 }
