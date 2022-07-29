@@ -51,6 +51,7 @@ export class RegistroPersonaComponent implements OnInit {
   validadorRequisitosContrasena : boolean = false;
   validadorTerminos: boolean = false;
 
+  isDisableNroDocumento : boolean = true;
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string,
   ) {
   }
@@ -96,6 +97,8 @@ export class RegistroPersonaComponent implements OnInit {
     this.http.post(this.baseUrl + 'ComponenteLogin/RegistroPersona', formData).subscribe((result : any) => {
       if(result.data != null){
         alert("El registro se guardo con exito.");
+
+
       }
       else{
         alert(result.messages[0]);
@@ -104,6 +107,56 @@ export class RegistroPersonaComponent implements OnInit {
     }, error => console.error(error));
   }
 }
+
+
+  limpiar =()=>
+  {
+    this.ruc = null;
+    this.tipoDoc = 0;
+    this.numeroDoc = null;
+    this.apellidos = null;
+    this.nombres = null;
+    this.celular = null;
+    this.correo = null;
+    this.contrasena = null;
+    this.contrasena_rep = null;
+    this.tengoRuc = false;
+    this.terminos_politica = false;
+    this.terminos_mensajeria = false;
+
+    this.cod_departamento = null;
+    this.cod_provincia = null;
+    this.cod_distrito = null;
+    this.direccion = null;
+
+
+    this.isVisiblePaso1 = true;
+    this.isVisiblePaso2 = false;
+    this.ispaso2 = true;
+
+    //Variables validador
+    this.validadorRuc = true;
+    this.validadorTipoDocumento = false;
+    this.validadorNroDocumento = false;
+    this.validadorApellidos = false;
+    this.validadorNombres = false;
+    this.validadorCelular = false;
+    this.validadorCelularLength = false;
+    this.validadorCorreo = false;
+    this.validadorCorreoInvalido = false;
+    this.validadorContrasena = false;
+    this.validadorContrasenaRep = false;
+    this.validadorContrasenaRepetir = false;
+    //Validador Contraseña
+    this.Validador8Digitos = false;
+    this.ValidadorNumeros = false;
+    this.ValidadorMayuscula = false;
+    this.ValidadorSimbolo = false;
+    this.validadorRequisitosContrasena = false;
+    this.validadorTerminos = false;
+
+    this.isDisableNroDocumento = true;
+  }
 
 
   buscarReniec = () =>{
@@ -133,11 +186,6 @@ export class RegistroPersonaComponent implements OnInit {
   }
 
 
-
-  changeTengoRuc= (item) =>
-  {
-    this.tengoRuc;
-  }
 
   clickPaso1 = () =>{
     this.isVisiblePaso1 = true;
@@ -184,9 +232,11 @@ export class RegistroPersonaComponent implements OnInit {
   {   
     if(this.tipoDoc == 0){
       this.validadorTipoDocumento = true;
+      this.isDisableNroDocumento = true;
     }
     else{
       this.validadorTipoDocumento = false;
+      this.isDisableNroDocumento = false;
     }
   }
 
