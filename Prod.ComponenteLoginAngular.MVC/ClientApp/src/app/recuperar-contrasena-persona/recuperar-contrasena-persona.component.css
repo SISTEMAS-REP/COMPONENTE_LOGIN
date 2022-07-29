@@ -389,72 +389,83 @@ background-color: #000;
 }
 
 /* -------------Radio----------------*/
+  
+  /* El contenedor */
+  .radio{
+    display: block;
+    position: relative;
+    padding-left: 22px;
+    cursor: pointer;
+    font-size: 12px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    width: 100%;
+  }
+  
+  
+  /* Ocultar el botón de opción predeterminado del navegador */
+  .radio input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  /* Crear un botón de opción personalizado */
+  .checkradio {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 10px;
+    width: 10px;
+    background-color: #FFBEBA;
+    border-radius: 50%;
+    margin-top: 3px;
+  }
+  
+  /* Al pasar el mouse, agregue un color de fondo gris */
+  .contradioainer:hover input ~ .checkradio {
+    background-color: #ccc;
+  }
+  
+  /* Cuando el botón de radio está marcado, agrega un fondo azul */
+  .radio input:checked ~ .checkradio {
+    background-color: #34b434ee;
+  }
+  
+  /* Crea el indicador (el punto/círculo - oculto cuando no está marcado) */
+  .checkradio:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Mostrar el indicador (punto/círculo) cuando está marcado */
+  .radio input:checked ~ .checkradio:after {
+    display: block;
+  }
+  
+  .login .radio {
+    font-size: 10px;
+  }
+  
+  .columnRadio {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
 
-/* El contenedor */
-.radio{
-  display: block;
-  position: relative;
-  padding-left: 22px;
-  cursor: pointer;
-  font-size: 12px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  width: 100%;
-}
-
-
-/* Ocultar el botón de opción predeterminado del navegador */
-.radio input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-}
-
-/* Crear un botón de opción personalizado */
-.checkradio {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 10px;
-  width: 10px;
-  background-color: #eee;
-  border-radius: 50%;
-  margin-top: 3px;
-}
-
-/* Al pasar el mouse, agregue un color de fondo gris */
-.contradioainer:hover input ~ .checkradio {
-  background-color: #ccc;
-}
-
-/* Cuando el botón de radio está marcado, agrega un fondo azul */
-.radio input:checked ~ .checkradio {
-  background-color: #000;
-}
-
-/* Crea el indicador (el punto/círculo - oculto cuando no está marcado) */
-.checkradio:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-/* Mostrar el indicador (punto/círculo) cuando está marcado */
-.radio input:checked ~ .checkradio:after {
-  display: block;
-}
-
-.footer {
-  text-align: center;
-  margin-bottom: 0px;
-  font-size: 12px;
-}
-
-.validador{
-  font-size: 10px;
-  color: #EB1E23;
-  text-align: left;
-  margin-bottom: 6px;
-}
+  .footer {
+    text-align: center;
+    margin-bottom: 0px;
+    font-size: 12px;
+  }
+  
+  .validador{
+    font-size: 10px;
+    color: #EB1E23;
+    text-align: left;
+    margin-bottom: 6px;
+  }
