@@ -64,6 +64,8 @@ export class RegistroEmpresaComponent implements OnInit {
 
  isDisableNroDocumento: boolean = true;
 
+ validadorRucDigitos: boolean = false;
+
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string,
   ) {
   }
@@ -118,13 +120,17 @@ export class RegistroEmpresaComponent implements OnInit {
 
   btnBuscarRUC = () =>{
     if(this.ruc.length != 11){
-      this.validadorRuc = true;
+      //this.validadorRuc = true;
+      this.validadorRucDigitos = true;
       this.razonSocial = null;
       this.cod_departamento = null;
       this.cod_provincia = null;
       this.cod_distrito = null;
       this.direccion = null;
       return;
+    }
+    else{
+      this.validadorRucDigitos = false;
     }
 
 
@@ -140,6 +146,8 @@ export class RegistroEmpresaComponent implements OnInit {
         this.cod_provincia = result.data.codigoProvincia;
         this.cod_distrito  = result.data.codigo_distrito;
         this.direccion = result.data.direccion;
+        this.changeRazonSocial();
+        this.changeDireccion();
       }
       else{
         alert("El número de RUC es incorrecto.");
@@ -169,6 +177,8 @@ export class RegistroEmpresaComponent implements OnInit {
       if(result.data!= null){
         this.nombres = result.data.nombres;
         this.apellidos = result.data.apellidos;
+        this.changeApeliidos();
+        this.changeNombres();
       }
       else{
         alert("El número de DNI es incorrecto.");
@@ -206,7 +216,7 @@ export class RegistroEmpresaComponent implements OnInit {
   }
 
   clickPaso3 = () =>{
-    this.changeTipoDocumento();
+    //this.changeTipoDocumento();
     this.changeNroDocumento();
     this.changeApeliidos();
     this.changeNombres();
@@ -272,6 +282,9 @@ export class RegistroEmpresaComponent implements OnInit {
 
   changeTipoDocumento = () =>
   {   
+    this.numeroDoc = null;
+    this.apellidos = null;
+    this.nombres = null;
     if(this.tipoDoc == 0){
       this.validadorTipoDocumento = true;
       this.isDisableNroDocumento = true;
@@ -282,9 +295,10 @@ export class RegistroEmpresaComponent implements OnInit {
     }
   }
 
-  changeNroDocumento = () =>{
+  changeNroDocumento = () =>{   
     if(this.numeroDoc == null || this.numeroDoc == ""){
       this.validadorNroDocumento = true;
+      this.changeTipoDocumento();
     }
     else{
       this.validadorNroDocumento = false;

@@ -173,6 +173,8 @@ export class RegistroPersonaComponent implements OnInit {
         this.cod_provincia = result.data.data.codigoProvincia;
         this.cod_distrito = result.data.data.codigoDistrito;
         this.direccion = result.data.data.direccion;
+        this.changeApeliidos();
+        this.changeNombres();
       }
       else{
         alert("El número de DNI es incorrecto.");
@@ -194,7 +196,6 @@ export class RegistroPersonaComponent implements OnInit {
     this.ispaso2 = true;
   }
   clickPaso2 = () =>{
-    this.changeTipoDocumento();
     this.changeNroDocumento();
     this.changeApeliidos();
     this.changeNombres();
@@ -231,6 +232,9 @@ export class RegistroPersonaComponent implements OnInit {
   
   changeTipoDocumento = () =>
   {   
+    this.numeroDoc = null;
+    this.apellidos = null;
+    this.nombres = null;
     if(this.tipoDoc == 0){
       this.validadorTipoDocumento = true;
       this.isDisableNroDocumento = true;
@@ -244,6 +248,7 @@ export class RegistroPersonaComponent implements OnInit {
   changeNroDocumento = () =>{
     if(this.numeroDoc == null || this.numeroDoc == ""){
       this.validadorNroDocumento = true;
+      this.changeTipoDocumento();
     }
     else{
       this.validadorNroDocumento = false;

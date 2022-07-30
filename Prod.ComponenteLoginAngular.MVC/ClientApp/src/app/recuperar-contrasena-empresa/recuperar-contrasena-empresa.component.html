@@ -11,7 +11,8 @@
           <p>Persona Jurídica</p>
     </header>
   
-      <form class="login__form">      
+      <form class="login__form">     
+        <div *ngIf="!validaSuccess">
           <div>
             <label for="ruc">RUC</label>
             <input type="text" id="ruc" name="ruc" [(ngModel)]="numeroDocumento" placeholder="Ej.:10152346872"  maxlength="11" (change)="changeRuc()">
@@ -32,9 +33,15 @@
           <p>¿No tienes una cuenta de empresa?</p>  
           <a href="#">Crea una ahora</a>
         </div>
+        </div> 
+        
 
-        <h3>¡Listo!</h3>
-        <p>Se te ha enviado un link a tu correo registrado</p>
+
+        <div *ngIf="validaSuccess">
+          <h3>¡Listo!</h3>
+          <p>Se te ha enviado un link a tu correo registrado</p>
+        </div>
+        
   
       </form>
     </div>

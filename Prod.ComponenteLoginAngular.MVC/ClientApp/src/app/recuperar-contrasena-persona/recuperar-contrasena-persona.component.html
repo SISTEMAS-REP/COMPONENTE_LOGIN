@@ -11,31 +11,37 @@
           <p>Persona Natural</p>
     </header>
 
-      <form action="#" class="login__form" method="POST">              
+      <form action="#" class="login__form" method="POST"> 
+        <div  *ngIf="!validaSuccess">
           <div>
-              <label for="numeroDoc">NÚMERO DE DOCUMENTO</label>
-              <input type="text" id="numeroDoc" name="numeroDoc"  [(ngModel)]="numeroDocumento" placeholder="Ej.:15234687" (change)="changeNroDocumento()" maxlength="12">
-              <p class="validador" *ngIf="validarNroDocumento">Debe ingresar el número de documento.</p>
-          </div>
-    
-     
-          <div>
-            <label for="correo">CORREO ELECTRONICO</label>
-            <input type="text" id="correo" name="correo"  [(ngModel)]="email" placeholder="Ej.:camila.flores@ejemplo.com" (change)="changeEmail()">
-            <p class="validador" *ngIf="validarEmail">Debe ingresar el correo electronico.</p>
-          </div>
-    
-        <div>
-          <button class="buttonSiguiente" (click)="fnBtnRecuperarContrasena()">Recuperar contraseña</button>    
+            <label for="numeroDoc">NÚMERO DE DOCUMENTO</label>
+            <input type="text" id="numeroDoc" name="numeroDoc"  [(ngModel)]="numeroDocumento" placeholder="Ej.:15234687" (change)="changeNroDocumento()" maxlength="12">
+            <p class="validador" *ngIf="validarNroDocumento">Debe ingresar el número de documento.</p>
         </div>
   
-        <div class="footer">
-          <p>¿No tienes una cuenta de persona?</p>  
-          <a href="#">Crea una ahora</a>
+   
+        <div>
+          <label for="correo">CORREO ELECTRONICO</label>
+          <input type="text" id="correo" name="correo"  [(ngModel)]="email" placeholder="Ej.:camila.flores@ejemplo.com" (change)="changeEmail()">
+          <p class="validador" *ngIf="validarEmail">Debe ingresar el correo electronico.</p>
         </div>
+  
+      <div>
+        <button class="buttonSiguiente" (click)="fnBtnRecuperarContrasena()">Recuperar contraseña</button>    
+      </div>
 
-        <h3>¡Listo!</h3>
-        <p>Se te ha enviado un link a tu correo registrado</p>
+      <div class="footer">
+        <p>¿No tienes una cuenta de persona?</p>  
+        <a href="#">Crea una ahora</a>
+      </div>
+        </div>             
+          
+
+        <div *ngIf="validaSuccess">
+          <h3>¡Listo!</h3>
+          <p>Se te ha enviado un link a tu correo registrado</p>
+        </div>
+        
   
       </form>
     </div>

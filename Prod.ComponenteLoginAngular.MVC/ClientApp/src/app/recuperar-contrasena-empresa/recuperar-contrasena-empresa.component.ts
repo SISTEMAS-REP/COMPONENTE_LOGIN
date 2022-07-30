@@ -10,7 +10,7 @@ export class RecuperarContrasenaEmpresaComponent implements OnInit {
 
   numeroDocumento : string = null;
   validarRuc : boolean = false;
-
+  validaSuccess: boolean = false;
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string,
   ) {
   }
@@ -28,6 +28,7 @@ export class RecuperarContrasenaEmpresaComponent implements OnInit {
       
       const formData = {...Data};
       this.http.post(this.baseUrl + 'ComponenteLogin/RecuperarContrasena', formData).subscribe(result => {
+        this.validaSuccess = true;
       }, error => console.error(error));
     }
     

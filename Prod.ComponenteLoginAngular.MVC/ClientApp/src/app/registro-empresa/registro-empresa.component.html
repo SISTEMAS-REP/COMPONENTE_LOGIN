@@ -24,6 +24,7 @@
           <label for="ruc">RUC</label>
           <input type="text" id="ruc" name="ruc" placeholder="Ej. : 20543216789"  [(ngModel)]="ruc" (change)="changeRuc($event)"  maxlength="11" (blur)="btnBuscarRUC()" (keypress)="restrictNumeric($event)">
           <p class="validador" *ngIf="validadorRuc">Debe ingresar el RUC.</p>
+          <p class="validador" *ngIf="validadorRucDigitos">El RUC debe tener 11 digitos.</p>
         </div>
       
        <div>
