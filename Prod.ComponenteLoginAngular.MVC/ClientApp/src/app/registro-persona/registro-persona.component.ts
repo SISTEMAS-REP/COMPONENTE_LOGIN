@@ -173,6 +173,7 @@ export class RegistroPersonaComponent implements OnInit {
         this.cod_provincia = result.data.data.codigoProvincia;
         this.cod_distrito = result.data.data.codigoDistrito;
         this.direccion = result.data.data.direccion;
+        this.changeTipoDocumento();
         this.changeApeliidos();
         this.changeNombres();
       }

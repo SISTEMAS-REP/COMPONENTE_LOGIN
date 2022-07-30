@@ -175,8 +175,10 @@ export class RegistroEmpresaComponent implements OnInit {
     const formData = {...Data};
     this.http.post(this.baseUrl + 'ComponenteLogin/BuscarPersonaEmpresa', formData).subscribe((result : any) => {
       if(result.data!= null){
+        debugger;
         this.nombres = result.data.nombres;
         this.apellidos = result.data.apellidos;
+        this.changeTipoDocumento();
         this.changeApeliidos();
         this.changeNombres();
       }
