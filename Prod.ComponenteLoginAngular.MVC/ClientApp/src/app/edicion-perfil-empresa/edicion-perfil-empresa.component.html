@@ -1,9 +1,9 @@
 <body class="align">
     <div class="form"> 
-        <div class="header">
+        <div class="header" *ngIf="isVisiblePerfil">
          <div class="circle"> 
            <div class="circleEditar"> 
-               <img src="../../assets/img/icono_editar.png" alt="Editar" title="Editar" width="20">
+               <img src="../../assets/img/icono_editar.png" alt="Editar" title="Editar" width="20" (click)="clickEditarImg()">
            </div> 
          </div>        
          <div class="title">
@@ -11,21 +11,22 @@
            <p>Persona Jurídica</p>    
        </div>
      </div>
-          <div class="empresa">
+          <div class="personal" *ngIf="isVisiblePerfil">
             <h5>Información de empresa</h5>
                <p>RUC</p>
                <p>Razón social</p>
                <p>Dirección</p>
              </div>
-
-             <div class="representante">
+             <div class="representante" *ngIf="isVisiblePerfil">
                 <h5>Información Representante Legal         
-                  <img src="../../assets/img/icono_editar.png" alt="Editar" title="Editar" width="20">
+                  <img src="../../assets/img/icono_editar.png" alt="Editar" title="Editar" width="20"  (click)="clickEditarRepresentante()">
                 </h5>
-                    <p>DNI</p>
-                    <p>Nombres y apellidos</p>
+                    <div  *ngIf="isVisibleRepresentante">
+                     <p>DNI</p>
+                     <p>Nombres y apellidos</p>
+                   </div>
                 </div>
-                <div class="column">
+                <div class="column" *ngIf="isVisibleEditarRepresentante" >
                     <div class="left">
                         <label for="tipoDoc">TIPO DOCUMENTO</label>
                         <select type="tipoDoc" name="select" placeholder="Seleccionar" >
@@ -43,7 +44,8 @@
                       </div>
                 </div>
             
-                <div class="column">
+                <div *ngIf="isVisibleEditarRepresentante">
+                 <div class="column"  >
                     <div class="left">
                         <label for="nombres">NOMBRES</label>
                         <input type="text" id="nombres" name="nombres" placeholder="Ej.:Camila"  maxlength="150" disabled>
@@ -54,49 +56,56 @@
                         <label for="apellidos">APELLIDOS</label>
                         <input type="text" id="apellidos" name="apellidos" placeholder="Ejm:Flores Sánchez"  maxlength="150" disabled>
                         <p  class="validador" >Debe ingresar los apellidos.</p>
+                    </div>
                  </div>
-                </div>
-                <div class="button">
+
+                  <div class="button">
                     <button class="buttonSiguiente">Guardar cambios</button>
-                    <button class="buttonCancelar">Cancelar</button>
+                    <button class="buttonCancelar" (click)="clickCancelarRepresentante()" >Cancelar</button>
                   </div>
+                </div>
+          
    
-           <div class="contacto">
+           <div class="contacto" *ngIf="isVisiblePerfil">
            <h5>Información de contacto         
-             <img src="../../assets/img/icono_editar.png" alt="Editar" title="Editar" width="20">
+             <img src="../../assets/img/icono_editar.png" alt="Editar" title="Editar" width="20" (click)="clickEditarContacto()">
            </h5>
+             <div  *ngIf="isVisibleContacto">
                <p>Celular</p>
                <p>Correo</p>
+             </div>
            </div>
    
-           <div>
-             <label for="apellidos">Celular</label>
-             <input type="text" id="apellidos" name="apellidos" placeholder="Ej.:999123045"  maxlength="150" >
-             <p  class="validador" >Debe ingresar el celular.</p>
-           </div>
-           <div>
-             <label for="nombres">Correo</label>
-             <input type="text" id="nombres" name="nombres" placeholder="Ej.:camila.flores@ejemplo.com" maxlength="150" >
-             <p class="validador" >Debe ingresar el correo.</p>
-           </div>
-           <div class="button">
-            <button class="buttonSiguiente">Guardar cambios</button>
-            <button class="buttonCancelar">Cancelar</button>
+           <div *ngIf="isVisibleEditarContacto">
+             <div>
+               <label for="apellidos">Celular</label>
+               <input type="text" id="apellidos" name="apellidos" placeholder="Ej.:999123045"  maxlength="150" >
+                <p  class="validador" >Debe ingresar el celular.</p>
+             </div>
+             <div>
+               <label for="nombres">Correo</label>
+               <input type="text" id="nombres" name="nombres" placeholder="Ej.:camila.flores@ejemplo.com" maxlength="150" >
+               <p class="validador" >Debe ingresar el correo.</p>
+            </div>
+             <div class="button">
+              <button class="buttonSiguiente">Guardar cambios</button>
+               <button class="buttonCancelar" (click)="clickCancelarContacto()">Cancelar</button>
+             </div>
           </div>
    
-           <div class="editar">
+           <div class="editar" *ngIf="isVisibleEditarImg">
              <h3>Editar foto</h3>
              <div class="circle"> 
                <div class="circleEditar"> 
                </div> 
              </div>    
               <a href="#">Seleccionar foto</a>
-           </div>
-   
+
            <div class="button">
              <button class="buttonSiguiente">Guardar</button>
-             <button class="buttonCancelar">Cancelar</button>
+             <button class="buttonCancelar" (click)="clickCancelarImg()">Cancelar</button>
            </div>
+        </div>
      </div>
    </body>
    

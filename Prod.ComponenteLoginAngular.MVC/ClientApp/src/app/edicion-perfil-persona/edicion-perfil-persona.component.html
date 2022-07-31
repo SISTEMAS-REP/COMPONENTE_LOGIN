@@ -1,31 +1,33 @@
 <body class="align">
  <div class="form"> 
-     <div class="header">
+     <div class="header" *ngIf="isVisiblePerfil">
       <div class="circle"> 
         <div class="circleEditar"> 
-            <img src="../../assets/img/icono_editar.png" alt="Editar" title="Editar" width="20">
+            <img src="../../assets/img/icono_editar.png" alt="Editar" title="Editar" width="20" (click)="clickEditarImg()">
         </div> 
       </div>        
-      <div class="title">
+      <div class="title" >
         <h3>Mi perfil</h3>
         <p>Persona Natural</p>    
     </div>
   </div>
-       <div class="personal">
+       <div class="personal" *ngIf="isVisiblePerfil">
          <h5>Información personal</h5>
             <p>DNI</p>
             <p>Nombres y apellidos</p>
             <p>Dirección</p>
           </div>
 
-        <div class="contacto">
+        <div class="contacto" *ngIf="isVisiblePerfil">
         <h5>Información de contacto         
-          <img src="../../assets/img/icono_editar.png" alt="Editar" title="Editar" width="20">
+          <img src="../../assets/img/icono_editar.png" alt="Editar" title="Editar" width="20" (click)="clickEditarContacto()">
         </h5>
-            <p>Celular</p>
-            <p>Correo</p>
-        </div>
-
+         <div *ngIf="isVisibleContacto"> 
+          <p>Celular</p>
+          <p>Correo</p></div>        
+         </div>
+        
+        <div *ngIf="isVisibleEditarContacto">
         <div>
           <label for="apellidos">Celular</label>
           <input type="text" id="apellidos" name="apellidos" placeholder="Ej.:999123045"  maxlength="150" >
@@ -38,21 +40,19 @@
         </div>
         <div class="button">
           <button class="buttonSiguiente">Guardar cambios</button>
-          <button class="buttonCancelar">Cancelar</button>
+          <button class="buttonCancelar" (click)="clickCancelarContacto()">Cancelar</button>
         </div>
+      </div>
 
-        <div class="editar">
+        <div class="editar" *ngIf="isVisibleEditarImg">
           <h3>Editar foto</h3>
           <div class="circle"> 
             <div class="circleEditar"> 
             </div> 
           </div>    
            <a href="#">Seleccionar foto</a>
-        </div>
-
-        <div class="button">
           <button class="buttonSiguiente">Guardar cambios</button>
-          <button class="buttonCancelar">Cancelar</button>
+          <button class="buttonCancelar" (click)="clickCancelarImg()">Cancelar</button>
         </div>
   </div>
 </body>
