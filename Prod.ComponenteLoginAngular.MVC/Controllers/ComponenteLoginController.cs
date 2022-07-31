@@ -257,7 +257,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
         [Route("BuscarPersonaEmpresa")]
         public StatusResponse<PersonaResponse> BuscarPersonaEmpresa([FromBody] PersonaRequest request)
         {
-            var sr = new StatusResponse<PersonaResponse>();
+            var sr = new StatusResponse<PersonaResponse> { Success = false };
             var persona = personasServicio.ObtenerPersona(new se.Personas.PersonaGeneralRequest
             {
                 nro_documento = request.NroDocumento

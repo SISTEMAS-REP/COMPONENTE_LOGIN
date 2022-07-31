@@ -50,6 +50,7 @@ export class RegistroPersonaComponent implements OnInit {
   ValidadorSimbolo: boolean = false;
   validadorRequisitosContrasena : boolean = false;
   validadorTerminos: boolean = false;
+  validadorRucDigitos: boolean = false;
 
   isDisableNroDocumento : boolean = true;
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string,
@@ -162,18 +163,20 @@ export class RegistroPersonaComponent implements OnInit {
 
   buscarReniec = () =>{
     let Data = {
-      NroDocumento : this.numeroDoc
+      NroDocumento : this.numeroDoc,
+      IdTipoIdentificacion : 1
     }
     const formData = {...Data};
-    this.http.post(this.baseUrl + 'ComponenteLogin/buscarReniec', formData).subscribe((result : any) => {
-      if(result.data.data != null){
-        this.nombres = result.data.data.nombre;
-        this.apellidos = result.data.data.apellidoPaterno + " " + result.data.data.apellidoMaterno;
-        this.cod_departamento = result.data.data.codigoDepartamento;
-        this.cod_provincia = result.data.data.codigoProvincia;
-        this.cod_distrito = result.data.data.codigoDistrito;
-        this.direccion = result.data.data.direccion;
-        this.changeTipoDocumento();
+    this.http.post(this.baseUrl + 'ComponenteLogin/BuscarPersonaEmpresa', formData).subscribe((result : any) => {
+      debugger
+      if(result.success){
+        this.nombres = result.data.nombres;
+        this.apellidos = result.data.apellidos;
+        this.cod_departamento = result.data.codigoDepartamento;
+        this.cod_provincia = result.data.codigoProvincia;
+        this.cod_distrito =result.data.codigoProvincia
+        this.direccion = result.data.codigoProvincia
+        // this.changeTipoDocumento();
         this.changeApeliidos();
         this.changeNombres();
       }
@@ -224,9 +227,17 @@ export class RegistroPersonaComponent implements OnInit {
   changeRuc = () =>{
     if(this.ruc == null || this.ruc == ""){
       this.validadorRuc = true;
+      this.validadorRucDigitos = false
     }
     else{
-      this.validadorRuc = false;
+      if( this.ruc.length < 11){    
+        this.validadorRucDigitos = true;
+        this.validadorRuc = false;
+      }
+      else {
+        this.validadorRucDigitos = false;
+        this.validadorRuc = false;
+      }  
     }
   } 
 
