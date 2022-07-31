@@ -120,8 +120,6 @@ export class RegistroEmpresaComponent implements OnInit {
 
   btnBuscarRUC = () =>{
     if(this.ruc.length != 11){
-      //this.validadorRuc = true;
-      this.validadorRucDigitos = true;
       this.razonSocial = null;
       this.cod_departamento = null;
       this.cod_provincia = null;
@@ -129,10 +127,6 @@ export class RegistroEmpresaComponent implements OnInit {
       this.direccion = null;
       return;
     }
-    else{
-      this.validadorRucDigitos = false;
-    }
-
 
     let Data = {
       NroDocumento : this.ruc,
@@ -256,11 +250,21 @@ export class RegistroEmpresaComponent implements OnInit {
   //validador
 
   changeRuc = () =>{
+    debugger
     if(this.ruc == null || this.ruc == ""){
       this.validadorRuc = true;
+      this.validadorRucDigitos = false
     }
-    else{
-      this.validadorRuc = false;
+    else{      
+      if( this.ruc.length < 11){    
+        this.validadorRucDigitos = true;
+        this.validadorRuc = false;
+      }
+      else {
+        this.validadorRucDigitos = false;
+        this.validadorRuc = false;
+      }  
+
     }
   } 
 

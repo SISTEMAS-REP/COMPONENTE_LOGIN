@@ -257,7 +257,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
         [Route("BuscarPersonaEmpresa")]
         public StatusResponse<PersonaResponse> BuscarPersonaEmpresa([FromBody] PersonaRequest request)
         {
-            var sr = new StatusResponse<PersonaResponse>();
+            var sr = new StatusResponse<PersonaResponse> { Success = false };
             var persona = personasServicio.ObtenerPersona(new se.Personas.PersonaGeneralRequest
             {
                 nro_documento = request.NroDocumento
@@ -328,6 +328,35 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                 }
             }
             return sr;
+        }
+
+        [HttpPost]
+        [Route("CambiarContrasena")]
+        public IActionResult CambiarContrasena([FromBody] Prod.ComponenteLoginAngular.MVC.Model.LoginRequest request)
+        {
+            var sr = new StatusResponse();
+            var validacion = produceVirtualServicio.VerificarCorreoValidado(new ConfirmacionCodigoEmailRequest
+            {
+                Email = request.email,
+                Identificador = Guid.Parse(request.id)
+            });
+            if (validacion.Success)
+            {
+                var password = produceVirtualServicio.CambioClaveUsuario(request.dni, request.clave);
+                if (password.Success)
+                {
+                    sr.Success = true;
+                }
+                else
+                {
+                    sr.Messages.Add("Ocurrió un error al cambiar la contraseña");
+                }
+            }
+            else
+            {
+                sr.Messages.Add("Ocurrió un error en la validación de correo");
+            }
+            return Ok(sr);
         }
 
     }

@@ -15,6 +15,7 @@ export class SesionEmpresaComponent implements OnInit {
   validarRuc : boolean = false;
   validarNroDocumento: boolean = false;
   validarContrasena: boolean = false;
+  validadorRucDigitos: boolean = false;
 
    constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string,
   ) {
@@ -45,12 +46,14 @@ export class SesionEmpresaComponent implements OnInit {
       this.validarRuc = true;
     }
     else{
-      if(this.ruc.length < 11){
-        this.validarRuc = true;
-      }
-      else{
+      if( this.ruc.length < 11){    
+        this.validadorRucDigitos = true;
         this.validarRuc = false;
       }
+      else {
+        this.validadorRucDigitos = false;
+        this.validarRuc = false;
+      } 
      
     }
   }
