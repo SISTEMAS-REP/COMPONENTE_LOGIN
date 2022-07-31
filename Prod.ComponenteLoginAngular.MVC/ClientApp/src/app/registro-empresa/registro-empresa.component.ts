@@ -156,6 +156,7 @@ export class RegistroEmpresaComponent implements OnInit {
 
 
   btnBuscarDNI = () =>{
+    debugger;
     if(this.numeroDoc.length != 8){
       this.validadorTipoDocumento = true;
       this.nombres = null;
@@ -172,7 +173,7 @@ export class RegistroEmpresaComponent implements OnInit {
         debugger;
         this.nombres = result.data.nombres;
         this.apellidos = result.data.apellidos;
-        this.changeTipoDocumento();
+       //this.changeTipoDocumento();
         this.changeApeliidos();
         this.changeNombres();
       }

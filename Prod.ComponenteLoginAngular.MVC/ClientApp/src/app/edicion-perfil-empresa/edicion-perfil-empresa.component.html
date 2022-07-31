@@ -28,34 +28,34 @@
                 </div>
                 <div class="column" *ngIf="isVisibleEditarRepresentante" >
                     <div class="left">
-                        <label for="tipoDoc">TIPO DOCUMENTO</label>
-                        <select type="tipoDoc" name="select" placeholder="Seleccionar" >
+                        <label for="tipoDoc">Tipo documento</label>
+                        <select type="tipoDoc" name="select" placeholder="Seleccionar"  [(ngModel)]="tipoDoc" (change)="changeTipoDocumento($event)">
                           <option value="0">--Seleccionar--</option>
                           <option value="1">DNI</option>
                           <option value="2">Carnet de Extranjería</option>
                           </select>
-                          <p class="validador">Debe ingresar el tipo de documento.</p>
+                          <p class="validador" *ngIf="validadorTipoDocumento">Debe ingresar el tipo de documento.</p>
                     </div>    
           
                     <div class="right">
-                        <label for="numeroDoc">NÚMERO DOCUMENTO</label>
-                        <input type="text" id="numeroDoc" name="numeroDoc" placeholder="Ej.:15234687" maxlength="12"  >
-                        <p class="validador" >Debe ingresar el número de documento.</p>
+                        <label for="numeroDoc">N° documento</label>
+                        <input type="text" id="numeroDoc" name="numeroDoc" placeholder="Ej.:15234687" [(ngModel)]="numeroDoc" (change)="changeNroDocumento($event)" maxlength="12" (blur)="btnBuscarDNI()" [disabled]="isDisableNroDocumento" (keypress)="restrictNumeric($event)" >
+                        <p class="validador" *ngIf="validadorNroDocumento">Debe ingresar el número de documento.</p>
                       </div>
                 </div>
             
                 <div *ngIf="isVisibleEditarRepresentante">
                  <div class="column"  >
                     <div class="left">
-                        <label for="nombres">NOMBRES</label>
-                        <input type="text" id="nombres" name="nombres" placeholder="Ej.:Camila"  maxlength="150" disabled>
-                        <p class="validador" >Debe ingresar los nombres.</p>                       
+                        <label for="nombres">Nombres</label>
+                        <input type="text" id="nombres" name="nombres" placeholder="Ej.:Camila"  [(ngModel)]="nombres" (change)="changeNombres($event)" maxlength="150" disabled>
+                        <p class="validador" *ngIf="validadorNombres" >Debe ingresar los nombres.</p>                       
                       </div>
           
                     <div class="right">
-                        <label for="apellidos">APELLIDOS</label>
-                        <input type="text" id="apellidos" name="apellidos" placeholder="Ejm:Flores Sánchez"  maxlength="150" disabled>
-                        <p  class="validador" >Debe ingresar los apellidos.</p>
+                        <label for="apellidos">Apellidos</label>
+                        <input type="text" id="apellidos" name="apellidos" placeholder="Ejm:Flores Sánchez"  [(ngModel)]="apellidos" (change)="changeApeliidos($event)" maxlength="150" disabled>
+                        <p  class="validador" *ngIf="validadorApellidos">Debe ingresar los apellidos.</p>
                     </div>
                  </div>
 
@@ -65,7 +65,7 @@
                   </div>
                 </div>
           
-   
+
            <div class="contacto" *ngIf="isVisiblePerfil">
            <h5>Información de contacto         
              <img src="../../assets/img/icono_editar.png" alt="Editar" title="Editar" width="20" (click)="clickEditarContacto()">
