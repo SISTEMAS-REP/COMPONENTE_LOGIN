@@ -93,7 +93,7 @@
     flex-wrap: wrap;
   }
 
-  .form .header .title h3{
+  .form .header . h3{
     text-align: left;
     margin-top: 0%;
     margin-bottom: 0%;
@@ -109,9 +109,6 @@
    
   }
 
-  .form .personal {
-    padding: 15px 20px 15px 20px;
-   }
 
   .form .personal h5{
    font-size: 14px;
@@ -124,9 +121,6 @@
  
    }
 
-   .form .contacto {
-    padding: 15px 20px 15px 20px;
-   }
 
   .form .contacto h5{
    font-size: 14px;
@@ -138,7 +132,34 @@
     text-align: left;
  
    }
-  
+
+   
+  .form .contacto img{
+    margin-left: 185px;
+   }
+
+
+   .form .editar {
+    text-align: center;
+   }
+
+
+   .form .editar h3{
+    text-align: center;
+    margin-top: 0%;
+    margin-bottom: 0%;
+    color: #000;
+}
+
+
+   .form .editar a {
+  text-align: center;
+  margin-top: 0%;
+  margin-bottom: 0%;
+  color: #000;
+}
+
+
   .form input {
     background-color: #fff;
     width: 100%;
@@ -246,6 +267,7 @@
   
   /* ---------- BUTTON ---------- */
   
+
   .buttonSiguiente {
     background-color: #58595B;
     color: #FFFFFF;
@@ -449,18 +471,18 @@
 
 /*------------------*/
 
-  .circle {
+  .form .header .circle {
      width: 130px;
      height: 130px;
      -moz-border-radius: 50%;
      -webkit-border-radius: 50%;
      border-radius: 50%;
-     background: #eee;
+     background: #ccc;
      margin: 0px 34px 0px 15px;
      border: 1px solid #ccc;
 }
 
-.circleEditar {
+.form .header .circle .circleEditar {
     width: 40px;
     height: 40px;
     -moz-border-radius: 50%;
@@ -473,7 +495,27 @@
     
 }
 
+.form .editar .circle {
+  width: 360px;
+  height: 360px;
+  background: #ccc;
+  margin: 20px 0px 20px 0px;
+  border: 1px solid #ccc;
+}
+
+.form .editar .circle .circleEditar {
+  width: 320px;
+  height: 320px;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  background: #eee;
+  margin: 20px 0px 0px 20px;
+  border: 1px solid #ccc;
+ 
+}
   .title {
     width: 50%;
     padding: 25px 10px 10px 25px;
+    color: #000;
   }

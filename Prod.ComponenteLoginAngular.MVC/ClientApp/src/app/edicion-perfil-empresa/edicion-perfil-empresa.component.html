@@ -1,1 +1,104 @@
-<p>edicion-perfil-empresa works!</p>
+<body class="align">
+    <div class="form"> 
+        <div class="header">
+         <div class="circle"> 
+           <div class="circleEditar"> 
+               <img src="../../assets/img/icono_editar.png" alt="Editar" title="Editar" width="20">
+           </div> 
+         </div>        
+         <div class="title">
+           <h3>Mi perfil</h3>
+           <p>Persona Jurídica</p>    
+       </div>
+     </div>
+          <div class="empresa">
+            <h5>Información de empresa</h5>
+               <p>RUC</p>
+               <p>Razón social</p>
+               <p>Dirección</p>
+             </div>
+
+             <div class="representante">
+                <h5>Información Representante Legal         
+                  <img src="../../assets/img/icono_editar.png" alt="Editar" title="Editar" width="20">
+                </h5>
+                    <p>DNI</p>
+                    <p>Nombres y apellidos</p>
+                </div>
+                <div class="column">
+                    <div class="left">
+                        <label for="tipoDoc">TIPO DOCUMENTO</label>
+                        <select type="tipoDoc" name="select" placeholder="Seleccionar" >
+                          <option value="0">--Seleccionar--</option>
+                          <option value="1">DNI</option>
+                          <option value="2">Carnet de Extranjería</option>
+                          </select>
+                          <p class="validador">Debe ingresar el tipo de documento.</p>
+                    </div>    
+          
+                    <div class="right">
+                        <label for="numeroDoc">NÚMERO DOCUMENTO</label>
+                        <input type="text" id="numeroDoc" name="numeroDoc" placeholder="Ej.:15234687" maxlength="12"  >
+                        <p class="validador" >Debe ingresar el número de documento.</p>
+                      </div>
+                </div>
+            
+                <div class="column">
+                    <div class="left">
+                        <label for="nombres">NOMBRES</label>
+                        <input type="text" id="nombres" name="nombres" placeholder="Ej.:Camila"  maxlength="150" disabled>
+                        <p class="validador" >Debe ingresar los nombres.</p>                       
+                      </div>
+          
+                    <div class="right">
+                        <label for="apellidos">APELLIDOS</label>
+                        <input type="text" id="apellidos" name="apellidos" placeholder="Ejm:Flores Sánchez"  maxlength="150" disabled>
+                        <p  class="validador" >Debe ingresar los apellidos.</p>
+                 </div>
+                </div>
+                <div class="button">
+                    <button class="buttonSiguiente">Guardar cambios</button>
+                    <button class="buttonCancelar">Cancelar</button>
+                  </div>
+   
+           <div class="contacto">
+           <h5>Información de contacto         
+             <img src="../../assets/img/icono_editar.png" alt="Editar" title="Editar" width="20">
+           </h5>
+               <p>Celular</p>
+               <p>Correo</p>
+           </div>
+   
+           <div>
+             <label for="apellidos">Celular</label>
+             <input type="text" id="apellidos" name="apellidos" placeholder="Ej.:999123045"  maxlength="150" >
+             <p  class="validador" >Debe ingresar el celular.</p>
+           </div>
+           <div>
+             <label for="nombres">Correo</label>
+             <input type="text" id="nombres" name="nombres" placeholder="Ej.:camila.flores@ejemplo.com" maxlength="150" >
+             <p class="validador" >Debe ingresar el correo.</p>
+           </div>
+           <div class="button">
+            <button class="buttonSiguiente">Guardar cambios</button>
+            <button class="buttonCancelar">Cancelar</button>
+          </div>
+   
+           <div class="editar">
+             <h3>Editar foto</h3>
+             <div class="circle"> 
+               <div class="circleEditar"> 
+               </div> 
+             </div>    
+              <a href="#">Seleccionar foto</a>
+           </div>
+   
+           <div class="button">
+             <button class="buttonSiguiente">Guardar</button>
+             <button class="buttonCancelar">Cancelar</button>
+           </div>
+     </div>
+   </body>
+   
+   
+   
