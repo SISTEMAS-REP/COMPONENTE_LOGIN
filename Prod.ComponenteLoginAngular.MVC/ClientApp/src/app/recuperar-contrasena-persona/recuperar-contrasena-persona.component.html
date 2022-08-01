@@ -17,7 +17,7 @@
         <div  *ngIf="!validaSuccess">
           <div>
             <label for="numeroDoc">NÚMERO DE DOCUMENTO</label>
-            <input type="text" id="numeroDoc" name="numeroDoc"  [(ngModel)]="numeroDocumento" placeholder="Ej.:15234687" (change)="changeNroDocumento()" maxlength="12">
+            <input type="text" id="numeroDoc" name="numeroDoc"  [(ngModel)]="numeroDocumento" placeholder="Ej.:15234687" (change)="changeNroDocumento()"  (keypress)="restrictNumeric($event)" maxlength="12">
             <p class="validador" *ngIf="validarNroDocumento">Debe ingresar el número de documento.</p>
         </div>
   
