@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-registro-persona',
@@ -53,7 +54,10 @@ export class RegistroPersonaComponent implements OnInit {
   validadorRucDigitos: boolean = false;
 
   isDisableNroDocumento : boolean = true;
-  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string,
+  constructor(
+    private http: HttpClient, 
+    @Inject('BASE_URL') private baseUrl: string,
+    private spinner: NgxSpinnerService
   ) {
   }
 
@@ -162,12 +166,14 @@ export class RegistroPersonaComponent implements OnInit {
 
 
   btnBuscarDNI = () =>{
+    this.spinner.show();
     let Data = {
       NroDocumento : this.numeroDoc,
       IdTipoIdentificacion : 1
     }
     const formData = {...Data};
     this.http.post(this.baseUrl + 'ComponenteLogin/BuscarPersonaEmpresa', formData).subscribe((result : any) => {
+      this.spinner.hide();
       if(result.success){
         this.nombres = result.data.nombres;
         this.apellidos = result.data.apellidos;

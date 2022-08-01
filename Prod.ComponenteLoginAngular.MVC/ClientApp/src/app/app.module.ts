@@ -21,6 +21,7 @@ import { CambiarContrasenaEmpresaComponent } from './cambiar-contrasena-empresa/
 import { EdicionPerfilPersonaComponent } from './edicion-perfil-persona/edicion-perfil-persona.component';
 import { EdicionPerfilEmpresaComponent } from './edicion-perfil-empresa/edicion-perfil-empresa.component';
 import { AdministracionUsuarioEmpresaComponent } from './administracion-usuario-empresa/administracion-usuario-empresa.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { AdministracionUsuarioEmpresaComponent } from './administracion-usuario-
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
+    NgxSpinnerModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
