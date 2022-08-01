@@ -30,16 +30,18 @@
         <div *ngIf="isVisibleEditarContacto">
         <div>
           <label for="apellidos">Celular</label>
-          <input type="text" id="apellidos" name="apellidos" placeholder="Ej.:999123045"  maxlength="150" >
-          <p  class="validador" >Debe ingresar el celular.</p>
+          <input type="text" id="apellidos" name="apellidos" placeholder="Ej.:999123045"  [(ngModel)]="celular" (change)="changeCelular($event)" maxlength="9" (keypress)="restrictNumeric($event)" >
+          <p class="validador" *ngIf="validadorCelular">Debe ingresar el celular.</p>
+               <p class="validador" *ngIf="validadorCelularLength">El celular debe contener 9 digitos</p>
         </div>
         <div>
           <label for="nombres">Correo</label>
-          <input type="text" id="nombres" name="nombres" placeholder="Ej.:camila.flores@ejemplo.com" maxlength="150" >
-          <p class="validador" >Debe ingresar el correo.</p>
+          <input type="text" id="nombres" name="nombres" placeholder="Ej.:camila.flores@ejemplo.com" [(ngModel)]="correo"  (change)="changeCorreo($event)" maxlength="150" >
+          <p class="validador" *ngIf="validadorCorreo">Debe ingresar el correo.</p>
+          <p class="validador" *ngIf="validadorCorreoInvalido">Correo inválido.</p>
         </div>
         <div class="button">
-          <button class="buttonSiguiente">Guardar cambios</button>
+          <button class="buttonSiguiente"  (click)="btnGuardarContacto()">Guardar cambios</button>
           <button class="buttonCancelar" (click)="clickCancelarContacto()">Cancelar</button>
         </div>
       </div>
@@ -50,8 +52,8 @@
             <div class="circleEditar"> 
             </div> 
           </div>    
-           <a href="#">Seleccionar foto</a>
-          <button class="buttonSiguiente">Guardar cambios</button>
+          <input type="file" name="adjunto" accept=".pdf,.jpg,.png" multiple />
+          <button class="buttonSiguiente" >Guardar cambios</button>
           <button class="buttonCancelar" (click)="clickCancelarImg()">Cancelar</button>
         </div>
   </div>
