@@ -41,7 +41,18 @@ export class EdicionPerfilPersonaComponent implements OnInit {
         this.isVisibleContacto = true; 
         this.isVisibleEditarContacto = false;  
         this.limpiar();
-      }       
+      }
+
+      let Data = {
+        Id: 2496732, //cambiar
+        Email: this.correo,
+        Telefono: this.celular,
+        idContactoExtranet: 15357//cambiar
+      }
+      const formData = {...Data};
+      this.http.post(this.baseUrl + 'ComponenteLogin/UpdateCorreoTelefonoPersona', formData).subscribe((result : any) => {
+        debugger
+      }, error => console.error(error));
   }
 
 
