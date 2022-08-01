@@ -37,6 +37,28 @@ export class CambiarContrasenaEmpresaComponent implements OnInit {
   ngOnInit() {
   }
 
+  cambiarContrasena = () => 
+  {
+    this.spinner.show();
+    let Data = {
+      id: "2496752",  //this.id,
+      dni: "753470004", // this.userName,
+      email: "JHOSEPH264@GMAIL.COM",// this.email,
+      clave: "produce", //this.form.get('contrasena').value,
+    }
+    const formData = {...Data};
+    this.http.post(this.baseUrl + 'ComponenteLogin/CambiarContrasena', formData).subscribe((result : any) => {
+    this.spinner.hide();
+     if(result.success){
+       alert("Se actualizó la contraseña");
+     }
+     else{
+       alert(result.messages[0]);
+     }
+     
+   }, error => console.error(error));
+  }
+
 
   clickPaso2 = () =>{
     this.changeContrasenaActual();
