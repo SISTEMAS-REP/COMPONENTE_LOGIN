@@ -61,6 +61,14 @@ a:hover {
     }
     
 /* ---------- LOGIN ---------- */
+.container 
+{
+  width: 410px;
+  height: 620px;
+  background-color: #fff;
+  padding: 0em 0em 1.3em 0em;
+}
+
 .form {
   width: 410px;
   background-color: #fff;

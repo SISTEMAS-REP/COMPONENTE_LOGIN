@@ -375,6 +375,7 @@ export class RegistroEmpresaComponent implements OnInit {
 
 
   changeCorreoRep = () =>{
+    debugger;
     if(this.correo_rep == null || this.correo_rep == ""){
       this.validadorCorreoRep = true;
     }

@@ -22,10 +22,7 @@
             <div class="input-wrapper">
               <label for="contrasenaActual">CONTRASEÑA ACTUAL</label>
               <input type="password"  id="contrasenaActual" name="contrasenaActual" placeholder="" [(ngModel)]="contrasenaActual" (change)="changeContrasenaActual($event)" maxlength="150" >      
-              <svg  (click)="mostrarContrasenaActual()" id="eyeContrasenaActual"  xmlns="http://www.w3.org/2000/svg" class="input-icon password" viewBox="0 0 20 20" fill="currentColor">
-              <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-              <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
-            </svg>
+               <img src="../../assets/img/ver_on.png" (click)="mostrarContrasenaActual()" id="eyeContrasenaActual" class="input-icon password">
             </div>
             <p class="validador" *ngIf="validadorContrasenaActual">Debe ingresar la contraseña.</p>
         </div>
@@ -44,10 +41,7 @@
             <div class="input-wrapper">
               <label for="contrasenaNueva">CONTRASEÑA NUEVA</label>
               <input type="password"  id="contrasenaNueva" name="contrasenaNueva" placeholder="" [(ngModel)]="contrasenaNueva" (change)="changeContrasenaNueva($event)" maxlength="150" >      
-              <svg (click)="mostrarContrasenaNueva()" id="eyeContrasena"  xmlns="http://www.w3.org/2000/svg" class="input-icon password" viewBox="0 0 20 20" fill="currentColor">
-              <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-              <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
-              </svg>
+              <img src="../../assets/img/ver_on.png" (click)="mostrarContrasenaNueva()" id="eyeContrasena" class="input-icon password">
             </div>
               <p class="validador" *ngIf="validadorContrasenaNueva">Debe ingresar la contraseña.</p>
               <p class="validador" *ngIf="validadorRequisitosContrasenaNueva">La contraseña debe cumplir con los requistos</p>
@@ -57,10 +51,7 @@
             <div class="input-wrapper">
               <label for="contrasenaRep">REPETIR CONTRASEÑA NUEVA</label>
               <input type="password"  id="contrasenaRep" name="contrasenaRep" placeholder="" [(ngModel)]="contrasenaRep" (change)="changeContrasenaRep($event)" maxlength="150" >      
-              <svg (click)="mostrarContrasenaRep()" id="eyeContrasenaRep" xmlns="http://www.w3.org/2000/svg" class="input-icon password" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
-              </svg>
+              <img src="../../assets/img/ver_on.png" (click)="mostrarContrasenaRep()" id="eyeContrasenaRep" class="input-icon password">
             </div>
               <p class="validador" *ngIf="validadorContrasenaRep || validadorContrasenaRepetir">No coincide con la contraseña ingresada.</p>
         </div> 
