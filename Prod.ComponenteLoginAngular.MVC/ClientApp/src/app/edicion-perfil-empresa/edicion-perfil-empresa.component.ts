@@ -43,6 +43,35 @@ export class EdicionPerfilEmpresaComponent implements OnInit {
   }
 
 
+  
+  btnGuardarRepresentante = () =>{
+    //this.changeTipoDocumento();
+    this.changeNroDocumento();
+    this.changeNombres();
+    this.changeApeliidos();
+ 
+    debugger;
+      if( !this.validadorTipoDocumento && !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres){
+        this.isVisiblePerfil = true;  
+        this.isVisibleRepresentante = true; 
+        this.isVisibleEditarRepresentante = false; 
+        this.limpiar();
+      }       
+  }
+
+  btnGuardarContacto = () =>{
+    this.changeCelular();
+    this.changeCorreo();
+ 
+      if(!this.validadorCelular &&   !this.validadorCelularLength && !this.validadorCorreo && !this.validadorCorreoInvalido){
+        this.isVisiblePerfil = true;  
+        this.isVisibleContacto = true; 
+        this.isVisibleEditarContacto = false;  
+        this.limpiar();
+      }       
+  }
+
+
   btnBuscarDNI = () =>{
     let Data = {
       NroDocumento : this.numeroDoc,
