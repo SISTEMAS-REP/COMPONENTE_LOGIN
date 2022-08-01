@@ -161,7 +161,7 @@ export class RegistroPersonaComponent implements OnInit {
   }
 
 
-  buscarReniec = () =>{
+  btnBuscarDNI = () =>{
     let Data = {
       NroDocumento : this.numeroDoc,
       IdTipoIdentificacion : 1
