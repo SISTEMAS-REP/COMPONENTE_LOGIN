@@ -41,7 +41,7 @@
             </div>        
             <div class="right">
                 <label for="numeroDoc">NÚMERO DOCUMENTO</label>
-                 <input type="text" id="numeroDoc" name="numeroDoc" placeholder="Ej.:15234687" [(ngModel)]="numeroDoc" (change)="changeNroDocumento($event)" maxlength="12" (keypress)="restrictNumeric($event)" (blur)="buscarReniec()"  [disabled]="isDisableNroDocumento">  <!--(blur)="buscarReniec()" -->
+                 <input type="text" id="numeroDoc" name="numeroDoc" placeholder="Ej.:15234687" [(ngModel)]="numeroDoc" (change)="changeNroDocumento($event)" maxlength="12" (keypress)="restrictNumeric($event)" (blur)="btnBuscarDNI()"  [disabled]="isDisableNroDocumento">  <!--(blur)="buscarReniec()" -->
                 <p class="validador" *ngIf="validadorNroDocumento">Debe ingresar el número de documento.</p>
             </div>
         </div>

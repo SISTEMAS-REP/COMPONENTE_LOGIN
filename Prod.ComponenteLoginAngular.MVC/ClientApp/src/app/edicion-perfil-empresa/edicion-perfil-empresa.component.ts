@@ -44,23 +44,17 @@ export class EdicionPerfilEmpresaComponent implements OnInit {
 
 
   btnBuscarDNI = () =>{
-    if(this.numeroDoc.length != 8){
-      this.validadorTipoDocumento = true;
-      this.nombres = null;
-      this.apellidos = null;
-    }
-
     let Data = {
       NroDocumento : this.numeroDoc,
       IdTipoIdentificacion : 1
     }
     const formData = {...Data};
     this.http.post(this.baseUrl + 'ComponenteLogin/BuscarPersonaEmpresa', formData).subscribe((result : any) => {
-      if(result.data!= null){
-        debugger;
+      debugger
+      if(result.success){
         this.nombres = result.data.nombres;
         this.apellidos = result.data.apellidos;
-        //this.changeTipoDocumento();
+        // this.changeTipoDocumento();
         this.changeApeliidos();
         this.changeNombres();
       }
@@ -97,12 +91,14 @@ export class EdicionPerfilEmpresaComponent implements OnInit {
     this.isVisiblePerfil = true;  
     this.isVisibleContacto = true; 
     this.isVisibleEditarContacto = false;  
+    this.limpiar();
   }
 
   clickCancelarRepresentante= () =>{ 
     this.isVisiblePerfil = true;  
     this.isVisibleRepresentante = true; 
     this.isVisibleEditarRepresentante = false; 
+    this.limpiar();
   }
 
   clickCancelarImg= () =>{ 
@@ -228,6 +224,29 @@ export class EdicionPerfilEmpresaComponent implements OnInit {
     input = String.fromCharCode(e.which);
     return !!/[\d\s]/.test(input);
    }
+
+
+   limpiar =()=>
+  {
+    this.tipoDoc = 0;
+    this.numeroDoc = null;
+    this.apellidos = null;
+    this.nombres = null;
+    this.celular = null;
+    this.correo = null;
+
+    //Variables validador
+    this.validadorTipoDocumento = false;
+    this.validadorNroDocumento = false;
+    this.validadorApellidos = false;
+    this.validadorNombres = false;
+    this.validadorCelular = false;
+    this.validadorCelularLength = false;
+    this.validadorCorreo = false;
+    this.validadorCorreoInvalido = false;
+
+    this.isDisableNroDocumento = true;
+  }
 
 
 

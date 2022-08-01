@@ -156,13 +156,6 @@ export class RegistroEmpresaComponent implements OnInit {
 
 
   btnBuscarDNI = () =>{
-    debugger;
-    if(this.numeroDoc.length != 8){
-      this.validadorTipoDocumento = true;
-      this.nombres = null;
-      this.apellidos = null;
-    }
-
     let Data = {
       NroDocumento : this.numeroDoc,
       IdTipoIdentificacion : 1
