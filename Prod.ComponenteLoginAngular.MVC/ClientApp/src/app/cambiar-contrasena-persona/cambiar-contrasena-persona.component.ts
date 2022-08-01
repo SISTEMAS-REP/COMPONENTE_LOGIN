@@ -36,7 +36,6 @@ export class CambiarContrasenaPersonaComponent implements OnInit {
 
   cambiarContrasena = () => 
   {
-    debugger
     let Data = {
       id: "2496752",  //this.id,
       dni: "753470004", // this.userName,
@@ -46,7 +45,6 @@ export class CambiarContrasenaPersonaComponent implements OnInit {
     const formData = {...Data};
     this.http.post(this.baseUrl + 'ComponenteLogin/CambiarContrasena', formData).subscribe((result : any) => {
 
-      debugger
      if(result.success){
        alert("Se actualizó la contraseña");
      }
@@ -68,7 +66,6 @@ export class CambiarContrasenaPersonaComponent implements OnInit {
   }
 
   clickPaso3 = () =>{
-    debugger;
     this.changeContrasenaNueva();
     this.changeContrasenaRep();
  

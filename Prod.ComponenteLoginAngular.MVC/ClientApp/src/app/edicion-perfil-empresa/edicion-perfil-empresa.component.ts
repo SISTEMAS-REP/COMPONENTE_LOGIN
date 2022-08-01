@@ -50,7 +50,7 @@ export class EdicionPerfilEmpresaComponent implements OnInit {
     }
     const formData = {...Data};
     this.http.post(this.baseUrl + 'ComponenteLogin/BuscarPersonaEmpresa', formData).subscribe((result : any) => {
-      debugger
+
       if(result.success){
         this.nombres = result.data.nombres;
         this.apellidos = result.data.apellidos;
