@@ -60,7 +60,7 @@
                  </div>
 
                   <div class="button">
-                    <button class="buttonSiguiente">Guardar cambios</button>
+                    <button class="buttonSiguiente" (click)="btnGuardarRepresentante()">Guardar cambios</button>
                     <button class="buttonCancelar" (click)="clickCancelarRepresentante()" >Cancelar</button>
                   </div>
                 </div>
@@ -90,7 +90,7 @@
                <p class="validador" *ngIf="validadorCorreoInvalido">Correo inválido.</p> 
             </div>
              <div class="button">
-              <button class="buttonSiguiente">Guardar cambios</button>
+              <button class="buttonSiguiente" (click)="btnGuardarContacto()">Guardar cambios</button>
                <button class="buttonCancelar" (click)="clickCancelarContacto()">Cancelar</button>
              </div>
           </div>
