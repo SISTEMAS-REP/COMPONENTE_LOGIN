@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, Inject, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-cambiar-contrasena-empresa',
@@ -26,7 +28,11 @@ export class CambiarContrasenaEmpresaComponent implements OnInit {
   ValidadorSimbolo: boolean = false;
   validadorRequisitosContrasenaNueva : boolean = false;
 
-  constructor() { }
+  constructor(
+    private http: HttpClient, 
+    @Inject('BASE_URL') private baseUrl: string,
+    private spinner: NgxSpinnerService
+  ) { }
 
   ngOnInit() {
   }

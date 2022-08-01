@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-registro-empresa',
@@ -66,7 +67,10 @@ export class RegistroEmpresaComponent implements OnInit {
 
  validadorRucDigitos: boolean = false;
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string,
+  constructor(
+  private http: HttpClient, 
+  @Inject('BASE_URL') private baseUrl: string,
+  private spinner: NgxSpinnerService
   ) {
   }
 
@@ -83,9 +87,9 @@ export class RegistroEmpresaComponent implements OnInit {
    //   alert("Debe cumplir las validaciones.");
    //   return;
    // }
-
    if(!this.validadorRuc && !this.validadorRazonSocial &&  !this.validadorDireccion && !this.validadorTipoDocumento && !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular  && !this.validadorCelularLength  && !this.validadorCorreo && !this.validadorContrasena && !this.validadorContrasenaRep && !this.validadorContrasenaRepetir  && !this.validadorRequisitosContrasena && !this.validadorTerminos ){
-   let Data = {
+    this.spinner.show();
+    let Data = {
      Id: 0,
      IdSector: 1, // 1: persona Natural // 2: persona juridica
      IdTipoPersona: 1,
@@ -106,7 +110,8 @@ export class RegistroEmpresaComponent implements OnInit {
    }
    const formData = {...Data};
    this.http.post(this.baseUrl + 'ComponenteLogin/RegistroPersona', formData).subscribe((result : any) => {
-     if(result.data != null){
+    this.spinner.hide();
+    if(result.data != null){
         this.limpiar();
        alert("El registro se guardo con exito.");
      }
@@ -127,13 +132,14 @@ export class RegistroEmpresaComponent implements OnInit {
       this.direccion = null;
       return;
     }
-
+    this.spinner.show();
     let Data = {
       NroDocumento : this.ruc,
       IdTipoIdentificacion : 8
     }
     const formData = {...Data};
     this.http.post(this.baseUrl + 'ComponenteLogin/BuscarPersonaEmpresa', formData).subscribe((result : any) => {
+      this.spinner.hide();
       if(result.data != null){
         this.razonSocial = result.data.razonSocial;
         this.cod_departamento = result.data.codigoDepartamento;
@@ -156,12 +162,14 @@ export class RegistroEmpresaComponent implements OnInit {
 
 
   btnBuscarDNI = () =>{
+    this.spinner.show();
     let Data = {
       NroDocumento : this.numeroDoc,
       IdTipoIdentificacion : 1
     }
     const formData = {...Data};
     this.http.post(this.baseUrl + 'ComponenteLogin/BuscarPersonaEmpresa', formData).subscribe((result : any) => {
+      this.spinner.hide();
       if(result.data!= null){
         this.nombres = result.data.nombres;
         this.apellidos = result.data.apellidos;

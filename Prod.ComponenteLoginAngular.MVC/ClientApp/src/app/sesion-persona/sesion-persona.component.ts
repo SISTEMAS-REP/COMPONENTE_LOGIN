@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-sesion-persona',
@@ -14,7 +15,10 @@ export class SesionPersonaComponent implements OnInit {
   validarNroDocumento: boolean = false;
   validarContrasena: boolean = false;
   
-  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string,
+  constructor(
+    private http: HttpClient, 
+    @Inject('BASE_URL') private baseUrl: string,
+    private spinner: NgxSpinnerService
   ) {
   }
 
@@ -26,12 +30,14 @@ export class SesionPersonaComponent implements OnInit {
     this.changeContrasena();
 
     if(!this.validarNroDocumento && !this.validarContrasena){
+      this.spinner.show();
       let Data = {
         dni: this.numero_documento,
         clave: this.contrasena
       }
       const formData = {...Data};
       this.http.post(this.baseUrl + 'ComponenteLogin/IniciarSesionExtranet', formData).subscribe(result => {
+      this.spinner.hide();
       }, error => console.error(error));
     }
    

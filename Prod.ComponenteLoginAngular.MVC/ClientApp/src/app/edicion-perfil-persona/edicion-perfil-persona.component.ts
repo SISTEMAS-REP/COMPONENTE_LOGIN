@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, Inject, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-edicion-perfil-persona',
@@ -21,7 +23,11 @@ export class EdicionPerfilPersonaComponent implements OnInit {
   validadorCorreo :  boolean = false;
   validadorCorreoInvalido : boolean = false;
 
-  constructor() { }
+  constructor(
+    private http: HttpClient, 
+    @Inject('BASE_URL') private baseUrl: string,
+    private spinner: NgxSpinnerService
+  ) { }
 
   ngOnInit() {
   }

@@ -67,6 +67,7 @@ export class RegistroPersonaComponent implements OnInit {
   }
 
   registroPersonaService = () =>{
+
      this.changeCorreo();
      this.changeContrasena();
      this.changeContrasenaRep();
@@ -79,6 +80,7 @@ export class RegistroPersonaComponent implements OnInit {
     // }
 
     if(!this.validadorTipoDocumento && !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular  && !this.validadorCelularLength  && !this.validadorCorreo && !this.validadorContrasena && !this.validadorContrasenaRep && !this.validadorContrasenaRepetir  && !this.validadorRequisitosContrasena && !this.validadorTerminos ){
+    this.spinner.show();
     let Data = {
       Id: 0,
       IdSector: 2, // 1: persona Natural // 2: persona juridica
@@ -100,6 +102,7 @@ export class RegistroPersonaComponent implements OnInit {
     }
     const formData = {...Data};
     this.http.post(this.baseUrl + 'ComponenteLogin/RegistroPersona', formData).subscribe((result : any) => {
+      this.spinner.hide();
       if(result.data != null){
         this.limpiar();
         alert("El registro se guardo con exito.");

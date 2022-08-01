@@ -1,5 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
+
+
 @Component({
   selector: 'app-cambiar-contrasena-persona',
   templateUrl: './cambiar-contrasena-persona.component.html',
@@ -26,7 +29,10 @@ export class CambiarContrasenaPersonaComponent implements OnInit {
   ValidadorSimbolo: boolean = false;
   validadorRequisitosContrasenaNueva : boolean = false;
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string
+  constructor(
+    private http: HttpClient, 
+    @Inject('BASE_URL') private baseUrl: string,
+    private spinner: NgxSpinnerService
   ) {
   }
   
@@ -36,6 +42,7 @@ export class CambiarContrasenaPersonaComponent implements OnInit {
 
   cambiarContrasena = () => 
   {
+    this.spinner.show();
     let Data = {
       id: "2496752",  //this.id,
       dni: "753470004", // this.userName,
@@ -44,7 +51,7 @@ export class CambiarContrasenaPersonaComponent implements OnInit {
     }
     const formData = {...Data};
     this.http.post(this.baseUrl + 'ComponenteLogin/CambiarContrasena', formData).subscribe((result : any) => {
-
+    this.spinner.hide();
      if(result.success){
        alert("Se actualizó la contraseña");
      }
