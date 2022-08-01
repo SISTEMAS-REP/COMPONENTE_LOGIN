@@ -12,8 +12,8 @@ export class SesionPersonaComponent implements OnInit {
   numero_documento : string = null;
   contrasena : string = null;
 
-  validarNroDocumento: boolean = false;
-  validarContrasena: boolean = false;
+  validadorNroDocumento: boolean = false;
+  validadorContrasena: boolean = false;
   
   constructor(
     private http: HttpClient, 
@@ -29,7 +29,7 @@ export class SesionPersonaComponent implements OnInit {
     this.changeNroDocumento();
     this.changeContrasena();
 
-    if(!this.validarNroDocumento && !this.validarContrasena){
+    if(!this.validadorNroDocumento && !this.validadorContrasena){
       this.spinner.show();
       let Data = {
         dni: this.numero_documento,
@@ -45,21 +45,36 @@ export class SesionPersonaComponent implements OnInit {
 
   changeNroDocumento = () =>{
     if(this.numero_documento == null || this.numero_documento == ""){
-      this.validarNroDocumento = true;
+      this.validadorNroDocumento = true;
     }
     else{
-      this.validarNroDocumento = false;
+      this.validadorNroDocumento = false;
     }
   }
 
   changeContrasena = () =>{
     if(this.contrasena == null || this.contrasena == ""){
-      this.validarContrasena = true;
+      this.validadorContrasena = true;
     }
     else{
-      this.validarContrasena = false;
+      this.validadorContrasena = false;
     }
   }
+
+  mostrarContrasena(){
+    let contrasena :any = document.getElementById('contrasena');
+    let eyeContrasena :any = document.getElementById('eyeContrasena');
+    
+    if(contrasena.type == "password"){
+      contrasena.type = "text";
+      eyeContrasena.style.opacity=0.8;
+    }
+    else{
+      contrasena.type = "password";
+      eyeContrasena.style.opacity=0.4;
+    }
+  }
+
 
   public restrictNumeric(e) {
     let input;
