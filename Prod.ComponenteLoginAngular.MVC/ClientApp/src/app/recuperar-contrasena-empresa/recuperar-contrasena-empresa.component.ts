@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-recuperar-contrasena-empresa',
@@ -11,7 +12,10 @@ export class RecuperarContrasenaEmpresaComponent implements OnInit {
   numeroDocumento : string = null;
   validarRuc : boolean = false;
   validaSuccess: boolean = false;
-  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string,
+  constructor(
+    private http: HttpClient, 
+    @Inject('BASE_URL') private baseUrl: string,
+    private spinner: NgxSpinnerService
   ) {
   }
   ngOnInit(): void {
@@ -22,12 +26,14 @@ export class RecuperarContrasenaEmpresaComponent implements OnInit {
     this.changeRuc();
     if(!this.validarRuc)
     {
+      this.spinner.show();
       let Data = {
         numeroDocumento: this.numeroDocumento,
       }
       
       const formData = {...Data};
       this.http.post(this.baseUrl + 'ComponenteLogin/RecuperarContrasena', formData).subscribe(result => {
+        this.spinner.hide();
         this.validaSuccess = true;
       }, error => console.error(error));
     }
