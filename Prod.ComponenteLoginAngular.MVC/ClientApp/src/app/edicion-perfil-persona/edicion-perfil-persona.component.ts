@@ -35,14 +35,9 @@ export class EdicionPerfilPersonaComponent implements OnInit {
   btnGuardarContacto = () =>{
     this.changeCelular();
     this.changeCorreo();
- 
+    debugger
       if(!this.validadorCelular &&   !this.validadorCelularLength && !this.validadorCorreo && !this.validadorCorreoInvalido){
-        this.isVisiblePerfil = true;  
-        this.isVisibleContacto = true; 
-        this.isVisibleEditarContacto = false;  
-        this.limpiar();
-      }
-
+        debugger
       let Data = {
         Id: 2496732, //cambiar
         Email: this.correo,
@@ -52,7 +47,16 @@ export class EdicionPerfilPersonaComponent implements OnInit {
       const formData = {...Data};
       this.http.post(this.baseUrl + 'ComponenteLogin/UpdateCorreoTelefonoPersona', formData).subscribe((result : any) => {
         debugger
-      }, error => console.error(error));
+        alert(result.messages[0]);
+        this.isVisiblePerfil = true;  
+        this.isVisibleContacto = true; 
+        this.isVisibleEditarContacto = false;  
+        this.limpiar();
+        }, error => console.error(error));
+       
+      }
+
+      
   }
 
 

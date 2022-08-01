@@ -69,22 +69,25 @@ export class EdicionPerfilEmpresaComponent implements OnInit {
     this.changeCorreo();
  
       if(!this.validadorCelular &&   !this.validadorCelularLength && !this.validadorCorreo && !this.validadorCorreoInvalido){
-        this.isVisiblePerfil = true;  
-        this.isVisibleContacto = true; 
-        this.isVisibleEditarContacto = false;  
-        this.limpiar();
+        let Data = {
+          Id: 2496732, //cambiar
+          Email: this.correo,
+          Telefono: this.celular,
+          idContactoExtranet: 15357//cambiar
+        }
+        const formData = {...Data};
+        this.http.post(this.baseUrl + 'ComponenteLogin/UpdateCorreoTelefonoPersona', formData).subscribe((result : any) => {
+          debugger
+          alert(result.messages[0]);
+          this.isVisiblePerfil = true;  
+          this.isVisibleContacto = true; 
+          this.isVisibleEditarContacto = false;  
+          this.limpiar();
+          }, error => console.error(error));
+  
       }    
       
-      let Data = {
-        Id: 2496732, //cambiar
-        Email: this.correo,
-        Telefono: this.celular,
-        idContactoExtranet: 15357//cambiar
-      }
-      const formData = {...Data};
-      this.http.post(this.baseUrl + 'ComponenteLogin/UpdateCorreoTelefonoPersona', formData).subscribe((result : any) => {
-        debugger
-      }, error => console.error(error));
+    
   }
 
 
