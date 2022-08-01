@@ -115,6 +115,7 @@ export class RegistroPersonaComponent implements OnInit {
 }
 
 
+
   limpiar =()=>
   {
     this.ruc = null;
