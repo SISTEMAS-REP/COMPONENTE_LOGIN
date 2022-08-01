@@ -359,6 +359,14 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
             return Ok(sr);
         }
 
+        [HttpPost]
+        [Route("UpdateCorreoTelefonoPersona")]
+        public IActionResult UpdateCorreoTelefonoPersona([FromBody] PersonaRequest request)
+        {
+            var sr = produceVirtualServicio.UpdateCorreoTelefonoPersona(request.Id,request.Email,request.Telefono,request.idContactoExtranet);
+            return Ok(sr);
+        }
+
     }
-  
+
 }

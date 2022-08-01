@@ -26,5 +26,6 @@
 		public string NroDocPerNatural { get; set; }
 		public string Contrasena { get; set; }
 		public bool Estado { get; set; }
+		public int idContactoExtranet { get; set; }
 	}
 }
