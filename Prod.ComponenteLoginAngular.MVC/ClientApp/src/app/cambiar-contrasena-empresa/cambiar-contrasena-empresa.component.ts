@@ -43,7 +43,6 @@ export class CambiarContrasenaEmpresaComponent implements OnInit {
   }
 
   clickPaso3 = () =>{
-    debugger;
     this.changeContrasenaNueva();
     this.changeContrasenaRep();
  
