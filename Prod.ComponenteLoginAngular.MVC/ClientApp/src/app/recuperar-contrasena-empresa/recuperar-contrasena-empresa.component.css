@@ -137,6 +137,8 @@ a:hover {
 /* ---------- LOGIN ---------- */
 .login {
   width: 410px;
+  height: 620px;
+  background-color: #FFF
 
 }
 
@@ -148,12 +150,30 @@ a:hover {
 
 .login__header h3 {
   text-align: center;
-  margin-top: 0%;
+  margin-top: 10px;
   margin-bottom: 0%;
+  font-size: 22px;
+  font-weight: 600;
 }
 
 
 .login__header p {
+  text-align: center;
+  margin-top: 0%;
+  margin-bottom: 0%;
+  padding-top: 0%;
+}
+
+.login__header .title h3 {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 0%;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+
+.login__header .title p {
   text-align: center;
   margin-top: 0%;
   margin-bottom: 0%;
@@ -180,7 +200,7 @@ a:hover {
   color: #777;
   display: grid;
   gap: 0.5em;
-  padding: 1.7em 1.6em 1.3em 1.6em;
+  padding: 0.8em 1.6em 1.3em 1.6em;
   
 }
 
@@ -248,7 +268,7 @@ a:hover {
 }
 
 .login select {
-  padding: 5px 7px;
+  padding: 6px 7px;
   width: 80%;
   font-size: 12px;
   border: 1px solid #ccc;
@@ -284,7 +304,8 @@ a:hover {
 
 .logo-aplicacion, h1, p {
   text-align: center;
-  padding-bottom: 5px;
+  margin-top: 4px;
+
 } 
 
 

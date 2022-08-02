@@ -138,6 +138,8 @@ a:hover {
 /* ---------- LOGIN ---------- */
 .login {
   width: 410px;
+  height: 620px;
+  background-color: #FFF
 
 }
 
@@ -147,11 +149,49 @@ a:hover {
   padding: 0.5em 0.5em 0em 0.5em;
 }
 
-.login__header h3 {
+
+
+.login__header p {
   text-align: center;
   margin-top: 0%;
   margin-bottom: 0%;
+  padding-top: 0%;
 }
+
+.login__header .title h3 {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 0%;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+
+.login__header .title p {
+  text-align: center;
+  margin-top: 0%;
+  margin-bottom: 0%;
+  padding-top: 0%;
+}
+
+
+.login__header :first-child {
+  margin-top: 0;
+}
+.login__header {
+  background-color: #fff;
+  color: #000;
+  padding: 0.5em 0.5em 0em 0.5em;
+}
+
+.login__header h3 {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 0%;
+  font-size: 22px;
+  font-weight: 600;
+}
+
 
 
 .login__header p {
@@ -170,6 +210,7 @@ a:hover {
   margin-bottom: 0;
 }
 
+
 .login h2 .icon {
   margin-right: 14px;
 }
@@ -181,7 +222,7 @@ a:hover {
   color: #777;
   display: grid;
   gap: 0.5em;
-  padding: 1.7em 1.6em 1.3em 1.6em;
+  padding: 0.8em 1.6em 1.3em 1.6em;
   
 }
 
@@ -249,7 +290,7 @@ a:hover {
 }
 
 .login select {
-  padding: 5px 7px;
+  padding: 6px 7px;
   width: 80%;
   font-size: 12px;
   border: 1px solid #ccc;
@@ -286,9 +327,9 @@ a:hover {
 
 .logo-aplicacion, h1, p {
   text-align: center;
-  padding-bottom: 5px;
-} 
+  margin-top: 4px;
 
+} 
 .column {
   display: flex;
   flex-direction: row;

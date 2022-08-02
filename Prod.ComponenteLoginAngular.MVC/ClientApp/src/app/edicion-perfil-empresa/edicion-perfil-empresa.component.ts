@@ -118,13 +118,12 @@ export class EdicionPerfilEmpresaComponent implements OnInit {
   clickEditarRepresentante = () =>{ 
     this.isVisibleEditarRepresentante = true;
     this.isVisibleRepresentante = false;  
-    this.isVisibleContacto = false; 
   }
 
   clickEditarContacto = () =>{ 
     this.isVisibleEditarContacto = true;
     this.isVisibleContacto = false; 
-    this.isVisibleRepresentante = false;    
+  
   }
 
   clickEditarImg= () =>{ 

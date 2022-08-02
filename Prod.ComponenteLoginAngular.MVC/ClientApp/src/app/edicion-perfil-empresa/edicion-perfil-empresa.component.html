@@ -2,6 +2,7 @@
   <p style="font-size: 20px; color: white">Procesando información, por favor no cierre la ventana.</p>
 </ngx-spinner>
 <body class="align">
+  <div class="container">
     <div class="form"> 
         <div class="header" *ngIf="isVisiblePerfil">
          <div class="circle"> 
@@ -43,7 +44,7 @@
                     <div class="right">
                         <label for="numeroDoc">N° documento</label>
                         <input type="text" id="numeroDoc" name="numeroDoc" placeholder="Ej.:15234687" [(ngModel)]="numeroDoc" (change)="changeNroDocumento($event)" maxlength="12" (blur)="btnBuscarDNI()" [disabled]="isDisableNroDocumento" (keypress)="restrictNumeric($event)" >
-                        <p class="validador" *ngIf="validadorNroDocumento">Debe ingresar el número de documento.</p>
+                        <p class="validador" *ngIf="validadorNroDocumento">Debe ingresar el N° de documento.</p>
                       </div>
                 </div>
             
@@ -112,6 +113,7 @@
            </div>
         </div>
      </div>
+    </div>
    </body>
    
    

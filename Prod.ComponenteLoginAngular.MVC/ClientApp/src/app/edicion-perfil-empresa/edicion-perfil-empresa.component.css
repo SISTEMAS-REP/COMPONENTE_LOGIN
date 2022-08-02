@@ -61,6 +61,15 @@
       }
       
 /* ---------- LOGIN ---------- */
+
+.container 
+{
+  width: 410px;
+  height: 620px;
+  background-color: #fff;
+  padding: 0em 0em 1.3em 0em;
+}
+
 .form {
     width: 410px;
     background-color: #fff;
@@ -259,7 +268,7 @@
   
   .logo-aplicacion, h1, p {
     text-align: center;
-    padding-bottom: 5px;
+    padding-bottom: 4px;
   } 
   
   .column {
@@ -543,6 +552,7 @@
   border: 1px solid #ccc;
  
 }
+
   .title {
     width: 50%;
     padding: 25px 10px 10px 25px;

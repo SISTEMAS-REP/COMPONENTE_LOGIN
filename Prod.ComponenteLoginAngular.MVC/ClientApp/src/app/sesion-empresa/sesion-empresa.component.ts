@@ -13,10 +13,11 @@ export class SesionEmpresaComponent implements OnInit {
   contrasena : string = null;
   ruc: string = null;
 
-  validarRuc : boolean = false;
-  validarNroDocumento: boolean = false;
-  validarContrasena: boolean = false;
+  validadorRuc : boolean = false;
+  validadorNroDocumento: boolean = false;
+  validadorContrasena: boolean = false;
   validadorRucDigitos: boolean = false;
+
 
    constructor(
     private http: HttpClient, 
@@ -32,7 +33,7 @@ export class SesionEmpresaComponent implements OnInit {
     this.changeNroDocumento();
     this.changeContrasena();
 
-    if(!this.validarRuc && !this.validarNroDocumento && !this.validarContrasena){
+    if(!this.validadorRuc && !this.validadorNroDocumento && !this.validadorContrasena){
       this.spinner.show();
       let Data = {
         dni: this.numero_documento,
@@ -49,16 +50,16 @@ export class SesionEmpresaComponent implements OnInit {
 
   changeRuc = () =>{
     if(this.ruc == null || this.ruc == ""){
-      this.validarRuc = true;
+      this.validadorRuc = true;
     }
     else{
       if( this.ruc.length < 11){    
         this.validadorRucDigitos = true;
-        this.validarRuc = false;
+        this.validadorRuc = false;
       }
       else {
         this.validadorRucDigitos = false;
-        this.validarRuc = false;
+        this.validadorRuc = false;
       } 
      
     }
@@ -66,19 +67,33 @@ export class SesionEmpresaComponent implements OnInit {
   
   changeNroDocumento = () =>{
     if(this.numero_documento == null || this.numero_documento == ""){
-      this.validarNroDocumento = true;
+      this.validadorNroDocumento = true;
     }
     else{
-      this.validarNroDocumento = false;
+      this.validadorNroDocumento = false;
     }
   }
 
   changeContrasena = () =>{
     if(this.contrasena == null || this.contrasena == ""){
-      this.validarContrasena = true;
+      this.validadorContrasena = true;
     }
     else{
-      this.validarContrasena = false;
+      this.validadorContrasena = false;
+    }
+  }
+
+  mostrarContrasena(){
+    let contrasena :any = document.getElementById('contrasena');
+    let eyeContrasena :any = document.getElementById('eyeContrasena');
+    
+    if(contrasena.type == "password"){
+      contrasena.type = "text";
+      eyeContrasena.style.opacity=0.8;
+    }
+    else{
+      contrasena.type = "password";
+      eyeContrasena.style.opacity=0.4;
     }
   }
 
