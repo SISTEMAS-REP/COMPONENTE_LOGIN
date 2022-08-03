@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-
+import { NzNotificationService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-cambiar-contrasena-persona',
@@ -32,7 +32,8 @@ export class CambiarContrasenaPersonaComponent implements OnInit {
   constructor(
     private http: HttpClient, 
     @Inject('BASE_URL') private baseUrl: string,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private notification: NzNotificationService
   ) {
   }
   
@@ -53,10 +54,10 @@ export class CambiarContrasenaPersonaComponent implements OnInit {
     this.http.post(this.baseUrl + 'ComponenteLogin/CambiarContrasena', formData).subscribe((result : any) => {
     this.spinner.hide();
      if(result.success){
-       alert("Se actualizó la contraseña");
+      this.createNotification('success',"Persona Natural",'Se actualizó la contraseña.')
      }
      else{
-       alert(result.messages[0]);
+      this.createNotification('error',"Persona Natural",'Ocurrió un error al actualizar.')
      }
      
    }, error => console.error(error));
@@ -214,6 +215,14 @@ export class CambiarContrasenaPersonaComponent implements OnInit {
         eyeContrasenaRep.style.opacity=0.4;
       }
     }
+
+    createNotification = (type: string, title: string, message: string): void => {
+      this.notification.create(
+        type,
+        title,
+        message
+      );
+    };
 
 }
 

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NzNotificationService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-edicion-perfil-persona',
@@ -26,7 +27,8 @@ export class EdicionPerfilPersonaComponent implements OnInit {
   constructor(
     private http: HttpClient, 
     @Inject('BASE_URL') private baseUrl: string,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private notification: NzNotificationService,
   ) { }
 
   ngOnInit() {
@@ -169,5 +171,13 @@ export class EdicionPerfilPersonaComponent implements OnInit {
     this.validadorCorreoInvalido = false;
 
   }
+
+  createNotification = (type: string, title: string, message: string): void => {
+    this.notification.create(
+      type,
+      title,
+      message
+    );
+  };
 
 }

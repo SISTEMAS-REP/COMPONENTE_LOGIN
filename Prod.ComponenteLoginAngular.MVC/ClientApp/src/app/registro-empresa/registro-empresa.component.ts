@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NzNotificationService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-registro-empresa',
@@ -70,7 +71,8 @@ export class RegistroEmpresaComponent implements OnInit {
   constructor(
   private http: HttpClient, 
   @Inject('BASE_URL') private baseUrl: string,
-  private spinner: NgxSpinnerService
+  private spinner: NgxSpinnerService,
+  private notification: NzNotificationService,
   ) {
   }
 
@@ -115,10 +117,10 @@ export class RegistroEmpresaComponent implements OnInit {
     this.spinner.hide();
     if(result.data != null){
         this.limpiar();
-       alert("El registro se guardo con exito.");
+        this.createNotification('success',"Persona Jurídica",'El registro se guardo con exito.');
      }
      else{
-       alert(result.messages[0]);
+      this.createNotification('error',"Persona Jurídica",'Ha ocurrido un error al registrar.');
      }
      
    }, error => console.error(error));
@@ -152,7 +154,7 @@ export class RegistroEmpresaComponent implements OnInit {
         this.changeDireccion();
       }
       else{
-        alert("El número de RUC es incorrecto.");
+        this.createNotification('error',"Registro",'El número de RUC es incorrecto.');
         this.razonSocial = null;
         this.cod_departamento = null;
         this.cod_provincia = null;
@@ -180,7 +182,7 @@ export class RegistroEmpresaComponent implements OnInit {
         this.changeNombres();
       }
       else{
-        alert("El número de DNI es incorrecto.");
+        this.createNotification('error',"Registro",'El número de DNI es incorrecto.');
         this.nombres = null;
         this.apellidos = null;
       }
@@ -601,4 +603,12 @@ export class RegistroEmpresaComponent implements OnInit {
   
     this.isDisableNroDocumento = true;
    }
+
+   createNotification = (type: string, title: string, message: string): void => {
+    this.notification.create(
+      type,
+      title,
+      message
+    );
+  };
 }

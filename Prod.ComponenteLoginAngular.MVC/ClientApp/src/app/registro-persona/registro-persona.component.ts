@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NzNotificationService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-registro-persona',
@@ -62,7 +63,8 @@ export class RegistroPersonaComponent implements OnInit {
     private http: HttpClient, 
     @Inject('BASE_URL') private baseUrl: string,
     private spinner: NgxSpinnerService,
-    private router: ActivatedRoute
+    private router: ActivatedRoute,
+    private notification: NzNotificationService,
   ) {
   }
 
@@ -112,13 +114,12 @@ export class RegistroPersonaComponent implements OnInit {
     this.http.post(this.baseUrl + 'ComponenteLogin/RegistroPersona', formData).subscribe((result : any) => {
       this.spinner.hide();
       if(result.data != null){
+        debugger;
         this.limpiar();
-        alert("El registro se guardo con exito.");
-
-
+        this.createNotification('success',"Persona Natural",'El registro se guardo con exito.');
       }
       else{
-        alert(result.messages[0]);
+        this.createNotification('error',"Persona Natural",'Ha ocurrido un error al registrar.');
       }
       
     }, error => console.error(error));
@@ -198,7 +199,7 @@ export class RegistroPersonaComponent implements OnInit {
         this.changeNombres();
       }
       else{
-        alert("El número de DNI es incorrecto.");
+        this.createNotification('error',"Registro",'El número de DNI es incorrecto.');
         this.nombres = null;
         this.apellidos = null;
         this.cod_departamento = null;
@@ -492,5 +493,11 @@ export class RegistroPersonaComponent implements OnInit {
     return !!/[\d\s]/.test(input);
    }
 
-
+   createNotification = (type: string, title: string, message: string): void => {
+    this.notification.create(
+      type,
+      title,
+      message
+    );
+  };
 }
