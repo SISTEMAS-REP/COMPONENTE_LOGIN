@@ -52,10 +52,10 @@ export class CambiarContrasenaEmpresaComponent implements OnInit {
     this.http.post(this.baseUrl + 'ComponenteLogin/CambiarContrasena', formData).subscribe((result : any) => {
     this.spinner.hide();
      if(result.success){
-       alert("Se actualizó la contraseña");
+       this.createNotification('success',"Persona Jurídica",'Se actualizó la contraseña.');
      }
      else{
-       alert(result.messages[0]);
+      this.createNotification('error',"Persona Jurídica",'Ocurrió un error al actualizar.')
      }
      
    }, error => console.error(error));

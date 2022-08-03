@@ -117,10 +117,10 @@ export class RegistroEmpresaComponent implements OnInit {
     this.spinner.hide();
     if(result.data != null){
         this.limpiar();
-       alert("El registro se guardo con exito.");
+        this.createNotification('success',"Persona Jurídica",'El registro se guardo con exito.');
      }
      else{
-       alert(result.messages[0]);
+      this.createNotification('error',"Persona Jurídica",'Ha ocurrido un error al registrar.');
      }
      
    }, error => console.error(error));

@@ -114,13 +114,12 @@ export class RegistroPersonaComponent implements OnInit {
     this.http.post(this.baseUrl + 'ComponenteLogin/RegistroPersona', formData).subscribe((result : any) => {
       this.spinner.hide();
       if(result.data != null){
+        debugger;
         this.limpiar();
-        alert("El registro se guardo con exito.");
-
-
+        this.createNotification('success',"Persona Natural",'El registro se guardo con exito.');
       }
       else{
-        alert(result.messages[0]);
+        this.createNotification('error',"Persona Natural",'Ha ocurrido un error al registrar.');
       }
       
     }, error => console.error(error));
