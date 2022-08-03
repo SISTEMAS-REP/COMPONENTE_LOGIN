@@ -1,0 +1,55 @@
+<form [formGroup]="form" (ngSubmit)="fnBtnCambiarContrasena()">
+<div
+  fxLayout="row"
+  fxLayoutAlign="start center"
+  mat-dialog-title
+>
+  <h2 class="headline m-0" fxFlex="auto">Actualizar contraseña</h2>
+</div>
+<mat-divider class="-mx-6 text-border"></mat-divider>
+<div mat-dialog-content class="mt-12">
+
+  <!-- <p class="font-medium" fxFlex="auto" fxLayout="row" fxLayoutAlign="center center" [innerHTML]="message"></p> -->
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="table-responsive"></div>
+      <mat-form-field
+        appearance="fill"
+        class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+      >
+        <mat-label>Nueva Contraseña (*)</mat-label>
+        <input
+          matInput
+          type="password"
+          placeholder="Nueva Contraseña"
+          maxlength="100"
+          formControlName="contrasena"
+        />
+        <mat-error *ngIf="contrasenaErrors">{{
+          contrasenaErrors
+        }}</mat-error>
+      </mat-form-field>
+      <mat-form-field
+        appearance="fill"
+        class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+      >
+        <mat-label>Repetir Contraseña (*)</mat-label>
+        <input
+          matInput
+          type="password"
+          placeholder="Repetir Contraseña"
+          maxlength="100"
+          formControlName="contrasenaRepetida"
+        />
+        <mat-error *ngIf="contrasenaRepetidaErrors">{{ contrasenaRepetidaErrors }}</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+</div>
+
+<br />
+<div mat-dialog-actions align="center">
+  <button mat-flat-button mat-dialog-close="false" color="primary" type="submit">Aceptar</button>
+  <button mat-flat-button mat-dialog-close="false" color="warn">Cerrar</button>
+</div>
+</form>

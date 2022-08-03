@@ -1,0 +1,263 @@
+<ng-template [ngIf]="isAuth" [ngIfElse]="notIsAuth">
+    <app-sec-header-simple></app-sec-header-simple>
+</ng-template>
+<ng-template #notIsAuth>
+    <app-sec-header-without-login></app-sec-header-without-login>
+</ng-template>
+<div class="container-fluid">
+    <br>
+    <h2 align="center">Trámite en línea</h2>
+    <br>
+    <ol class="breadcrumb">
+        <li><a [routerLink]="['/principal']">Inicio</a></li>
+        <li class="active"><a [routerLink]="['/tramite-linea']">Trámites en Línea</a></li>
+        <!-- <li class="active">Pesca</li> -->
+        <li>Procedimiento Nº {{formTupa.numeroTupa}}</li>
+    </ol>
+    <div class="main">
+        <div class="row">
+
+            <div class="col-md-10" [ngStyle]="{'font-size': (size + 'rem')}">
+                <!-- Inicial -->
+                <p class="titulo-tramite" align="center"><b>{{formTupa.descripcion}}</b><br><br></p>
+                <!-- /Inicial -->
+                <!-- Detail -->
+                <div id="description">
+                    <h3 id="description"><i><img src="../../../assets/img/icon-files-empty.png" /></i> Descripción</h3>
+                    <p>
+                        <b>Evaluación Previa:</b> Automático.<br>
+                        <b>Plazo para Resolver:</b> Automático.<br>
+                        <b>Inicio del Procedimiento:</b> Virtual<br>
+                        <b>Derecho de Tramitación:</b>&nbsp;&nbsp; {{(frDecimal(formTupa.uit*100))}}% UIT - S/.{{(frDecimal(formTupa.cantidad))}}
+                        <!--14.2304% UIT - S/. 562.1.-->
+                    </p><br>
+
+                </div>
+                <!-- /Detail -->
+                <!-- Beneficiary -->
+                <h3 id="beneficiary"><i><img src="../../../assets/img/icon_users2.png" /></i> ¿A quién está dirigido?</h3>
+                <p>
+                    <b>Autoridad competente para resolver:</b> {{formTupa.nombreDependencia}}.
+                </p><br>
+                <!-- /Beneficiary -->
+                <!-- Requirements -->
+                <h3 id="requirements"><i><img src="../../../assets/img/icon-drawer.png" /></i> Requisitos del trámite</h3>
+                <ul>
+                    <li *ngFor="let tupaReq of listaTupaRequisito" style="list-style: none;">
+                        <span [innerHTML]="tupaReq.descripcion"></span>
+                    </li>
+                    <!-- <li>Solicitud dirigida al Director General de Extracción y Producción Pesquera para Consumo Humano
+                        Directo, la misma que debe ser presentada mínimo con 3 días de anticipación a la fecha
+                        programada para el inicio de operaciones, con carácter de declaración jurada y obligatoria según
+                        Formulario DEPCHD-017.</li>
+                    <li>Pago por servicio de inspección (*2). Según Servicio N° 8</li>
+                    <li>Pago por derecho de trámite. (*1).</li> -->
+
+                </ul>
+                <!-- / Requirements -->
+                <!-- Attachments -->
+                <h3 id="attachment"><i><img src="../../../assets/img/icon-dowload.png" /></i> Formatos y anexos</h3>
+                <p>No aplica formato y Anexos</p>
+                <!-- Attachments -->
+                <br>
+                <!-- Steps -->
+                <h3 id="location"><i><img src="../../../assets/img/iocn-clock.png" /></i> Plazos para resolver el trámite</h3>
+                <p>Presentarse con {{formTupa.numeroDias}} días de anticipación a la fecha programada para el inicio de
+                    operaciones.</p>
+                <!-- Steps -->
+            </div>
+            <div class="col-md-2">
+              <!-- <div id="page-nav" data-spy="affix" data-offset-top="415" class="affix-top">
+                <div style="margin-top:5px">
+                  <span (click)="fnGoLink(fnSafeUrl(formTupa.link))" class="btn btn-tramite" style="text-align: left">
+                    Ir al
+                    trámite en línea <i class="fa fa-arrow-right"></i>
+                  </span><br><br />
+                </div>
+              </div> -->
+              <!-- Index -->
+              <!-- /Index -->
+              <!-- Feedback -->
+              <h3 class="block-title">¿Te sirvió el contenido?</h3>
+              <section class="block block-gobec-feedback block-gobec-feedback-block clearfix">
+                <div id="feedback-form">
+                  <form class="gobec-feedback-block-form gobec-feedback-form"
+                        data-drupal-selector="gobec-feedback-block-form"
+                        action="/senadi/tramites/accion-tutela-administrativa-positiva-derecho-obtentor"
+                        method="post" id="gobec-feedback-block-form" accept-charset="UTF-8">
+                    <div id="form-status-messages"></div>
+                    <div class="field--type-boolean field--name-like field--widget-like-widget form-group js-form-wrapper form-wrapper"
+                         data-drupal-selector="edit-like-wrapper" id="edit-like-wrapper">
+                      <fieldset class="feedback-like fieldgroup form-composite required js-form-item form-item js-form-wrapper form-wrapper"
+                                data-drupal-selector="edit-like" id="edit-like--wrapper" required="required"
+                                aria-required="true">
+                        <legend>
+                          <span class="visually-hidden fieldset-legend js-form-required form-required">
+                          </span>
+                        </legend>
+                        <div class="fieldset-wrapper">
+                          <div id="edit-like">
+                            <div class="form-item js-form-item form-type-radio js-form-type-radio form-item-like js-form-item-like radio">
+                              <label for="edit-like-1" class="control-label option">
+                                <i class="fa fa-thumbs-up fa-4x" (click)="fnMeGusta(true)"></i>
+                              </label>
+                            </div>
+                            <div class="form-item js-form-item form-type-radio js-form-type-radio form-item-like js-form-item-like radio">
+                              <label for="edit-like-0" class="control-label option">
+                                <i class="fa fa-thumbs-down fa-flip-horizontal fa-4x" (click)="fnMeGusta(false)"></i>
+                              </label>
+                            </div>
+                            <div class="like-counter">
+                              <span id="like-ok">{{cantidadLike}}</span><span id="like-ko">{{cantidadDislike}}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </div>
+                    <input autocomplete="off"
+                           data-drupal-selector="form-ur4ojkvtoztykahximjjre5gncwvrjgdsx-w4wi2-gm" type="hidden"
+                           name="form_build_id" value="form-ur4oJKVtOZTYkaHxIMJjrE5gNCwvrjgdsX_w4Wi2-GM"><input data-drupal-selector="edit-gobec-feedback-block-form" type="hidden" name="form_id"
+                                                                                                                value="gobec_feedback_block_form">
+                    <div class="field--type-entity-reference field--name-type field--widget-feedback-type-widget form-group js-form-wrapper form-wrapper"
+                         data-drupal-selector="edit-type-wrapper"
+                         data-drupal-states="{&quot;visible&quot;:{&quot;:input[name=\u0022like\u0022]&quot;:{&quot;value&quot;:&quot;0&quot;}},&quot;required&quot;:{&quot;:input[name=\u0022like\u0022]&quot;:{&quot;value&quot;:&quot;0&quot;}}}"
+                         id="edit-type-wrapper" style="display: none;">
+                      <fieldset class="feedback-type fieldgroup form-composite js-form-item form-item js-form-wrapper form-wrapper"
+                                data-drupal-selector="edit-type" aria-describedby="edit-type--wrapper--description"
+                                id="edit-type--wrapper">
+                        <legend>
+                          <span class="visually-hidden fieldset-legend">Categoría del feedback</span>
+                        </legend>
+                        <div class="fieldset-wrapper">
+                          <div id="edit-type">
+                            <h4>Cuéntanos el problema</h4>
+                            <p>
+                              Tenemos en cuenta todos los comentarios, ya que nos ayudan a mejorar
+                              constantemente la información.
+                            </p>
+                            <p><strong>Seleccione una categoría:</strong></p>
+                            <div class="form-item js-form-item form-type-radio js-form-type-radio form-item-type js-form-item-type radio col-md-6 col-sm-12">
+                              <label for="edit-type-10466" class="control-label option">
+                                <input class="feedback-type form-radio"
+                                       data-drupal-selector="edit-type-10466"
+                                       aria-describedby="edit-type--description" type="radio"
+                                       id="edit-type-10466" name="type" value="10466"> <span title="La información difiere de lo solicitado al realizar el trámite">
+                                  <i class="fa  fa-2x fa-exclamation"></i>
+                                </span>
+                                Difiere al realizar el trámite
+                              </label>
+                            </div>
+                            <div class="form-item js-form-item form-type-radio js-form-type-radio form-item-type js-form-item-type radio col-md-6 col-sm-12">
+                              <label for="edit-type-10463" class="control-label option">
+                                <input class="feedback-type form-radio"
+                                       data-drupal-selector="edit-type-10463"
+                                       aria-describedby="edit-type--description" type="radio"
+                                       id="edit-type-10463" name="type" value="10463"> <span title="Requisitos incompletos, información desactualizada">
+                                  <i class="fa  fa-2x fa-edit"></i>
+                                </span>
+                                Falta información
+                              </label>
+                            </div>
+                            <div class="form-item js-form-item form-type-radio js-form-type-radio form-item-type js-form-item-type radio col-md-6 col-sm-12">
+                              <label for="edit-type-10464" class="control-label option">
+                                <input class="feedback-type form-radio"
+                                       data-drupal-selector="edit-type-10464"
+                                       aria-describedby="edit-type--description" type="radio"
+                                       id="edit-type-10464" name="type" value="10464"> <span title="Faltas de ortografía, inconsistencia en la información, etc.">
+                                  <i class="fa  fa-2x fa-times"></i>
+                                </span>
+                                Hay información incorrecta
+                              </label>
+                            </div>
+                            <div class="form-item js-form-item form-type-radio js-form-type-radio form-item-type js-form-item-type radio col-md-6 col-sm-12">
+                              <label for="edit-type-10465" class="control-label option">
+                                <input class="feedback-type form-radio"
+                                       data-drupal-selector="edit-type-10465"
+                                       aria-describedby="edit-type--description" type="radio"
+                                       id="edit-type-10465" name="type" value="10465"> <span title="La información no es clara.">
+                                  <i class="fa  fa-2x fa-question"></i>
+                                </span>
+                                No es fácil de entender
+                              </label>
+                            </div>
+                          </div>
+                          <div id="edit-type--wrapper--description" class="description">
+                            Categoría del
+                            feedback
+                          </div>
+                        </div>
+                      </fieldset>
+                    </div>
+                    <div class="field--type-string-long field--name-detail field--widget-string-textarea form-group js-form-wrapper form-wrapper"
+                         data-drupal-selector="edit-detail-wrapper"
+                         data-drupal-states="{&quot;visible&quot;:{&quot;:input[name=\u0022like\u0022]&quot;:{&quot;value&quot;:&quot;0&quot;}},&quot;required&quot;:{&quot;:input[name=\u0022like\u0022]&quot;:{&quot;value&quot;:&quot;0&quot;}}}"
+                         id="edit-detail-wrapper" style="display: none;">
+                      <div class="form-item js-form-item form-type-textarea js-form-type-textarea form-item-detail-0-value js-form-item-detail-0-value form-group">
+                        <label for="edit-detail-0-value" class="control-label">Descripción</label>
+                        <div class="form-textarea-wrapper">
+                          <textarea class="js-text-full text-full form-textarea form-control resize-vertical"
+                                    data-drupal-selector="edit-detail-0-value"
+                                    aria-describedby="edit-detail-0-value--description" id="edit-detail-0-value"
+                                    name="detail[0][value]" rows="3" cols="60" placeholder=""></textarea>
+                        </div>
+                        <div id="edit-detail-0-value--description" class="description help-block">
+                          Detalle del feedback
+                        </div>
+                      </div>
+                    </div>
+                    <input id="fingerprint-id" data-drupal-selector="edit-fingerprint" type="hidden"
+                           name="fingerprint" value="2351bfe743e2208128b2853d44ce02df">
+                    <div data-drupal-selector="edit-actions"
+                         class="form-actions form-group js-form-wrapper form-wrapper" id="edit-actions">
+                      <button class="use-ajax button button--primary js-form-submit form-submit btn-success btn icon-before"
+                              data-drupal-selector="edit-submit" type="submit" id="edit-submit" name="op"
+                              value="Guardar"
+                              data-drupal-states="{&quot;visible&quot;:{&quot;:input[name=\u0022like\u0022]&quot;:{&quot;value&quot;:&quot;0&quot;}},&quot;required&quot;:{&quot;:input[name=\u0022like\u0022]&quot;:{&quot;value&quot;:&quot;0&quot;}}}"
+                              style="display: none;">
+                        <span class="icon glyphicon glyphicon-ok"
+                              aria-hidden="true"></span>
+                        Guardar
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </section>
+              <!-- / Feedback -->
+              <!-- Related Procedure -->
+              <!-- /Related Procedure -->
+              <!-- Controls -->
+              <div class="gobec-controls">
+                <ul>
+                  <li>
+                    Letra
+                    <a (click)="fnSubirBajarFuente(-0.1)" style="cursor:pointer">
+                      <i class="fa fa-minus-circle"></i>
+                    </a>&nbsp;
+                    <a (click)="fnSubirBajarFuente(0.1)" style="cursor:pointer">
+                      <i class="fa fa-plus-circle"></i>
+                    </a>
+                  </li>
+                  <!-- <li>
+          <a href="/sites/default/files/sign/procedure-IEPI-003-03-01-20201212181818-10191225-signed.pdf"
+              target="_blank">
+              <i class="fa fa-print"></i>
+          </a>
+      </li> -->
+                </ul>
+
+              </div>
+              <div id="page-nav" data-spy="affix" data-offset-top="415" class="affix-top">
+                <div style="margin-top:5px">
+                  <span (click)="fnGoLink(fnSafeUrl(formTupa.link),formTupa)" class="btn btn-tramite" style="text-align: left">
+                    Ir al
+                    trámite en línea <i class="fa fa-arrow-right"></i>
+                  </span><br><br />
+                  <!-- <input type="button" class="btn btn-tramite2" (click)="fnPrepararQS()" value="Ingresar" /> -->
+                </div>
+              </div>
+              <!-- /Controls -->
+            </div>
+        </div>
+    </div>
+</div>
+<app-sec-footer></app-sec-footer>

@@ -1,0 +1,17 @@
+.hw-btn-not {
+  font-size: 14px;
+  color: white;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  background-color: #bf1817 !important;
+  padding: 14px 30px;
+  display: inline-block;
+  border-radius: 4px;
+  text-decoration: none;
+  border: 1px solid #bf1817 !important;
+}
+.hw-btn-not:hover {
+  color: white;
+  background-color: F82F4E;
+  border: 1px solid #bf1817 !important;
+}

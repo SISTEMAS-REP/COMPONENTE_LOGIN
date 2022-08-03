@@ -1,0 +1,54 @@
+<div class="col-md-10">
+    <div class="well">
+        <div class="form-horizontal">
+            <div class="form-group" *ngIf="tipoIdentificacion == enumerado.TIPO_DE_DOCUMENTO_PERSONA.RUC">
+                <label class="col-sm-4 control-label">Razón Social</label>
+                <div class="col-sm-8">
+                    <p class="form-control-static">{{form.RazonSocial}}</p>
+                </div>
+            </div>
+            <div class="form-group" *ngIf="tipoIdentificacion == enumerado.TIPO_DE_DOCUMENTO_PERSONA.DNI">
+                <label class="col-sm-4 control-label">Nombre completo</label>
+                <div class="col-sm-8">
+                    <p class="form-control-static">{{form.NombreCompleto}}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Dirección</label>
+                <div class="col-sm-8">
+                    <p class="form-control-static">{{form.Direccion}}</p>
+                </div>
+            </div>
+            <div class="form-group" *ngIf="tipoIdentificacion == enumerado.TIPO_DE_DOCUMENTO_PERSONA.RUC">
+                <label class="col-sm-4 control-label">RUC</label>
+                <div class="col-sm-8">
+                    <p class="form-control-static">{{form.NumeroDocumento}}</p>
+                </div>
+            </div>
+            <div class="form-group" *ngIf="tipoIdentificacion == enumerado.TIPO_DE_DOCUMENTO_PERSONA.DNI">
+                <label class="col-sm-4 control-label">DNI/CE</label>
+                <div class="col-sm-8">
+                    <p class="form-control-static">{{form.NumeroDocumento}}</p>
+                </div>
+            </div>
+            <!-- <div class="form-group">
+                <label class="col-sm-4 control-label">Teléfono</label>
+                <div class="col-sm-8">
+                    <p class="form-control-static">{{form.Telefono}}</p>
+                </div>
+            </div> -->
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Correo Electrónico</label>
+                <div class="col-sm-8">
+                    <p class="form-control-static">{{form.CorreoElectronico}}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Celular</label>
+                <div class="col-sm-8">
+                    <p class="form-control-static">{{form.Celular}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

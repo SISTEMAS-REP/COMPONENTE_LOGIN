@@ -1,78 +1,105 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+
+// import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
+import { APP_BASE_HREF } from '@angular/common';
+
+import * as componentes from "./shared/componentes";
+
+// import { ErrorInterceptor } from './helpers/error.interceptor';
+// import { RegisterInterceptors } from './helpers/http-settings';
+// import { HttpClientInterceptor } from './helpers/http-client.interceptor';
+// import * as components from "./shared/components";
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { RegistroPersonaComponent } from './registro-persona/registro-persona.component';
-import { RegistroEmpresaComponent } from './registro-empresa/registro-empresa.component';
-import { SesionPersonaComponent } from './sesion-persona/sesion-persona.component';
-import { SesionEmpresaComponent } from './sesion-empresa/sesion-empresa.component';
-import { RecuperarContrasenaPersonaComponent } from './recuperar-contrasena-persona/recuperar-contrasena-persona.component';
-import { RecuperarContrasenaEmpresaComponent } from './recuperar-contrasena-empresa/recuperar-contrasena-empresa.component';
+import { FormsModule } from '@angular/forms';
 
-import { CommonModule, registerLocaleData } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
-import { CambiarContrasenaPersonaComponent } from './cambiar-contrasena-persona/cambiar-contrasena-persona.component';
-import { CambiarContrasenaEmpresaComponent } from './cambiar-contrasena-empresa/cambiar-contrasena-empresa.component';
-import { EdicionPerfilPersonaComponent } from './edicion-perfil-persona/edicion-perfil-persona.component';
-import { EdicionPerfilEmpresaComponent } from './edicion-perfil-empresa/edicion-perfil-empresa.component';
-import { AdministracionUsuarioEmpresaComponent } from './administracion-usuario-empresa/administracion-usuario-empresa.component';
-import { NgxSpinnerModule } from 'ngx-spinner';
-import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
+import { ComunService } from './services/comun.service';
+import { UbigeoService } from './services/ubigeo.service';
+
+import { PagesModule } from './pages/pages.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import en from '@angular/common/locales/en';
 
-registerLocaleData(en);
+import {MaterialModule} from './material/material.module';
+import { DecisionComponent } from './modals/decision/decision.component';
+import { TuDocumentoAdjuntosComponent } from './shared/modal/tu-documento-adjuntos/tu-documento-adjuntos.component';
+import { TuFlujoComponent } from './shared/modal/tu-flujo/tu-flujo.component';
+import { NotificacionDetalleComponent } from './shared/modal/notificacion-detalle/notificacion-detalle.component';
+import { TuVerPdfComponent } from './shared/modal/tu-ver-pdf/tu-ver-pdf.component';
+import { NgxBootstrapModule } from './shared/modules/ngx-bootstrap.module';
+import { DateFormatPipe } from './pipes/date-format.pipe';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ModalResetearContrasenaComponent } from './shared/modal/resetear-contrasena/resetear-contrasena.component';
+import { ModalIniciarSesionTramiteComponent } from './shared/modal/iniciar-sesion-tramite/iniciar-sesion-tramite.component';
+import { ActivatedRoute } from '@angular/router';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { FormularioActivarDesactivarComponent } from './shared/modal/formulario-activar-desactivar/formulario-activar-desactivar.component';
+import { FormularioNuevoUsuarioComponent } from './shared/modal/formulario-nuevo-usuario/formulario-nuevo-usuario.component';
+import { HabiDesaDomicilioComponent } from './shared/modal/habi-desa-domicilio/habi-desa-domicilio.component';
+import { FormularioAdjuntarObservacionComponent } from './shared/modal/formulario-adjuntar-observacion/formulario-adjuntar-observacion.component';
+import { ActualizarDatosNotifFisicaComponent } from './shared/modal/actualizar-datos-notif-fisica/actualizar-datos-notif-fisica.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
-    RegistroPersonaComponent,
-    RegistroEmpresaComponent,
-    SesionPersonaComponent,
-    SesionEmpresaComponent,
-    RecuperarContrasenaPersonaComponent,
-    RecuperarContrasenaEmpresaComponent,
-    CambiarContrasenaPersonaComponent,
-    CambiarContrasenaEmpresaComponent,
-    EdicionPerfilPersonaComponent,
-    EdicionPerfilEmpresaComponent,
-    AdministracionUsuarioEmpresaComponent
+    DecisionComponent,
+    TuDocumentoAdjuntosComponent,
+    TuFlujoComponent,
+    NotificacionDetalleComponent,
+    TuVerPdfComponent,
+    ModalResetearContrasenaComponent,
+    ModalIniciarSesionTramiteComponent,
+    FormularioActivarDesactivarComponent,
+    FormularioNuevoUsuarioComponent,
+    HabiDesaDomicilioComponent,
+    FormularioAdjuntarObservacionComponent,
+    ActualizarDatosNotifFisicaComponent,
+    //componentes.DatepickerComponent,
+    //DateFormatPipe
+    // components.DatatableBodyComponent,
+    // components.DatatableComponent,
+    // components.DatatableCustomColumnComponent,
+    // components.DatatableHeaderComponent,
+    // components.DatatablePaginationComponent,
+    // components.DatatableToolbarComponent,
+    // components.DatatableColumnComponent,
+    // components.ModalEnvelopeComponent,
+    // components.ProgressBarComponent,
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    HttpClientModule,
-    CommonModule,
-    ReactiveFormsModule,
+    BrowserModule,
+    AppRoutingModule,
     FormsModule,
-    NgxSpinnerModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'registro-empresa', component: RegistroEmpresaComponent },
-      { path: 'registro-persona', component: RegistroPersonaComponent },
-      { path: 'sesion-empresa', component: SesionEmpresaComponent },
-      { path: 'sesion-persona', component: SesionPersonaComponent },
-      { path: 'recuperar-contrasena-empresa', component: RecuperarContrasenaEmpresaComponent },
-      { path: 'recuperar-contrasena-persona', component: RecuperarContrasenaPersonaComponent },
-      { path: 'cambiar-contrasena-empresa', component: CambiarContrasenaEmpresaComponent },
-      { path: 'cambiar-contrasena-persona', component: CambiarContrasenaPersonaComponent },
-      { path: 'edicion-perfil-empresa', component: EdicionPerfilEmpresaComponent },
-      { path: 'edicion-perfil-persona', component: EdicionPerfilPersonaComponent },
-      { path: 'administracion-usuario-empresa', component: AdministracionUsuarioEmpresaComponent },    
-      { path: 'fetch-data', component: FetchDataComponent },
-    ]),
-    NgZorroAntdModule,
-    BrowserAnimationsModule
+    PagesModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+    NgxBootstrapModule,
+    NgxSpinnerModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  exports:[
+    //componentes.DatepickerComponent,
+    //DateFormatPipe
+    // components.DatatableBodyComponent,
+    // components.DatatableComponent,
+    // components.DatatableCustomColumnComponent,
+    // components.DatatableHeaderComponent,
+    // components.DatatablePaginationComponent,
+    // components.DatatableToolbarComponent,
+    // components.DatatableColumnComponent,
+    // components.ModalEnvelopeComponent,
+    // components.ProgressBarComponent,
+  ],
+  providers: [
+    { provide: APP_BASE_HREF, useValue: '/' },
+
+    /* { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },*/
+    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    // { provide: APP_INITIALIZER, useFactory: setAxiosInterceptor, deps: [], multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: HttpClientInterceptor, multi: true },
+    ComunService,
+    UbigeoService,
+  ],
+
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

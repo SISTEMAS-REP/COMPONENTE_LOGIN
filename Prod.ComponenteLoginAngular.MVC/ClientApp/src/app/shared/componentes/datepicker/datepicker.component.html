@@ -1,0 +1,7 @@
+<div class="input-group">
+    <input type="text" class="form-control" [disabled]="disabled" [value]="Model | dateFormat:''"
+        (bsValueChange)="onDateChange($event)" bsDatepicker #dp="bsDatepicker"
+        readonly [bsConfig]="bsConfig">
+    <span type="button" class="input-group-addon" (click)="disabled||dp.show()"
+        [attr.aria-expanded]="dp.isOpen"><i class="fa fa-calendar"></i></span>
+</div>

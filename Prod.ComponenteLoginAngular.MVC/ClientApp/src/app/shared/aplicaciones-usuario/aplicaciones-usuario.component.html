@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-sm-12">
+      <h3 style="color: #c92329">Mis Aplicaciones</h3>
+    </div>
+  </div>
+  <div class="row col-sm-12">
+    <div class="col-sm-12" style="margin-bottom: 30px">
+      <hr>
+      <div class="col-sm-4" *ngFor="let app of listaAplicaciones">
+        <div class="box-app">
+            <span class="categoria">{{app.nombre_categoria}}</span>
+            <div class="box-app-content">
+                <div class="img">
+                    <!-- <img src="assets/img/Logo/{{app.id_aplicacion}}.png" err-src="assets/img/Logo/logo_Temp.png"> -->
+                    <!-- <img src="assets/img/Logo/{{app.id_aplicacion}}.png" on-error-src="assets/img/Logo/logo_Temp.png"> -->
+                    <!-- <img src="assets/img/Logo/logo_Temp.png"> -->
+                    <img [src]="app.urlArchivo" alt="archivo">
+                </div>
+                <span class="nombre">{{app.nombre}}</span>
+                <span class="descripcion">{{app.descripcion}}</span>
+            </div>
+            <div class="box-view">
+              <a [attr.href]="app.url" target="_blank" rel="tooltip"data-placement="bottom" title="Ir a aplicación">
+                Ver Aplicación <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  

@@ -1,0 +1,5 @@
+<div [class]="className" [ngStyle]="{ 'height.px': height, 'background-color': defaultBackgroundPrimary ? '#dc3545' : 'none' }">
+	<div *ngIf="show" class="material-progress-bar" [ngStyle]="{ 'height.px': height, 'background-color': Themes[theme].backgroundWrapper }">
+		<div class="material-progress-bar-indeterminate" [ngStyle]="{ 'background-color': Themes[theme].backgroundBar }"></div>
+	</div>
+</div>

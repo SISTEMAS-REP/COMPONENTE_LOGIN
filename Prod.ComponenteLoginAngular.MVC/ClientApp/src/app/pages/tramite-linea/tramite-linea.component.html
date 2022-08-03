@@ -1,0 +1,509 @@
+<style>
+  .active a {
+    text-decoration: none;
+    background-color: #c92329;
+    color: #fff;
+  }
+</style>
+<app-sec-header-simple></app-sec-header-simple>
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white">Procesando información, por favor no cierre la ventana.</p>
+</ngx-spinner>
+<div class="container-fluid">
+    <br><br>
+    <h2 class="text-center">Trámites en línea</h2>
+    <br>
+    <ol class="breadcrumb">
+        <li><a [routerLink]="['/principal']">Inicio</a></li>
+        <li class="active">Trámites en Línea</li>
+    </ol>
+    <div class="main">
+        <div align="center">
+            Aquí podrás ingresar tu trámite digitalizado, sigue los pasos a continuación:<br><br><br>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12 nopadding" align="center" *ngIf="isPaso1">
+            <img src="assets/img/bt_paso1_off.png"> <img src="assets/img/div.png"><img src="assets/img/bt_paso2_on.png"><img src="assets/img/div.png"><img src="assets/img/bt_paso3_on.png">
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12 nopadding" align="center" *ngIf="isPaso2">
+            <img src="assets/img/bt_paso1_on.png"> <img src="assets/img/div.png"><img src="assets/img/bt_paso2_off.png"><img src="assets/img/div.png"><img src="assets/img/bt_paso3_on.png">
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12 nopadding" align="center" *ngIf="isPaso3">
+            <img src="assets/img/bt_paso1_on.png"> <img src="assets/img/div.png"><img src="assets/img/bt_paso2_on.png"><img src="assets/img/div.png"><img src="assets/img/bt_paso3_off.png">
+        </div>
+
+        <div class="col-md-12 col-sm-12 col-xs-12 nopadding" align="center" *ngIf="isPaso1">
+            <div class="caja"><br>
+            <p style="color: #BD0F17">¿Qué trámite desea realizar?</p> 
+                    <p align="center">
+                        <a class="btn btn-tramite4" (click)="fnBtnTipoTramiteListar($event,1)" tooltip="Texto Único de Procedimientos Administrativos, aprobado con Decreto Supremo N° 023-2021-PRODUCE"> TUPA </a>&nbsp;
+                        <a class="btn btn-tramite4" (click)="fnBtnTipoTramiteListar($event,2)"> NO TUPA </a>
+                    </p>
+            </div>
+        </div>
+        <br><br>
+        <div *ngIf="isPaso1">
+            <div class="col-md-12 col-sm-12 col-xs-12 callout callout-danger" *ngIf="!info.tiene_consentimiento">
+                <h4>AVISO:</h4>
+                <p style="font-size:14px">
+                    {{info.aviso_informativo}}<br />
+                    {{info.aviso_pregunta}}
+                </p>
+                <button type="button" class="btn btn-default" (click)="openModalDomicilioElectronicoDesactivar(0);" *ngIf="!info.esta_activo_sne" style="border-radius: 0px; padding: 5px 10px 5px 10px; font-size: 14px;">
+                    NO
+                </button>&nbsp;&nbsp;
+    
+                <button type="button" class="btn btn-primary" (click)="openModalDomicilioElectronico();" *ngIf="!info.esta_activo_sne"  style="border-radius: 0px; padding: 5px 10px 5px 10px; font-size: 14px;">
+                    SI
+                </button>&nbsp;&nbsp;
+    
+                <button type="button" class="btn btn-default" (click)="GuardarRespuestaAviso(1);" *ngIf="info.esta_activo_sne"  style="border-radius: 0px; padding: 5px 10px 5px 10px; font-size: 14px;">
+                    SI
+                </button>&nbsp;&nbsp;
+    
+                <button type="button" class="btn btn-primary" (click)="openModalDomicilioElectronicoDesactivar();" *ngIf="info.esta_activo_sne"  style="border-radius: 0px; padding: 5px 10px 5px 10px; font-size: 14px;">
+                    No <!-- No Dar de baja -->
+                </button>
+            </div>
+        </div>
+       
+        <br><br>
+        <div class="row" *ngIf="isTupa && isPaso1">
+            <div class="col-md-12">
+                <form id="search" class="navbar-form navbar-left">
+                    <div class="caja3"><br>
+                        <p>Busca por texto o palabra clave:</p> 
+                    <label for="search-input"><span class="sr-only">Search icons</span><i class="fa fa-search"
+                            aria-hidden="true"></i></label>
+                    <input id="search-input" class="form-control" [(ngModel)]="textoConsulta" name="textoConsulta" placeholder="Ingrese texto a buscar..." (ngModelChange)="fnEvChangeTextoConsulta($event)"
+                        autocomplete="off" spellcheck="false" autocorrect="off" tabindex="1">
+                    <a id="search-clear" href="#" class="fa fa-times-circle hide" aria-hidden="true" (click)="fnEliminarBusqueda()"><span
+                            class="sr-only">Clear search</span></a>
+                    </div>
+                </form>
+                <br><br>
+                <div class="col-md-12">
+                    Selecciona un TUPA
+                  <br><br>
+                <div class="col-md-12 col-sm-12 col-xs-12 nopadding">
+                    <div *ngFor="let tupa of listaTupas" class="recent-listing-box-container-item list-view-item">
+                        <div class="recent-listing-box-item">
+                            <div class="listing-boxes-text">
+                                <h3><a [routerLink]="['/interna-tramite']" [queryParams]="{ IdTupa: tupa.idTupa }">{{tupa.descripcion}}</a></h3>
+                                <p>Procedimiento Nº {{tupa.numeroTupa}}</p>
+                            </div>
+                            <div class="recent-feature-item-rating">
+                                <span><a [routerLink]="['/interna-tramite']" [queryParams]="{ IdTupa: tupa.idTupa }" class="btn btn-outline-danger">Ver detalle</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-3">
+                          <button class="btn btn-default" (click)="fnBtnTupaPaginado(1)" title="First page of results"><i
+                                  class="fa fa-angle-double-left"></i></button>
+                          <button class="btn btn-default" (click)="fnBtnTupaPaginado(2)" title="Previous page of results"><i
+                                  class="fa fa-angle-left"></i></button>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="text-center" id="PageInfo">
+                              <p class="small">Página {{page}} de {{lastPage}}</p>
+
+                          </div>
+                      </div>
+                      <div class="col-md-3 text-right">
+                          <button class="btn btn-default" (click)="fnBtnTupaPaginado(3)" title="Next page of results"><i
+                                  class="fa fa-angle-right"></i></button>
+                          <button class="btn btn-default" (click)="fnBtnTupaPaginado(4)" title="Last page of results"><i
+                                  class="fa fa-angle-double-right"></i></button>
+                      </div>
+                  </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="isNoTupa && isPaso1">
+            <div class="col-md-12">
+            <form>
+                <div class="caja"><br>
+                    <select class="form-control" [(ngModel)] = "coddep_principal" name="coddep_principal">
+                    <option value="0">---Seleccione la entidad---</option>
+                    <option [value]="p.codigO_DEPENDENCIA" *ngFor="let p of listaDependenciasPrincipales">
+                        {{p.dependencia}}</option>
+                    </select>
+                    <br>
+                    <mat-form-field class="col-sm-12" appearance="fill" style="background-color: #fff;color:black;border-radius: 15px;padding-left: 0px;padding-right: 0px;">
+                        <mat-label>  &nbsp;&nbsp;  Escriba la oficina en donde desea ingresar su trámite</mat-label>
+                        <input matInput placeholder="" [matAutocomplete]="auto" name="joke" #joke="ngModel" [(ngModel)]="buscar" (ngModelChange)="handleChangeOficina($event)" >
+                    </mat-form-field>
+
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="detalleOficina($event)">
+                        <mat-option matTooltip = '{{joke.dependenciaFull}}' matTooltipPosition="right" *ngFor="let joke of listaDependencias" [value]="joke.dependenciaFull">
+                            {{joke.dependenciaFull}}
+                        </mat-option>           
+                    </mat-autocomplete>
+                <br><br><br><br>
+                 </div>
+            </form>
+            <div class="col-md-12" *ngIf="isVisibleVua">
+                <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="width: 7%; color:white !important;background-color:#BD0F17">N°</th>
+                            <th class="text-center" style="color:white !important;background-color:#BD0F17">TUPA</th>
+                            <th class="text-center" style="color:white !important;background-color:#BD0F17">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let app of listaServicioTramite">
+                            <td class="text-center">{{app.id_tupa}}</td>
+                            <td class="ng-binding">{{app.descripcion_servicio}}</td>
+                            <td class="text-center">
+                                <a  class="btn btn-link btn-icon" (click)="handleClickEditar(app)" data-tooltip="tooltip" data-placement="bottom" title="Editar">Iniciar</a> 
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-md-12">
+                <br><br> Si no encuentra la oficina, ingrese <a (click)="fnPaso2Alterno()"><u>aquí</u>.</a> 
+            </div>
+                
+            <div class="col-md-12" align="center">
+            <a class="btn btn-tramite4" [routerLink]="['/principal']"> Salir </a>&nbsp;
+            <a class="btn btn-tramite3" (click)="fnPaso2()"> Iniciar Trámite </a>
+            </div>
+                       
+            </div>
+        </div>
+        <div class="row" *ngIf="isPaso2">
+            <div class="col-md-12">
+                <div class="col-md-12 col-sm-12 col-xs-12 nopadding" align="center">
+                    <br>
+                    <div class="caja" *ngIf="isTupa">                                  
+                        <p style="color: #BD0F17"><b>TIPO DE TRÁMITE</b></p> 
+                        <p>
+                            <b>{{formTupa.descripcion}}</b>
+                    </p>                             
+                    </div>
+                    <br>
+                     <div class="caja">                                  
+                        <p style="color: #BD0F17"><b>DATOS PRINCIPALES</b></p> 
+                        <div class="two-columns" *ngIf="usuario">
+                            <p>
+                                <b>TIPO DE PERSONA:</b><br>
+                                {{usuario.idTipoPersona == 1 ? 'NATURAL':'JURÍDICA'}}
+                            </p>
+                            <p>
+                                <b>NOMBRE/RAZÓN SOCIAL:</b><br>
+                                {{usuario.nombreCompleto}}
+                            </p>
+                            <p>
+                                <b>Nº DE DOCUMENTO:</b><br>
+                                {{usuario.nroDocumento}}
+                            </p>
+                            <p *ngIf="isTupa">
+                                <b>OFICINA A LA QUE SE DIRIGE:</b><br>
+                                {{formTupa.nombreDependencia}}
+                            </p>
+                            <p *ngIf="isNoTupa">
+                                <b>OFICINA A LA QUE SE DIRIGE:</b><br>
+                                {{dependenciaSeleccionada.dependencia}}
+                            </p>
+                        </div>                               
+                     </div>
+                </div>
+                <br><br>
+		  
+                <div class="col-md-12">
+                    <br><br> Términos y condiciones:
+                   <br><br>
+                    <p>Declaro bajo juramento que:</p>
+                    <ul>
+                        <li>Acepto los términos y condiciones para el uso de las credenciales otorgadas a mi usuario.</li>
+                        <li>De conformidad con el numeral 1.7 del artículo IV del Título Preliminar y el artículo 49 del Texto Único Ordenado de la Ley N° 27444 - Ley del Procedimiento Administrativo General, aprobado por el Decreto Supremo N° 006-2017-JUS, la información proporcionada es veraz; en caso contrario, me someto a las acciones administrativas o judiciales que correspondan. </li>
+                        <li>Autorizo que me notiﬁquen electrónicamente las observaciones, requerimientos de información, denegación, aprobación u otros actos emitidos por el Minsiterio de la Producción al correo electrónico declarado en el Sistema de Notiﬁcación Electrónica (SNE) de PRODUCE.</li>
+                        </ul>
+                    <input type="checkbox" [(ngModel)] = "isAcceptTerms" name="isAcceptTerms"> Acepto términos y condiciones<br><br>
+                  <div class="col-md-12 col-sm-12 col-xs-12 nopadding">
+                      
+  <div><div class="text-right input-group-sm">
+          <div class="col-md-12" align="center"><div class="alert alert-warning" role="alert" style="text-align:left; margin-bottom:0 !important;">
+              <img src="assets/img/adventencia.png" align="left" style="margin-right:10px;"> <p style="line-height:1.0em !important; color: #eb0f0f">Antes de iniciar el procedimiento comprueba que el procedimiento seleccionado y los datos que figuran arriba sean los correctos.</p>
+          </div>
+              </div>
+              </div>
+         
+      </div>
+                      <div class="col-md-12" align="center">
+                          <a class="btn btn-tramite4" [routerLink]="['/principal']"> Salir </a>&nbsp;
+                          <a class="btn btn-tramite3" (click)="fnPaso3()"> Iniciar Trámite </a>
+                      </div>
+      
+  </div>
+  
+      </div>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="isPaso3">
+            <div class="col-md-12">
+                <div class="col-md-12 col-sm-12 col-xs-12 nopadding" align="center">
+                    <br>
+                    <div class="caja" *ngIf="isTupa">                                  
+                        <p style="color: #BD0F17"><b>TIPO DE TRÁMITE</b></p> 
+                        <p>
+                            <b>{{formTupa.descripcion}}</b>
+                    </p>                             
+                    </div>
+                    <br>
+                        <div class="caja">
+                        
+                        <p style="color: #BD0F17"><b>DATOS PRINCIPALES</b></p> 
+                            <div class="two-columns">
+                                <p>
+                                    <b>TIPO DE PERSONA:</b><br>
+                                    {{usuario.idTipoPersona == 1 ? 'NATURAL':'JURÍDICA'}}
+                                </p>
+                                <p>
+                                    <b>NOMBRE/RAZÓN SOCIAL:</b><br>
+                                    {{usuario.nombreCompleto}}
+                                </p>
+                                <p>
+                                    <b>Nº DE DOCUMENTO:</b><br>
+                                    {{usuario.nroDocumento}}
+                                </p>
+                                <p *ngIf="isTupa">
+                                    <b>OFICINA A LA QUE SE DIRIGE:</b><br>
+                                    {{formTupa.nombreDependencia}}
+                                </p>
+                                <p *ngIf="isNoTupa">
+                                    <b>OFICINA A LA QUE SE DIRIGE:</b><br>
+                                    {{dependenciaSeleccionada.dependencia}}
+                                </p>
+                            </div>
+                    
+            
+                    </div>
+                </div>
+                <br><br>
+                <div class="col-md-12 col-sm-12 col-xs-12 nopadding" align="center" *ngIf="isNoTupa">
+                    <div class="caja" style="margin-bottom: 20px">
+                        <p style="color: #BD0F17"><b>DETALLE DEL TRÁMITE</b></p> 
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <p><b>Asunto</b><br> 	
+                                    <input class="form-control" [(ngModel)]="formSolicitud.asunto" placeholder="Asunto de documento principal"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <p><b>Tipo de documento</b><br>
+                                    <select class="form-control" [(ngModel)]="formSolicitud.clase">
+                                       <option value="0">---Seleccione---</option>
+                                       <option [value]="p.id_clase_documento_interno" *ngFor="let p of listaClaseDocumento">{{p.descripcion}}</option>
+                                    </select>
+                                </p>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <p><b>Nro Documento</b><br> 	
+                                <input class="form-control" [(ngModel)]="formSolicitud.indicativo" placeholder="Número de solicitud o documento principal. Ejem: 001-2022-PCM/SEGDI"></p><br>
+                            </div>                           
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <p><b>Referencia (Documento emitido por PRODUCE)</b>
+                                <input class="form-control"  [(ngModel)]="formSolicitud.referencia"  placeholder="Número de documento que fue emitido por PRODUCE y al que se brinda respuesta"></p><br>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <p style="margin-bottom: 0"><b>Subir archivo</b></p>
+                                <div class="input-group">
+                                    <input rel="file_1" class="form-control" placeholder="Seleccionar un archivo" readonly="" [(ngModel)]="formSolicitud.uploader_filename">
+                                    <div class="input-group-btn file-input-wrapper">
+                                        <input type="file" id="file_1" style="display: none;" nv-file-select="" accept="application/pdf" uploader="uploader" (change)="handleSeleccionarArchivos()">
+                                        <button class="btn-input-file btn-primary btn-sm btn-custom" style="padding: 8px 10px !important;" type="button" tooltip="Seleccionar" onclick="document.getElementById('file_1').click()">
+                                            <span class="glyphicon glyphicon-paperclip"></span>
+                                        </button>
+                                        <button class="btn-input-file  btn-primary btn-sm btn-custom" style="padding: 8px 10px !important;" type="button" tooltip="Subir archivo" (click)="subirArchivoPrincipal()">
+                                            <span class="glyphicon glyphicon-open"></span>
+                                        </button>
+                                        <button class="btn-input-file  btn-primary btn-sm btn-custom" style="padding: 8px 10px !important;" type="button" tooltip="Resetear" (click)="resetearArchivo()">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- <p *ngIf="isVisibleValidarAdjuntarArchivo" style="color: #BD0F17">Debe adjuntar un archivo</p> -->
+                                <p *ngIf="isVisibleValidarSubirArchivo" style="color: #BD0F17">Debe subir el archivo</p>
+                            </div>                                                                                                                                 
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12 nopadding" align="center" *ngIf="isTupa">
+                    <br>
+                     <div class="caja" style="margin-bottom: 20px">
+                      <p style="color: #BD0F17"><b>REQUISITOS DEL TUPA</b></p> 
+                           <p><b>Requisito</b></p> 	
+                               <select class="form-control" [(ngModel)]="tupaRequisito">
+                                 <option value="0">---Seleccione---</option>
+                                <option [value]="p.idTupaRequisito" *ngFor="let p of listaTupaRequisito">
+                                    {{p.descripcion}}</option>
+                               </select><br>
+                               <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <p><b>Descripción del documento</b><br>  
+                                        <input class="form-control" [(ngModel)]="descripcion_archivo_tupa">     
+                                    </p>                                                                                                             
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <p style="margin-bottom: 0"><b>Subir archivo</b></p>
+                                    <div class="input-group">
+                                        <input rel="file_3" class="form-control" placeholder="Seleccionar un archivo" readonly="" [(ngModel)]="uploader_requisito_filename">
+                                        <div class="input-group-btn file-input-wrapper">
+                                            <input type="file" id="file_3" style="display: none;" nv-file-select="" accept="application/pdf" uploader="uploader" (change)="handleSeleccionarArchivosRequisitos()">
+                                            <button class="btn-input-file  btn-primary btn-sm btn-custom" style="padding: 8px 10px !important;" type="button" tooltip="Seleccionar" onclick="document.getElementById('file_3').click()">
+                                                <span class="glyphicon glyphicon-paperclip"></span>
+                                            </button>
+                                            <button class="btn-input-file  btn-primary btn-sm btn-custom" style="padding: 8px 10px !important;" type="button" tooltip="Subir archivo" (click)="subirArchivoRequisito()">
+                                                <span class="glyphicon glyphicon-open"></span>
+                                            </button>
+                                            <button class="btn-input-file  btn-primary btn-sm btn-custom" style="padding: 8px 10px !important;" type="button" tooltip="Resetear" (click)="resetearArchivoRequisito()">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </button>
+                                        </div>
+                                    </div>   
+                                    <p *ngIf="isVisibleValidarSubirArchivoRequisitoTupa" style="color: #BD0F17">Debe subir el archivo</p>  
+                                </div>   
+
+                            </div>
+                               <a class="btn btn-tramite3" (click)="agregarRequisito()"> Agregar</a>           
+                     </div>
+                     <table class="table table-striped table-bordered" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="color:white !important;background-color:#BD0F17; width:60%">Requisito</th>
+                                <th class="text-center" style="color:white !important;background-color:#BD0F17">Descripción del Archivo</th>
+                                <th class="text-center" style="color:white !important;background-color:#BD0F17">Archivo</th>
+                                <th class="text-center" style="color:white !important;background-color:#BD0F17">Acción</th>
+                            </tr>
+                        </thead>
+                        <!-- <tbody  class="ng-hide">
+
+                        </tbody> -->
+                        <tbody *ngIf="lista_requisitos.length > 0">
+                            <tr *ngFor="let item of lista_requisitos">
+                                <td>{{item.nombre_requisito}}</td>
+                                <td>{{item.nombre_mostrar}}</td>
+                                <td class="text-center">
+                                    <span class="glyphicon glyphicon-download-alt" (click)="descargarAdjunto(item)" title="descargar adjunto"></span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="glyphicon glyphicon-trash" (click)="eliminarRequisito(item)" title="eliminar adjunto"></span>
+                                </td>
+                            </tr>
+                           </tbody>
+                        <tbody *ngIf="lista_requisitos.length == 0">
+                            <tr>
+                                <td class="text-center" colspan="4">Aún no se ha agregado ningún requisito</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12" *ngIf="isNoTupa">
+                    <p style="color: #BD0F17; font-weight:700;">¿DESEA AGREGAR ARCHIVOS ADJUNTOS AL TRÁMITE?</p>
+                    <table width="200">
+                      <tr>
+                        <td><label>
+                          <input type="radio"  name="RadioGroup" value="true" id="RadioGroup1_0" (change)="handleAgregarArchivos('true')">
+                          Si</label></td>
+                        <td><label>
+                          <input type="radio"  name="RadioGroup" value="false" id="RadioGroup2_0" (change)="handleAgregarArchivos('false')" checked>
+                          No</label></td>
+                      </tr>
+                      </table><br>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12 nopadding" align="center" *ngIf="isNoTupa && isAgregarArchivos">
+                    <div class="caja" style="margin-bottom: 20px">
+                        <p>
+                                               <label class="control-label form__text ">
+                                                   Pasos para subir adjuntos:
+                                               </label><br>
+                                               1. Buscar documento <span class="glyphicon glyphicon-paperclip"></span>&nbsp;|&nbsp;
+                                               2. Subir archivo <span class="glyphicon glyphicon-open"></span>&nbsp;|&nbsp;
+                                               3. Click en el boton "Agregar"
+                                           </p><br>
+                                 <p><b>Descripción del adjunto:</b></p>
+                                    <input class="form-control" [(ngModel)]="descripcion_adjunto"><br>
+
+                                 <div class="row">
+                                    <div class="col-md-6 col-sm-6">
+                                    <p style="margin-bottom: 0"><b>Subir archivo</b></p>
+                                     <div class="input-group">
+                                        <input rel="file_2" class="form-control" placeholder="Seleccionar un archivo" readonly="" [(ngModel)]="uploader_adjunto_filename">
+                                        <div class="input-group-btn file-input-wrapper">
+                                            <input type="file" id="file_2" style="display: none;" nv-file-select="" accept="application/pdf" uploader="uploader" (change)="handleSeleccionarArchivosAdjuntos()">
+                                            <button class="btn-input-file  btn-primary btn-sm btn-custom" style="padding: 8px 10px !important;" type="button" tooltip="Seleccionar" onclick="document.getElementById('file_2').click()">
+                                                <span class="glyphicon glyphicon-paperclip"></span>
+                                            </button>
+                                            <button class="btn-input-file  btn-primary btn-sm btn-custom" style="padding: 8px 10px !important;" type="button" tooltip="Subir archivo" (click)="subirArchivoAdjunto()">
+                                                <span class="glyphicon glyphicon-open"></span>
+                                            </button>
+                                            <button class="btn-input-file  btn-primary btn-sm btn-custom" style="padding: 8px 10px !important;" type="button" tooltip="Resetear" (click)="resetearArchivoAdjunto()">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </button>
+                                        </div>
+                                        
+                                     </div>
+                                     <p *ngIf="isVisibleValidarSubirArchivoMas" style="color: #BD0F17">Debe subir el archivo</p>     
+                                    </div>   
+                                    <div class="col-md-6 col-sm-6">
+                                        <p><a class="btn btn-tramite3" (click)="agregarAdjunto()"> Agregar</a></p>                                                                                                                       
+                                    </div>
+                                </div>
+                                   <table class="table table-striped table-bordered" width="100%" cellspacing="0">
+                                       <thead>
+                                           <tr>
+                                               <th class="text-center" style="color:white !important;background-color:#BD0F17; width:60%">Descripción del adjunto</th>
+                                               <th class="text-center" style="color:white !important;background-color:#BD0F17">Archivo</th>
+                                               <th class="text-center" style="color:white !important;background-color:#BD0F17">Acción</th>
+                                           </tr>
+                                       </thead>
+                                       <tbody *ngIf="reg_adjuntos.length > 0">
+                                        <tr *ngFor="let item of reg_adjuntos">
+                                            <td>{{item.nombre}}</td>
+                                            <td class="text-center">
+                                                <span class="glyphicon glyphicon-download-alt" (click)="descargarAdjunto(item)" title="descargar adjunto"></span>
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="glyphicon glyphicon-trash" (click)="eliminarAdjunto(item)" title="eliminar adjunto"></span>
+                                            </td>
+                                        </tr>
+                                       </tbody>
+                                       <tbody *ngIf="reg_adjuntos.length == 0">
+                                           <tr>
+                                               <td class="text-center" colspan="4">Sin archivos</td>
+                                           </tr>
+                                       </tbody>
+                                   </table>
+                                 
+               
+                    </div>
+                </div>
+                <div class="col-md-12" align="center" *ngIf="isTupa">
+                    <a class="btn btn-tramite4" [routerLink]="['/principal']" > Salir </a>&nbsp;
+                    <a class="btn btn-tramite3" (click)="fnRegistrarTramiteTupa()">Enviar Trámite
+                    </a>					
+               </div>
+               <div class="col-md-12" align="center" *ngIf="isNoTupa">
+                <a class="btn btn-tramite4" [routerLink]="['/principal']"> Salir </a>&nbsp;
+                <a class="btn btn-tramite3" (click)="fnRegistrarTramite()">Enviar Trámite
+                </a>					
+               </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<app-sec-footer></app-sec-footer>

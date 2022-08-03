@@ -1,0 +1,25 @@
+.hw-btn {
+  /* font-size: 14px; */
+  color: white !important;
+  /* font-weight: 700;
+  letter-spacing: 0.5px; */
+  background-color: #bf1817 !important;
+  /* padding: 14px 30px;
+  display: inline-block;
+  border-radius: 4px;
+  text-decoration: none; */
+  border: 1px solid #bf1817 !important;
+}
+.hw-btn:hover {
+  color: white;
+  background-color: F82F4E;
+  border: 1px solid #bf1817 !important;
+}
+
+.scroll_horizontal {
+	width: 400px;
+	overflow: auto;
+	border: 1px solid #666;
+	background-color: #ccc;
+	padding: 8px;
+}

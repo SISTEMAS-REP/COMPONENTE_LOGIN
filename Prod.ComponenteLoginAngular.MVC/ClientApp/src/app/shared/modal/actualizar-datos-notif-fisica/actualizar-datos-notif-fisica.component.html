@@ -1,0 +1,74 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white">Procesando información, por favor no cierre la ventana.</p>
+</ngx-spinner>
+<div fxLayout="row" fxLayoutAlign="start center" mat-dialog-title>
+  <h2 class="headline m-0" fxFlex="auto">Actualización de datos para notificación física.</h2>
+</div>
+<mat-divider class="-mx-6 text-border"></mat-divider>
+<div mat-dialog-content class="mt-12">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="table-responsive"></div>
+            <mat-form-field appearance="fill" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="user.es_persona_juridica">
+                <mat-label>Ruc</mat-label>
+                <input matInput [(ngModel)]="user.ruc" readonly/>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="user.es_persona_juridica">
+                <mat-label>Razón Social</mat-label>
+                <input matInput [(ngModel)]="user.razonSocial" readonly/>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="!user.es_persona_juridica">
+                <mat-label>DNI/C.E</mat-label>
+                <input matInput [(ngModel)]="user.dni"  readonly/>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="!user.es_persona_juridica">
+                <mat-label>Nombres y Apellidos</mat-label>
+                <input matInput [(ngModel)]="user.nombreCompleto"  readonly/>
+            </mat-form-field>
+            <mat-form-field class="col-xs-12 col-sm-12 col-md-12 col-lg-12" appearance="fill">
+                <mat-label>Departamento (*)</mat-label>
+                <mat-select matInput  [(ngModel)]="user.codigo_departamento"  (selectionChange)="fnChangeDepartamento()">
+                    <mat-option value=0>--Seleccionar--</mat-option>
+                    <mat-option matTooltipPosition="right"
+                    [value]="p.value" *ngFor="let p of listaDepartamentos">
+                        {{p.text}}</mat-option>
+                </mat-select>  
+                <!-- <mat-error *ngIf="departamentoErrors">{{ departamentoErrors }}</mat-error>                  -->
+            </mat-form-field>  
+            <mat-form-field class="col-xs-12 col-sm-12 col-md-12 col-lg-12" appearance="fill">
+                <mat-label>Provincia (*)</mat-label>
+                <mat-select matInput [(ngModel)]="user.codigo_provincia"  (selectionChange)="fnChangeProvincia()">
+                    <mat-option value=0>--Seleccionar--</mat-option>
+                    <mat-option matTooltipPosition="right"
+                    [value]="p.value" *ngFor="let p of listaProvincias">
+                        {{p.text}}</mat-option>
+                </mat-select>  
+                <!-- <mat-error *ngIf="provinciaErrors">{{ provinciaErrors }}</mat-error>                  -->
+            </mat-form-field>  
+            <mat-form-field class="col-xs-12 col-sm-12 col-md-12 col-lg-12" appearance="fill">
+                <mat-label>Distrito (*)</mat-label>
+                <mat-select matInput [(ngModel)]="user.codigo_distrito">
+                    <mat-option value=0>--Seleccionar--</mat-option>
+                    <mat-option matTooltipPosition="right"
+                    [value]="p.value" *ngFor="let p of listaDistritos">
+                        {{p.text}}</mat-option>
+                </mat-select>  
+                <!-- <mat-error *ngIf="distritoErrors">{{ distritoErrors }}</mat-error>                  -->
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <mat-label>Dirección (*)</mat-label>
+                <input matInput [(ngModel)]="user.direccion"/>
+            </mat-form-field>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <span style="color: #157BDF">La información registrada tiene carácter de declaración jurada.</span>
+            </div>
+        </div>
+  </div>
+</div>
+
+<br/>
+<div mat-dialog-actions align="center">
+  <button mat-flat-button mat-dialog-close="false" color="warn">CERRAR</button>
+  <!-- <button mat-flat-button color="primary" type="submit" (click)="habilitar()" *ngIf="!user.esta_activo_sne">CONFIRMARss</button> -->
+  <button mat-flat-button color="primary" type="submit" (click)="darDeBaja()">CONFIRMAR</button>
+</div>

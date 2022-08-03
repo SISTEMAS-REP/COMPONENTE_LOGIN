@@ -1,0 +1,175 @@
+<section class="seccion-consultas">
+    <div class="container">
+      <!-- <app-datepicker [(Model)]="fecha"></app-datepicker> -->
+        <h2 align="center">Consultas en Línea</h2>
+        <div class="row col-sm-12">
+            <div class="tabs">
+                <div class="tab">
+                    <input type="radio" name="css-tabs" id="tab-1" checked class="tab-switch">
+                    <label for="tab-1" class="tab-label">Atención al Ciudadano</label>
+
+                    <div class="tab-content">
+                        <div *ngFor="let opcion of listaOpcionesAC" class="col-sm-3 col-md-3">
+                            <div class="media">
+                                <a [routerLink]="['/consulta-atencion-ciudadano', opcion.enlaceSeccion]" (click)="sumarClick(opcion)">
+                                    <div class="media-left">
+                                        <div class="circle">
+                                            <span [attr.class]="(opcion.icono + ' fa-3x')"></span>
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading" align="left">{{opcion.nombre}}</h4>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 text-right" style="border-top: 1px solid #e6e6e6;">
+                            <a [routerLink]="['/consulta-atencion-ciudadano']" class="btn btn-outline-danger" tabindex="-1" role="button"
+                                style="margin-top: 10px">Ver más consultas <span aria-hidden="true">&rarr;</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab">
+                    <input type="radio" name="css-tabs" id="tab-2" class="tab-switch">
+                    <label for="tab-2" class="tab-label">Servicios</label>
+                    <div class="tab-content">
+
+                        <div *ngFor="let opcion of listaOpcionesSE" class="col-sm-3 col-md-3">
+                            <div class="media">
+                                <a [routerLink]="['/consulta-servicios', opcion.enlaceSeccion]" (click)="sumarClick(opcion)">
+                                    <div class="media-left">
+                                        <div class="circle">
+                                            <span [attr.class]="(opcion.icono + ' fa-2x')"></span>
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">{{opcion.nombre}}</h4>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- <div class="col-sm-3 col-md-3">
+                            <div class="media">
+                                <a [routerLink]="['/consulta-servicios']">
+                                    <div class="media-left">
+                                        <div class="circle">
+                                            <span class="icon-normas-legales fa-2x"></span>
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">Consulta tu trámite</h4>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3">
+                            <div class="media">
+                                <a [routerLink]="['/consulta-servicios']">
+                                    <div class="media-left">
+                                        <div class="circle">
+                                            <span class="icon-datero-pesquero fa-2x"></span>
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">Dato Pesquero</h4>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3">
+                            <div class="media">
+                                <a [routerLink]="['/consulta-servicios']">
+                                    <div class="media-left">
+                                        <div class="circle">
+                                            <span class="icon-der-acuicultura fa-2x"></span>
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">Registro de Sanciones de Pesca y Acuicultura</h4>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3">
+                            <div class="media">
+                                <a [routerLink]="['/consulta-servicios']">
+                                    <div class="media-left">
+                                        <div class="circle">
+                                            <span class="icon-registro-usu-alcohol-etilico fa-2x"></span>
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">Registro único de usuarios y transportistas de alcohol
+                                            etílico</h4>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3">
+                            <div class="media">
+                                <a [routerLink]="['/consulta-servicios']">
+                                    <div class="media-left">
+                                        <div class="circle">
+                                            <span class="icon-calc-multas fa-2x"></span>
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">Calculadora virtual de decomisos</h4>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3">
+                            <div class="media">
+                                <a [routerLink]="['/consulta-servicios']">
+                                    <div class="media-left">
+                                        <div class="circle">
+                                            <span class="icon-normas-legales fa-2x"></span>
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">Normas legales</h4>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3">
+                            <div class="media">
+                                <a [routerLink]="['/consulta-servicios']">
+                                    <div class="media-left">
+                                        <div class="circle">
+                                            <span class="icon-der-acuicultura fa-2x"></span>
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">Derechos en acuicultura</h4>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3">
+                            <div class="media">
+                                <a [routerLink]="['/consulta-servicios']">
+                                    <div class="media-left">
+                                        <div class="circle">
+                                            <span class="icon-registro-comercio-alcohol fa-2x"></span>
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">Registro de comercializadores de bebidas alcohólicas
+                                        </h4>
+                                    </div>
+                                </a>
+                            </div>
+                        </div> -->
+                        <div class="col-sm-12 text-right" style="border-top: 1px solid #e6e6e6;">
+                            <a [routerLink]="['/consulta-servicios']" class="btn btn-outline-danger" tabindex="-1" role="button"
+                                style="margin-top: 10px">Ver más servicios <span aria-hidden="true">&rarr;</span></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

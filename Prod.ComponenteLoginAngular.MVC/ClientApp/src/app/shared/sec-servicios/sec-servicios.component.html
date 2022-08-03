@@ -1,0 +1,39 @@
+<section class="seccion-procedimientos" align="center">
+  <div class="container" align="center">
+    <br><br>
+    <h2 class="" align="center">Servicios Empresariales</h2>
+
+    <div *ngFor="let opcion of listaOpcionesSE" class="col-sm-4 col-md-4 form-group">
+      <div class="ts-item">
+        <div class="ts-text" align="left">
+          <img [attr.src]="('/assets/'+opcion.imagen)" />
+          <h5>{{opcion.nombre}}</h5>
+        </div>
+        <p align="justify" [attr.title]="opcion.descripcionCorta">
+          {{fnRecortarTexto(opcion.descripcionCorta)}}
+        </p>
+        <div>
+          <a [href]="opcion.enlaceRuta" class="btn btn-outline-danger2" target="_blank">
+            Ver más
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4 col-md-4 form-group">
+      <div class="ts-item">
+        <div class="ts-text" align="left">
+          <img src="/assets/img/icon_VUA.png">
+          <h5>Acuicultura</h5>
+        </div>
+        <p align="justify">
+          Ingresa tu solicitud para poder obtener los derechos correspondientes para realizar la actividad de acuicultura.
+        </p>
+        <div>
+          <a class="btn btn-outline-danger2" (click)="EnviarTramite()">
+            Ver más
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

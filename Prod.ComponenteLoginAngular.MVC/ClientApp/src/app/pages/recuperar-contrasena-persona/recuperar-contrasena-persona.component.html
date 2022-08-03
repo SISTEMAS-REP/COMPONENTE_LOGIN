@@ -1,0 +1,57 @@
+<div class="container">
+  <form [formGroup]="form" (ngSubmit)="fnBtnRecuperarContrasena()">
+    <div class="formularios">
+      <div class="col-md-12">
+        <img src="/assets/img/logo-produce2.png" /><br /><br /><br />
+      </div>
+      <h2 align="center">Recuperar contraseña cuenta Personal</h2>
+      <br /><br /><br />
+      <div class="form-group row">
+        <mat-form-field
+          appearance="fill"
+          class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+        >
+          <mat-label>Número de Documento de Identidad (*)</mat-label>
+          <input
+            matInput
+            placeholder="Ingresar su DNI"
+            maxlength="8"
+            formControlName="numeroDocumento"
+          />
+          <mat-error *ngIf="numeroDocumentoErrors">{{ numeroDocumentoErrors }}</mat-error>
+        </mat-form-field>
+        <mat-form-field
+          appearance="fill"
+          class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+        >
+          <mat-label>Correo electrónico (*)</mat-label>
+          <input
+            matInput
+            placeholder="Ingresar correo electrónico"
+            maxlength="100"
+            formControlName="correo"
+          />
+          <mat-error *ngIf="correoErrors">{{ correoErrors }}</mat-error>
+        </mat-form-field>
+        <!-- <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+                    <label for="linea">Número de Docuemento de Identidad o correo electrónico</label>
+                    <input name="" type="text"
+                        class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-maxlength" id=""
+                        placeholder="Ingresar tu DNI, CE, PS o pase temporal o correo electrónico" maxlength="500"
+                        ng-model="">
+                </div> -->
+      </div>
+      <div class="form-group row">
+        <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+            <input type="submit" class="btn btn-tramite2" value="Recuperar" />
+        </div>
+        <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+          <input type="button" (click)="fnGoToPrincipal()" class="btn btn-tramite2" value="Regresar" style="color: #fff;
+          background-color: #666;
+          border-color: #666;
+          border-radius: 4px;" />
+      </div>
+      </div>
+    </div>
+  </form>
+</div>

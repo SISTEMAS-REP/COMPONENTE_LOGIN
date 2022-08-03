@@ -1,0 +1,48 @@
+<div class="container-fluid">
+    <br>
+    <h2 class="text-center">Mis datos</h2>
+    <br>
+    <ol class="breadcrumb">
+        <li><a [routerLink]="['/principal']">Inicio</a></li>
+        <li class="active">{{nombreFormulario}}</li>
+    </ol>
+    <div class="main">
+        <div class="row">
+            <div class="col-md-2" id="">
+                <div class="left-archive-categor">
+                    <ul class="nav">
+                        <li>
+                            <a  (click)="fnBtnLink('datosUsuario')" style="cursor: pointer;" alt="Mis Trámites" title="Mis Trámites" [class.active]="swFormulario === 'datosUsuario'">
+                                <i class="fa fa-address-card" style="padding: 10px 5px 0 5px;"></i> Mis datos</a>
+                        </li>
+                        <li>
+                            <a (click)="fnBtnLink('tramitesUsuario')"style="cursor: pointer;" alt="Mis Trámites" title="Mis Trámites"[class.active]="swFormulario === 'tramitesUsuario'">
+                                <i class="fa fa-copy" style="padding: 10px 5px 0 5px;"></i> Mis Trámites</a>
+                        </li>
+                        <li>
+                            <a (click)="fnBtnLink('notificacionesUsuario')" style="cursor: pointer;" alt="Mis Notificaciones" title="Mis Notificaciones"[class.active]="swFormulario === 'notificacionesUsuario'">
+                                <i class="fa fa-paper-plane" style="padding: 10px 5px 0 5px;"></i> Mis
+                                Notificaciones</a>
+                        </li>
+                        <li>
+                            <a (click)="fnBtnLink('misAplicaciones')" style="cursor: pointer;" alt="Mis Aplicaciones" title="Mis Aplicaciones" [class.active]="swFormulario === 'misAplicaciones'">
+                                <i class="fa fa-newspaper-o" style="padding: 10px 5px 0 5px;"></i> Mis Aplicaciones</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/tramite-linea']" alt="Nuevos Trámites" title="Nuevos Trámites">
+                                <i class="fa fa-newspaper-o" style="padding: 10px 5px 0 5px;"></i> Nuevos Trámites</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-10"[ngSwitch]="swFormulario">
+                    <app-datos-usuario *ngSwitchCase="'datosUsuario'"></app-datos-usuario>
+                    <app-tramites-usuario *ngSwitchCase="'tramitesUsuario'"></app-tramites-usuario>
+                    <app-notificaciones-usuario *ngSwitchCase="'notificacionesUsuario'"></app-notificaciones-usuario>  
+                    <app-aplicaciones-usuario *ngSwitchCase="'misAplicaciones'"></app-aplicaciones-usuario>                 
+                    <app-datos-usuario *ngSwitchDefault>...</app-datos-usuario>
+            </div>
+        </div>
+    </div>
+</div>

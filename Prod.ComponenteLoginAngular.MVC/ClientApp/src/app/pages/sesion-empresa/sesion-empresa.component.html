@@ -1,0 +1,51 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white">Procesando información, por favor no cierre la ventana.</p>
+</ngx-spinner>
+<div class="container">
+    <div class="formularios">
+        <div class="col-md-12"><img src="/assets/img/logo-produce2.png"><br><br><br></div>
+        <h2 align="center">Iniciar sesión en tu cuenta de Empresa</h2>
+        <p align="center">Una cuenta para todas las aplicaciones del Ministerio de Producción.<br><br></p>
+        <div class="form-group row">
+            <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+                <label for="linea">RUC <i class="fa fa-info-circle"></i></label>
+                <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-maxlength"
+                    maxlength="11" [(ngModel)]="form.NumeroDocumento" placeholder="Ingresar RUC" [ngClass]="{'has-error': errors.NumeroDocumento}">
+                    <span class="help-block" *ngIf="errors.NumeroDocumento">{{errors.NumeroDocumento}}</span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+                <label for="linea">Número de Documento de Identidad <i class="fa fa-info-circle"></i></label>
+                <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-maxlength"
+                    maxlength="11" [(ngModel)]="form.NroDocPerNatural"
+                    placeholder="Ingresar tu DNI, CE, CAN, PS o pase temporal" [ngClass]="{'has-error': errors.NroDocPerNatural}">
+                    <span class="help-block" *ngIf="errors.NroDocPerNatural">{{errors.NroDocPerNatural}}</span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+                <label for="linea">Contraseña</label>
+                <input type="password"
+                    class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-maxlength"
+                    [(ngModel)]="form.Contrasena" placeholder="Ingresar una contraseña" [ngClass]="{'has-error': errors.Contrasena}">
+                    <span class="help-block" *ngIf="errors.Contrasena">{{errors.Contrasena}}</span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12" style="color: #177ADF; text-align: right">
+                <a [routerLink]="['/recuperar-contrasena-empresa']" style="color: #177ADF">Recuperar Contraseña</a>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+                <a class="btn btn-tramite2" (click)="fnBtnIngresar()">Ingresar</a>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12" align="center">
+                ¿No tienes un acuenta de empresa? <a [routerLink]="['/registro-empresa']">Crea una ahora</a>
+            </div>
+        </div>
+    </div>
+</div>

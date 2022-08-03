@@ -1,0 +1,155 @@
+<div class="">
+    <!-- Offcanvas Menu Wrapper Begin -->
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div class="canvas-close">
+            <span class="icon_close"></span>
+        </div>
+        <div class="col-lg-3">
+            <div class="logo">
+                <img class="img-responsivo" src="assets/img/logo-produce.png" alt="" />
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="logo">
+                <img class="img-responsivo" src="assets/img/logo-VSP.png" alt="" />
+            </div>
+        </div>
+        <div id="mobile-menu-wrap"></div>
+        <div class="om-widget2 nav">
+            <li class="slicknav_collapsed slicknav_parent">
+                <a href="#" class="hw-btn dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                    aria-expanded="false">Servicios<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li [routerLinkActive]="['active']"><a [routerLink]="['/principal']">Mis datos</a></li>
+                    <li><a [routerLink]="['/principal']">Mis trámites</a></li>
+                    <li><a [routerLink]="['/principal']">Mis notificaciones</a></li>
+                    <li><a [routerLink]="['/tramite-linea']">Nuevos trámites</a></li>
+                    <!-- <li><a [routerLink]="['/consulta-aplicaciones']">Servicios</a></li> -->
+                </ul>
+            </li>
+            <li class="slicknav_collapsed slicknav_parent">
+                <a *ngIf="tipoPersona == enumerado.TIPO_DE_DOCUMENTO_PERSONA.RUC" href="#" class="hw-btn dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                    aria-expanded="false">{{form.RazonSocial}} <i class="fa fa-user-circle fa-2x"></i></a>
+                <a *ngIf="tipoPersona == enumerado.TIPO_DE_DOCUMENTO_PERSONA.DNI" href="#" class="hw-btn dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                aria-expanded="false">{{form.NombreCompleto}} <i class="fa fa-user-circle fa-2x"></i></a>
+                <ul class="dropdown-menu">
+                    <li style="text-align: center"><br><i class="fa fa-user-circle"
+                            style="font-size: 5rem; color: #BD0F17"></i><br><br>
+                        <strong>
+                            <h4>{{form.NombreCompleto}}</h4>
+                        </strong>
+                    </li>
+                    <hr>
+                    <li style="text-align: center"><a href="editar_perfil_persona.html">Editar Perfil</a></li>
+                    <li style="text-align: center"><a href="recuperar_contrasena_personal.html">Cambiar Contraseña</a>
+                    </li>
+                    <li style="text-align: center"><a href="#">Cerrar Sesión</a></li>
+                </ul>
+            </li>
+        </div>
+    </div>
+    <!-- Offcanvas Menu Wrapper End -->
+    <header class="header-section">
+        <div class="hs-top">
+            <div class="container">
+                <div class="row d-flex">
+                    <div class="col-lg-3">
+                        <div class="logo">
+                            <img class="img-responsivo" src="assets/img/logo-produce.png" alt="" />
+                        </div>
+                    </div>
+					<div class="col-lg-3">
+                        <div class="logo">
+                            <img class="img-responsivo" src="assets/img/logo-VSP.png" alt="" />
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="ht-widget2 nav2" >
+                            <ng-template [ngIf]="isAuth" [ngIfElse]="notIsAuth">
+                                <li class="dropdown">
+                                    <a href="#" class="hw-btn dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Servicios <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li class="active"><a href="#">Mis datos</a></li>
+                                        <li><a [routerLink]="['/principal']">Mis trámites</a></li>
+                                        <li><a [routerLink]="['/principal']">Mis notificaciones</a></li>
+                                        <li><a [routerLink]="['/tramite-linea']">Nuevos trámites</a></li>
+                                        <!-- <li><a [routerLink]="['/consulta-aplicaciones']">Servicios</a></li> -->
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a *ngIf="tipoPersona == enumerado.TIPO_DE_DOCUMENTO_PERSONA.DNI" href="#" class="hw-btn dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{form.Nombres}}<i class="fa fa-user-circle fa-2x" style="color: #BD0F17"></i></a>
+                                    <a *ngIf="tipoPersona == enumerado.TIPO_DE_DOCUMENTO_PERSONA.RUC" href="#" class="hw-btn dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{form.RazonSocial}}<i class="fa fa-user-circle fa-2x" style="color: #BD0F17"></i></a>
+                                    <ul class="dropdown-menu">
+                                        <li *ngIf="tipoPersona == enumerado.TIPO_DE_DOCUMENTO_PERSONA.DNI" style="text-align: center"><br><i class="fa fa-user-circle" style="font-size: 5rem; color: #BD0F17"></i><br><br>
+                                        <strong><h4>{{form.NombreCompleto}}</h4></strong></li>
+                                        <li *ngIf="tipoPersona == enumerado.TIPO_DE_DOCUMENTO_PERSONA.RUC" style="text-align: center"><br><i class="fa fa-user-circle" style="font-size: 5rem; color: #BD0F17"></i><br><br>
+                                            <strong><h4>{{form.RazonSocial}} {{form.NombreCompleto}}</h4></strong></li>
+                                        <hr>
+                                        <li *ngIf="tipoPersona == enumerado.TIPO_DE_DOCUMENTO_PERSONA.DNI" style="text-align: center"><a [routerLink]="['/editar-persona']">Editar Perfil</a></li>
+                                        <li *ngIf="tipoPersona == enumerado.TIPO_DE_DOCUMENTO_PERSONA.RUC" style="text-align: center"><a [routerLink]="['/editar-empresa']">Editar Perfil</a></li>
+                                        <li *ngIf="tipoPersona == enumerado.TIPO_DE_DOCUMENTO_PERSONA.DNI" style="text-align: center"><a [routerLink]="['/recuperar-contrasena-persona']">Cambiar Contraseña</a></li>
+                                        <li *ngIf="tipoPersona == enumerado.TIPO_DE_DOCUMENTO_PERSONA.RUC" style="text-align: center"><a [routerLink]="['/recuperar-contrasena-empresa']">Cambiar Contraseña</a></li>
+                                        <li *ngIf="isRepresentanteLegal" style="text-align: center"><a [routerLink]="['/administrar-usuario-representante-legal']">Administrar Usuarios</a></li>
+                                        <li style="text-align: center"><a (click)="fnCerrarSesion()" style="cursor:pointer;">Cerrar Sesión</a></li>
+                                    </ul>
+                                </li>
+                            </ng-template>
+                            <ng-template #notIsAuth>                        
+                                <li class="dropdown">
+                                    <a href="#" class="hw-btn-not dropdown-toggle" data-toggle="dropdown" role="button"
+                                        aria-haspopup="true" aria-expanded="false">Iniciar Sesión
+                                        <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a [routerLink]="['/sesion-empresa']">Empresas</a></li>
+                                        <li><a [routerLink]="['/sesion-persona']">Personas</a></li>
+                                    </ul>
+                                </li>
+        
+                                <li class="dropdown">
+                                    <a href="#" class="hw-btn-not dropdown-toggle" data-toggle="dropdown" role="button"
+                                        aria-haspopup="true" aria-expanded="false" >Registrarse
+                                        <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a [routerLink]="['/registro-empresa']">Empresas</a></li>
+                                        <li><a [routerLink]="['/registro-persona']">Personas</a></li>
+                                    </ul>
+                                </li>
+                              </ng-template>
+						</div>
+                    </div>
+                </div>
+                <div class="canvas-open">
+                    <span class="icon_menu"></span>
+                </div>
+            </div>
+        </div>
+        <div class="hs-nav" style="background-color: #BD0F17">
+            <div class="container">
+                <div class="row" align="center">
+                    <div class="col-lg-12">
+                        <nav class="nav-menu">
+                            <ul>
+                                <li routerLinkActive="active"><a [routerLink]="['/principal']">Inicio</a></li>
+                                <li routerLinkActive="active"><a [routerLink]="['/tramite-linea']">Trámites en línea</a>
+                                </li>
+                                <li routerLinkActive="active"><a href="javascript:void(0)">Consultas en línea</a>
+                                    <ul class="dropdown">
+                                        <li><a [routerLink]="['/consulta-atencion-ciudadano']">Atención al cuidadano</a>
+                                        </li>
+                                        <li><a [routerLink]="['/consulta-servicios']">Servicios</a></li>
+                                    </ul>
+                                </li>
+                                <li routerLinkActive="active"><a [routerLink]="['/mapa-sitio']">mapa del sitio</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-lg-3">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--/*End Menu*/-->
+</div>

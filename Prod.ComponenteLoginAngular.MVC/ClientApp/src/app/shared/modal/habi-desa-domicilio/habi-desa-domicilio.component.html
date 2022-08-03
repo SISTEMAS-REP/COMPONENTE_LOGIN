@@ -1,0 +1,45 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white">Procesando información, por favor no cierre la ventana.</p>
+</ngx-spinner>
+<div fxLayout="row" fxLayoutAlign="start center" mat-dialog-title>
+  <h2 class="headline m-0" fxFlex="auto">Confirmación de casilla electrónica</h2>
+</div>
+<mat-divider class="-mx-6 text-border"></mat-divider>
+<div mat-dialog-content class="mt-12">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="table-responsive"></div>
+            <mat-form-field appearance="fill" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="user.ruc != ''">
+                <mat-label>Ruc</mat-label>
+                <input matInput [(ngModel)]="user.ruc" readonly/>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="user.es_persona_juridica">
+                <mat-label>Razón Social</mat-label>
+                <input matInput [(ngModel)]="user.razonSocial" readonly/>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <mat-label>DNI/C.E</mat-label>
+                <input matInput [(ngModel)]="user.dni"  readonly/>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <mat-label>Nombres y Apellidos</mat-label>
+                <input matInput [(ngModel)]="user.nombreCompleto"  readonly/>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <mat-label>Correo</mat-label>
+                <input matInput [(ngModel)]="user.correoElectronico" readonly/>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <mat-label>Celular</mat-label>
+                <input matInput [(ngModel)]="user.celular" readonly/>
+            </mat-form-field>
+        </div>
+  </div>
+</div>
+
+<br/>
+<div mat-dialog-actions align="center">
+  <button mat-flat-button mat-dialog-close="false" color="warn">CERRAR</button>
+  <button mat-flat-button color="primary" type="submit" (click)="habilitar()" *ngIf="!user.esta_activo_sne">CONFIRMAR</button>
+  <button mat-flat-button color="primary" type="submit" (click)="darDeBaja()" *ngIf="user.esta_activo_sne">CONFIRMAR</button>
+</div>

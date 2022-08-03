@@ -1,0 +1,63 @@
+<div fxLayout="row" fxLayoutAlign="start center" mat-dialog-title>
+    <h2 class="headline m-0" fxFlex="auto">DETALLE DE NOTIFICACION</h2>
+    <!-- <button class="text-secondary" mat-dialog-close="false" mat-icon-button type="button">
+    </button> -->
+</div>
+<mat-divider class="-mx-6 text-border"></mat-divider>
+<div mat-dialog-content class="mt-12">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form style="color: black;">    
+                <mat-form-field class="col-sm-12" appearance="legacy" [hidden]="false">               
+                    <input matInput placeholder="Referencia" value="{{notificacion$.referencia_entrada}}" autocomplete="off" readonly />
+                </mat-form-field>    
+                <mat-form-field class="col-sm-12" appearance="legacy" [hidden]="false">               
+                    <input matInput placeholder="Dependencia" value="{{notificacion$.dependencia}}" autocomplete="off" readonly/>
+                </mat-form-field>     
+                <mat-form-field class="col-sm-12" appearance="legacy" [hidden]="false">               
+                    <input matInput placeholder="Documento" value="{{notificacion$.referencia_salida}}" autocomplete="off" readonly/>
+                </mat-form-field>   
+                <mat-form-field class="col-sm-12" appearance="legacy" [hidden]="false">               
+                    <input matInput placeholder="Fecha notificacion" value="{{notificacion$.fecha_notificacion | date:'dd/MM/yyyy HH:mm:ss'}}" autocomplete="off" readonly/>
+                </mat-form-field>   
+                <br>
+        </form>
+        <legend>Contenido de la Notificación</legend>
+        <mat-form-field class="col-sm-12" appearance="legacy">
+            <textarea matInput placeholder="" rows="3" value="{{notificacion$.asunto}}" readonly></textarea>
+        </mat-form-field>  
+        <legend>Adjuntos</legend>
+            <div class="table-responsive">  
+                <table class="table table-striped table-custom">
+                    <thead>
+                        <tr>
+                            <th>N°</th>
+                            <th>Nombre de archivo</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let adjunto of listaAdjuntos">
+                            <tr>
+                                <td class="text-center">{{adjunto.fila}}</td>
+                                <td>{{adjunto.path_notificacion}}</td>
+                                <td class="text-center">
+                                    <p *ngIf="adjunto.str_nombre_archivo == 'CARGO DE RECEPC'">
+                                        <i class="fa fa-download" style="cursor: pointer;" (click)="fnDescargarArchivoCargo($event,adjunto)"></i>
+                                    </p>
+                                    <p *ngIf="adjunto.str_nombre_archivo != 'CARGO DE RECEPC'">
+                                        <i class="fa fa-download" style="cursor: pointer;" (click)="fnDescargarArchivo($event,adjunto)"></i>
+                                    </p>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div mat-dialog-actions align="center">
+    <button mat-flat-button mat-dialog-close="false" color="warn">Cerrar</button>
+</div>

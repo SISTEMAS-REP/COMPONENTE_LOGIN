@@ -1,0 +1,186 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+  <p style="font-size: 20px; color: white">Procesando información, por favor no cierre la ventana.</p>
+</ngx-spinner>
+<div class="container">
+  <div class="formularios">
+    <form [formGroup]="formRegistroEmpresa" (ngSubmit)="registrarEmpresa()">       
+    <div class="row">
+      <div class="col-md-12"><img src="/assets/img/logo-produce2.png"><br><br><br></div>
+      <h2 align="center">Crea una cuenta de Empresa</h2>
+      <p align="center">
+        Regístrese y use esta cuenta para acceder a todas las aplicaciones,
+        comunidades, soporte y más del Ministerio de Producción.<br><br>
+      </p>
+      <div class="group-input">
+        <h4><strong>Información de la Empresa</strong></h4>
+
+        <mat-form-field appearance="fill" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+          <mat-label>Número de documento (*)</mat-label>
+          <input matInput placeholder="Ingresar número de documento" formControlName="numeroDocumento" maxlength="11"  />
+          <button mat-button matSuffix mat-stroked-button aria-label="search" type="button" (click)="fnBtnRUCBuscar()">
+              <mat-icon>search</mat-icon>
+          </button>
+          <mat-error *ngIf="numeroDocumentoErrors">{{ numeroDocumentoErrors }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="col-xs-12 col-sm-6 col-md-6 col-lg-6" appearance="fill" *ngIf="false">
+        <mat-label>Sector (*)</mat-label>
+        <mat-select matInput  formControlName="sector"  >
+        <mat-option value=0>--Seleccionar--</mat-option>
+        <mat-option matTooltip = {{p.label}} matTooltipPosition="right"
+        [value]="p.value" *ngFor="let p of listaSector">
+            {{p.label}}</mat-option>
+        </mat-select>  
+        <mat-error *ngIf="sectorErrors">{{ sectorErrors }}</mat-error>                 
+    </mat-form-field>  
+        <div class="clearfix"></div>
+
+        <mat-form-field appearance="fill" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <mat-label>Razon Social (*)</mat-label>
+          <input matInput placeholder="Campo autocompletado con RUC" maxlength="500"
+          formControlName="razonSocial" readonly />
+          <mat-error *ngIf="razonSocialErrors">{{ razonSocialErrors }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <mat-label>Dirección (*)</mat-label>
+          <input matInput placeholder="Ingresar una dirección" maxlength="500" formControlName="direccion" />
+          <mat-error *ngIf="direccionErrors">{{ direccionErrors }}</mat-error>
+        </mat-form-field>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><br></div>
+
+        <h4>
+          <strong>Información Personal (Representante Legal)</strong><br>
+        </h4>
+
+        <mat-form-field appearance="fill" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+          <mat-label>Número de documento(*)</mat-label>
+          <input matInput placeholder="Ingresar número de documento" formControlName="nroDocPerNatural"  />
+          <button mat-button matSuffix mat-stroked-button aria-label="search" type="button" (click)="fnBtnPersonaBuscar()">
+              <mat-icon>search</mat-icon>
+          </button>
+          <mat-error *ngIf="nroDocPerNaturalErrors">{{ nroDocPerNaturalErrors }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+          <mat-label>Nombres (*)</mat-label>
+          <input matInput placeholder="Campo autocompletado con DNI/RUC" maxlength="200"
+          formControlName="nombres" readonly />
+          <mat-error *ngIf="nombresErrors">{{ nombresErrors }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+          <mat-label>Apellidos (*)</mat-label>
+          <input matInput placeholder="Campo autocompletado con DNI/RUC" maxlength="200"
+          formControlName="apellidos" readonly />
+          <mat-error *ngIf="apellidosErrors">{{ apellidosErrors }}</mat-error>
+      </mat-form-field>
+
+        <mat-form-field appearance="fill" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+          <mat-label>Celular (*)</mat-label>
+          <input matInput placeholder="Ingresar número de celular" maxlength="9"
+          formControlName="celular" />
+          <mat-error *ngIf="celularErrors">{{ celularErrors }}</mat-error>
+      </mat-form-field>
+
+        <!-- <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+          <label for="linea">Correo electrónico</label>
+          <input type="email"
+                 class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-maxlength"
+                 maxlength="500" [(ngModel)]="form.CorreoElectronico" placeholder="Ingresar correo electrónico">
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+          <label for="linea">Correo electrónico</label>
+          <input type="email"
+                 class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-maxlength"
+                 maxlength="500" [(ngModel)]="form.CorreoElectronico2" placeholder="Ingresar correo electrónico">
+        </div> -->
+        <mat-form-field appearance="fill" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+          <mat-label>Correo electrónico (*)</mat-label>
+          <input matInput placeholder="Ingresar correo electrónico" maxlength="100"
+          formControlName="correo" />
+          <mat-error *ngIf="correoErrors">{{ correoErrors }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+          <mat-label>Contraseña (*)</mat-label>
+          <input  type="password" matInput placeholder="Ingresar contraseña" maxlength="9"
+          formControlName="contrasena" />
+          <mat-error *ngIf="contrasenaErrors">{{ contrasenaErrors }}</mat-error>
+          <mat-hint style="color: #9B9B9B">Usa 8 o más caracteres con una combinación de letras, números y símbolos</mat-hint>   
+      </mat-form-field>
+        <!-- <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+          <label for="linea">Contraseña</label>
+          <input type="password"
+                 class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-maxlength"
+                 maxlength="500" [(ngModel)]="form.Contrasena" placeholder="Ingresar una contraseña">
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+          <label for="linea">Contraseña</label>
+          <input type="password"
+                 class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-maxlength"
+                 maxlength="500" [(ngModel)]="form.Contrasena2" placeholder="Ingresar una contraseña">
+        </div> -->
+        <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div style="color: #9B9B9B">
+            Usa 8 o más caracteres con una conbinación de letras, números y
+            símbolos
+          </div>
+        </div> -->
+      </div>
+    </div>
+    <div class="form-group row">
+      <!-- <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+        <input type="checkbox">&nbsp; Acepta los <span style="color: #157BDF">
+          términos, condiciones y
+          políticas de privacidad de Tu Empresa
+        </span>
+      </div> -->
+      <div appearance="fill" class="col-xs-12 col-md-12 col-sm-12 col-lg-12" style="padding-top: 15px;">
+        <mat-checkbox class="check" formControlName="terminos"> </mat-checkbox>
+        &nbsp; Acepta los <span style="color: #157BDF">términos, condiciones y
+            políticas de privacidad de tu Empresa</span>
+            <mat-error *ngIf="terminosErrors">{{ terminosErrors }}</mat-error>
+    </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+        <!-- <input type="button" class="btn btn-tramite2" (click)="fnBtnRegistrar()" value="Regístrate" /> -->
+        <input type="submit" class="btn btn-tramite2" value="Regístrate" />
+      </div>
+    </div>
+  </form>
+    <div class="form-group row">
+      <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12" align="center">
+        ¿Ya tienes cuenta de empresa? <a [routerLink]="['/sesion-empresa']">¡Ingresa aquí!</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <button class="btn btn-lg btn-outline-primary" (click)="open()">Launch demo modal</button>
+
+<app-modal #modal [modalConfig]="modalConfig">
+  It works!
+</app-modal>
+<div>
+  <button type="button" id="button" class="btn btn-outline-dark" style="margin: auto" (click)="openModal()">Click me</button>
+</div>
+
+<div class="alert alert-info" role="alert"> Bootstrap alert</div>
+
+<div class="" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <p>One fine body&hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div> -->

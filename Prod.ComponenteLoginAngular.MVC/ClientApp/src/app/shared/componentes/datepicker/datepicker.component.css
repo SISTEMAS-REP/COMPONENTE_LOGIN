@@ -1,0 +1,13 @@
+input:-moz-read-only {
+    /* For Firefox */
+    background-color: #fff;
+}
+
+input:read-only {
+    background-color: #fff;
+}
+
+
+input:disabled {
+    background-color: #eee;
+}
