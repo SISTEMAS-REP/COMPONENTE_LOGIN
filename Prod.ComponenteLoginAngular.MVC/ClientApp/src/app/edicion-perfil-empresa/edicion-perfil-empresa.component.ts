@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NzNotificationService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-edicion-perfil-empresa',
@@ -41,7 +42,8 @@ export class EdicionPerfilEmpresaComponent implements OnInit {
   constructor(
     private http: HttpClient, 
     @Inject('BASE_URL') private baseUrl: string,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private notification: NzNotificationService
     ){}
 
   ngOnInit() {
@@ -108,7 +110,7 @@ export class EdicionPerfilEmpresaComponent implements OnInit {
         this.changeNombres();
       }
       else{
-        alert("El número de DNI es incorrecto.");
+        this.createNotification('error',"Registro",'El número de DNI es incorrecto.');
         this.nombres = null;
         this.apellidos = null;
       }
@@ -296,6 +298,12 @@ export class EdicionPerfilEmpresaComponent implements OnInit {
     this.isDisableNroDocumento = true;
   }
 
-
+  createNotification = (type: string, title: string, message: string): void => {
+    this.notification.create(
+      type,
+      title,
+      message
+    );
+  };
 
 }

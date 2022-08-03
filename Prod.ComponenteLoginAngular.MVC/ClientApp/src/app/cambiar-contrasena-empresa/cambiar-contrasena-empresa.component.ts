@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NzNotificationService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-cambiar-contrasena-empresa',
@@ -31,7 +32,8 @@ export class CambiarContrasenaEmpresaComponent implements OnInit {
   constructor(
     private http: HttpClient, 
     @Inject('BASE_URL') private baseUrl: string,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private notification: NzNotificationService
   ) { }
 
   ngOnInit() {
@@ -212,5 +214,13 @@ export class CambiarContrasenaEmpresaComponent implements OnInit {
         eyeContrasenaRep.style.opacity=0.4;
       }
     }
+
+    createNotification = (type: string, title: string, message: string): void => {
+      this.notification.create(
+        type,
+        title,
+        message
+      );
+    };
 
 }

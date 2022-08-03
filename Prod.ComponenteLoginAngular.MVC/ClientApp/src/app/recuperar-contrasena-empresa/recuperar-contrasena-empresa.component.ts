@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NzNotificationService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-recuperar-contrasena-empresa',
@@ -15,7 +16,8 @@ export class RecuperarContrasenaEmpresaComponent implements OnInit {
   constructor(
     private http: HttpClient, 
     @Inject('BASE_URL') private baseUrl: string,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private notification: NzNotificationService,
   ) {
   }
   ngOnInit(): void {
@@ -81,5 +83,12 @@ export class RecuperarContrasenaEmpresaComponent implements OnInit {
     return !!/[\d\s]/.test(input);
    }
 
-
+   createNotification = (type: string, title: string, message: string): void => {
+    this.notification.create(
+      type,
+      title,
+      message
+    );
+  };
+  
 }
