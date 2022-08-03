@@ -14,7 +14,7 @@ import { SesionEmpresaComponent } from './sesion-empresa/sesion-empresa.componen
 import { RecuperarContrasenaPersonaComponent } from './recuperar-contrasena-persona/recuperar-contrasena-persona.component';
 import { RecuperarContrasenaEmpresaComponent } from './recuperar-contrasena-empresa/recuperar-contrasena-empresa.component';
 
-import { CommonModule } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CambiarContrasenaPersonaComponent } from './cambiar-contrasena-persona/cambiar-contrasena-persona.component';
 import { CambiarContrasenaEmpresaComponent } from './cambiar-contrasena-empresa/cambiar-contrasena-empresa.component';
@@ -22,6 +22,11 @@ import { EdicionPerfilPersonaComponent } from './edicion-perfil-persona/edicion-
 import { EdicionPerfilEmpresaComponent } from './edicion-perfil-empresa/edicion-perfil-empresa.component';
 import { AdministracionUsuarioEmpresaComponent } from './administracion-usuario-empresa/administracion-usuario-empresa.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import en from '@angular/common/locales/en';
+
+registerLocaleData(en);
 
 @NgModule({
   declarations: [
@@ -63,9 +68,11 @@ import { NgxSpinnerModule } from 'ngx-spinner';
       { path: 'edicion-perfil-persona', component: EdicionPerfilPersonaComponent },
       { path: 'administracion-usuario-empresa', component: AdministracionUsuarioEmpresaComponent },    
       { path: 'fetch-data', component: FetchDataComponent },
-    ])
+    ]),
+    NgZorroAntdModule,
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
