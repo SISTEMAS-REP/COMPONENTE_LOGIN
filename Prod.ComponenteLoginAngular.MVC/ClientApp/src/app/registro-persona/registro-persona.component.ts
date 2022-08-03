@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
@@ -8,6 +9,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./registro-persona.component.css']
 })
 export class RegistroPersonaComponent implements OnInit {
+
+  id_aplicacion : number = 0;
+
   ruc: string = null;
   tipoDoc: number = 0;
   numeroDoc: string = null;
@@ -57,13 +61,22 @@ export class RegistroPersonaComponent implements OnInit {
   constructor(
     private http: HttpClient, 
     @Inject('BASE_URL') private baseUrl: string,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private router: ActivatedRoute
   ) {
   }
 
   ngOnInit() {
-    //this.registroPersonaService();
-    //this.tipoDoc = 1;
+    //  this.router.params.subscribe(params => {
+    //   debugger;
+    //   this.id_aplicacion = params['id_aplicacion'];
+    // });
+    this.router.queryParams.subscribe(params => {
+      debugger
+      const data: any = params['id_aplicacion'] || null;
+      // Código...
+    });
+    debugger;
   }
 
   registroPersonaService = () =>{

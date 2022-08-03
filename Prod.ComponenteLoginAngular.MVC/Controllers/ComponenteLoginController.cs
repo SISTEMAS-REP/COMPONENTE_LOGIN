@@ -367,6 +367,30 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
             return Ok(sr);
         }
 
+
+        [HttpPost]
+        [Route("Obtener_Imagen_By_Aplicacion")]
+        public IActionResult Obtener_Imagen_By_Aplicacion([FromBody] PersonaRequest request)
+        {
+            StatusResponse response = new StatusResponse();
+            byte[] numArray;
+            try
+            {
+                var carpetaRutaLogo = System.IO.Path.Combine(appConfig.RegistroTramite.RutaImagenLogo, request.id_aplicacion + ".png");
+                numArray = System.IO.File.ReadAllBytes(carpetaRutaLogo);
+                response.Data = numArray;
+                response.Success = true;
+            }
+            catch (System.IO.FileNotFoundException ex)
+            {
+                var carpetaRutaLogoError = System.IO.Path.Combine(appConfig.RegistroTramite.RutaImagenLogo, "Logo_Temp.png");
+                numArray = System.IO.File.ReadAllBytes(carpetaRutaLogoError);
+                response.Data = numArray;
+                response.Success = false;
+            }
+            return Ok(response);
+        }
+
     }
 
 }

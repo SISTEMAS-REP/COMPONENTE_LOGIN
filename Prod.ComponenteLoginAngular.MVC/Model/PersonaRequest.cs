@@ -27,5 +27,6 @@
 		public string Contrasena { get; set; }
 		public bool Estado { get; set; }
 		public int idContactoExtranet { get; set; }
+		public int id_aplicacion { get; set; }
 	}
 }
