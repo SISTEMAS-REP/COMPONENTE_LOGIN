@@ -85,7 +85,7 @@
         <div class="input-wrapper">
           <label for="contrasena">CONTRASEÑA</label>
           <input type="password"  id="contrasena" name="contrasena" placeholder="" [(ngModel)]="contrasena" (change)="changeContrasena($event)" maxlength="150" >      
-          <img src="../../assets/img/ver_on.png" (click)="mostrarContrasena()" id="eyeContrasena_" class="input-icon password">
+          <img src="../../assets/img/ver_on.png" (click)="mostrarContrasena()" id="eyeContrasena" class="input-icon password">
         </div>
         <p class="validador" *ngIf="validadorContrasena">Debe ingresar la contraseña.</p>
         <p class="validador" *ngIf="validadorRequisitosContrasena">La contraseña debe cumplir con los requistos</p>

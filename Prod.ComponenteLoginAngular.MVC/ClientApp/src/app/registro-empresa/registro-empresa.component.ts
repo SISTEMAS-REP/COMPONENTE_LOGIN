@@ -78,6 +78,7 @@ export class RegistroEmpresaComponent implements OnInit {
   }
 
   registroEmpresaService = () =>{
+    debugger;
     this.changeContrasena();
     this.changeContrasenaRep();
     this.changeTerminos();
@@ -110,6 +111,7 @@ export class RegistroEmpresaComponent implements OnInit {
    }
    const formData = {...Data};
    this.http.post(this.baseUrl + 'ComponenteLogin/RegistroPersona', formData).subscribe((result : any) => {
+    debugger;
     this.spinner.hide();
     if(result.data != null){
         this.limpiar();
@@ -599,5 +601,4 @@ export class RegistroEmpresaComponent implements OnInit {
   
     this.isDisableNroDocumento = true;
    }
-
 }
