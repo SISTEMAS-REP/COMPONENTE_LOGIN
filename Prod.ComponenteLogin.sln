@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.2.32630.192
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32630.194
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prod.ComponenteLoginAngular.MVC", "Prod.ComponenteLoginAngular.MVC\Prod.ComponenteLoginAngular.MVC.csproj", "{DFFE83C1-1941-4D1A-A4E0-B4992A7B8601}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prod.ComponenteLogin.MVC.Configuracion", "Prod.ComponenteLogin.MVC.Configuracion\Prod.ComponenteLogin.MVC.Configuracion.csproj", "{B172D98A-E5A4-4065-A3DF-2F1E5F4097E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prod.ComponenteLogin.MVC.Configuracion", "Prod.ComponenteLogin.MVC.Configuracion\Prod.ComponenteLogin.MVC.Configuracion.csproj", "{B172D98A-E5A4-4065-A3DF-2F1E5F4097E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
