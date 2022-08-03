@@ -6,9 +6,12 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="6.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.8" />
     <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
     <PackageReference Include="Prod.ServiciosExternos" Version="1.3.74" />
+    <PackageReference Include="Release.Helper.WebKoMvc" Version="1.1.4" />
   </ItemGroup>
 
 </Project>

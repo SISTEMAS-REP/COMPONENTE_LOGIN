@@ -25,12 +25,13 @@
           <div>
             <div class="input-wrapper">
               <label for="contrasena">CONTRASEÑA</label>
-              <input type="password"  id="contrasena" name="contrasena" placeholder="" [(ngModel)]="contrasena" (change)="changeContrasena($event)" maxlength="150" >
+              <input type="password"  id="contrasena" name="contrasena" placeholder="" [(ngModel)]="contrasena" (change)="changeContrasena()" maxlength="150" >
               <img src="../../assets/img/ver_on.png" (click)="mostrarContrasena()" id="eyeContrasena" class="input-icon password">
             </div>
             <p class="validador" *ngIf="validadorContrasena">Debe ingresar la contraseña.</p>
           </div>
     
+
         <div class="align-right">
           <a href="#">Recuperar contraseña</a>
         </div>

@@ -19,30 +19,30 @@ namespace Prod.ComponenteLogin.MVC.Configuracion.Proxy
 		#region ServicioSeguridad
 		public LoginResponse IniciarSesionExtranet(LoginRequest request)
 		{
-			return this.InvokeWebApi<LoginResponse>(HttpMethod.Post, _url + "Extranet/IniciarSesion", this.GetJsonParameters(request));
+			return this.CallWebApi<LoginResponse>(HttpMethod.Post, _url + "Extranet/IniciarSesion", this.GetJsonParameters(request));
 		}
 		public LoginResponse IniciarSesionIntranet(LoginRequest request)
 		{
-			return this.InvokeWebApi<LoginResponse>(HttpMethod.Post, _url + "Intranet/IniciarSesion", this.GetJsonParameters(request));
+			return this.CallWebApi<LoginResponse>(HttpMethod.Post, _url + "Intranet/IniciarSesion", this.GetJsonParameters(request));
 		}
 		#endregion ServicioSeguridad
 
 		#region ServicioSeguridad
 		public LoginResponse LoginExtranetPV(LoginExPVRequest request)
 		{
-			return this.InvokeWebApi<LoginResponse>(HttpMethod.Post, _url_PV + "ExtranetToken/Login", this.GetJsonParameters(request));
+			return this.CallWebApi<LoginResponse>(HttpMethod.Post, _url_PV + "ExtranetToken/Login", this.GetJsonParameters(request));
 		}
 		public LoginResponse LoginIntranetPV(LoginPVRequest request)
 		{
-			return this.InvokeWebApi<LoginResponse>(HttpMethod.Post, _url_PV + "IntranetToken/Login", this.GetJsonParameters(request));
+			return this.CallWebApi<LoginResponse>(HttpMethod.Post, _url_PV + "IntranetToken/Login", this.GetJsonParameters(request));
 		}
 		public LoginResponse RecuperarContrasena(LoginExPVRequest request)
 		{
-			return this.InvokeWebApi<LoginResponse>(HttpMethod.Post, _url_PV + "ExtranetToken/RecuperarContrasena", this.GetJsonParameters(request));
+			return this.CallWebApi<LoginResponse>(HttpMethod.Post, _url_PV + "ExtranetToken/RecuperarContrasena", this.GetJsonParameters(request));
 		}
 		public LoginResponse Test()
 		{
-			return this.InvokeWebApi<LoginResponse>(HttpMethod.Post, _url_PV + "ExtranetToken/Test", null);
+			return this.CallWebApi<LoginResponse>(HttpMethod.Post, _url_PV + "ExtranetToken/Test", null);
 		}
 		#endregion ServicioSeguridad
 	}

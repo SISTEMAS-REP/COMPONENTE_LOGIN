@@ -43,7 +43,6 @@ export class SesionPersonaComponent implements OnInit {
     }
     const formData = {...Data};
     this.http.post(this.baseUrl + 'ComponenteLogin/Obtener_Imagen_By_Aplicacion', formData).subscribe((result : any) => {
-      debugger
       var binary = atob(result.data.replace(/\s/g, ''));
           var len = binary.length;
           var buffer = new ArrayBuffer(len);
@@ -70,6 +69,7 @@ export class SesionPersonaComponent implements OnInit {
       const formData = {...Data};
       this.http.post(this.baseUrl + 'ComponenteLogin/IniciarSesionExtranet', formData).subscribe(result => {
       this.spinner.hide();
+      debugger
       }, error => console.error(error));
     }
    

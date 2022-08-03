@@ -1,22 +1,29 @@
 using Autofac;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Serialization;
 using Prod.ComponenteLogin.MVC.Configuracion._Modules;
+using Prod.Seguridad.Auth;
 using Release.Helper.WebKoMvc.Common;
 using Release.Helper.WebKoMvc.Controllers;
 using Serilog;
 using System;
 
+
 namespace Prod.ComponenteLoginAngular.MVC
 {
     public class Startup
     {
-        public IWebHostEnvironment Environment { get; set; }
+        public IConfiguration Configuration { get; }
 
+        public IWebHostEnvironment Environment { get; set; }
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Log.Logger = new LoggerConfiguration()
@@ -36,27 +43,49 @@ namespace Prod.ComponenteLoginAngular.MVC
             Environment = env;
 
             BaseController.StartConfig(); //Leer Config     
-            //SecurityConfig.Init((IConfigurationRoot)Configuration);
-
+            SecurityConfig.Init((IConfigurationRoot)Configuration);
         }
 
-        public IConfiguration Configuration { get; }
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+
+            #if DEBUG
+            HelperHttp.AllowEncrypt = false;
+            #elif !DEBUG
+            HelperHttp.AllowEncrypt = false;
+            #endif
+
+            HelperHttp.WebRootPath = Environment.WebRootPath;
+
+            //Register Types
+            BootstrapperContainer.Configuration = this.Configuration;
+            BootstrapperContainer.Environment = this.Environment;
+            BootstrapperContainer.Register(builder);
+        }
+
 
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
-            // In production, the Angular files will be served from this directory
+            services.AddAuthorization();
+            services.AddCustomAuthentication(false);
+            services.AddMvc(o =>
+            {
+                o.Filters.Add(new ProducesAttribute("application/json"));
+                //o.Filters.Add(new Release.Helper.WebKoMvc.Filters.SecureResponseRequestAttribute());
+                o.EnableEndpointRouting = false;
+            });
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "ClientApp/dist";
+                configuration.RootPath = "wwwroot/dist";
             });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -65,52 +94,43 @@ namespace Prod.ComponenteLoginAngular.MVC
             {
                 app.UseExceptionHandler("/Error");
             }
+            app.UseSecurityHeadersMiddleware(new SecurityHeadersBuilder()
+                .AddDefaultSecurePolicy()
+            );
+            app.UseDefaultFiles();
 
             app.UseStaticFiles();
-            if (!env.IsDevelopment())
-            {
-                app.UseSpaStaticFiles();
-            }
+
+            app.UseSpaStaticFiles();
 
             app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
+            app.UseAuthentication();
+            app.UseMvc(routes =>
             {
-                endpoints.MapControllerRoute(
+
+                routes.MapRoute(
                     name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute(
+                   name: "catch-all",
+                   template: "{*url}",
+                   defaults: new { controller = "Home", action = "Index" }
+               );
             });
 
             app.UseSpa(spa =>
             {
-                // To learn more about options for serving an Angular SPA from ASP.NET Core,
-                // see https://go.microsoft.com/fwlink/?linkid=864501
-
                 spa.Options.SourcePath = "ClientApp";
-
-                if (env.IsDevelopment())
-                {
-                    spa.UseAngularCliServer(npmScript: "start");
-                }
             });
         }
-
-        public void ConfigureContainer(ContainerBuilder builder)
+        private void Areas(IRouteBuilder routes)
         {
-            //Encryts
-
-#if DEBUG
-            HelperHttp.AllowEncrypt = false;
-#elif !DEBUG
-            HelperHttp.AllowEncrypt = true;
-#endif
-
-            HelperHttp.WebRootPath = Environment.WebRootPath;
-
-            //Register Types
-            BootstrapperContainer.Configuration = this.Configuration;
-            //BootstrapperContainer.Environment = this.Environment;
-            BootstrapperContainer.Register(builder);
+            routes.MapRoute(
+                name: "area",
+                template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
         }
+
     }
 }
