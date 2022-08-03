@@ -8,7 +8,8 @@
          <img src="../../assets/img/logo_produce.PNG" alt="Logo" title="Logo" width="138">
        </div>  
        <div class="logo-aplicacion">
-         <img src="../../assets/img/logo_vusp.png" alt="Logo" title="Logo" width="138">
+        <img [src]="urlArchivo" alt="archivo"  width="138">
+         <!-- <img src="../../assets/img/logo_vusp.png" alt="Logo" title="Logo"> -->
        </div>
           <h3>Inicio de Sesión</h3>
           <p>Persona Natural</p>
@@ -24,7 +25,7 @@
           <div>
             <div class="input-wrapper">
               <label for="contrasena">CONTRASEÑA</label>
-              <input type="password"  id="contrasena" name="contrasena" placeholder="" [(ngModel)]="contrasena" (change)="changeContrasena($event)" maxlength="150" >      
+              <input type="password"  id="contrasena" name="contrasena" placeholder="" [(ngModel)]="contrasena" (change)="changeContrasena($event)" maxlength="150" >
               <img src="../../assets/img/ver_on.png" (click)="mostrarContrasena()" id="eyeContrasena" class="input-icon password">
             </div>
             <p class="validador" *ngIf="validadorContrasena">Debe ingresar la contraseña.</p>

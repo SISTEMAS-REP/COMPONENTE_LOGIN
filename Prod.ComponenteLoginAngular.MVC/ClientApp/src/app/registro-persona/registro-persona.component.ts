@@ -67,14 +67,9 @@ export class RegistroPersonaComponent implements OnInit {
   }
 
   ngOnInit() {
-    //  this.router.params.subscribe(params => {
-    //   debugger;
-    //   this.id_aplicacion = params['id_aplicacion'];
-    // });
     this.router.queryParams.subscribe(params => {
       debugger
       const data: any = params['id_aplicacion'] || null;
-      // Código...
     });
     debugger;
   }
