@@ -4,7 +4,7 @@ export const environment = {
     apiGA: 'https://dega.produce.gob.pe',
     apiPTD: 'https://detupa.produce.gob.pe',
     apiWebPV: 'https://desistemasv2.produce.gob.pe',
-    apiUrl: 'https://devsp.produce.gob.pe'
+    apiUrl: 'https://delogin.produce.gob.pe'
 
     // ----------------calidad-------------------------
     // apiGA: 'https://pega.produce.gob.pe',
