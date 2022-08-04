@@ -28,7 +28,7 @@ const routes: Routes = [
     { path: 'sesion-persona', component: SesionPersonaComponent },
 
 
-    { path: '**', pathMatch: 'full', redirectTo: 'principal' }
+    { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];
 
 @NgModule({
