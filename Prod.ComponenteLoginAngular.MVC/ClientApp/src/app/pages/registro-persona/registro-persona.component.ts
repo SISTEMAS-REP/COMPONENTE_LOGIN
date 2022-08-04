@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ComponenteLoginService } from 'src/app/services/componenteLogin.service';
+import { AlertService } from 'src/app/shared/componentes/services/alert.service';
 
 @Component({
   selector: 'app-registro-persona',
@@ -60,7 +62,9 @@ export class RegistroPersonaComponent implements OnInit {
   isDisableNroDocumento : boolean = true;
   constructor(
     private spinner: NgxSpinnerService,
-    private router: ActivatedRoute
+    private router: ActivatedRoute,
+    private componenteLoginService: ComponenteLoginService,
+    private _alertService: AlertService
   ) {
   }
 
@@ -173,40 +177,39 @@ export class RegistroPersonaComponent implements OnInit {
     this.isDisableNroDocumento = true;
   }
 
-
   btnBuscarDNI = () =>{
+    if(!this.validadorNroDocumento  && !this.validadorTipoDocumento){
     this.spinner.show();
     let Data = {
       NroDocumento : this.numeroDoc,
       IdTipoIdentificacion : 1
     }
-    const formData = {...Data};
-    // this.http.post(this.baseUrl + 'ComponenteLogin/BuscarPersonaEmpresa', formData).subscribe((result : any) => {
-    //   this.spinner.hide();
-    //   if(result.success){
-    //     this.nombres = result.data.nombres;
-    //     this.apellidos = result.data.apellidos;
-    //     this.cod_departamento = result.data.codigoDepartamento;
-    //     this.cod_provincia = result.data.codigoProvincia;
-    //     this.cod_distrito =result.data.codigoProvincia
-    //     this.direccion = result.data.codigoProvincia
-    //     // this.changeTipoDocumento();
-    //     this.changeApeliidos();
-    //     this.changeNombres();
-    //   }
-    //   else{
-    //   // this.createNotification('error',"Registro",'El número de DNI es incorrecto.');
-    //     this.nombres = null;
-    //     this.apellidos = null;
-    //     this.cod_departamento = null;
-    //     this.cod_provincia = null;
-    //     this.cod_distrito = null;
-    //     this.direccion = null;
-    //   }
-    // }, error => console.error(error));
+    this.componenteLoginService.buscarPersonaEmpresa(Data)
+    .then(resp => {
+      debugger;
+      this.spinner.hide();
+      this.nombres = resp.data.nombres;
+        this.apellidos = resp.data.apellidos;
+        this.cod_departamento = resp.data.codigoDepartamento;
+        this.cod_provincia = resp.data.codigoProvincia;
+        this.cod_distrito =resp.data.codigoProvincia
+        this.direccion = resp.data.codigoProvincia
+        // this.changeTipoDocumento();
+        this.changeApellidos();
+        this.changeNombres();
+        })
+        .catch(err => {
+           this._alertService.alertWarning("El número de documento es invalido.")
+           this.nombres = null;
+           this.apellidos = null;
+           this.cod_departamento = null;
+           this.cod_departamento = null;
+           this.cod_provincia = null;
+           this.cod_distrito = null;
+           this.direccion = null;
+        });
+      }
   }
-
-
 
   clickPaso1 = () =>{
     this.isVisiblePaso1 = true;
@@ -215,7 +218,7 @@ export class RegistroPersonaComponent implements OnInit {
   }
   clickPaso2 = () =>{
     this.changeNroDocumento();
-    this.changeApeliidos();
+    this.changeApellidos();
     this.changeNombres();
     this.changeCelular();
 
@@ -281,7 +284,7 @@ export class RegistroPersonaComponent implements OnInit {
     }
   }
   
-  changeApeliidos = () =>{
+  changeApellidos = () =>{
     if(this.apellidos == null || this.apellidos == ""){
       this.validadorApellidos = true;
     }

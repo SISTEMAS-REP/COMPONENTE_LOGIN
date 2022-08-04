@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ComponenteLoginService } from 'src/app/services/componenteLogin.service';
+import { AlertService } from 'src/app/shared/componentes/services/alert.service';
 
 @Component({
   selector: 'app-registro-empresa',
@@ -69,13 +71,16 @@ export class RegistroEmpresaComponent implements OnInit {
 
   constructor(
   private spinner: NgxSpinnerService,
+  private componenteLoginService: ComponenteLoginService,
+  private _alertService: AlertService
   ) {
   }
 
   ngOnInit(): void {
   }
 
-  registroEmpresaService = () =>{
+
+  registroEmpresaService2 = () =>{
     debugger;
     this.changeContrasena();
     this.changeContrasenaRep();
@@ -125,66 +130,58 @@ export class RegistroEmpresaComponent implements OnInit {
 }
 
   btnBuscarRUC = () =>{
-    if(this.ruc.length != 11){
-      this.razonSocial = null;
-      this.cod_departamento = null;
-      this.cod_provincia = null;
-      this.cod_distrito = null;
-      this.direccion = null;
-      return;
-    }
+    if(!this.validadorRuc  && !this.validadorRucDigitos){
     this.spinner.show();
     let Data = {
       NroDocumento : this.ruc,
       IdTipoIdentificacion : 8
     }
-    const formData = {...Data};
-    // this.http.post(this.baseUrl + 'ComponenteLogin/BuscarPersonaEmpresa', formData).subscribe((result : any) => {
-    //   this.spinner.hide();
-    //   if(result.data != null){
-    //     this.razonSocial = result.data.razonSocial;
-    //     this.cod_departamento = result.data.codigoDepartamento;
-    //     this.cod_provincia = result.data.codigoProvincia;
-    //     this.cod_distrito  = result.data.codigo_distrito;
-    //     this.direccion = result.data.direccion;
-    //     this.changeRazonSocial();
-    //     this.changeDireccion();
-    //   }
-    //   else{
-    //     //this.createNotification('error',"Registro",'El número de RUC es incorrecto.');
-    //     this.razonSocial = null;
-    //     this.cod_departamento = null;
-    //     this.cod_provincia = null;
-    //     this.cod_distrito = null;
-    //     this.direccion = null;
-    //   }
-    // }, error => console.error(error));
+    this.componenteLoginService.buscarPersonaEmpresa(Data)
+    .then(resp => {
+      this.spinner.hide();
+        this.razonSocial = resp.data.razonSocial;
+        this.cod_departamento = resp.data.codigoDepartamento;
+        this.cod_provincia = resp.data.codigoProvincia;
+        this.cod_distrito  = resp.data.codigo_distrito;
+        this.direccion = resp.data.direccion;
+        this.changeRazonSocial();
+        this.changeDireccion();
+        })
+        .catch(err => {
+           this._alertService.alertWarning("El número de RUC es invalido.")
+           this.razonSocial = null;
+           this.cod_departamento = null;
+           this.cod_provincia = null;
+           this.cod_distrito = null;
+           this.direccion = null;
+        });
+      }
   }
-
 
   btnBuscarDNI = () =>{
-    this.spinner.show();
-    let Data = {
-      NroDocumento : this.numeroDoc,
-      IdTipoIdentificacion : 1
+    if(!this.validadorNroDocumento  && !this.validadorTipoDocumento){
+      this.spinner.show();
+      let Data = {
+        NroDocumento : this.numeroDoc,
+        IdTipoIdentificacion : 1
+      }
+      this.componenteLoginService.buscarPersonaEmpresa(Data)
+      .then(resp => {
+        debugger;
+        this.spinner.hide();
+        this.nombres = resp.data.nombres;
+          this.apellidos = resp.data.apellidos;
+          // this.changeTipoDocumento();
+          this.changeApellidos();
+          this.changeNombres();
+          })
+          .catch(err => {
+             this._alertService.alertWarning("El número de documento es invalido.")
+             this.nombres = null;
+             this.apellidos = null;
+          });
+        }
     }
-    const formData = {...Data};
-    // this.http.post(this.baseUrl + 'ComponenteLogin/BuscarPersonaEmpresa', formData).subscribe((result : any) => {
-    //   this.spinner.hide();
-    //   if(result.data!= null){
-    //     this.nombres = result.data.nombres;
-    //     this.apellidos = result.data.apellidos;
-    //    //this.changeTipoDocumento();
-    //     this.changeApeliidos();
-    //     this.changeNombres();
-    //   }
-    //   else{
-    //     //this.createNotification('error',"Registro",'El número de DNI es incorrecto.');
-    //     this.nombres = null;
-    //     this.apellidos = null;
-    //   }
-    // }, error => console.error(error));
-  }
 
 
   clickPaso1 = () =>{ 
@@ -216,7 +213,7 @@ export class RegistroEmpresaComponent implements OnInit {
   clickPaso3 = () =>{
     //this.changeTipoDocumento();
     this.changeNroDocumento();
-    this.changeApeliidos();
+    this.changeApellidos();
     this.changeNombres();
  
       if(!this.validadorRuc && !this.validadorRazonSocial && !this.validadorDireccion && !this.validadorTipoDocumento && !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres){
@@ -312,7 +309,7 @@ export class RegistroEmpresaComponent implements OnInit {
     }
   }
   
-  changeApeliidos = () =>{
+  changeApellidos = () =>{
     if(this.apellidos == null || this.apellidos == ""){
       this.validadorApellidos = true;
     }

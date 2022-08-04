@@ -253,6 +253,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
             return Ok(sr);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [Route("BuscarPersonaEmpresa")]
         public StatusResponse<PersonaResponse> BuscarPersonaEmpresa([FromBody] PersonaRequest request)

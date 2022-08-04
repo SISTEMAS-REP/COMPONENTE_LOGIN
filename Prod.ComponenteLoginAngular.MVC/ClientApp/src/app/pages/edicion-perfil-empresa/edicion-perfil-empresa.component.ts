@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ComponenteLoginService } from 'src/app/services/componenteLogin.service';
+import { AlertService } from 'src/app/shared/componentes/services/alert.service';
 
 @Component({
   selector: 'app-edicion-perfil-empresa',
@@ -39,7 +41,9 @@ export class EdicionPerfilEmpresaComponent implements OnInit {
 
 
   constructor(
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private componenteLoginService: ComponenteLoginService,
+    private _alertService: AlertService
     ){}
 
   ngOnInit() {
@@ -51,7 +55,7 @@ export class EdicionPerfilEmpresaComponent implements OnInit {
     //this.changeTipoDocumento();
     this.changeNroDocumento();
     this.changeNombres();
-    this.changeApeliidos();
+    this.changeApellidos();
  
     debugger;
       if( !this.validadorTipoDocumento && !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres){
@@ -88,28 +92,29 @@ export class EdicionPerfilEmpresaComponent implements OnInit {
 
 
   btnBuscarDNI = () =>{
-    this.spinner.show();
-    let Data = {
-      NroDocumento : this.numeroDoc,
-      IdTipoIdentificacion : 1
+    if(!this.validadorNroDocumento  && !this.validadorTipoDocumento){
+      this.spinner.show();
+      let Data = {
+        NroDocumento : this.numeroDoc,
+        IdTipoIdentificacion : 1
+      }
+      this.componenteLoginService.buscarPersonaEmpresa(Data)
+      .then(resp => {
+        this.spinner.hide();
+        this.nombres = resp.data.nombres;
+          this.apellidos = resp.data.apellidos;
+          // this.changeTipoDocumento();
+          this.changeApellidos();
+          this.changeNombres();
+          })
+          .catch(err => {
+             this._alertService.alertWarning("El número de documento es invalido.")
+             this.nombres = null;
+             this.apellidos = null;
+          });
+        }
     }
-    const formData = {...Data};
-    // this.http.post(this.baseUrl + 'ComponenteLogin/BuscarPersonaEmpresa', formData).subscribe((result : any) => {
-    //   this.spinner.hide();
-    //   if(result.success){
-    //     this.nombres = result.data.nombres;
-    //     this.apellidos = result.data.apellidos;
-    //     // this.changeTipoDocumento();
-    //     this.changeApeliidos();
-    //     this.changeNombres();
-    //   }
-    //   else{
-    //     //this.createNotification('error',"Registro",'El número de DNI es incorrecto.');
-    //     this.nombres = null;
-    //     this.apellidos = null;
-    //   }
-    // }, error => console.error(error));
-  }
+  
 
   clickEditarRepresentante = () =>{ 
     this.isVisibleEditarRepresentante = true;
@@ -180,7 +185,7 @@ export class EdicionPerfilEmpresaComponent implements OnInit {
     }
   }
   
-  changeApeliidos = () =>{
+  changeApellidos = () =>{
     if(this.apellidos == null || this.apellidos == ""){
       this.validadorApellidos = true;
     }

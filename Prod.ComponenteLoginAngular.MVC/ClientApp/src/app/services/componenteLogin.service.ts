@@ -45,4 +45,27 @@ export class ComponenteLoginService {
     }
   }
 
+  async buscarPersonaEmpresa(request) {
+    const formData = {...request};
+    const url = `${this.baseUrl}/BuscarPersonaEmpresa`;
+    try {
+      const resp = await axios
+        .post(url, formData);
+      return resp.data;
+    } catch (err) {
+      throw err.data || err;
+    }
+  }
+
+  async RegistroPersona(request) {
+    const formData = {...request};
+    const url = `${this.baseUrl}/RegistroPersona`;
+    try {
+      const resp = await axios
+        .post(url, formData);
+      return resp.data;
+    } catch (err) {
+      throw err.data || err;
+    }
+  }
 }
