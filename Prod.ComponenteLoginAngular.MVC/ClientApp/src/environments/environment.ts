@@ -6,7 +6,7 @@ export const environment = {
     production: false,
     apiGA: 'https://dega.produce.gob.pe',
     apiPTD: 'https://detupa.produce.gob.pe',
-    apiUrl: 'http://127.0.0.1:30700',
+    apiUrl: 'http://localhost:43495',
     // apiUrl: 'http://127.0.0.1:50555',
     apiWebPV: 'http://127.0.0.1:8000'
     // apiWebPV: 'https://desistemasv2.produce.gob.pe',

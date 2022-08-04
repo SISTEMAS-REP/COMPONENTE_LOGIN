@@ -13,9 +13,9 @@ using Http = Microsoft.AspNetCore.Http;
 using sep = Prod.ServiciosExternos.Personas;
 using roles = Prod.ServiciosExternos.PRODUCE_VIRTUAL.Roles;
 using Prod.ServiciosExternos.PRODUCE_VIRTUAL.Roles;
-using Prod.ComponenteLogin.MVC.Configuracion.Proxy;
 using Prod.ComponenteLogin.MVC.Configuracion;
 using PersonaResponse = Prod.ComponenteLoginAngular.MVC.Model.PersonaResponse;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Prod.ComponenteLoginAngular.MVC.Controllers
 {
@@ -187,20 +187,18 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
             return _Response(reniec);
         }
 
-
+        [AllowAnonymous]
         [HttpPost]
         [Route("IniciarSesionExtranet")]
-        public IActionResult IniciarSesionExtranetAsync([FromBody] ComponenteLogin.MVC.Configuracion.Proxy.LoginRequest request)
+        public IActionResult IniciarSesionExtranetAsync([FromBody] ComponenteLogin.MVC.Configuracion.LoginRequest request)
         {
             var sr = loginProxy.IniciarSesionExtranet(request);
             return Ok(sr);
-
         }
-
 
         [HttpPost]
         [Route("RecuperarContrasena")]
-        public IActionResult RecuperarContrasena([FromBody] ComponenteLogin.MVC.Configuracion.Proxy.LoginRequest request)
+        public IActionResult RecuperarContrasena([FromBody] ComponenteLogin.MVC.Configuracion.LoginRequest request)
         {
             var guid = Guid.NewGuid();
             var sr = new StatusResponse();
@@ -367,7 +365,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
             return Ok(sr);
         }
 
-
+        [AllowAnonymous]
         [HttpPost]
         [Route("Obtener_Imagen_By_Aplicacion")]
         public IActionResult Obtener_Imagen_By_Aplicacion([FromBody] PersonaRequest request)

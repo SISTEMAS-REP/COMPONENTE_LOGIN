@@ -3,6 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ComponenteLoginService } from 'src/app/services/componenteLogin.service';
 
 @Component({
   selector: 'app-sesion-persona',
@@ -22,38 +23,41 @@ export class SesionPersonaComponent implements OnInit {
   urlArchivo: SafeResourceUrl;
 
   constructor(
-    // private http: HttpClient, 
-    // @Inject('BASE_URL') private baseUrl: string,
     private spinner: NgxSpinnerService,
+    private componenteLoginService: ComponenteLoginService,
     private router: ActivatedRoute,
     private sanitizer: DomSanitizer
   ) {
   }
 
   ngOnInit(): void {
-    // this.router.queryParams.subscribe(params => {
-    //   this.id_aplicacion = params['id_aplicacion'] || null;
-    //   this.obtenerImagenByAplicacion();
-    // });
+    this.router.queryParams.subscribe(params => {
+      this.id_aplicacion = params['id_aplicacion'] || null;
+      this.obtenerImagenByAplicacion();
+    });
   }
 
   obtenerImagenByAplicacion = () =>{
+    debugger
     let Data = {
-      id_aplicacion: this.id_aplicacion
+      id_aplicacion: Number(this.id_aplicacion) 
     }
-    const formData = {...Data};
-    // this.http.post(this.baseUrl + 'ComponenteLogin/Obtener_Imagen_By_Aplicacion', formData).subscribe((result : any) => {
-    //   var binary = atob(result.data.replace(/\s/g, ''));
-    //       var len = binary.length;
-    //       var buffer = new ArrayBuffer(len);
-    //       var view = new Uint8Array(buffer);
-    //       for (var e = 0; e < len; e++) {
-    //         view[e] = binary.charCodeAt(e);
-    //       }
-    //       var blob = new Blob([view], { type: this.contentType });
-    //       var urlArchivo = URL.createObjectURL(blob);
-    //       this.urlArchivo= this.sanitizer.bypassSecurityTrustResourceUrl(urlArchivo);
-    // }, error => console.error(error));
+
+    this.componenteLoginService.obtenerImagenByAplicacion(Data)
+      .then(resp => {
+        debugger
+        var binary = atob(resp.data.replace(/\s/g, ''));
+        var len = binary.length;
+        var buffer = new ArrayBuffer(len);
+        var view = new Uint8Array(buffer);
+        for (var e = 0; e < len; e++) {
+          view[e] = binary.charCodeAt(e);
+        }
+        var blob = new Blob([view], { type: this.contentType });
+        var urlArchivo = URL.createObjectURL(blob);
+        this.urlArchivo= this.sanitizer.bypassSecurityTrustResourceUrl(urlArchivo);
+      })
+      .catch(err => []);
   }
 
   iniciarSesionPersonaNatural = () =>{
@@ -66,13 +70,30 @@ export class SesionPersonaComponent implements OnInit {
         dni: this.numero_documento,
         clave: this.contrasena
       }
-      const formData = {...Data};
-      // this.http.post(this.baseUrl + 'ComponenteLogin/IniciarSesionExtranet', formData).subscribe(result => {
-      // this.spinner.hide();
-      // debugger
-      // }, error => console.error(error));
+      this.componenteLoginService.IniciarSesionExtranet(Data)
+      .then(resp => {
+        debugger
+        if (resp.id > 0) {
+
+        }
+       
+      })
+      .catch(err => []);
     }
    
+  }
+
+  fnCargarAplicacion = (persona) =>{
+    // this.componenteLoginService.p_Obtener_Datos_Aplicacion_By_Usuario({
+    //    IdTipoPersona: persona.idTipoPersona,
+    //    NroDocumento: persona.nroDocumento,
+    //    NroDocPerNatural: persona.nroDocPerNatural,
+    //    id_aplicacion: this.id_aplicacion
+    // })
+    // .then(resp => {
+    //   debugger      
+    // })
+    // .catch(err => []);
   }
 
   changeNroDocumento = () =>{

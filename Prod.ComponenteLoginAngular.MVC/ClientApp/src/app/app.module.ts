@@ -38,6 +38,7 @@ import { FormularioNuevoUsuarioComponent } from './shared/modal/formulario-nuevo
 import { HabiDesaDomicilioComponent } from './shared/modal/habi-desa-domicilio/habi-desa-domicilio.component';
 import { FormularioAdjuntarObservacionComponent } from './shared/modal/formulario-adjuntar-observacion/formulario-adjuntar-observacion.component';
 import { ActualizarDatosNotifFisicaComponent } from './shared/modal/actualizar-datos-notif-fisica/actualizar-datos-notif-fisica.component';
+import { ComponenteLoginService } from './services/componenteLogin.service';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { ActualizarDatosNotifFisicaComponent } from './shared/modal/actualizar-d
     HabiDesaDomicilioComponent,
     FormularioAdjuntarObservacionComponent,
     ActualizarDatosNotifFisicaComponent,
+    
     //componentes.DatepickerComponent,
     //DateFormatPipe
     // components.DatatableBodyComponent,
@@ -98,6 +100,7 @@ import { ActualizarDatosNotifFisicaComponent } from './shared/modal/actualizar-d
     // { provide: HTTP_INTERCEPTORS, useClass: HttpClientInterceptor, multi: true },
     ComunService,
     UbigeoService,
+    ComponenteLoginService
   ],
 
   bootstrap: [AppComponent]

@@ -3,7 +3,7 @@ using Release.Helper.Proxy;
 using System;
 using System.Net.Http;
 
-namespace Prod.ComponenteLogin.MVC.Configuracion.Proxy
+namespace Prod.ComponenteLogin.MVC.Configuracion
 {
 	public class LoginProxy : BaseProxy
 	{

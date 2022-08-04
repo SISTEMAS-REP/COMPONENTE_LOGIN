@@ -5,7 +5,7 @@
     <div class="login">
     <header class="login__header">
        <div class="logo-produce">
-         <img src="../../assets/img/logo_produce.PNG" alt="Logo" title="Logo" width="138">
+         <img src="../assets/img/logo_produce.PNG" alt="Logo" title="Logo" width="138">
        </div>  
        <div class="logo-aplicacion">
         <img [src]="urlArchivo" alt="archivo"  width="138">
@@ -26,7 +26,7 @@
             <div class="input-wrapper">
               <label for="contrasena">CONTRASEÑA</label>
               <input type="password"  id="contrasena" name="contrasena" placeholder="" [(ngModel)]="contrasena" (change)="changeContrasena()" maxlength="150" >
-              <img src="../../assets/img/ver_on.png" (click)="mostrarContrasena()" id="eyeContrasena" class="input-icon password">
+              <img src="../assets/img/ver_on.png" (click)="mostrarContrasena()" id="eyeContrasena" class="input-icon password">
             </div>
             <p class="validador" *ngIf="validadorContrasena">Debe ingresar la contraseña.</p>
           </div>
