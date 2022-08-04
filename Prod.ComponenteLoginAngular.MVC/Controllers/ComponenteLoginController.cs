@@ -16,6 +16,8 @@ using Prod.ServiciosExternos.PRODUCE_VIRTUAL.Roles;
 using Prod.ComponenteLogin.MVC.Configuracion;
 using PersonaResponse = Prod.ComponenteLoginAngular.MVC.Model.PersonaResponse;
 using Microsoft.AspNetCore.Authorization;
+using Prod.ComponenteLogin.Entidades.AplicacionUsuario;
+using Newtonsoft.Json.Linq;
 
 namespace Prod.ComponenteLoginAngular.MVC.Controllers
 {
@@ -389,6 +391,55 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
             return Ok(response);
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("obtenerDatoAplicacionByUsuario")]
+        public IActionResult obtenerDatoAplicacionByUsuario([FromBody] PersonaRequest request)
+        {
+            var user = new StatusResponse<UsuarioExtranet>();
+            var userName = "";
+            StatusResponse aplicaciones = new StatusResponse();
+            try
+            {
+                if (request.IdTipoPersona == (int)TIPO_PERSONA.JURIDICA)
+                {
+                    userName = request.NroDocumento + request.NroDocPerNatural;
+                    user = produceVirtualServicio.GetUsuarioUserName(userName);
+                }
+                else if (request.IdTipoPersona == (int)TIPO_PERSONA.NATURAL)
+                {
+                    userName = request.NroDocPerNatural;
+                    user = produceVirtualServicio.GetUsuarioUserName(userName);
+                }
+
+                //var sr = comunConsultaProxy.p_Obtener_Datos_Aplicacion_By_Usuario(userName);
+
+              
+                dynamic jsonToken = new JObject();
+                jsonToken.userName = userName;
+                jsonToken.type = "E";
+                jsonToken.dni = request.IdTipoPersona == (int)TIPO_PERSONA.JURIDICA ? request.NroDocPerNatural : request.NroDocumento;
+                jsonToken.time = DateTime.Now;
+                jsonToken.appId = request.id_aplicacion;
+                string tokenEncrypted = Functions.Encrypt(jsonToken.ToString());
+                string customUrl = "https://detupa.produce.gob.pe/"; //elemento.url_extranet;
+                //if (customUrl.EndsWith("#"))
+                //{
+                    
+                //}
+                if (customUrl.EndsWith("/"))
+                {
+                    customUrl = customUrl.TrimEnd('/');
+                }
+                aplicaciones.Data = customUrl + string.Format("?var={0}", tokenEncrypted);
+            }
+            catch (Exception ex)
+            {
+               
+            }
+
+            return Ok(aplicaciones);
+        }
     }
 
 }
