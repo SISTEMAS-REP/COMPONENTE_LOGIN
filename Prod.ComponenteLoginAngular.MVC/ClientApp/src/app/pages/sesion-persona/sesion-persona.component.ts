@@ -155,5 +155,4 @@ export class SesionPersonaComponent implements OnInit {
     return !!/[\d\s]/.test(input);
    }
 
-
 }

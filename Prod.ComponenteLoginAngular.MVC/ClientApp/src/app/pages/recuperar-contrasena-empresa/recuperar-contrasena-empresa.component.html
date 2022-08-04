@@ -1,48 +1,52 @@
-<div class="container">
-    <form [formGroup]="form" (ngSubmit)="fnBtnRecuperarContrasena()">
-        <div class="formularios">
-            <div class="col-md-12"><img src="/assets/img/logo-produce2.png"><br><br><br></div>
-            <h2 align="center">Recuperar contraseña cuenta Empresa</h2><br><br><br>
-            <div class="form-group row">
-                <!-- <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
-                    <label for="linea">RUC o correo electrónico</label>
-                    <input name="" type="text"
-                        class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-maxlength" id=""
-                        placeholder="Ingresar RUC10, RUC15 o correo eletrónico" maxlength="500" ng-model="">
-                </div> -->
-                <mat-form-field appearance="fill" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <mat-label>Número de RUC (*)</mat-label>
-                <input
-                  matInput
-                  placeholder="Ingresar su RUC"
-                  maxlength="11"
-                  formControlName="numeroDocumento"
-                  (keypress)="numberOnly($event)"
-                />
-                <mat-error *ngIf="numeroDocumentoErrors">{{ numeroDocumentoErrors }}</mat-error>
-              </mat-form-field>
-              <!-- <mat-form-field appearance="fill" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <mat-label>Número de DNI/CE (*)</mat-label>
-                <input
-                  matInput
-                  placeholder="Ingresar su DNI/CE"
-                  maxlength="11"
-                  formControlName="nroDocPerNatural"
-                />
-                <mat-error *ngIf="nroDocPerNaturalErrors">{{ nroDocPerNaturalErrors }}</mat-error>
-              </mat-form-field> -->
-            </div>
-            <div class="form-group row">
-                <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
-                    <input type="submit" class="btn btn-tramite2" value="Recuperar" />
-                </div>
-                <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
-                    <input type="button" (click)="fnGoToPrincipal()" class="btn btn-tramite2" value="Regresar" style="color: #fff;
-                    background-color: #666;
-                    border-color: #666;
-                    border-radius: 4px;" />
-                </div>
-            </div>
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+  <p style="font-size: 20px; color: white">Procesando información, por favor no cierre la ventana.</p>
+</ngx-spinner>
+<body class="align">
+    <div class="login">     
+      <header class="login__header">
+        <div class="logo-produce">
+          <img src="../../assets/img/logo_produce.PNG" alt="Logo" title="Logo" width="138">
+        </div>  
+        <div class="logo-aplicacion">
+          <img src="../../assets/img/logo_vusp.png" alt="Logo" title="Logo" width="138">
         </div>
-    </form>
-</div>
+        <div class="title" *ngIf="!validaSuccess">
+          <h3>Recuperar contraseña</h3>
+          <p>Persona Jurídica</p>
+        </div>         
+      </header>  
+      <form class="login__form">     
+        <div *ngIf="!validaSuccess">
+          <div>
+            <label for="ruc">RUC</label>
+            <input type="text" id="ruc" name="ruc" [(ngModel)]="numeroDocumento" placeholder="Ej.:10152346872"  maxlength="11" (change)="changeRuc()" (keypress)="restrictNumeric($event)">
+            <p class="validador" *ngIf="validarRuc">Debe ingresar el número de RUC.</p>
+         </div>
+          <!-- <div>
+              <label for="numeroDoc">NÚMERO DE DOCUMENTO</label>
+              <input type="text" id="numeroDoc" name="numeroDoc" placeholder="Ej.:15234687">
+          </div> -->
+      
+        <div>
+          <button class="buttonSiguiente" (click)="fnBtnRecuperarContrasena()">Recuperar contraseña</button>    
+        </div>
+  
+        <div class="footer">
+          <p>¿No tienes una cuenta de empresa?</p>  
+          <a href="#">Crea una ahora</a>
+        </div>
+        </div> 
+        
+
+
+        <div *ngIf="validaSuccess">
+          <h3>¡Listo!</h3>
+          <p>Se te ha enviado un link a tu correo registrado</p>
+        </div>
+        
+  
+      </form>
+    </div>
+
+  </body>
+  

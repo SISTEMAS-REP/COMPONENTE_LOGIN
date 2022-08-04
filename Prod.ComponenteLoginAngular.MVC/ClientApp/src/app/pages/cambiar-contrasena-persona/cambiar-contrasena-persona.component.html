@@ -1,0 +1,106 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+  <p style="font-size: 20px; color: white">Procesando información, por favor no cierre la ventana.</p>
+</ngx-spinner>
+<body class="align">
+    <div class="login">
+      <div *ngIf="isVisiblePaso1 || isVisiblePaso2 ">
+        <header class="login__header">
+          <div class="logo-produce">
+            <img src="../../assets/img/logo_produce.PNG" alt="Logo" title="Logo" width="138">
+          </div>  
+          <div class="logo-aplicacion">
+            <img src="../../assets/img/logo_vusp.png" alt="Logo" title="Logo" width="138">
+          </div>
+          <h3>Cambiar contraseña</h3>
+          <p>Persona Natural</p>
+       </header>
+    </div>
+
+      <form class="login__form" >     
+        <div *ngIf="isVisiblePaso1">
+        <div>
+            <div class="input-wrapper">
+              <label for="contrasenaActual">CONTRASEÑA ACTUAL</label>
+              <input type="password"  id="contrasenaActual" name="contrasenaActual" placeholder="" [(ngModel)]="contrasenaActual" (change)="changeContrasenaActual($event)" maxlength="150" >      
+            <img src="../../assets/img/ver_on.png" (click)="mostrarContrasenaActual()" id="eyeContrasenaActual" class="input-icon password">
+            </div>
+            <p class="validador" *ngIf="validadorContrasenaActual">Debe ingresar la contraseña.</p>
+        </div>
+    
+        <div class="align-right">
+          <a href="#">Recuperar contraseña</a>
+        </div>
+        
+        <div>
+          <button class="buttonSiguiente" (click)="clickPaso2()" >Siguiente</button>    
+        </div>
+      </div> 
+
+      <div *ngIf="isVisiblePaso2">
+        <div>
+            <div class="input-wrapper">
+              <label for="contrasenaNueva">CONTRASEÑA NUEVA</label>
+              <input type="password"  id="contrasenaNueva" name="contrasenaNueva" placeholder="" [(ngModel)]="contrasenaNueva" (change)="changeContrasenaNueva($event)" maxlength="150" >      
+              <img src="../../assets/img/ver_on.png" (click)="mostrarContrasenaNueva()" id="eyeContrasenaNueva" class="input-icon password">
+            </div>
+              <p class="validador" *ngIf="validadorContrasenaNueva">Debe ingresar la contraseña.</p>
+              <p class="validador" *ngIf="validadorRequisitosContrasenaNueva">La contraseña debe cumplir con los requistos</p>
+        </div>
+    
+         <div>
+            <div class="input-wrapper">
+              <label for="contrasenaRep">REPETIR CONTRASEÑA NUEVA</label>
+              <input type="password"  id="contrasenaRep" name="contrasenaRep" placeholder="" [(ngModel)]="contrasenaRep" (change)="changeContrasenaRep($event)" maxlength="150" >      
+              <img src="../../assets/img/ver_on.png" (click)="mostrarContrasenaRep()" id="eyeContrasenaRep" class="input-icon password">
+            </div>
+              <p class="validador" *ngIf="validadorContrasenaRep || validadorContrasenaRepetir">No coincide con la contraseña ingresada.</p>
+        </div> 
+    
+
+        <div>
+            <div class="left">
+              <label class="radio">Al menos un simbolo
+               <input type="radio"  name="radioSimbolo" [checked]="ValidadorSimbolo" disabled>
+               <span class="checkradio"></span>
+              </label>
+           </div>         
+           <div class="left">
+            <label class="radio">Al menos una mayúscula
+             <input type="radio"  name="radioMayus" [checked]="ValidadorMayuscula" disabled>
+             <span class="checkradio"></span>
+            </label>
+         </div>
+           <div class="left">
+            <label class="radio">Al menos un número
+             <input type="radio"  name="radioNumero" [checked]="ValidadorNumeros" disabled >
+             <span class="checkradio"></span>
+            </label>
+         </div>
+         <div class="left">
+            <label class="radio">Más de 8 digitos
+             <input type="radio"  name="radioDigitos" [checked]="Validador8Digitos" disabled>
+             <span class="checkradio"></span>
+            </label>
+         </div>
+         </div>
+
+         <div>
+            <button class="buttonSiguiente" (click)="cambiarContrasena()" >Cambiar contraseña</button>    
+          </div>
+    </div>
+    
+        <div *ngIf="isVisiblePaso3">
+            <div class="center">
+              <h3>Contraseña cambiada</h3>
+              <label class="center">Tu contraseña fue guardada con exito</label>
+            </div>
+
+           <div>
+             <button class="buttonSiguiente" >Ir a inicio</button>    
+           </div>
+        </div>
+      </form>
+    </div>
+  </body>
+  
+
