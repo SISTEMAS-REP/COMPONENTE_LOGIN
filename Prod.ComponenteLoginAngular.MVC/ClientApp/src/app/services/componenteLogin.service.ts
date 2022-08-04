@@ -32,4 +32,17 @@ export class ComponenteLoginService {
       throw err.data || err;
     }
   }
+
+  async obtenerDatoAplicacionByUsuario(request) {
+    const formData = {...request};
+    const url = `${this.baseUrl}/obtenerDatoAplicacionByUsuario`;
+    try {
+      const resp = await axios
+        .post(url, formData);
+      return resp.data;
+    } catch (err) {
+      throw err.data || err;
+    }
+  }
+
 }

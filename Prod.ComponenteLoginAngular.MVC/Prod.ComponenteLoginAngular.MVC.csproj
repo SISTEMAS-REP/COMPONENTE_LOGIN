@@ -32,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Prod.ComponenteLogin.Entidades\Prod.ComponenteLogin.Entidades.csproj" />
     <ProjectReference Include="..\Prod.ComponenteLogin.MVC.Configuracion\Prod.ComponenteLogin.MVC.Configuracion.csproj" />
   </ItemGroup>
 

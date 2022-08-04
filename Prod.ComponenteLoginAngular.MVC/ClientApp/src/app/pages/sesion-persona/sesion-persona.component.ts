@@ -4,6 +4,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ComponenteLoginService } from 'src/app/services/componenteLogin.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-sesion-persona',
@@ -72,9 +73,36 @@ export class SesionPersonaComponent implements OnInit {
       }
       this.componenteLoginService.IniciarSesionExtranet(Data)
       .then(resp => {
+        this.spinner.hide();
         debugger
         if (resp.id > 0) {
-
+          debugger
+          var frm = document.createElement('form');
+          frm.id = "frmLogin";
+          frm.method = 'POST';
+          frm.action = `${environment.apiWebPV}/ExtranetToken/login`;
+          var campo = document.createElement("input");
+          campo.setAttribute("name", "Login");
+          campo.setAttribute("value", this.numero_documento);
+          var campo2 = document.createElement("input");
+          campo2.setAttribute("name", "password");
+          campo2.setAttribute("value", this.contrasena);
+          var campo3 = document.createElement("input");
+          campo3.setAttribute("name", "RememberMe");
+          campo3.setAttribute("value", 'false');
+          var campo5 = document.createElement("input");
+          campo5.setAttribute("name", "TipoPersona");
+          campo5.setAttribute("value", "1");
+          frm.appendChild(campo);
+          frm.appendChild(campo2);
+          frm.appendChild(campo3);
+          frm.appendChild(campo5);
+          document.body.append(frm);
+          frm.submit();
+          document.getElementById('frmLogin').remove();
+          debugger
+          this.fnCargarAplicacion();
+          debugger
         }
        
       })
@@ -83,17 +111,23 @@ export class SesionPersonaComponent implements OnInit {
    
   }
 
-  fnCargarAplicacion = (persona) =>{
-    // this.componenteLoginService.p_Obtener_Datos_Aplicacion_By_Usuario({
-    //    IdTipoPersona: persona.idTipoPersona,
-    //    NroDocumento: persona.nroDocumento,
-    //    NroDocPerNatural: persona.nroDocPerNatural,
-    //    id_aplicacion: this.id_aplicacion
-    // })
-    // .then(resp => {
-    //   debugger      
-    // })
-    // .catch(err => []);
+  fnCargarAplicacion = () =>{
+    debugger
+    this.componenteLoginService.obtenerDatoAplicacionByUsuario({
+       IdTipoPersona: 1,
+       NroDocumento: this.numero_documento,
+       NroDocPerNatural: this.numero_documento,
+       id_aplicacion: Number(this.id_aplicacion)
+    })
+    .then(resp => {
+      debugger
+      let targetURL = resp.data;
+      let newURL = document.createElement('a');
+      newURL.href = targetURL;
+      document.body.appendChild(newURL);
+      newURL.click();
+    })
+    .catch(err => []);
   }
 
   changeNroDocumento = () =>{
