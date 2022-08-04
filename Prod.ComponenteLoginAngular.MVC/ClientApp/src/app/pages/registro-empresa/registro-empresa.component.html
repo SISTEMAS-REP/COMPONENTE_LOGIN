@@ -1,186 +1,208 @@
 <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
   <p style="font-size: 20px; color: white">Procesando información, por favor no cierre la ventana.</p>
 </ngx-spinner>
-<div class="container">
-  <div class="formularios">
-    <form [formGroup]="formRegistroEmpresa" (ngSubmit)="registrarEmpresa()">       
-    <div class="row">
-      <div class="col-md-12"><img src="/assets/img/logo-produce2.png"><br><br><br></div>
-      <h2 align="center">Crea una cuenta de Empresa</h2>
-      <p align="center">
-        Regístrese y use esta cuenta para acceder a todas las aplicaciones,
-        comunidades, soporte y más del Ministerio de Producción.<br><br>
-      </p>
-      <div class="group-input">
-        <h4><strong>Información de la Empresa</strong></h4>
-
-        <mat-form-field appearance="fill" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-          <mat-label>Número de documento (*)</mat-label>
-          <input matInput placeholder="Ingresar número de documento" formControlName="numeroDocumento" maxlength="11"  />
-          <button mat-button matSuffix mat-stroked-button aria-label="search" type="button" (click)="fnBtnRUCBuscar()">
-              <mat-icon>search</mat-icon>
-          </button>
-          <mat-error *ngIf="numeroDocumentoErrors">{{ numeroDocumentoErrors }}</mat-error>
-      </mat-form-field>
-
-      <mat-form-field class="col-xs-12 col-sm-6 col-md-6 col-lg-6" appearance="fill" *ngIf="false">
-        <mat-label>Sector (*)</mat-label>
-        <mat-select matInput  formControlName="sector"  >
-        <mat-option value=0>--Seleccionar--</mat-option>
-        <mat-option matTooltip = {{p.label}} matTooltipPosition="right"
-        [value]="p.value" *ngFor="let p of listaSector">
-            {{p.label}}</mat-option>
-        </mat-select>  
-        <mat-error *ngIf="sectorErrors">{{ sectorErrors }}</mat-error>                 
-    </mat-form-field>  
-        <div class="clearfix"></div>
-
-        <mat-form-field appearance="fill" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <mat-label>Razon Social (*)</mat-label>
-          <input matInput placeholder="Campo autocompletado con RUC" maxlength="500"
-          formControlName="razonSocial" readonly />
-          <mat-error *ngIf="razonSocialErrors">{{ razonSocialErrors }}</mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="fill" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <mat-label>Dirección (*)</mat-label>
-          <input matInput placeholder="Ingresar una dirección" maxlength="500" formControlName="direccion" />
-          <mat-error *ngIf="direccionErrors">{{ direccionErrors }}</mat-error>
-        </mat-form-field>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><br></div>
-
-        <h4>
-          <strong>Información Personal (Representante Legal)</strong><br>
-        </h4>
-
-        <mat-form-field appearance="fill" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-          <mat-label>Número de documento(*)</mat-label>
-          <input matInput placeholder="Ingresar número de documento" formControlName="nroDocPerNatural"  />
-          <button mat-button matSuffix mat-stroked-button aria-label="search" type="button" (click)="fnBtnPersonaBuscar()">
-              <mat-icon>search</mat-icon>
-          </button>
-          <mat-error *ngIf="nroDocPerNaturalErrors">{{ nroDocPerNaturalErrors }}</mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="fill" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-          <mat-label>Nombres (*)</mat-label>
-          <input matInput placeholder="Campo autocompletado con DNI/RUC" maxlength="200"
-          formControlName="nombres" readonly />
-          <mat-error *ngIf="nombresErrors">{{ nombresErrors }}</mat-error>
-      </mat-form-field>
-      <mat-form-field appearance="fill" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-          <mat-label>Apellidos (*)</mat-label>
-          <input matInput placeholder="Campo autocompletado con DNI/RUC" maxlength="200"
-          formControlName="apellidos" readonly />
-          <mat-error *ngIf="apellidosErrors">{{ apellidosErrors }}</mat-error>
-      </mat-form-field>
-
-        <mat-form-field appearance="fill" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-          <mat-label>Celular (*)</mat-label>
-          <input matInput placeholder="Ingresar número de celular" maxlength="9"
-          formControlName="celular" />
-          <mat-error *ngIf="celularErrors">{{ celularErrors }}</mat-error>
-      </mat-form-field>
-
-        <!-- <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-          <label for="linea">Correo electrónico</label>
-          <input type="email"
-                 class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-maxlength"
-                 maxlength="500" [(ngModel)]="form.CorreoElectronico" placeholder="Ingresar correo electrónico">
+<body class="align">
+    <div class="login">
+      <header class="login__header">
+        <div class="logo-produce">
+          <img src="../../assets/img/logo_produce.PNG" alt="Logo" title="Logo" width="138">
+        </div>  
+        <div class="logo-aplicacion">
+          <img src="../../assets/img/logo_vusp.png" alt="Logo" title="Logo" width="138">
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-          <label for="linea">Correo electrónico</label>
-          <input type="email"
-                 class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-maxlength"
-                 maxlength="500" [(ngModel)]="form.CorreoElectronico2" placeholder="Ingresar correo electrónico">
-        </div> -->
-        <mat-form-field appearance="fill" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-          <mat-label>Correo electrónico (*)</mat-label>
-          <input matInput placeholder="Ingresar correo electrónico" maxlength="100"
-          formControlName="correo" />
-          <mat-error *ngIf="correoErrors">{{ correoErrors }}</mat-error>
-      </mat-form-field>
-      <mat-form-field appearance="fill" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-          <mat-label>Contraseña (*)</mat-label>
-          <input  type="password" matInput placeholder="Ingresar contraseña" maxlength="9"
-          formControlName="contrasena" />
-          <mat-error *ngIf="contrasenaErrors">{{ contrasenaErrors }}</mat-error>
-          <mat-hint style="color: #9B9B9B">Usa 8 o más caracteres con una combinación de letras, números y símbolos</mat-hint>   
-      </mat-form-field>
-        <!-- <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-          <label for="linea">Contraseña</label>
-          <input type="password"
-                 class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-maxlength"
-                 maxlength="500" [(ngModel)]="form.Contrasena" placeholder="Ingresar una contraseña">
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-          <label for="linea">Contraseña</label>
-          <input type="password"
-                 class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-maxlength"
-                 maxlength="500" [(ngModel)]="form.Contrasena2" placeholder="Ingresar una contraseña">
-        </div> -->
-        <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <div style="color: #9B9B9B">
-            Usa 8 o más caracteres con una conbinación de letras, números y
-            símbolos
+          <h3>REGISTRATE</h3>
+          <p>Persona Jurídica</p>
+          <div class="Pasos">
+            <button class="buttonPaso" (click)="clickPaso1()" >1</button>
+            <button class="buttonPaso"  [ngClass]="ispaso2 === true  ? 'disabled' : 'null'" (click)="clickPaso2()" >2</button>
+            <button class="buttonPaso"  [ngClass]="ispaso3 === true  ? 'disabled' : 'null'" (click)="clickPaso3()" >3</button>
+            <button class="buttonPaso"  [ngClass]="ispaso4 === true  ? 'disabled' : 'null'" (click)="clickPaso4()" >4</button>
           </div>
-        </div> -->
-      </div>
-    </div>
-    <div class="form-group row">
-      <!-- <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
-        <input type="checkbox">&nbsp; Acepta los <span style="color: #157BDF">
-          términos, condiciones y
-          políticas de privacidad de Tu Empresa
-        </span>
-      </div> -->
-      <div appearance="fill" class="col-xs-12 col-md-12 col-sm-12 col-lg-12" style="padding-top: 15px;">
-        <mat-checkbox class="check" formControlName="terminos"> </mat-checkbox>
-        &nbsp; Acepta los <span style="color: #157BDF">términos, condiciones y
-            políticas de privacidad de tu Empresa</span>
-            <mat-error *ngIf="terminosErrors">{{ terminosErrors }}</mat-error>
-    </div>
-    </div>
-    <div class="form-group row">
-      <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
-        <!-- <input type="button" class="btn btn-tramite2" (click)="fnBtnRegistrar()" value="Regístrate" /> -->
-        <input type="submit" class="btn btn-tramite2" value="Regístrate" />
-      </div>
-    </div>
-  </form>
-    <div class="form-group row">
-      <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12" align="center">
-        ¿Ya tienes cuenta de empresa? <a [routerLink]="['/sesion-empresa']">¡Ingresa aquí!</a>
-      </div>
-    </div>
-  </div>
-</div>
+    </header>
 
-<!-- <button class="btn btn-lg btn-outline-primary" (click)="open()">Launch demo modal</button>
-
-<app-modal #modal [modalConfig]="modalConfig">
-  It works!
-</app-modal>
-<div>
-  <button type="button" id="button" class="btn btn-outline-dark" style="margin: auto" (click)="openModal()">Click me</button>
-</div>
-
-<div class="alert alert-info" role="alert"> Bootstrap alert</div>
-
-<div class="" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Modal title</h4>
+    <form class="login__form" >     
+    <div *ngIf="isVisiblePaso1">
+      <h5 class="center">DATOS EMPRESA</h5>
+      <div>
+          <label for="ruc">RUC</label>
+          <input type="text" id="ruc" name="ruc" placeholder="Ej. : 20543216789"  [(ngModel)]="ruc" (change)="changeRuc($event)"  maxlength="11" (blur)="btnBuscarRUC()" (keypress)="restrictNumeric($event)">
+          <p class="validador" *ngIf="validadorRuc">Debe ingresar el RUC.</p>
+          <p class="validador" *ngIf="validadorRucDigitos">El RUC debe tener 11 digitos.</p>
+        </div>
+      
+       <div>
+        <label for="razonSocial">RAZÓN SOCIAL</label>
+        <input type="text" id="razonSocial" name="razonSocial" placeholder="Ej. : Base - Base Corporation" [(ngModel)]="razonSocial" (change)="changeRazonSocial($event)" maxlength="300" disabled>
+        <p  class="validador" *ngIf="validadorRazonSocial">Debe ingresar la razón social.</p>
       </div>
-      <div class="modal-body">
-        <p>One fine body&hellip;</p>
+
+      <div>
+        <label for="direccion">DIRECCIÓN</label>
+        <input type="text" id="direccion" name="direccion" placeholder="Ej. : Calle C 3517 , Lima"  [(ngModel)]="direccion" (change)="changeDireccion($event)"  maxlength="300" disabled>
+        <p  class="validador" *ngIf="validadorDireccion">Debe ingresar la dirección.</p>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+
+      <div>
+        <button class="buttonSiguiente" (click)="clickPaso2()">Siguiente</button>
+        <button class="buttonCancelar">Cancelar</button>
       </div>
+
     </div>
-  </div>
-</div> -->
+
+
+    <div *ngIf="isVisiblePaso2">
+
+      <h5 class="center">DATOS REPRESENTANTE LEGAL</h5>
+
+       <div class="column">
+          <div class="left">
+              <label for="tipoDoc">TIPO DOCUMENTO</label>
+              <select type="tipoDoc" name="select" placeholder="Seleccionar" [(ngModel)]="tipoDoc" (change)="changeTipoDocumento($event)">
+                <option value="0">--Seleccionar--</option>
+                <option value="1">DNI</option>
+                <option value="2">Carnet de Extranjería</option>
+                </select>
+                <p class="validador" *ngIf="validadorTipoDocumento">Debe ingresar el tipo de documento.</p>
+          </div>    
+
+          <div class="right">
+              <label for="numeroDoc">NÚMERO DOCUMENTO</label>
+              <input type="text" id="numeroDoc" name="numeroDoc" placeholder="Ej.:15234687" [(ngModel)]="numeroDoc" (change)="changeNroDocumento($event)" maxlength="12" (blur)="btnBuscarDNI()" [disabled]="isDisableNroDocumento" (keypress)="restrictNumeric($event)">
+              <p class="validador" *ngIf="validadorNroDocumento">Debe ingresar el número de documento.</p>
+            </div>
+      </div>
+  
+        <div>
+          <label for="apellidos">APELLIDOS</label>
+          <input type="text" id="apellidos" name="apellidos" placeholder="Ejm:Flores Sánchez" [(ngModel)]="apellidos" (change)="changeApeliidos($event)" maxlength="150" disabled>
+          <p  class="validador" *ngIf="validadorApellidos">Debe ingresar los apellidos.</p>
+        </div>
+  
+        <div>
+          <label for="nombres">NOMBRES</label>
+          <input type="text" id="nombres" name="nombres" placeholder="Ej.:Camila" [(ngModel)]="nombres" (change)="changeNombres($event)" maxlength="150" disabled>
+          <p class="validador" *ngIf="validadorNombres">Debe ingresar los nombres.</p>
+        </div>
+
+        <div>
+          <button class="buttonSiguiente" (click)="clickPaso3()">Siguiente</button>
+          <button class="buttonCancelar" (click)="clickPaso1()">Regresar</button>
+        </div>
+
+    </div>
+
+    <div *ngIf="isVisiblePaso3">
+
+        <h5 class="center">DATOS DE CONTACTO</h5>
+
+        <div>
+          <label for="celular">CELULAR</label>
+          <input type="text" id="celular" name="celular" placeholder="Ej.:999123045" maxlength="9" [(ngModel)]="celular" (change)="changeCelular($event)" (keypress)="restrictNumeric($event)">
+          <p class="validador" *ngIf="validadorCelular">Debe ingresar el celular.</p>
+          <p class="validador" *ngIf="validadorCelularLength">El celular debe contener 9 digitos</p>
+        </div>
+  
+        <div>
+          <label for="correo">CORREO</label>
+          <input type="text" id="correo" name="correo" placeholder="Ej.:camila.flores@ejemplo.com" [(ngModel)]="correo" (change)="changeCorreo($event)">
+          <p class="validador" *ngIf="validadorCorreo">Debe ingresar el correo.</p>
+          <p class="validador" *ngIf="validadorCorreoInvalido">Correo inválido.</p> 
+        </div>
+  
+        <div>
+          <label for="correo_rep">REPETIR CORREO</label>
+          <input type="text" id="correo_rep" name="correo_rep" placeholder="Ej.:camila.flores@ejemplo.com" [(ngModel)]="correo_rep" (change)="changeCorreoRep($event)" >
+          <p class="validador" *ngIf="validadorCorreoRep || validadorCorreoRepetir">No coincide con el correo ingresado. </p>
+        </div>
+
+        <div>
+          <button class="buttonSiguiente" (click)="clickPaso4()">Siguiente</button>
+          <button class="buttonCancelar" (click)="clickPaso2()">Regresar</button>
+        </div>
+
+      </div>
+  
+
+      <div *ngIf="isVisiblePaso4">
+        <div>
+          <div class="input-wrapper">
+            <label for="contrasena">CONTRASEÑA</label>
+            <input type="password"  id="contrasena" name="contrasena" placeholder="" [(ngModel)]="contrasena" (change)="changeContrasena($event)" maxlength="150" >      
+            <img src="../../assets/img/ver_on.png" (click)="mostrarContrasena()" id="eyeContrasena" class="input-icon password">
+          </div>
+          <p class="validador" *ngIf="validadorContrasena">Debe ingresar la contraseña.</p>
+          <p class="validador" *ngIf="validadorRequisitosContrasena">La contraseña debe cumplir con los requistos</p>
+        </div>
+  
+        <div>
+          <div class="input-wrapper">
+            <label for="contrasena_rep">REPETIR CONTRASEÑA</label>
+            <input type="password"  id="contrasena_rep" name="contrasena_rep" placeholder="" [(ngModel)]="contrasena_rep" (change)="changeContrasenaRep($event)" maxlength="150" >      
+            <img src="../../assets/img/ver_on.png" (click)="mostrarContrasenaRepe()" id="eyeContrasena_rep" class="input-icon password">
+          </div>
+        <p class="validador" *ngIf="validadorContrasenaRep || validadorContrasenaRepetir">No coincide con la contraseña ingresada.</p>
+        </div>
+  
+        <div class="column">
+            <div class="left">
+              <label class="radio">Al menos un simbolo
+               <input type="radio"  name="radioSimbolo" [checked]="ValidadorSimbolo" disabled>
+               <span class="checkradio"></span>
+              </label>
+           </div>
+            
+            <div class="right">
+              <label class="radio">Al menos un número
+               <input type="radio"  name="radioNumero" [checked]="ValidadorNumeros" disabled >
+               <span class="checkradio"></span>
+              </label>
+           </div>
+         </div>
+    
+    
+         <div class="columnRadio">
+          <div class="left">
+            <label class="radio">Al menos una mayúscula
+             <input type="radio"  name="radioMayus" [checked]="ValidadorMayuscula" disabled>
+             <span class="checkradio"></span>
+            </label>
+         </div>
+          
+          <div class="right">
+            <label class="radio">Más de 8 digitos
+             <input type="radio"  name="radioDigitos" [checked]="Validador8Digitos" disabled>
+             <span class="checkradio"></span>
+            </label>
+         </div>
+       </div>
+
+
+       <label class="check" id="c1">Acepto los términos y la <a href="#">Política de Protección de Datos</a>
+        <input type="checkbox" name="terminos_politica" [(ngModel)]="terminos_politica"  (change)="changeTerminos($event)">
+        <span class="checkmark"></span>
+      </label>
+
+      <label class="check" id="c1">Acepto los términos y la mensajeria
+        <input type="checkbox" name="terminos_mensajeria" [(ngModel)]="terminos_mensajeria"  (change)="changeTerminos($event)" >
+        <span class="checkmark"></span>
+      </label>
+      <p class="validador" *ngIf="validadorTerminos">Marcar los términos y condiciones.</p>
+       
+        <div>
+          <button class="buttonSiguiente" (click)="registroEmpresaService()">Registrar</button>
+          <button class="buttonCancelar" (click)="clickPaso3()">Regresar</button>
+        </div>
+
+      </div>
+    
+  
+      <div class="footer">
+        <p>¿Ya tienes una cuenta?</p>  
+        <a href="#">Ingresa aquí</a>
+      </div>
+      
+      </form>
+    </div>
+  
+  </body>
+  

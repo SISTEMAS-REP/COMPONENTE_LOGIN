@@ -1,57 +1,55 @@
-<div class="container">
-  <form [formGroup]="form" (ngSubmit)="fnBtnRecuperarContrasena()">
-    <div class="formularios">
-      <div class="col-md-12">
-        <img src="/assets/img/logo-produce2.png" /><br /><br /><br />
-      </div>
-      <h2 align="center">Recuperar contraseña cuenta Personal</h2>
-      <br /><br /><br />
-      <div class="form-group row">
-        <mat-form-field
-          appearance="fill"
-          class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
-        >
-          <mat-label>Número de Documento de Identidad (*)</mat-label>
-          <input
-            matInput
-            placeholder="Ingresar su DNI"
-            maxlength="8"
-            formControlName="numeroDocumento"
-          />
-          <mat-error *ngIf="numeroDocumentoErrors">{{ numeroDocumentoErrors }}</mat-error>
-        </mat-form-field>
-        <mat-form-field
-          appearance="fill"
-          class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
-        >
-          <mat-label>Correo electrónico (*)</mat-label>
-          <input
-            matInput
-            placeholder="Ingresar correo electrónico"
-            maxlength="100"
-            formControlName="correo"
-          />
-          <mat-error *ngIf="correoErrors">{{ correoErrors }}</mat-error>
-        </mat-form-field>
-        <!-- <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
-                    <label for="linea">Número de Docuemento de Identidad o correo electrónico</label>
-                    <input name="" type="text"
-                        class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-maxlength" id=""
-                        placeholder="Ingresar tu DNI, CE, PS o pase temporal o correo electrónico" maxlength="500"
-                        ng-model="">
-                </div> -->
-      </div>
-      <div class="form-group row">
-        <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
-            <input type="submit" class="btn btn-tramite2" value="Recuperar" />
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+  <p style="font-size: 20px; color: white">Procesando información, por favor no cierre la ventana.</p>
+</ngx-spinner>
+<body class="align">
+    <div class="login">
+      <header class="login__header">
+        <div class="logo-produce">
+          <img src="../../assets/img/logo_produce.PNG" alt="Logo" title="Logo" width="138">
+        </div>  
+        <div class="logo-aplicacion">
+          <img src="../../assets/img/logo_vusp.png" alt="Logo" title="Logo" width="138">
         </div>
-        <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
-          <input type="button" (click)="fnGoToPrincipal()" class="btn btn-tramite2" value="Regresar" style="color: #fff;
-          background-color: #666;
-          border-color: #666;
-          border-radius: 4px;" />
+        <div class="title" *ngIf="!validaSuccess">
+          <h3>Recuperar contraseña</h3>
+          <p>Persona Natural</p>
+        </div>         
+    </header>
+
+      <form action="#" class="login__form" method="POST"> 
+        <div  *ngIf="!validaSuccess">
+          <div>
+            <label for="numeroDoc">NÚMERO DE DOCUMENTO</label>
+            <input type="text" id="numeroDoc" name="numeroDoc"  [(ngModel)]="numeroDocumento" placeholder="Ej.:15234687" (change)="changeNroDocumento()"  (keypress)="restrictNumeric($event)" maxlength="12">
+            <p class="validador" *ngIf="validarNroDocumento">Debe ingresar el número de documento.</p>
+        </div>
+  
+   
+        <div>
+          <label for="correo">CORREO ELECTRONICO</label>
+          <input type="text" id="correo" name="correo"  [(ngModel)]="email" placeholder="Ej.:camila.flores@ejemplo.com" (change)="changeEmail()">
+          <p class="validador" *ngIf="validarEmail">Debe ingresar el correo electronico.</p>
+        </div>
+  
+      <div>
+        <button class="buttonSiguiente" (click)="fnBtnRecuperarContrasena()">Recuperar contraseña</button>    
       </div>
+
+      <div class="footer">
+        <p>¿No tienes una cuenta de persona?</p>  
+        <a href="#">Crea una ahora</a>
       </div>
+        </div>             
+          
+
+        <div *ngIf="validaSuccess">
+          <h3>¡Listo!</h3>
+          <p>Se te ha enviado un link a tu correo registrado</p>
+        </div>
+        
+  
+      </form>
     </div>
-  </form>
-</div>
+
+  </body>
+  

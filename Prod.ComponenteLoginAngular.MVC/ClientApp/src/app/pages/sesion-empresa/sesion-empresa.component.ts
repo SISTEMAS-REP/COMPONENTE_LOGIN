@@ -1,122 +1,126 @@
-import { Component, OnInit } from '@angular/core';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
-import { Router } from '@angular/router';
-import { LoginService } from 'src/app/services/login.service';
-import { AlertService } from 'src/app/shared/componentes/services/alert.service';
-import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { Component, Inject, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-sesion-empresa',
   templateUrl: './sesion-empresa.component.html',
-  // styleUrls: ['./sesion-empresa.component.css']
+  styleUrls: ['./sesion-empresa.component.css']
 })
 export class SesionEmpresaComponent implements OnInit {
-  form = new formModel();
-  errors: any;
-  constructor(private loginService: LoginService,
-    private _alertService: AlertService,
-    private spinner: NgxSpinnerService,
-    private route: Router) {
-    this.errors = { ...DEFAULT_SESION_EMPRESA };
-  }
 
+  numero_documento : string = null;
+  contrasena : string = null;
+  ruc: string = null;
+
+  validadorRuc : boolean = false;
+  validadorNroDocumento: boolean = false;
+  validadorContrasena: boolean = false;
+  validadorRucDigitos: boolean = false;
+
+
+   constructor(
+    private spinner: NgxSpinnerService
+  ) {
+  }
   ngOnInit(): void {
-
   }
 
-  fnBtnIngresar = () => {
-    this.errors = { ...DEFAULT_SESION_EMPRESA };
-    if (this.validarForm()) {
+  iniciarSesionPersonaJuridica = () =>{
+    this.changeRuc();
+    this.changeNroDocumento();
+    this.changeContrasena();
+
+    if(!this.validadorRuc && !this.validadorNroDocumento && !this.validadorContrasena){
       this.spinner.show();
-      this.loginService.IniciarSesionExtranet({
-        ruc: this.form.NumeroDocumento,
-        dni: this.form.NroDocPerNatural,
-        clave: this.form.Contrasena
-      })
-        .then(resp => {
-          if (resp.id > 0) {
-            var frm = document.createElement('form');
-            frm.id = "frmLogin";
-            frm.method = 'POST';
-            frm.action = `${environment.apiWebPV}/ExtranetToken/login`;
-            var campo = document.createElement("input");
-            campo.setAttribute("name", "Login");
-            campo.setAttribute("value", this.form.NroDocPerNatural);
-            var campo2 = document.createElement("input");
-            campo2.setAttribute("name", "password");
-            campo2.setAttribute("value", this.form.Contrasena);
-            var campo3 = document.createElement("input");
-            campo3.setAttribute("name", "RememberMe");
-            campo3.setAttribute("value", 'false');
-            var campo4 = document.createElement("input");
-            campo4.setAttribute("name", "Ndocumento");
-            campo4.setAttribute("value", this.form.NumeroDocumento);
-            var campo5 = document.createElement("input");
-            campo5.setAttribute("name", "TipoPersona");
-            campo5.setAttribute("value", "2");
-            frm.appendChild(campo);
-            frm.appendChild(campo2);
-            frm.appendChild(campo3);
-            frm.appendChild(campo4);
-            frm.appendChild(campo5);
-            document.body.append(frm);
-            frm.submit();
-            document.getElementById('frmLogin').remove();
-            this.spinner.hide();
-          }
-          else {
-            this.spinner.hide();
-            this._alertService.open(
-              "error",
-              "Los datos ingresados son inválidos"
-            );
-          }
-        })
-        .catch(err => []);
+      let Data = {
+        dni: this.numero_documento,
+        clave: this.contrasena,
+        ruc: this.ruc
+      }
+  
+      const formData = {...Data};
+      // this.http.post(this.baseUrl + 'ComponenteLogin/IniciarSesionExtranet', formData).subscribe(result => {
+      // this.spinner.hide();
+      // }, error => console.error(error));
+    }    
+  }
+
+  changeRuc = () =>{
+    if(this.ruc == null || this.ruc == ""){
+      this.validadorRuc = true;
+    }
+    else{
+      if( this.ruc.length < 11){    
+        this.validadorRucDigitos = true;
+        this.validadorRuc = false;
+      }
+      else {
+        this.validadorRucDigitos = false;
+        this.validadorRuc = false;
+      } 
+     
+    }
+  }
+  
+  changeNroDocumento = () =>{
+    if(this.numero_documento == null || this.numero_documento == ""){
+      this.validadorNroDocumento = true;
+    }
+    else{
+      this.validadorNroDocumento = false;
     }
   }
 
-  validarForm = () => {
-    var hashErrors = false;
-    var errores = {};
-    if ((this.form.NumeroDocumento || '') == '') {
-      errores["NumeroDocumento"] = "Debe ingresar el número de ruc";
-      hashErrors = true;
+  changeContrasena = () =>{
+    if(this.contrasena == null || this.contrasena == ""){
+      this.validadorContrasena = true;
     }
-
-    if ((this.form.NroDocPerNatural || '') == '') {
-      errores["NroDocPerNatural"] = "Debe ingresar el número de documento de identidad";
-      hashErrors = true;
+    else{
+      this.validadorContrasena = false;
     }
+  }
 
-    if ((this.form.Contrasena || '') == '') {
-      errores["Contrasena"] = "Debe ingresar la contraseña";
-      hashErrors = true;
+  mostrarContrasena(){
+    let contrasena :any = document.getElementById('contrasena');
+    let eyeContrasena :any = document.getElementById('eyeContrasena');
+    
+    if(contrasena.type == "password"){
+      contrasena.type = "text";
+      eyeContrasena.style.opacity=0.8;
     }
+    else{
+      contrasena.type = "password";
+      eyeContrasena.style.opacity=0.4;
+    }
+  }
 
-    if (hashErrors) {
-      this.errors = errores;
-      this._alertService.open(
-          "warning",
-          "Complete y verifique todos los campos obligatorios"
-      );
-
-      return false;
-    } else {
+  public restrictNumeric(e) {
+    let input;
+    if (e.metaKey || e.ctrlKey) {
       return true;
     }
-  };
-}
+    if (e.which === 32) {
+     return false;
+    }
+    if (e.which === 0) {
+     return true;
+    }
+    if (e.which === 46) {
+      return true;
+     }
+    if (e.which < 33) {
+      return true;
+    }
+    if (e.which === 188){
+        return true;
+      }
+     
 
-class formModel {
-  NumeroDocumento?: string;
-  NroDocPerNatural?: string;
-  Contrasena?: string;
-}
+    input = String.fromCharCode(e.which);
+    return !!/[\d\s]/.test(input);
+   }
 
-export const DEFAULT_SESION_EMPRESA = {
-  NumeroDocumento: null,
-  NroDocPerNatural: null,
-  Contrasena: null
+
+
 }
