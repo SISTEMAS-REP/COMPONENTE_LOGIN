@@ -427,6 +427,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                 //{
                     
                 //}
+
                 if (customUrl.EndsWith("/"))
                 {
                     customUrl = customUrl.TrimEnd('/');
