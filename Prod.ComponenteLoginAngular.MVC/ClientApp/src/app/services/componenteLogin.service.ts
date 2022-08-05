@@ -58,11 +58,24 @@ export class ComponenteLoginService {
   }
 
   async RegistroPersona(request) {
+    debugger;
     const formData = {...request};
     const url = `${this.baseUrl}/RegistroPersona`;
     try {
       const resp = await axios
         .post(url, formData);
+      return resp.data;
+    } catch (err) {
+      throw err.data || err;
+    }
+  }
+
+  async RecuperarContrasena(request) {
+    debugger;
+    const url = `${this.baseUrl}/RecuperarContrasena`;
+    try {
+      const resp = await axios
+        .post(url, request);
       return resp.data;
     } catch (err) {
       throw err.data || err;
