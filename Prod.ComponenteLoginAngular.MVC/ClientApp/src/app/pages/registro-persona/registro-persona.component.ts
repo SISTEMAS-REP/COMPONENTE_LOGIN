@@ -6,6 +6,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { enumerados } from 'src/app/enums/enumerados';
 import { ComponenteLoginService } from 'src/app/services/componenteLogin.service';
 import { AlertService } from 'src/app/shared/componentes/services/alert.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-registro-persona',
@@ -29,17 +30,13 @@ export class RegistroPersonaComponent implements OnInit {
   tengoRuc: boolean = false;
   terminos_politica : boolean = false;
   terminos_mensajeria : boolean = false;
-
   cod_departamento : string = null;
   cod_provincia : string = null;
   cod_distrito : string = null;
   direccion : string = null;
-
-
   isVisiblePaso1 : boolean = true;
   isVisiblePaso2 : boolean = false;
   ispaso2 : boolean = true;
-
   //Variables validador
   validadorRuc :  boolean = true;
   validadorTipoDocumento :  boolean = false;
@@ -61,24 +58,48 @@ export class RegistroPersonaComponent implements OnInit {
   validadorRequisitosContrasena : boolean = false;
   validadorTerminos: boolean = false;
   validadorRucDigitos: boolean = false;
-
   isDisableNroDocumento : boolean = true;
+  contentType: string = "image/png";
+  urlArchivo: SafeResourceUrl;
+
   constructor(
     private spinner: NgxSpinnerService,
-    private router: ActivatedRoute,
     private componenteLoginService: ComponenteLoginService,
+    private router: ActivatedRoute,
+    private sanitizer: DomSanitizer,
     private _alertService: AlertService,
-    private route: Router,
+    private route: Router
   ) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.router.queryParams.subscribe(params => {
-      debugger
-      const data: any = params['id_aplicacion'] || null;
+      this.id_aplicacion = params['id_aplicacion'] || null;
+      this.obtenerImagenByAplicacion();
     });
-    debugger;
   }
+
+  obtenerImagenByAplicacion = () =>{
+    let Data = {
+      id_aplicacion: Number(this.id_aplicacion) 
+    }
+
+    this.componenteLoginService.obtenerImagenByAplicacion(Data)
+      .then(resp => {
+        var binary = atob(resp.data.replace(/\s/g, ''));
+        var len = binary.length;
+        var buffer = new ArrayBuffer(len);
+        var view = new Uint8Array(buffer);
+        for (var e = 0; e < len; e++) {
+          view[e] = binary.charCodeAt(e);
+        }
+        var blob = new Blob([view], { type: this.contentType });
+        var urlArchivo = URL.createObjectURL(blob);
+        this.urlArchivo= this.sanitizer.bypassSecurityTrustResourceUrl(urlArchivo);
+      })
+      .catch(err => []);
+  }
+
 
   registroPersonaService() {
     debugger;
@@ -154,59 +175,6 @@ export class RegistroPersonaComponent implements OnInit {
         }
 }
 
-//   registroPersonaService2 = (data) =>{
-//     debugger;
-
-//      this.changeCorreo();
-//      this.changeContrasena();
-//      this.changeContrasenaRep();
-//      this.changeTerminos();
-
-//     // if(!this.validadorRuc  &&  !this.validadorTipoDocumento &&  !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular && !this.validadorCelularLength && this.validadorCorreo && this.validadorContrasena && this.validadorContrasenaRep && this.validadorContrasenaRepetir && !this.ValidadorNumeros && !this.Validador8Digitos && !this.ValidadorMayuscula && !this.ValidadorSimbolo && !this.ValidadorRequisitos)
-//     // {
-//     //   alert("Debe cumplir las validaciones.");
-//     //   return;
-//     // }
-
-//     if(!this.validadorTipoDocumento && !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular  && !this.validadorCelularLength  && !this.validadorCorreo && !this.validadorContrasena && !this.validadorContrasenaRep && !this.validadorContrasenaRepetir  && !this.validadorRequisitosContrasena && !this.validadorTerminos ){
-//     this.spinner.show();
-//     let Data = {
-//       Id: 0,
-//       IdSector: 2, // 1: persona Natural // 2: persona juridica
-//       IdTipoPersona: 1,
-//       CodigoDepartamento: this.cod_departamento,
-//       CodigoProvincia: this.cod_provincia,
-//       CodigoDistrito: this.cod_distrito,
-//       IdTipoIdentificacion: 1,
-//       RazonSocial: "",
-//       Nombres: this.nombres,
-//       Apellidos: this.apellidos,
-//       NroDocumento: this.numeroDoc, //para persona juridica mandas el ruc
-//       Direccion: this.direccion,
-//       Celular: this.celular,
-//       Email: this.correo,
-//       Flag: "A",
-//       NroDocPerNatural: this.numeroDoc,//para persona juridica mandas el dni
-//       Contrasena: this.contrasena
-//     }
-//     const formData = {...Data};
-//     // this.http.post(this.baseUrl + 'ComponenteLogin/RegistroPersona', formData).subscribe((result : any) => {
-//     //   this.spinner.hide();
-//     //   if(result.data != null){
-//     //     debugger;
-//     //     this.limpiar();
-//     //     //this.createNotification('success',"Persona Natural",'El registro se guardo con exito.');
-//     //   }
-//     //   else{
-//     //    // this.createNotification('error',"Persona Natural",'Ha ocurrido un error al registrar.');
-//     //   }
-      
-//     // }, error => console.error(error));
-//   }
-// }
-
-
-
   limpiar =()=>
   {
     this.ruc = null;
@@ -265,6 +233,7 @@ export class RegistroPersonaComponent implements OnInit {
     }
     this.componenteLoginService.buscarPersonaEmpresa(Data)
     .then(resp => {
+      if(resp.data != null){
       debugger;
       this.spinner.hide();
       debugger
@@ -279,16 +248,19 @@ export class RegistroPersonaComponent implements OnInit {
         // this.changeTipoDocumento();
         this.changeApellidos();
         this.changeNombres();
-        })
-        .catch(err => {
-           this._alertService.alertWarning("El número de documento es invalido.")
-           this.nombres = null;
-           this.apellidos = null;
-           this.cod_departamento = null;
-           this.cod_provincia = null;
-           this.cod_distrito = null;
-           this.direccion = null;
-        });
+      }
+      else{    
+        this.nombres = null;
+        this.apellidos = null;
+        this.cod_departamento = null;
+        this.cod_provincia = null;
+        this.cod_distrito = null;
+        this.direccion = null
+        this._alertService.alertWarning("El número de documento es invalido.")
+        this.spinner.hide();
+      }   
+      })
+        .catch(err => {});
       }
   }
 

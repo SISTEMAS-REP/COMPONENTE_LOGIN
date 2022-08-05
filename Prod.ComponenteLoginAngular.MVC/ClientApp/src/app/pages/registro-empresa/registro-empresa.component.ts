@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { enumerados } from 'src/app/enums/enumerados';
 import { ComponenteLoginService } from 'src/app/services/componenteLogin.service';
 import { AlertService } from 'src/app/shared/componentes/services/alert.service';
-import { Router } from '@angular/router';
-import { enumerados } from 'src/app/enums/enumerados';
-import { ActivatedRoute } from '@angular/router';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-registro-empresa',
@@ -14,6 +16,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class RegistroEmpresaComponent implements OnInit {
   enumerado: enumerados = new enumerados();
+  id_aplicacion : number = 0;
   ruc: string  = null;
   razonSocial: string = null;
   direccion: string = null;
@@ -29,17 +32,13 @@ export class RegistroEmpresaComponent implements OnInit {
   contrasena_rep: string = null;
   terminos_politica : boolean = false;
   terminos_mensajeria : boolean = false;
-
   isVisiblePaso1 : boolean = true;
   isVisiblePaso2 : boolean = false;
   isVisiblePaso3 : boolean = false;
   isVisiblePaso4 : boolean = false;
-
   cod_departamento: string = null;
   cod_provincia : string = null;
   cod_distrito : string = null;
-
-
   //Variables validador
   validadorRuc :  boolean = false;
   validadorRazonSocial :  boolean = false;
@@ -64,27 +63,53 @@ export class RegistroEmpresaComponent implements OnInit {
   ValidadorSimbolo: boolean = false;
   validadorTerminos: boolean = false;
   validadorRequisitosContrasena : boolean = false;
-
   ispaso1 : boolean = true;
   ispaso2 : boolean = true;
   ispaso3 : boolean = true;
   ispaso4 : boolean = true;
-
- isDisableNroDocumento: boolean = true;
-
- validadorRucDigitos: boolean = false;
+  isDisableNroDocumento: boolean = true
+  validadorRucDigitos: boolean = false;
+  contentType: string = "image/png";
+  urlArchivo: SafeResourceUrl;
 
   constructor(
     private spinner: NgxSpinnerService,
-    private router: ActivatedRoute,
     private componenteLoginService: ComponenteLoginService,
+    private router: ActivatedRoute,
+    private sanitizer: DomSanitizer,
     private _alertService: AlertService,
     private route: Router
   ) {
   }
 
   ngOnInit(): void {
+    this.router.queryParams.subscribe(params => {
+      this.id_aplicacion = params['id_aplicacion'] || null;
+      this.obtenerImagenByAplicacion();
+    });
   }
+
+  obtenerImagenByAplicacion = () =>{
+    let Data = {
+      id_aplicacion: Number(this.id_aplicacion) 
+    }
+
+    this.componenteLoginService.obtenerImagenByAplicacion(Data)
+      .then(resp => {
+        var binary = atob(resp.data.replace(/\s/g, ''));
+        var len = binary.length;
+        var buffer = new ArrayBuffer(len);
+        var view = new Uint8Array(buffer);
+        for (var e = 0; e < len; e++) {
+          view[e] = binary.charCodeAt(e);
+        }
+        var blob = new Blob([view], { type: this.contentType });
+        var urlArchivo = URL.createObjectURL(blob);
+        this.urlArchivo= this.sanitizer.bypassSecurityTrustResourceUrl(urlArchivo);
+      })
+      .catch(err => []);
+  }
+
 
   registroEmpresaService = () => {
     debugger;
@@ -154,55 +179,6 @@ export class RegistroEmpresaComponent implements OnInit {
   }
 }
 
-//   registroEmpresaService = () =>{
-//     debugger;
-//     this.changeContrasena();
-//     this.changeContrasenaRep();
-//     this.changeTerminos();
-
-//    // if(!this.validadorRuc  &&  !this.validadorTipoDocumento &&  !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular && !this.validadorCelularLength && this.validadorCorreo && this.validadorContrasena && this.validadorContrasenaRep && this.validadorContrasenaRepetir && !this.ValidadorNumeros && !this.Validador8Digitos && !this.ValidadorMayuscula && !this.ValidadorSimbolo && !this.ValidadorRequisitos)
-//    // {
-//    //   alert("Debe cumplir las validaciones.");
-//    //   return;
-//    // }
-//    if(!this.validadorRuc && !this.validadorRazonSocial &&  !this.validadorDireccion && !this.validadorTipoDocumento && !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular  && !this.validadorCelularLength  && !this.validadorCorreo && !this.validadorContrasena && !this.validadorContrasenaRep && !this.validadorContrasenaRepetir  && !this.validadorRequisitosContrasena && !this.validadorTerminos ){
-//     this.spinner.show();
-//     let Data = {
-//      Id: 0,
-//      IdSector: 1, // 1: persona Natural // 2: persona juridica
-//      IdTipoPersona: 1,
-//      CodigoDepartamento: this.cod_departamento,
-//      CodigoProvincia: this.cod_provincia,
-//      CodigoDistrito: this.cod_distrito,
-//      IdTipoIdentificacion: 1,
-//      RazonSocial: "",
-//      Nombres: this.nombres,
-//      Apellidos: this.apellidos,
-//      NroDocumento: this.ruc, //para persona juridica mandas el ruc
-//      Direccion: this.direccion,
-//      Celular: this.celular,
-//      Email: this.correo,
-//      Flag: "A",
-//      NroDocPerNatural: this.numeroDoc,//para persona juridica mandas el dni
-//      Contrasena: this.contrasena
-//    }
-//    const formData = {...Data};
-// //    this.http.post(this.baseUrl + 'ComponenteLogin/RegistroPersona', formData).subscribe((result : any) => {
-// //     debugger;
-// //     this.spinner.hide();
-// //     if(result.data != null){
-// //         this.limpiar();
-// //         ////this.createNotification('success',"Persona Jurídica",'El registro se guardo con exito.');
-// //      }
-// //      else{
-// //       ////this.createNotification('error',"Persona Jurídica",'Ha ocurrido un error al registrar.');
-// //      }
-     
-// //    }, error => console.error(error));
- 
-//   }
-// }
-
   btnBuscarRUC = () =>{
     if(!this.validadorRuc  && !this.validadorRucDigitos){
     this.spinner.show();
@@ -212,6 +188,7 @@ export class RegistroEmpresaComponent implements OnInit {
     }
     this.componenteLoginService.buscarPersonaEmpresa(Data)
     .then(resp => {
+      if(resp.data != null){
       this.spinner.hide();
         this.id_persona =resp.data.id,
         this.razonSocial = resp.data.razonSocial;
@@ -221,16 +198,19 @@ export class RegistroEmpresaComponent implements OnInit {
         this.direccion = resp.data.direccion;
         this.changeRazonSocial();
         this.changeDireccion();
-        })
-        .catch(err => {
-           this.spinner.hide();
-           this._alertService.alertWarning("El número de RUC es invalido.")
-           this.razonSocial = null;
-           this.cod_departamento = null;
-           this.cod_provincia = null;
-           this.cod_distrito = null;
-           this.direccion = null;
-        });
+        }
+        else{
+          this.razonSocial = null;
+          this.cod_departamento = null;
+          this.cod_provincia = null;
+          this.cod_distrito = null;
+          this.direccion = null;
+          this.spinner.hide();
+          this._alertService.alertWarning("El número de RUC es invalido.")
+        }
+        
+      })
+        .catch(err => {});
       }
   }
 
@@ -244,18 +224,22 @@ export class RegistroEmpresaComponent implements OnInit {
       this.componenteLoginService.buscarPersonaEmpresa(Data)
       .then(resp => {
         debugger;
+        if(resp.data != null){
         this.spinner.hide();
         this.nombres = resp.data.nombres;
           this.apellidos = resp.data.apellidos;
           // this.changeTipoDocumento();
           this.changeApellidos();
           this.changeNombres();
-          })
-          .catch(err => {
-             this._alertService.alertWarning("El número de documento es invalido.")
-             this.nombres = null;
-             this.apellidos = null;
-          });
+          }
+          else {        
+            this.nombres = null;
+            this.apellidos = null;
+            this._alertService.alertWarning("El número de documento es invalido.")
+            this.spinner.hide();
+          }         
+        })
+          .catch(err => {});
         }
     }
 

@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { AlertService } from 'src/app/shared/componentes/services/alert.service';
-import { Router } from '@angular/router';
-import { enumerados } from 'src/app/enums/enumerados';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { enumerados } from 'src/app/enums/enumerados';
 import { ComponenteLoginService } from 'src/app/services/componenteLogin.service';
+import { AlertService } from 'src/app/shared/componentes/services/alert.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-recuperar-contrasena-empresa',
@@ -13,22 +15,52 @@ import { ComponenteLoginService } from 'src/app/services/componenteLogin.service
   styleUrls: ['./recuperar-contrasena-empresa.component.css']
 })
 export class RecuperarContrasenaEmpresaComponent implements OnInit {
-
+  id_aplicacion : number = 0;
   numeroDocumento : string = null;
   validarRuc : boolean = false;
   validaSuccess: boolean = false;
+  contentType: string = "image/png";
+  urlArchivo: SafeResourceUrl;
+
+
   constructor(
     private spinner: NgxSpinnerService,
-    private router: ActivatedRoute,
     private componenteLoginService: ComponenteLoginService,
+    private router: ActivatedRoute,
+    private sanitizer: DomSanitizer,
     private _alertService: AlertService,
     private route: Router
   ) {
   }
+
   ngOnInit(): void {
+    this.router.queryParams.subscribe(params => {
+      this.id_aplicacion = params['id_aplicacion'] || null;
+      this.obtenerImagenByAplicacion();
+    });
   }
 
+  obtenerImagenByAplicacion = () =>{
+    let Data = {
+      id_aplicacion: Number(this.id_aplicacion) 
+    }
 
+    this.componenteLoginService.obtenerImagenByAplicacion(Data)
+      .then(resp => {
+        var binary = atob(resp.data.replace(/\s/g, ''));
+        var len = binary.length;
+        var buffer = new ArrayBuffer(len);
+        var view = new Uint8Array(buffer);
+        for (var e = 0; e < len; e++) {
+          view[e] = binary.charCodeAt(e);
+        }
+        var blob = new Blob([view], { type: this.contentType });
+        var urlArchivo = URL.createObjectURL(blob);
+        this.urlArchivo= this.sanitizer.bypassSecurityTrustResourceUrl(urlArchivo);
+      })
+      .catch(err => []);
+  }
+  
   fnBtnRecuperarContrasena = () => {
     this.changeRuc();
 
@@ -58,25 +90,6 @@ export class RecuperarContrasenaEmpresaComponent implements OnInit {
      }
    }
   
-
-  // fnBtnRecuperarContrasena = () => {
-  //   this.changeRuc();
-  //   if(!this.validarRuc)
-  //   {
-  //     this.spinner.show();
-  //     let Data = {
-  //       numeroDocumento: this.numeroDocumento,
-  //     }
-      
-  //     const formData = {...Data};
-  //     // this.http.post(this.baseUrl + 'ComponenteLogin/RecuperarContrasena', formData).subscribe(result => {
-  //     //   this.spinner.hide();
-  //     //   this.validaSuccess = true;
-  //     // }, error => console.error(error));
-  //   }
-    
-  //  }
-
    changeRuc = () =>{
     if(this.numeroDocumento == null || this.numeroDocumento == ""){
       this.validarRuc = true;

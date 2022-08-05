@@ -4,6 +4,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ComponenteLoginService } from 'src/app/services/componenteLogin.service';
+import { AlertService } from 'src/app/shared/componentes/services/alert.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -27,7 +28,8 @@ export class SesionPersonaComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private componenteLoginService: ComponenteLoginService,
     private router: ActivatedRoute,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private _alertService: AlertService,
   ) {
   }
 
@@ -76,7 +78,6 @@ export class SesionPersonaComponent implements OnInit {
       }
       const resp = await this.componenteLoginService.IniciarSesionExtranet(Data)
       .then(resp => {
-        this.spinner.hide();
         if (resp.id > 0) {
           debugger
           var frm = document.createElement('form');
@@ -104,17 +105,27 @@ export class SesionPersonaComponent implements OnInit {
           frm.submit();
           document.getElementById('frmLogin').remove();
           debugger
-          //this.fnCargarAplicacion();
+          //this.fnCargarAplicacion();  
+          this.spinner.hide();
         }
        
+        else {
+          this.spinner.hide();
+          this._alertService.alertError("Los datos ingresados son inválidos");
+          // this._alertService.open(
+          //   "warning",
+          //   "Los datos ingresados son inválidos"
+          // );
+        }
       })
       .catch(err => []);
     }
-   
+  
   }
 
   async fnCargarAplicacion (){
     debugger
+    this.spinner.show();
     const respss = await this.componenteLoginService.obtenerDatoAplicacionByUsuario({
        IdTipoPersona: 1,
        NroDocumento: this.numero_documento,
@@ -128,6 +139,7 @@ export class SesionPersonaComponent implements OnInit {
       newURL.href = targetURL;
       document.body.appendChild(newURL);
       newURL.click();
+      this.spinner.hide();
     })
     .catch(err => []);
   }
