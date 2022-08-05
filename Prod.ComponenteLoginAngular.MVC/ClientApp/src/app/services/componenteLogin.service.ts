@@ -71,7 +71,6 @@ export class ComponenteLoginService {
   }
 
   async RecuperarContrasena(request) {
-    debugger;
     const url = `${this.baseUrl}/RecuperarContrasena`;
     try {
       const resp = await axios

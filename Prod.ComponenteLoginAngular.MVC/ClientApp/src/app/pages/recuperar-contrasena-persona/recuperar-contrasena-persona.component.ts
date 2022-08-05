@@ -35,7 +35,6 @@ export class RecuperarContrasenaPersonaComponent implements OnInit {
 
 
   fnBtnRecuperarContrasena = () => {
-    debugger;
     this.changeNroDocumento();
     this.changeEmail();
 
@@ -44,29 +43,24 @@ export class RecuperarContrasenaPersonaComponent implements OnInit {
        "",
        "¿Está seguro que desea realizar esta acción?",
        () => {
+      this.spinner.show();
       this.componenteLoginService.RecuperarContrasena({
       numeroDocumento: this.numeroDocumento,
       email: this.email
      })
        .then(resp => {
-        debugger;
          this.spinner.hide();
          this.numeroDocumento = null
          this.email = null
          if (resp.success) {
-          //  this._alertService.open(
-          //    "success",
-          //    "Revisar su correo electrónico"
-          //  );
            this.validaSuccess = true;
          }
          else {
-           this._alertService.alertError("Error al resetear contraseña");
+          debugger;
+           this._alertService.alertError("Error al recuperar contraseña");
          }
        })
        .catch(err => []);
-        this._alertService.alertError("Ha ocurrido un error");
-        this.spinner.hide();
      });
      }
    }

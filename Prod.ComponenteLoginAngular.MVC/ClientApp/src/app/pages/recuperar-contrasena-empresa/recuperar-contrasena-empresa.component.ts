@@ -30,7 +30,6 @@ export class RecuperarContrasenaEmpresaComponent implements OnInit {
 
 
   fnBtnRecuperarContrasena = () => {
-    debugger;
     this.changeRuc();
 
     if(!this.validarRuc){
@@ -44,23 +43,17 @@ export class RecuperarContrasenaEmpresaComponent implements OnInit {
       numeroDocumento: this.numeroDocumento,
      })
        .then(resp => {
-        debugger;
         this.spinner.hide();
          this.numeroDocumento = null
          if (resp.success) {
-          //  this._alertService.open(
-          //    "success",
-          //    "Revisar su correo electrónico"
-          //  );
            this.validaSuccess = true;
          }
          else {
-           this._alertService.alertError("Error al resetear contraseña");
+          debugger;
+           this._alertService.alertError("Error al recuperar contraseña");
          }
        })
        .catch(err => []);
-        this._alertService.alertError("Ha ocurrido un error");
-        this.spinner.hide();
      });
      }
    }
@@ -94,8 +87,7 @@ export class RecuperarContrasenaEmpresaComponent implements OnInit {
       }
       else{
         this.validarRuc = false;
-      }
-     
+      }    
     }
   }
 

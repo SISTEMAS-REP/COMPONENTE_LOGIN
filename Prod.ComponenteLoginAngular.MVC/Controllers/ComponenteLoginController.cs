@@ -198,6 +198,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
             return Ok(sr);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [Route("RecuperarContrasena")]
         public IActionResult RecuperarContrasena([FromBody] ComponenteLogin.MVC.Configuracion.LoginRequest request)

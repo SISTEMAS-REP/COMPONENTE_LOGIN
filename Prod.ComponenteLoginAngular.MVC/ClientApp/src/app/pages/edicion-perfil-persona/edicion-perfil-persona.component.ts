@@ -50,11 +50,9 @@ export class EdicionPerfilPersonaComponent implements OnInit {
       //   this.isVisibleContacto = true; 
       //   this.isVisibleEditarContacto = false;  
       //   this.limpiar();
-      //   }, error => console.error(error));
-       
+      //   }, error => console.error(error));      
       }    
   }
-
 
   clickEditarContacto = () =>{ 
     this.isVisibleEditarContacto = true;
