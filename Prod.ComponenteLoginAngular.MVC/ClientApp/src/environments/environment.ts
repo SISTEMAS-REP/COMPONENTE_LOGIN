@@ -8,7 +8,7 @@ export const environment = {
     apiPTD: 'https://detupa.produce.gob.pe',
     apiUrl: 'http://127.0.0.1:43495',
     // apiUrl: 'http://127.0.0.1:50555',
-    apiWebPV: 'http://127.0.0.1:8000'
+    apiWebPV: 'http://localhost:30700'
     // apiWebPV: 'https://desistemasv2.produce.gob.pe',
     // apiUrl: 'https://devusp.produce.gob.pe'
 };

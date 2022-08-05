@@ -118,7 +118,7 @@ export class RegistroEmpresaComponent implements OnInit {
             .then(resp => {
               debugger;
               this.spinner.hide();
-              if (resp.data.id > 0) {
+              if (resp.data.value > 0) {
               if(resp.messages.length > 0){
 
           this._alertService.alertWarning(resp.messages[0],
@@ -130,7 +130,7 @@ export class RegistroEmpresaComponent implements OnInit {
             "Registro exitoso",
             '',
             () => {
-                this.route.navigateByUrl('/principal').then(e => {
+              this.route.navigateByUrl('/sesion-empresa').then(e => {
                     if (e) {
                         console.log("Navigation is successful!");
                     } else {
@@ -223,6 +223,7 @@ export class RegistroEmpresaComponent implements OnInit {
         this.changeDireccion();
         })
         .catch(err => {
+           this.spinner.hide();
            this._alertService.alertWarning("El número de RUC es invalido.")
            this.razonSocial = null;
            this.cod_departamento = null;

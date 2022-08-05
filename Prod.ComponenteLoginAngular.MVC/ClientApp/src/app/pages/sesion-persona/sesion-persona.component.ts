@@ -60,6 +60,11 @@ export class SesionPersonaComponent implements OnInit {
   }
 
   async iniciarSesionPersonaNatural(){
+    debugger;
+
+    if(this.id_aplicacion == null){
+      return;
+    }
     this.changeNroDocumento();
     this.changeContrasena();
 
@@ -77,7 +82,8 @@ export class SesionPersonaComponent implements OnInit {
           var frm = document.createElement('form');
           frm.id = "frmLogin";
           frm.method = 'POST';
-          frm.action = `${environment.apiWebPV}/ExtranetToken/login`;
+          debugger;
+          frm.action = `${environment.apiWebPV}/ExtranetToken/loginUnico`;
           var campo = document.createElement("input");
           campo.setAttribute("name", "Login");
           campo.setAttribute("value", this.numero_documento);
@@ -98,7 +104,7 @@ export class SesionPersonaComponent implements OnInit {
           frm.submit();
           document.getElementById('frmLogin').remove();
           debugger
-          this.fnCargarAplicacion();
+          //this.fnCargarAplicacion();
         }
        
       })
