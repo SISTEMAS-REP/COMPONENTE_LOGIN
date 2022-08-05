@@ -12,6 +12,7 @@ namespace Prod.ComponenteLogin.MVC.Configuracion
         public RegistroUsuario RegistroUsuario { get; set; }
         public RegistroTramite RegistroTramite { get; set; }
         public ReportConfig ReportConfig { get; set; }
+        public Recaptcha Recaptcha { get; set; }
     }
     public class Urls
     {
@@ -47,6 +48,14 @@ namespace Prod.ComponenteLogin.MVC.Configuracion
         public string IdClaseDocumentoProContrata { get; set; }
         public string RutaImagenLogo { get; set; }
         public string tipoIdentificacionSunat { get; set; }
+    }
+
+    public class Recaptcha
+    {
+        public string recaptchaPublickey { get; set; }
+        public string recaptchaPrivatekey { get; set; }
+        public string URL_CAPTCHA_API { get; set; }
+        public string ruta_pide { get; set; }
     }
 
     public class ReportConfig

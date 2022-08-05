@@ -178,7 +178,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                 respuesta.Success = true;
 
             }
-            return _Response(respuesta);
+            return Ok(respuesta);
         }
 
         [HttpPost]
@@ -186,7 +186,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
         public IActionResult buscarReniec(PersonaRequest request)
         {
             var reniec = _reniecServicio.Buscar(request.NroDocumento);
-            return _Response(reniec);
+            return Ok(reniec);
         }
 
         [AllowAnonymous]

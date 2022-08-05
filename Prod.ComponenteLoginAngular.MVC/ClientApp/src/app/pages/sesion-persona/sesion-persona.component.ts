@@ -61,7 +61,19 @@ export class SesionPersonaComponent implements OnInit {
       .catch(err => []);
   }
 
-  iniciarSesionPersonaNatural = () =>{
+
+  // async Listar_usuarios_representante_legal() {
+  //   const url = `${this.baseUrl}/Listar_usuarios_representante_legal`;
+  //   try {
+  //     const resp = await axios
+  //       .post(url);
+  //     return resp.data;
+  //   } catch (err) {
+  //     throw err.data || err;
+  //   }
+  // }
+
+  async iniciarSesionPersonaNatural(){
     this.changeNroDocumento();
     this.changeContrasena();
 
@@ -71,7 +83,7 @@ export class SesionPersonaComponent implements OnInit {
         dni: this.numero_documento,
         clave: this.contrasena
       }
-      this.componenteLoginService.IniciarSesionExtranet(Data)
+      const resp = await this.componenteLoginService.IniciarSesionExtranet(Data)
       .then(resp => {
         this.spinner.hide();
         debugger
@@ -101,8 +113,7 @@ export class SesionPersonaComponent implements OnInit {
           frm.submit();
           document.getElementById('frmLogin').remove();
           debugger
-          this.fnCargarAplicacion();
-          debugger
+          // this.fnCargarAplicacion();
         }
        
       })
@@ -111,9 +122,9 @@ export class SesionPersonaComponent implements OnInit {
    
   }
 
-  fnCargarAplicacion = () =>{
+  async fnCargarAplicacion (){
     debugger
-    this.componenteLoginService.obtenerDatoAplicacionByUsuario({
+    const respss = await this.componenteLoginService.obtenerDatoAplicacionByUsuario({
        IdTipoPersona: 1,
        NroDocumento: this.numero_documento,
        NroDocPerNatural: this.numero_documento,

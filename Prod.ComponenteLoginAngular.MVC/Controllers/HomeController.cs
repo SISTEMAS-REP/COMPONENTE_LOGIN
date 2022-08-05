@@ -31,6 +31,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
 			}
 			return View();
 		}
+
 		public IActionResult Privacy(string opc)
 		{
 			ViewBag.IsAuthenticated = false;
