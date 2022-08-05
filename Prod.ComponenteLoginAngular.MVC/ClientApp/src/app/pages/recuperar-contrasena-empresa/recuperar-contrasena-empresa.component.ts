@@ -60,7 +60,7 @@ export class RecuperarContrasenaEmpresaComponent implements OnInit {
       })
       .catch(err => []);
   }
-  
+
   fnBtnRecuperarContrasena = () => {
     this.changeRuc();
 
@@ -71,9 +71,10 @@ export class RecuperarContrasenaEmpresaComponent implements OnInit {
        () => {
 
       this.spinner.show();
-      this.componenteLoginService.RecuperarContrasena({
-      numeroDocumento: this.numeroDocumento,
-     })
+      let Data = {
+       numeroDocumento: this.numeroDocumento
+      }
+      this.componenteLoginService.RecuperarContrasena(Data)
        .then(resp => {
         this.spinner.hide();
          this.numeroDocumento = null
@@ -90,6 +91,7 @@ export class RecuperarContrasenaEmpresaComponent implements OnInit {
      }
    }
   
+   
    changeRuc = () =>{
     if(this.numeroDocumento == null || this.numeroDocumento == ""){
       this.validarRuc = true;

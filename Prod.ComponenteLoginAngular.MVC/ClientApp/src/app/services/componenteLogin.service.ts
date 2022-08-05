@@ -71,10 +71,24 @@ export class ComponenteLoginService {
   }
 
   async RecuperarContrasena(request) {
+    debugger;
+    const formData = {...request};
     const url = `${this.baseUrl}/RecuperarContrasena`;
     try {
       const resp = await axios
-        .post(url, request);
+        .post(url, formData);
+      return resp.data;
+    } catch (err) {
+      throw err.data || err;
+    }
+  }
+
+  async CambiarContrasena(request) {
+    const formData = {...request};
+    const url = `${this.baseUrl}/CambiarContrasena`;
+    try {
+      const resp = await axios
+        .post(url, formData);
       return resp.data;
     } catch (err) {
       throw err.data || err;

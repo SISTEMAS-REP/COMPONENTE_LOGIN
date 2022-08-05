@@ -21,7 +21,7 @@ export class CambiarContrasenaEmpresaComponent implements OnInit {
   contrasenaRep: string = null;
   isVisiblePaso1 : boolean = true;
   isVisiblePaso2 : boolean = false;
-  isVisiblePaso3 : boolean = false;
+  validaSuccess : boolean = false;
   validadorContrasenaActual :  boolean = false;
   validadorContrasenaNueva :  boolean = false;
   validadorContrasenaRep :  boolean = false;
@@ -75,6 +75,14 @@ export class CambiarContrasenaEmpresaComponent implements OnInit {
 
   cambiarContrasena = () => 
   {
+    this.changeContrasenaNueva();
+    this.changeContrasenaRep();
+
+    if(!this.validadorContrasenaNueva && !this.validadorContrasenaRep && !this.validadorContrasenaRepetir && !this.validadorRequisitosContrasenaNueva){
+    this._alertService.alertConfirm(
+     "",
+     "¿Está seguro que desea cambiar la contraseña?",
+     () => {
     this.spinner.show();
     let Data = {
       id: "2496752",  //this.id,
@@ -82,19 +90,22 @@ export class CambiarContrasenaEmpresaComponent implements OnInit {
       email: "JHOSEPH264@GMAIL.COM",// this.email,
       clave: "produce", //this.form.get('contrasena').value,
     }
-    const formData = {...Data};
-  //   this.http.post(this.baseUrl + 'ComponenteLogin/CambiarContrasena', formData).subscribe((result : any) => {
-  //   this.spinner.hide();
-  //    if(result.success){
-  //     // this.createNotification('success',"Persona Jurídica",'Se actualizó la contraseña.');
-  //    }
-  //    else{
-  //    // this.createNotification('error',"Persona Jurídica",'Ocurrió un error al actualizar.')
-  //    }
-     
-  //  }, error => console.error(error));
-  }
-
+     this.componenteLoginService.CambiarContrasena(Data)
+      .then(resp => {
+       this.spinner.hide();
+       if (resp.success) {
+          this.isVisiblePaso2 = false;
+          this.validaSuccess = true;
+       }
+       else {
+        debugger;
+         this._alertService.alertError("Error al actualizar contraseña");
+       }
+     })
+     .catch(err => []);
+   });
+   }
+ }
 
   clickPaso2 = () =>{
     this.changeContrasenaActual();
@@ -106,16 +117,6 @@ export class CambiarContrasenaEmpresaComponent implements OnInit {
       }       
   }
 
-  clickPaso3 = () =>{
-    this.changeContrasenaNueva();
-    this.changeContrasenaRep();
- 
-      if(!this.validadorContrasenaNueva && !this.validadorContrasenaRep && !this.validadorContrasenaRepetir && !this.validadorRequisitosContrasenaNueva){
-        //this.isVisiblePaso1 = false;
-        this.isVisiblePaso2 = false;
-        this.isVisiblePaso3 = true;
-      }    
-  }
 
   changeContrasenaActual = () =>{
       if(this.contrasenaActual == null || this.contrasenaActual == ""){

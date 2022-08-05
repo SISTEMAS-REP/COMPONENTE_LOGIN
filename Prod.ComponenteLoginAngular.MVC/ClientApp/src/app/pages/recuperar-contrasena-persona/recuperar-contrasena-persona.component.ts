@@ -75,11 +75,12 @@ export class RecuperarContrasenaPersonaComponent implements OnInit {
        "¿Está seguro que desea realizar esta acción?",
        () => {
       this.spinner.show();
-      this.componenteLoginService.RecuperarContrasena({
-      numeroDocumento: this.numeroDocumento,
-      email: this.email
-     })
-       .then(resp => {
+      let Data = {
+        numeroDocumento: this.numeroDocumento,
+        email: this.email
+       }
+       this.componenteLoginService.RecuperarContrasena(Data)
+        .then(resp => {
          this.spinner.hide();
          this.numeroDocumento = null
          this.email = null
