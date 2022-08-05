@@ -55,6 +55,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
             this.appConfig = appConfig;
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [Route("RegistroPersona")]
         public IActionResult RegistroPersona(PersonaRequest request)
@@ -108,6 +109,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
             }
 
 
+
             if (resPersona.Success && request.Flag == "A")
             {
                 var result = new StatusResponse<Prod.ServiciosExternos.PRODUCE_VIRTUAL.OperationResult>();
@@ -130,8 +132,8 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                     new roles.UsuarioRolesRequest()
                     {
                         CodigoUsuario = request.IdTipoPersona == 2 ? user.Data.IdPersonaNatural : int.Parse(resPersona.Value),
-                        IdAplicion = 90,
-                        IdRol = 687,
+                        IdAplicion = 240,
+                        IdRol = 738,
                         Tipo = roles.TipoRol.Extranet
                     }, 1, 10);
 
@@ -157,8 +159,8 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                         Ruc = request.NroDocumento,
                         PhoneNumber = request.Celular,
                         UserRegister = "VSP", //appConfig.RegistroUsuario.Usuario,
-                        id_rol = 687,// int.Parse(appConfig.RegistroUsuario.IdRol),
-                        id_aplicacion = 90,// int.Parse(appConfig.RegistroUsuario.IdAplicacion),
+                        id_rol = 738,// int.Parse(appConfig.RegistroUsuario.IdRol),
+                        id_aplicacion = 240,// int.Parse(appConfig.RegistroUsuario.IdAplicacion),
                         ingresarClave = request.Contrasena
                     });
                 }
@@ -170,12 +172,19 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                         Email = request.Email,
                         PhoneNumber = request.Celular,
                         UserRegister = "VSP", //appConfig.RegistroUsuario.Usuario,
-                        id_rol = 687,// int.Parse(appConfig.RegistroUsuario.IdRol),
-                        id_aplicacion = 90,// int.Parse(appConfig.RegistroUsuario.IdAplicacion),
+                        id_rol = 738,// int.Parse(appConfig.RegistroUsuario.IdRol),
+                        id_aplicacion = 240,// int.Parse(appConfig.RegistroUsuario.IdAplicacion),
                         ingresarClave = request.Contrasena
                     });
+
+                    if (result.Success)
+                    {
+
+                    }
                 }
+                respuesta.Data = resPersona;
                 respuesta.Success = true;
+                
 
             }
             return Ok(respuesta);
