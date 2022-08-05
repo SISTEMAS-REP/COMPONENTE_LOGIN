@@ -92,9 +92,9 @@ export class RegistroPersonaComponent implements OnInit {
             "",
             "¿Está seguro que desea guardar esta información?",
             () => {
-              debugger;
               this.spinner.show();
 
+              debugger
               let Data = {
               Id: Number(this.id_persona),
               IdSector: this.enumerado.TIPO_SECTOR_PERSONA.PESQUERIA,
@@ -114,11 +114,12 @@ export class RegistroPersonaComponent implements OnInit {
               NroDocPerNatural: this.numeroDoc,
               Contrasena: this.contrasena
             }
+            debugger
             this.componenteLoginService.RegistroPersona(Data)
             .then(resp => {
               debugger;
               this.spinner.hide();
-                if (resp.data.id > 0) {
+                if (resp.data.value > 0) {
                   if(resp.messages.length > 0){
                     this._alertService.alertWarning(resp.messages[0],
                       () => {}
@@ -145,6 +146,7 @@ export class RegistroPersonaComponent implements OnInit {
                 }
             })
             .catch(err => {
+              debugger
                 this._alertService.alertError("Ha ocurrido un error");
                 this.spinner.hide();
             });
@@ -265,14 +267,15 @@ export class RegistroPersonaComponent implements OnInit {
     .then(resp => {
       debugger;
       this.spinner.hide();
+      debugger
         this.id_persona =resp.data.id,
         this.nombres = resp.data.nombres;     
         this.razon_Social  = resp.data.razonSocial;     
         this.apellidos = resp.data.apellidos;
         this.cod_departamento = resp.data.codigoDepartamento;
         this.cod_provincia = resp.data.codigoProvincia;
-        this.cod_distrito =resp.data.codigoProvincia
-        this.direccion = resp.data.codigoProvincia
+        this.cod_distrito =resp.data.codigoDistrito;
+        this.direccion = resp.data.direccion
         // this.changeTipoDocumento();
         this.changeApellidos();
         this.changeNombres();

@@ -39,14 +39,12 @@ export class SesionPersonaComponent implements OnInit {
   }
 
   obtenerImagenByAplicacion = () =>{
-    debugger
     let Data = {
       id_aplicacion: Number(this.id_aplicacion) 
     }
 
     this.componenteLoginService.obtenerImagenByAplicacion(Data)
       .then(resp => {
-        debugger
         var binary = atob(resp.data.replace(/\s/g, ''));
         var len = binary.length;
         var buffer = new ArrayBuffer(len);
@@ -61,18 +59,6 @@ export class SesionPersonaComponent implements OnInit {
       .catch(err => []);
   }
 
-
-  // async Listar_usuarios_representante_legal() {
-  //   const url = `${this.baseUrl}/Listar_usuarios_representante_legal`;
-  //   try {
-  //     const resp = await axios
-  //       .post(url);
-  //     return resp.data;
-  //   } catch (err) {
-  //     throw err.data || err;
-  //   }
-  // }
-
   async iniciarSesionPersonaNatural(){
     this.changeNroDocumento();
     this.changeContrasena();
@@ -86,7 +72,6 @@ export class SesionPersonaComponent implements OnInit {
       const resp = await this.componenteLoginService.IniciarSesionExtranet(Data)
       .then(resp => {
         this.spinner.hide();
-        debugger
         if (resp.id > 0) {
           debugger
           var frm = document.createElement('form');
@@ -113,7 +98,7 @@ export class SesionPersonaComponent implements OnInit {
           frm.submit();
           document.getElementById('frmLogin').remove();
           debugger
-          // this.fnCargarAplicacion();
+          this.fnCargarAplicacion();
         }
        
       })
