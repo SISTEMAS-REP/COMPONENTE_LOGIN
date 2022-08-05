@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { enumerados } from 'src/app/enums/enumerados';
 import { ComponenteLoginService } from 'src/app/services/componenteLogin.service';
 import { AlertService } from 'src/app/shared/componentes/services/alert.service';
 
@@ -11,12 +13,13 @@ import { AlertService } from 'src/app/shared/componentes/services/alert.service'
   styleUrls: ['./registro-persona.component.css']
 })
 export class RegistroPersonaComponent implements OnInit {
-
+  enumerado: enumerados = new enumerados();
   id_aplicacion : number = 0;
-
   ruc: string = null;
   tipoDoc: number = 0;
   numeroDoc: string = null;
+  id_persona: string = null;
+  razon_Social : string = null;
   apellidos: string = null;
   nombres: string = null;
   celular: string = null;
@@ -64,7 +67,8 @@ export class RegistroPersonaComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private router: ActivatedRoute,
     private componenteLoginService: ComponenteLoginService,
-    private _alertService: AlertService
+    private _alertService: AlertService,
+    private route: Router,
   ) {
   }
 
@@ -76,55 +80,128 @@ export class RegistroPersonaComponent implements OnInit {
     debugger;
   }
 
-  registroPersonaService = () =>{
+  registroPersonaService() {
+    debugger;
+    this.changeCorreo();
+    this.changeContrasena();
+    this.changeContrasenaRep();
+    this.changeTerminos();
 
-     this.changeCorreo();
-     this.changeContrasena();
-     this.changeContrasenaRep();
-     this.changeTerminos();
+    if(!this.validadorTipoDocumento && !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular  && !this.validadorCelularLength  && !this.validadorCorreo && !this.validadorContrasena && !this.validadorContrasenaRep && !this.validadorContrasenaRepetir  && !this.validadorRequisitosContrasena && !this.validadorTerminos ){        
+      this._alertService.alertConfirm(
+            "",
+            "¿Está seguro que desea guardar esta información?",
+            () => {
+              debugger;
+              this.spinner.show();
 
-    // if(!this.validadorRuc  &&  !this.validadorTipoDocumento &&  !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular && !this.validadorCelularLength && this.validadorCorreo && this.validadorContrasena && this.validadorContrasenaRep && this.validadorContrasenaRepetir && !this.ValidadorNumeros && !this.Validador8Digitos && !this.ValidadorMayuscula && !this.ValidadorSimbolo && !this.ValidadorRequisitos)
-    // {
-    //   alert("Debe cumplir las validaciones.");
-    //   return;
-    // }
-
-    if(!this.validadorTipoDocumento && !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular  && !this.validadorCelularLength  && !this.validadorCorreo && !this.validadorContrasena && !this.validadorContrasenaRep && !this.validadorContrasenaRepetir  && !this.validadorRequisitosContrasena && !this.validadorTerminos ){
-    this.spinner.show();
-    let Data = {
-      Id: 0,
-      IdSector: 2, // 1: persona Natural // 2: persona juridica
-      IdTipoPersona: 1,
-      CodigoDepartamento: this.cod_departamento,
-      CodigoProvincia: this.cod_provincia,
-      CodigoDistrito: this.cod_distrito,
-      IdTipoIdentificacion: 1,
-      RazonSocial: "",
-      Nombres: this.nombres,
-      Apellidos: this.apellidos,
-      NroDocumento: this.numeroDoc, //para persona juridica mandas el ruc
-      Direccion: this.direccion,
-      Celular: this.celular,
-      Email: this.correo,
-      Flag: "A",
-      NroDocPerNatural: this.numeroDoc,//para persona juridica mandas el dni
-      Contrasena: this.contrasena
-    }
-    const formData = {...Data};
-    // this.http.post(this.baseUrl + 'ComponenteLogin/RegistroPersona', formData).subscribe((result : any) => {
-    //   this.spinner.hide();
-    //   if(result.data != null){
-    //     debugger;
-    //     this.limpiar();
-    //     //this.createNotification('success',"Persona Natural",'El registro se guardo con exito.');
-    //   }
-    //   else{
-    //    // this.createNotification('error',"Persona Natural",'Ha ocurrido un error al registrar.');
-    //   }
-      
-    // }, error => console.error(error));
-  }
+              let Data = {
+              Id: Number(this.id_persona),
+              IdSector: this.enumerado.TIPO_SECTOR_PERSONA.PESQUERIA,
+              IdTipoPersona: this.enumerado.TIPO_PERSONA.NATURAL,        
+              CodigoDepartamento: this.cod_departamento,
+              CodigoProvincia: this.cod_provincia,
+              CodigoDistrito: this.cod_distrito, 
+              IdTipoIdentificacion: Number(this.tipoDoc),
+              RazonSocial: this.razon_Social,
+              Nombres: this.nombres,
+              Apellidos: this.apellidos,
+              NroDocumento: this.numeroDoc,
+              Direccion: this.direccion,
+              Celular: this.celular,
+              Email: this.correo,
+              Flag: this.enumerado.ESTADO_PERSONA.ACTIVO,
+              NroDocPerNatural: this.numeroDoc,
+              Contrasena: this.contrasena
+            }
+            this.componenteLoginService.RegistroPersona(Data)
+            .then(resp => {
+              debugger;
+              this.spinner.hide();
+                if (resp.data.id > 0) {
+                  if(resp.messages.length > 0){
+                    this._alertService.alertWarning(resp.messages[0],
+                      () => {}
+                      );
+                  }
+                  else{
+                    this._alertService.alertOk(
+                        "Registro exitoso",
+                        '',
+                        () => {
+                            this.route.navigateByUrl('/sesion-persona').then(e => {
+                                if (e) {
+                                    console.log("Navigation is successful!");
+                                } else {
+                                    console.log("Navigation has failed!");
+                                }
+                            });
+                        }
+                      );
+                    }
+                }
+                else {
+                    this._alertService.alertError("Ha ocurrido un error");
+                }
+            })
+            .catch(err => {
+                this._alertService.alertError("Ha ocurrido un error");
+                this.spinner.hide();
+            });
+        });
+        }
 }
+
+//   registroPersonaService2 = (data) =>{
+//     debugger;
+
+//      this.changeCorreo();
+//      this.changeContrasena();
+//      this.changeContrasenaRep();
+//      this.changeTerminos();
+
+//     // if(!this.validadorRuc  &&  !this.validadorTipoDocumento &&  !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular && !this.validadorCelularLength && this.validadorCorreo && this.validadorContrasena && this.validadorContrasenaRep && this.validadorContrasenaRepetir && !this.ValidadorNumeros && !this.Validador8Digitos && !this.ValidadorMayuscula && !this.ValidadorSimbolo && !this.ValidadorRequisitos)
+//     // {
+//     //   alert("Debe cumplir las validaciones.");
+//     //   return;
+//     // }
+
+//     if(!this.validadorTipoDocumento && !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular  && !this.validadorCelularLength  && !this.validadorCorreo && !this.validadorContrasena && !this.validadorContrasenaRep && !this.validadorContrasenaRepetir  && !this.validadorRequisitosContrasena && !this.validadorTerminos ){
+//     this.spinner.show();
+//     let Data = {
+//       Id: 0,
+//       IdSector: 2, // 1: persona Natural // 2: persona juridica
+//       IdTipoPersona: 1,
+//       CodigoDepartamento: this.cod_departamento,
+//       CodigoProvincia: this.cod_provincia,
+//       CodigoDistrito: this.cod_distrito,
+//       IdTipoIdentificacion: 1,
+//       RazonSocial: "",
+//       Nombres: this.nombres,
+//       Apellidos: this.apellidos,
+//       NroDocumento: this.numeroDoc, //para persona juridica mandas el ruc
+//       Direccion: this.direccion,
+//       Celular: this.celular,
+//       Email: this.correo,
+//       Flag: "A",
+//       NroDocPerNatural: this.numeroDoc,//para persona juridica mandas el dni
+//       Contrasena: this.contrasena
+//     }
+//     const formData = {...Data};
+//     // this.http.post(this.baseUrl + 'ComponenteLogin/RegistroPersona', formData).subscribe((result : any) => {
+//     //   this.spinner.hide();
+//     //   if(result.data != null){
+//     //     debugger;
+//     //     this.limpiar();
+//     //     //this.createNotification('success',"Persona Natural",'El registro se guardo con exito.');
+//     //   }
+//     //   else{
+//     //    // this.createNotification('error',"Persona Natural",'Ha ocurrido un error al registrar.');
+//     //   }
+      
+//     // }, error => console.error(error));
+//   }
+// }
 
 
 
@@ -188,7 +265,9 @@ export class RegistroPersonaComponent implements OnInit {
     .then(resp => {
       debugger;
       this.spinner.hide();
-      this.nombres = resp.data.nombres;
+        this.id_persona =resp.data.id,
+        this.nombres = resp.data.nombres;     
+        this.razon_Social  = resp.data.razonSocial;     
         this.apellidos = resp.data.apellidos;
         this.cod_departamento = resp.data.codigoDepartamento;
         this.cod_provincia = resp.data.codigoProvincia;
@@ -202,7 +281,6 @@ export class RegistroPersonaComponent implements OnInit {
            this._alertService.alertWarning("El número de documento es invalido.")
            this.nombres = null;
            this.apellidos = null;
-           this.cod_departamento = null;
            this.cod_departamento = null;
            this.cod_provincia = null;
            this.cod_distrito = null;

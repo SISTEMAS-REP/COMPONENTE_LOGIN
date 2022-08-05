@@ -3,6 +3,9 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ComponenteLoginService } from 'src/app/services/componenteLogin.service';
 import { AlertService } from 'src/app/shared/componentes/services/alert.service';
+import { Router } from '@angular/router';
+import { enumerados } from 'src/app/enums/enumerados';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-registro-empresa',
@@ -10,11 +13,13 @@ import { AlertService } from 'src/app/shared/componentes/services/alert.service'
   styleUrls: ['./registro-empresa.component.css']
 })
 export class RegistroEmpresaComponent implements OnInit {
+  enumerado: enumerados = new enumerados();
   ruc: string  = null;
   razonSocial: string = null;
   direccion: string = null;
   tipoDoc: number = 0;
   numeroDoc: string = null;
+  id_persona: string = null;
   apellidos: string = null;
   nombres: string = null;
   celular: string = null;
@@ -70,64 +75,133 @@ export class RegistroEmpresaComponent implements OnInit {
  validadorRucDigitos: boolean = false;
 
   constructor(
-  private spinner: NgxSpinnerService,
-  private componenteLoginService: ComponenteLoginService,
-  private _alertService: AlertService
+    private spinner: NgxSpinnerService,
+    private router: ActivatedRoute,
+    private componenteLoginService: ComponenteLoginService,
+    private _alertService: AlertService,
+    private route: Router
   ) {
   }
 
   ngOnInit(): void {
   }
 
-
-  registroEmpresaService2 = () =>{
+  registroEmpresaService = () => {
     debugger;
-    this.changeContrasena();
-    this.changeContrasenaRep();
-    this.changeTerminos();
+    if(!this.validadorRuc  &&  !this.validadorTipoDocumento &&  !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular && !this.validadorCelularLength && !this.validadorCorreo && !this.validadorContrasena && !this.validadorContrasenaRep && !this.validadorContrasenaRepetir   && !this.validadorRequisitosContrasena && !this.validadorTerminos ){  
+      this._alertService.alertConfirm(
+          "",
+          "¿Está seguro que desea guardar esta información?",
+          () => {
+            this.spinner.show();
 
-   // if(!this.validadorRuc  &&  !this.validadorTipoDocumento &&  !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular && !this.validadorCelularLength && this.validadorCorreo && this.validadorContrasena && this.validadorContrasenaRep && this.validadorContrasenaRepetir && !this.ValidadorNumeros && !this.Validador8Digitos && !this.ValidadorMayuscula && !this.ValidadorSimbolo && !this.ValidadorRequisitos)
-   // {
-   //   alert("Debe cumplir las validaciones.");
-   //   return;
-   // }
-   if(!this.validadorRuc && !this.validadorRazonSocial &&  !this.validadorDireccion && !this.validadorTipoDocumento && !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular  && !this.validadorCelularLength  && !this.validadorCorreo && !this.validadorContrasena && !this.validadorContrasenaRep && !this.validadorContrasenaRepetir  && !this.validadorRequisitosContrasena && !this.validadorTerminos ){
-    this.spinner.show();
-    let Data = {
-     Id: 0,
-     IdSector: 1, // 1: persona Natural // 2: persona juridica
-     IdTipoPersona: 1,
-     CodigoDepartamento: this.cod_departamento,
-     CodigoProvincia: this.cod_provincia,
-     CodigoDistrito: this.cod_distrito,
-     IdTipoIdentificacion: 1,
-     RazonSocial: "",
-     Nombres: this.nombres,
-     Apellidos: this.apellidos,
-     NroDocumento: this.ruc, //para persona juridica mandas el ruc
-     Direccion: this.direccion,
-     Celular: this.celular,
-     Email: this.correo,
-     Flag: "A",
-     NroDocPerNatural: this.numeroDoc,//para persona juridica mandas el dni
-     Contrasena: this.contrasena
-   }
-   const formData = {...Data};
-//    this.http.post(this.baseUrl + 'ComponenteLogin/RegistroPersona', formData).subscribe((result : any) => {
-//     debugger;
-//     this.spinner.hide();
-//     if(result.data != null){
-//         this.limpiar();
-//         ////this.createNotification('success',"Persona Jurídica",'El registro se guardo con exito.');
-//      }
-//      else{
-//       ////this.createNotification('error',"Persona Jurídica",'Ha ocurrido un error al registrar.');
-//      }
-     
-//    }, error => console.error(error));
- 
+              let Data = {
+              Id: Number(this.id_persona),
+              IdSector: this.enumerado.TIPO_SECTOR_PERSONA.PESQUERIA,
+              IdTipoPersona: this.enumerado.TIPO_PERSONA.JURIDICA,
+              CodigoDepartamento: this.cod_departamento,
+              CodigoProvincia: this.cod_provincia,
+              CodigoDistrito: this.cod_distrito, 
+              IdTipoIdentificacion: Number(this.tipoDoc),
+              RazonSocial: this.razonSocial,
+              Nombres: this.nombres,
+              Apellidos: this.apellidos,
+              NroDocumento: this.ruc,
+              Direccion: this.direccion,
+              Celular: this.celular,
+              Email: this.correo,
+              Flag: this.enumerado.ESTADO_PERSONA.ACTIVO,
+              NroDocPerNatural: this.numeroDoc,
+              Contrasena: this.contrasena
+            }
+            this.componenteLoginService.RegistroPersona(Data)
+            .then(resp => {
+              debugger;
+              this.spinner.hide();
+              if (resp.data.id > 0) {
+              if(resp.messages.length > 0){
+
+          this._alertService.alertWarning(resp.messages[0],
+            () => {}
+            );
+        }
+        else{
+          this._alertService.alertOk(
+            "Registro exitoso",
+            '',
+            () => {
+                this.route.navigateByUrl('/principal').then(e => {
+                    if (e) {
+                        console.log("Navigation is successful!");
+                    } else {
+                        console.log("Navigation has failed!");
+                    }
+                });
+            }
+          );
+        }
+      }
+      else {
+        this._alertService.alertError("Ha ocurrido un error");
+        // alert("Error en registrarse");
+      }
+    })
+      .catch(err => {
+        this._alertService.alertError("Ha ocurrido un error");
+        this.spinner.hide();
+      });
+    });
   }
 }
+
+//   registroEmpresaService = () =>{
+//     debugger;
+//     this.changeContrasena();
+//     this.changeContrasenaRep();
+//     this.changeTerminos();
+
+//    // if(!this.validadorRuc  &&  !this.validadorTipoDocumento &&  !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular && !this.validadorCelularLength && this.validadorCorreo && this.validadorContrasena && this.validadorContrasenaRep && this.validadorContrasenaRepetir && !this.ValidadorNumeros && !this.Validador8Digitos && !this.ValidadorMayuscula && !this.ValidadorSimbolo && !this.ValidadorRequisitos)
+//    // {
+//    //   alert("Debe cumplir las validaciones.");
+//    //   return;
+//    // }
+//    if(!this.validadorRuc && !this.validadorRazonSocial &&  !this.validadorDireccion && !this.validadorTipoDocumento && !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular  && !this.validadorCelularLength  && !this.validadorCorreo && !this.validadorContrasena && !this.validadorContrasenaRep && !this.validadorContrasenaRepetir  && !this.validadorRequisitosContrasena && !this.validadorTerminos ){
+//     this.spinner.show();
+//     let Data = {
+//      Id: 0,
+//      IdSector: 1, // 1: persona Natural // 2: persona juridica
+//      IdTipoPersona: 1,
+//      CodigoDepartamento: this.cod_departamento,
+//      CodigoProvincia: this.cod_provincia,
+//      CodigoDistrito: this.cod_distrito,
+//      IdTipoIdentificacion: 1,
+//      RazonSocial: "",
+//      Nombres: this.nombres,
+//      Apellidos: this.apellidos,
+//      NroDocumento: this.ruc, //para persona juridica mandas el ruc
+//      Direccion: this.direccion,
+//      Celular: this.celular,
+//      Email: this.correo,
+//      Flag: "A",
+//      NroDocPerNatural: this.numeroDoc,//para persona juridica mandas el dni
+//      Contrasena: this.contrasena
+//    }
+//    const formData = {...Data};
+// //    this.http.post(this.baseUrl + 'ComponenteLogin/RegistroPersona', formData).subscribe((result : any) => {
+// //     debugger;
+// //     this.spinner.hide();
+// //     if(result.data != null){
+// //         this.limpiar();
+// //         ////this.createNotification('success',"Persona Jurídica",'El registro se guardo con exito.');
+// //      }
+// //      else{
+// //       ////this.createNotification('error',"Persona Jurídica",'Ha ocurrido un error al registrar.');
+// //      }
+     
+// //    }, error => console.error(error));
+ 
+//   }
+// }
 
   btnBuscarRUC = () =>{
     if(!this.validadorRuc  && !this.validadorRucDigitos){
@@ -139,6 +213,7 @@ export class RegistroEmpresaComponent implements OnInit {
     this.componenteLoginService.buscarPersonaEmpresa(Data)
     .then(resp => {
       this.spinner.hide();
+        this.id_persona =resp.data.id,
         this.razonSocial = resp.data.razonSocial;
         this.cod_departamento = resp.data.codigoDepartamento;
         this.cod_provincia = resp.data.codigoProvincia;
