@@ -56,6 +56,7 @@ export class EdicionPerfilPersonaComponent implements OnInit {
       debugger;
        this.spinner.hide();
        if (resp.success) {
+        this._alertService.alertOk("Actualizacion exitosa"),
         this.isVisiblePerfil = true;  
         this.isVisibleContacto = true; 
         this.isVisibleEditarContacto = false;  
