@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using se = Prod.ServiciosExternos;
-using Prod.ComponenteLoginAngular.MVC.Controllers.Core;
+using Prod.ComponenteLoginAngular.MVC.Controllers;
 using Prod.ComponenteLoginAngular.MVC.Model;
 using Prod.ServiciosExternos;
 using Prod.ServiciosExternos.PRODUCE_VIRTUAL;
@@ -177,10 +177,6 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                         ingresarClave = request.Contrasena
                     });
 
-                    if (result.Success)
-                    {
-
-                    }
                 }
                 respuesta.Data = resPersona;
                 respuesta.Success = true;

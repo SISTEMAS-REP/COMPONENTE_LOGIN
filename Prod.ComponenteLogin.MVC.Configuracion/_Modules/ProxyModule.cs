@@ -32,8 +32,6 @@ namespace Prod.ComponenteLogin.MVC.Configuracion._Modules
             builder.RegisterType<ProduceVirtualServicio>().As<IProduceVirtualServicio>().WithParameter("baseUrl", AppConfig.Urls.URL_PRODUCE_VIRTUAL);
             builder.RegisterType<PersonasServicio>().As<IPersonasServicio>().WithParameter("baseUrl", AppConfig.Urls.URL_PERSONA_API);
             builder.RegisterType<RolesServicio>().As<IRolesServicio>().WithParameter("baseUrl", AppConfig.Urls.URL_ROLES_API);
-            var baseFolder = System.IO.Directory.GetCurrentDirectory();
-            var rootTemplates = Path.Combine(baseFolder, "PlantillasCorreo");
 
             base.Load(builder);
         }

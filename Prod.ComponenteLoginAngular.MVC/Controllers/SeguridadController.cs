@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Prod.ComponenteLoginAngular.MVC.Controllers.Core;
+using Prod.ComponenteLoginAngular.MVC.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;

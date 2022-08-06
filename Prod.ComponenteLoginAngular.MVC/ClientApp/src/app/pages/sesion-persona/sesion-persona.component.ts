@@ -77,13 +77,14 @@ export class SesionPersonaComponent implements OnInit {
         clave: this.contrasena
       }
       const resp = await this.componenteLoginService.IniciarSesionExtranet(Data)
-      .then(resp => {
+      .then(async resp => {
         if (resp.id > 0) {
+          debugger
+          await this.fnCargarAplicacion();
           debugger
           var frm = document.createElement('form');
           frm.id = "frmLogin";
           frm.method = 'POST';
-          debugger;
           frm.action = `${environment.apiWebPV}/ExtranetToken/loginUnico`;
           var campo = document.createElement("input");
           campo.setAttribute("name", "Login");
@@ -97,16 +98,20 @@ export class SesionPersonaComponent implements OnInit {
           var campo5 = document.createElement("input");
           campo5.setAttribute("name", "TipoPersona");
           campo5.setAttribute("value", "1");
+
+          var campo6 = document.createElement("input");
+          campo6.setAttribute("name", "url_extranet_by_aplicacion");
+          campo6.setAttribute("value", this.targetURL);
           frm.appendChild(campo);
           frm.appendChild(campo2);
           frm.appendChild(campo3);
           frm.appendChild(campo5);
+          frm.appendChild(campo6);
+          debugger
           document.body.append(frm);
           frm.submit();
           document.getElementById('frmLogin').remove();
-          debugger
-          //this.fnCargarAplicacion();  
-          this.spinner.hide();
+          this.spinner.hide();          
         }
        
         else {
@@ -123,9 +128,8 @@ export class SesionPersonaComponent implements OnInit {
   
   }
 
+  targetURL : string = "";
   async fnCargarAplicacion (){
-    debugger
-    this.spinner.show();
     const respss = await this.componenteLoginService.obtenerDatoAplicacionByUsuario({
        IdTipoPersona: 1,
        NroDocumento: this.numero_documento,
@@ -134,12 +138,7 @@ export class SesionPersonaComponent implements OnInit {
     })
     .then(resp => {
       debugger
-      let targetURL = resp.data;
-      let newURL = document.createElement('a');
-      newURL.href = targetURL;
-      document.body.appendChild(newURL);
-      newURL.click();
-      this.spinner.hide();
+      this.targetURL = resp.data;      
     })
     .catch(err => []);
   }

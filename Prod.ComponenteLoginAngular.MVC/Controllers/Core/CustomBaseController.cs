@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using Http = Microsoft.AspNetCore.Http;
 
-namespace Prod.ComponenteLoginAngular.MVC.Controllers.Core
+namespace Prod.ComponenteLoginAngular.MVC.Controllers
 {
     public class CustomBaseController : BaseController
     {

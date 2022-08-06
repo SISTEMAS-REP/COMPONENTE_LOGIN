@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Prod.ComponenteLoginAngular.MVC.Controllers.Core;
 using Prod.ComponenteLoginAngular.MVC.Model;
 using System;
 using System.Collections.Generic;
@@ -23,7 +22,6 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
 		[AllowAnonymous]
 		public IActionResult Index()
 		{
-			//var user = this.GetUser();
 			ViewBag.IsAuthenticated = false;
 			if (User.Identity.IsAuthenticated)
 			{
@@ -31,7 +29,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
 			}
 			return View();
 		}
-
+		[AllowAnonymous]
 		public IActionResult Privacy(string opc)
 		{
 			ViewBag.IsAuthenticated = false;

@@ -22,15 +22,16 @@ namespace Prod.ComponenteLoginAngular.MVC
     public class Startup
     {
         public IConfiguration Configuration { get; }
-
         public IWebHostEnvironment Environment { get; set; }
+
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
+
             Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Verbose()
-                .Enrich.FromLogContext()
-                .WriteTo.File("Log/Log-.txt", rollingInterval: RollingInterval.Day)
-                .CreateLogger();
+               .MinimumLevel.Verbose()
+               .Enrich.FromLogContext()
+               .WriteTo.File("Log/Log-.txt", rollingInterval: RollingInterval.Day)
+               .CreateLogger();
 
 
             var basePath = AppDomain.CurrentDomain.BaseDirectory; //#SDK 2.00
@@ -48,24 +49,21 @@ namespace Prod.ComponenteLoginAngular.MVC
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
+            //Encryts
 
-            #if DEBUG
+#if DEBUG
             HelperHttp.AllowEncrypt = false;
-            #elif !DEBUG
-            HelperHttp.AllowEncrypt = false;
-            #endif
+#elif !DEBUG
+            HelperHttp.AllowEncrypt = true;
+#endif
 
             HelperHttp.WebRootPath = Environment.WebRootPath;
 
             //Register Types
             BootstrapperContainer.Configuration = this.Configuration;
-            BootstrapperContainer.Environment = this.Environment;
             BootstrapperContainer.Register(builder);
         }
 
-
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAuthorization();
@@ -73,7 +71,6 @@ namespace Prod.ComponenteLoginAngular.MVC
             services.AddMvc(o =>
             {
                 o.Filters.Add(new ProducesAttribute("application/json"));
-                //o.Filters.Add(new Release.Helper.WebKoMvc.Filters.SecureResponseRequestAttribute());
                 o.EnableEndpointRouting = false;
             });
             services.AddSpaStaticFiles(configuration =>
@@ -82,10 +79,8 @@ namespace Prod.ComponenteLoginAngular.MVC
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -94,6 +89,7 @@ namespace Prod.ComponenteLoginAngular.MVC
             {
                 app.UseExceptionHandler("/Error");
             }
+
             app.UseSecurityHeadersMiddleware(new SecurityHeadersBuilder()
                 .AddDefaultSecurePolicy()
             );
@@ -125,12 +121,12 @@ namespace Prod.ComponenteLoginAngular.MVC
                 spa.Options.SourcePath = "ClientApp";
             });
         }
+
         private void Areas(IRouteBuilder routes)
         {
             routes.MapRoute(
                 name: "area",
                 template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
         }
-
     }
 }

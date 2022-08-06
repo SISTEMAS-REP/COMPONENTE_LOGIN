@@ -1,5 +1,4 @@
-﻿
-using Release.Helper.Proxy;
+﻿using Release.Helper.Proxy;
 using System;
 using System.Net.Http;
 
