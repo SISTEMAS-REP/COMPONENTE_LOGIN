@@ -82,7 +82,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                     telefono = string.IsNullOrEmpty(request.Telefono) ? "" : request.Telefono,
                     email = string.IsNullOrEmpty(request.Email) ? "" : request.Email,
                     flag = request.Flag,
-                    usuario = "VUSP",
+                    usuario = "login_unico",
                     celular = string.IsNullOrEmpty(request.Celular) ? "" : request.Celular,
                     representante_legal = "",
                     nro_documento_representante = "",
@@ -103,7 +103,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                     email = string.IsNullOrEmpty(request.Email) ? "" : request.Email,
                     celular = string.IsNullOrEmpty(request.Celular) ? "" : request.Celular,
                     nro_docpernatural = request.NroDocPerNatural,
-                    usuario = "VUSP"
+                    usuario = "login_unico"
                 };
                 resPersona = personasServicio.ActualizarPersonaById(persona);
             }
@@ -158,7 +158,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                         Email = request.Email,
                         Ruc = request.NroDocumento,
                         PhoneNumber = request.Celular,
-                        UserRegister = "VSP", //appConfig.RegistroUsuario.Usuario,
+                        UserRegister = "login_unico", //appConfig.RegistroUsuario.Usuario,
                         id_rol = 738,// int.Parse(appConfig.RegistroUsuario.IdRol),
                         id_aplicacion = 240,// int.Parse(appConfig.RegistroUsuario.IdAplicacion),
                         ingresarClave = request.Contrasena
@@ -171,7 +171,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                         Dni = request.NroDocPerNatural,
                         Email = request.Email,
                         PhoneNumber = request.Celular,
-                        UserRegister = "VSP", //appConfig.RegistroUsuario.Usuario,
+                        UserRegister = "login_unico", //appConfig.RegistroUsuario.Usuario,
                         id_rol = 738,// int.Parse(appConfig.RegistroUsuario.IdRol),
                         id_aplicacion = 240,// int.Parse(appConfig.RegistroUsuario.IdAplicacion),
                         ingresarClave = request.Contrasena
@@ -179,7 +179,8 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
 
                 }
                 respuesta.Data = resPersona;
-                respuesta.Success = true;
+                respuesta.Success = result.Success;
+                respuesta.Messages = result.Messages;
                 
 
             }

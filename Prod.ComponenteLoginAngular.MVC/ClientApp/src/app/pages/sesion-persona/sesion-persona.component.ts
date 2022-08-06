@@ -102,6 +102,7 @@ export class SesionPersonaComponent implements OnInit {
           var campo6 = document.createElement("input");
           campo6.setAttribute("name", "url_extranet_by_aplicacion");
           campo6.setAttribute("value", this.targetURL);
+          
           frm.appendChild(campo);
           frm.appendChild(campo2);
           frm.appendChild(campo3);
