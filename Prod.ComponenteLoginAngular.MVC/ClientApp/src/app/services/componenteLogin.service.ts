@@ -94,4 +94,18 @@ export class ComponenteLoginService {
       throw err.data || err;
     }
   }
+
+  async UpdateCorreoTelefonoPersona(request) {
+    const formData = {...request};
+    const url = `${this.baseUrl}/UpdateCorreoTelefonoPersona`;
+    try {
+      const resp = await axios
+        .post(url, formData);
+      return resp.data;
+    } catch (err) {
+      throw err.data || err;
+    }
+  }
+
+  
 }

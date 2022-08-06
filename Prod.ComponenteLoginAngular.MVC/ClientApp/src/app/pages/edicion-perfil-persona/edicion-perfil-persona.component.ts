@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ComponenteLoginService } from 'src/app/services/componenteLogin.service';
+import { AlertService } from 'src/app/shared/componentes/services/alert.service';
 
 @Component({
   selector: 'app-edicion-perfil-persona',
@@ -24,35 +26,50 @@ export class EdicionPerfilPersonaComponent implements OnInit {
   validadorCorreoInvalido : boolean = false;
 
   constructor(
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private componenteLoginService: ComponenteLoginService,
+    private _alertService: AlertService
   ) { }
 
   ngOnInit() {
   }
 
-  btnGuardarContacto = () =>{
+  btnGuardarContacto = () => {
+    debugger;
     this.changeCelular();
     this.changeCorreo();
-    debugger
-      if(!this.validadorCelular &&   !this.validadorCelularLength && !this.validadorCorreo && !this.validadorCorreoInvalido){
-        debugger
-      let Data = {
-        Id: 2496732, //cambiar
-        Email: this.correo,
-        Telefono: this.celular,
-        idContactoExtranet: 15357//cambiar
-      }
-      const formData = {...Data};
-      // this.http.post(this.baseUrl + 'ComponenteLogin/UpdateCorreoTelefonoPersona', formData).subscribe((result : any) => {
-      //   debugger
-      //   alert(result.messages[0]);
-      //   this.isVisiblePerfil = true;  
-      //   this.isVisibleContacto = true; 
-      //   this.isVisibleEditarContacto = false;  
-      //   this.limpiar();
-      //   }, error => console.error(error));      
-      }    
-  }
+
+    if(!this.validadorCelular &&   !this.validadorCelularLength && !this.validadorCorreo && !this.validadorCorreoInvalido){
+      this._alertService.alertConfirm(
+     "",
+     "¿Está seguro que actualizar los datos?",
+     () => {
+    this.spinner.show();
+    let Data = {
+      Id: 2496732, //cambiar
+      Email: this.correo,
+      Telefono: this.celular,
+      idContactoExtranet: 15357//cambiar
+    }
+     this.componenteLoginService.UpdateCorreoTelefonoPersona(Data)
+      .then(resp => {
+      debugger;
+       this.spinner.hide();
+       if (resp.success) {
+        this.isVisiblePerfil = true;  
+        this.isVisibleContacto = true; 
+        this.isVisibleEditarContacto = false;  
+        this.limpiar();
+       }
+       else {
+        debugger;
+         this._alertService.alertError("Error al actualizar");
+       }
+     })
+     .catch(err => []);
+   });
+   }
+ }
 
   clickEditarContacto = () =>{ 
     this.isVisibleEditarContacto = true;

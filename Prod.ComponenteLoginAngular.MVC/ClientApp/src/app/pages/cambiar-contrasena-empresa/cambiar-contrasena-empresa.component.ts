@@ -75,6 +75,7 @@ export class CambiarContrasenaEmpresaComponent implements OnInit {
 
   cambiarContrasena = () => 
   {
+    debugger;
     this.changeContrasenaNueva();
     this.changeContrasenaRep();
 
@@ -92,6 +93,7 @@ export class CambiarContrasenaEmpresaComponent implements OnInit {
     }
      this.componenteLoginService.CambiarContrasena(Data)
       .then(resp => {
+        debugger;
        this.spinner.hide();
        if (resp.success) {
           this.isVisiblePaso2 = false;

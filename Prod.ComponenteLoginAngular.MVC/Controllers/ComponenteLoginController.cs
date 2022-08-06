@@ -341,6 +341,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
             return sr;
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [Route("CambiarContrasena")]
         public IActionResult CambiarContrasena([FromBody] Prod.ComponenteLoginAngular.MVC.Model.LoginRequest request)
@@ -370,6 +371,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
             return Ok(sr);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [Route("UpdateCorreoTelefonoPersona")]
         public IActionResult UpdateCorreoTelefonoPersona([FromBody] PersonaRequest request)
