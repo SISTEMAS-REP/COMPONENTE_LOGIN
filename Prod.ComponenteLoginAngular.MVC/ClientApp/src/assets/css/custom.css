@@ -1290,14 +1290,14 @@ transition: .3s all ease-in;
 }
 .btn-tramite:hover{
     color: #fff;
-    background-color: #666;
-    border-color: #666;
+    background-color: #000;
+    border-color: #000;
 	border-radius: 4px;
 }
 .btn-tramite2 {
-    color: #fff;
-    background-color: #BD0F17;
-    border-color: #BD0F17;
+  color: #fff;
+  background-color: #EEE;
+  border-color: #CCC;
 	border-radius: 4px;
 	width: 100%;
 	padding-top: 10px;
@@ -1307,9 +1307,8 @@ transition: .3s all ease-in;
 }
 .btn-tramite2:hover{
     color: #fff;
-    background-color: #666;
-    border-color: #666;
-	border-radius: 4px;
+    background: #000;
+    border-color: #000;
 }
 @media (max-width: 767px) {
 	.formularios {
