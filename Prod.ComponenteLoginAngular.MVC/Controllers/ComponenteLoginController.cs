@@ -82,7 +82,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                     telefono = string.IsNullOrEmpty(request.Telefono) ? "" : request.Telefono,
                     email = string.IsNullOrEmpty(request.Email) ? "" : request.Email,
                     flag = request.Flag,
-                    usuario = "login_unico",
+                    usuario = appConfig.RegistroUsuario.Usuario,
                     celular = string.IsNullOrEmpty(request.Celular) ? "" : request.Celular,
                     representante_legal = "",
                     nro_documento_representante = "",
@@ -132,8 +132,8 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                     new roles.UsuarioRolesRequest()
                     {
                         CodigoUsuario = request.IdTipoPersona == 2 ? user.Data.IdPersonaNatural : int.Parse(resPersona.Value),
-                        IdAplicion = 240,
-                        IdRol = 738,
+                        IdAplicion = int.Parse(appConfig.RegistroUsuario.IdAplicacion),
+                        IdRol = int.Parse(appConfig.RegistroUsuario.IdRol),
                         Tipo = roles.TipoRol.Extranet
                     }, 1, 10);
 
@@ -141,7 +141,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                     {
                         if (result1.Data.TotalItems > 0)
                         {
-                            respuesta.Success = result1.Success;
+                            respuesta.Success = false;
                             respuesta.Messages.Add("Este usuario ya existe como administrado");
                             return Ok(respuesta);
                         }
@@ -158,9 +158,9 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                         Email = request.Email,
                         Ruc = request.NroDocumento,
                         PhoneNumber = request.Celular,
-                        UserRegister = "login_unico", //appConfig.RegistroUsuario.Usuario,
-                        id_rol = 738,// int.Parse(appConfig.RegistroUsuario.IdRol),
-                        id_aplicacion = 240,// int.Parse(appConfig.RegistroUsuario.IdAplicacion),
+                        UserRegister = appConfig.RegistroUsuario.Usuario,
+                        id_rol = int.Parse(appConfig.RegistroUsuario.IdRol),
+                        id_aplicacion = int.Parse(appConfig.RegistroUsuario.IdAplicacion),
                         ingresarClave = request.Contrasena
                     });
                 }
@@ -171,9 +171,9 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                         Dni = request.NroDocPerNatural,
                         Email = request.Email,
                         PhoneNumber = request.Celular,
-                        UserRegister = "login_unico", //appConfig.RegistroUsuario.Usuario,
-                        id_rol = 738,// int.Parse(appConfig.RegistroUsuario.IdRol),
-                        id_aplicacion = 240,// int.Parse(appConfig.RegistroUsuario.IdAplicacion),
+                        UserRegister = appConfig.RegistroUsuario.Usuario,
+                        id_rol =  int.Parse(appConfig.RegistroUsuario.IdRol),
+                        id_aplicacion =  int.Parse(appConfig.RegistroUsuario.IdAplicacion),
                         ingresarClave = request.Contrasena
                     });
 
