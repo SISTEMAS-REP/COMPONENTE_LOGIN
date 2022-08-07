@@ -222,7 +222,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                     {
                         var correo = produceVirtualServicio.EnviarCorreoVerificacion(new CorreoConfirmacionRequest
                         {
-                            Url = appConfig.Urls.URL_PRODUCE_VIRTUAL_WEB + "Verificaciones/EmailVUSP/[" + request.numeroDocumento + "]",
+                            Url = appConfig.Urls.URL_PRODUCE_VIRTUAL_WEB + "Verificaciones/EmailLoginUnico/[" + request.numeroDocumento + "]",
                             Correo = request.email,
                             Identificador = guid
                         });
@@ -241,7 +241,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                 {
                     var correo = produceVirtualServicio.EnviarCorreoVerificacion(new CorreoConfirmacionRequest
                     {
-                        Url = appConfig.Urls.URL_PRODUCE_VIRTUAL_WEB + "Verificaciones/EmailVUSP/[" + request.numeroDocumento + "]",
+                        Url = appConfig.Urls.URL_PRODUCE_VIRTUAL_WEB + "Verificaciones/EmailLoginUnico/[" + request.numeroDocumento + "]",
                         Correo = request.email,
                         Identificador = guid
                     });
