@@ -65,8 +65,6 @@ export class SesionEmpresaComponent implements OnInit {
   }
 
   async iniciarSesionPersonaJuridica(){
-    debugger;
-
     if(this.id_aplicacion == null){
       return;
     }
@@ -86,11 +84,10 @@ export class SesionEmpresaComponent implements OnInit {
       .then(resp => {
         //this.spinner.hide();
         if (resp.id > 0) {
-          debugger
           var frm = document.createElement('form');
           frm.id = "frmLogin";
           frm.method = 'POST';
-          debugger;
+
           frm.action = `${environment.apiWebPV}/ExtranetToken/loginUnico`;
           var campo = document.createElement("input");
           campo.setAttribute("name", "Login");
@@ -111,8 +108,6 @@ export class SesionEmpresaComponent implements OnInit {
           document.body.append(frm);
           frm.submit();
           document.getElementById('frmLogin').remove();
-          debugger
-          //this.fnCargarAplicacion();
           this.spinner.hide();
         }
        
@@ -125,7 +120,6 @@ export class SesionEmpresaComponent implements OnInit {
   }
 
   async fnCargarAplicacion (){
-    debugger
     this.spinner.show();
     const respss = await this.componenteLoginService.obtenerDatoAplicacionByUsuario({
        IdTipoPersona: 1,
@@ -134,7 +128,6 @@ export class SesionEmpresaComponent implements OnInit {
        id_aplicacion: Number(this.id_aplicacion)
     })
     .then(resp => {
-      debugger
       let targetURL = resp.data;
       let newURL = document.createElement('a');
       newURL.href = targetURL;

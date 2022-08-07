@@ -88,7 +88,6 @@ export class RecuperarContrasenaPersonaComponent implements OnInit {
            this.validaSuccess = true;
          }
          else {
-          debugger;
            this._alertService.alertError("Error al recuperar contraseña");
          }
        })

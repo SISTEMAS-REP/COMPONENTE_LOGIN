@@ -35,7 +35,6 @@ export class EdicionPerfilPersonaComponent implements OnInit {
   }
 
   btnGuardarContacto = () => {
-    debugger;
     this.changeCelular();
     this.changeCorreo();
 
@@ -53,7 +52,6 @@ export class EdicionPerfilPersonaComponent implements OnInit {
     }
      this.componenteLoginService.UpdateCorreoTelefonoPersona(Data)
       .then(resp => {
-      debugger;
        this.spinner.hide();
        if (resp.success) {
         this._alertService.alertOk("Actualizacion exitosa"),
@@ -63,7 +61,6 @@ export class EdicionPerfilPersonaComponent implements OnInit {
         this.limpiar();
        }
        else {
-        debugger;
          this._alertService.alertError("Error al actualizar");
        }
      })

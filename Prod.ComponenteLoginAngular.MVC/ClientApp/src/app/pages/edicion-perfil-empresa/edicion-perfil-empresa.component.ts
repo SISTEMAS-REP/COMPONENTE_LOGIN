@@ -57,7 +57,6 @@ export class EdicionPerfilEmpresaComponent implements OnInit {
     this.changeNombres();
     this.changeApellidos();
  
-    debugger;
       if( !this.validadorTipoDocumento && !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres){
         this.isVisiblePerfil = true;  
         this.isVisibleRepresentante = true; 
@@ -67,7 +66,6 @@ export class EdicionPerfilEmpresaComponent implements OnInit {
   }
 
   btnGuardarContacto = () => {
-    debugger;
     this.changeCelular();
     this.changeCorreo();
 
@@ -85,7 +83,6 @@ export class EdicionPerfilEmpresaComponent implements OnInit {
     }
      this.componenteLoginService.UpdateCorreoTelefonoPersona(Data)
       .then(resp => {
-      debugger;
        this.spinner.hide();
        if (resp.success) {
         this._alertService.alertOk("Actualizacion exitosa"),
@@ -95,7 +92,6 @@ export class EdicionPerfilEmpresaComponent implements OnInit {
           this.limpiar();
        }
        else {
-        debugger;
          this._alertService.alertError("Error al actualizar");
        }
      })

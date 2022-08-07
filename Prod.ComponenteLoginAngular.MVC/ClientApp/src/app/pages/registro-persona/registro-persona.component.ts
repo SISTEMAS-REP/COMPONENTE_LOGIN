@@ -102,7 +102,6 @@ export class RegistroPersonaComponent implements OnInit {
 
 
   registroPersonaService() {
-    debugger;
     this.changeCorreo();
     this.changeContrasena();
     this.changeContrasenaRep();
@@ -114,8 +113,6 @@ export class RegistroPersonaComponent implements OnInit {
             "¿Está seguro que desea guardar esta información?",
             () => {
               this.spinner.show();
-
-              debugger
               let Data = {
               Id: Number(this.id_persona),
               IdSector: this.enumerado.TIPO_SECTOR_PERSONA.PESQUERIA,
@@ -135,10 +132,8 @@ export class RegistroPersonaComponent implements OnInit {
               NroDocPerNatural: this.numeroDoc,
               Contrasena: this.contrasena
             }
-            debugger
             this.componenteLoginService.RegistroPersona(Data)
             .then(resp => {
-              debugger;
               this.spinner.hide();
                 if(!resp.success){
                   this._alertService.alertWarning(resp.messages[0]);
@@ -154,7 +149,6 @@ export class RegistroPersonaComponent implements OnInit {
                   }
             })
             .catch(err => {
-              debugger
                 this._alertService.alertError("Ha ocurrido un error");
                 this.spinner.hide();
             });
@@ -221,9 +215,7 @@ export class RegistroPersonaComponent implements OnInit {
     this.componenteLoginService.buscarPersonaEmpresa(Data)
     .then(resp => {
       if(resp.data != null){
-      debugger;
       this.spinner.hide();
-      debugger
         this.id_persona =resp.data.id,
         this.nombres = resp.data.nombres;     
         this.razon_Social  = resp.data.razonSocial;     

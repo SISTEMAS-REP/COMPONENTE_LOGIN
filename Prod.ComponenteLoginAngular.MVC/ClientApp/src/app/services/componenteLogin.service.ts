@@ -58,7 +58,6 @@ export class ComponenteLoginService {
   }
 
   async RegistroPersona(request) {
-    debugger;
     const formData = {...request};
     const url = `${this.baseUrl}/RegistroPersona`;
     try {
@@ -71,7 +70,6 @@ export class ComponenteLoginService {
   }
 
   async RecuperarContrasena(request) {
-    debugger;
     const formData = {...request};
     const url = `${this.baseUrl}/RecuperarContrasena`;
     try {

@@ -101,7 +101,6 @@ export class CambiarContrasenaPersonaComponent implements OnInit {
           this.validaSuccess = true;
        }
        else {
-        debugger;
          this._alertService.alertError("Error al actualizar contraseña");
        }
      })

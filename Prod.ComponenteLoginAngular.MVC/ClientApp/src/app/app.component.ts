@@ -8,7 +8,6 @@ import { Component, ElementRef } from '@angular/core';
 export class AppComponent {
   title = 'ClientApp';
   constructor(elm: ElementRef) {
-    debugger
     var ff = elm.nativeElement.getAttribute('tk');
     if (elm.nativeElement.getAttribute('tk') == 'true') {
       localStorage.setItem('AppVusp', elm.nativeElement.getAttribute('tk'));

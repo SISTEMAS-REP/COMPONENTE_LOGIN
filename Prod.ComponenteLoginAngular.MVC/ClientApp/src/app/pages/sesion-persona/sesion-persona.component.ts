@@ -62,8 +62,6 @@ export class SesionPersonaComponent implements OnInit {
   }
 
   async iniciarSesionPersonaNatural(){
-    debugger;
-
     if(this.id_aplicacion == null){
       return;
     }
@@ -79,9 +77,7 @@ export class SesionPersonaComponent implements OnInit {
       const resp = await this.componenteLoginService.IniciarSesionExtranet(Data)
       .then(async resp => {
         if (resp.id > 0) {
-          debugger
           await this.fnCargarAplicacion();
-          debugger
           var frm = document.createElement('form');
           frm.id = "frmLogin";
           frm.method = 'POST';
@@ -108,7 +104,6 @@ export class SesionPersonaComponent implements OnInit {
           frm.appendChild(campo3);
           frm.appendChild(campo5);
           frm.appendChild(campo6);
-          debugger
           document.body.append(frm);
           frm.submit();
           document.getElementById('frmLogin').remove();
@@ -138,7 +133,6 @@ export class SesionPersonaComponent implements OnInit {
        id_aplicacion: Number(this.id_aplicacion)
     })
     .then(resp => {
-      debugger
       this.targetURL = resp.data;      
     })
     .catch(err => []);

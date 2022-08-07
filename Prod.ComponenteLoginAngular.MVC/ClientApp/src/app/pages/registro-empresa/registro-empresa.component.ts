@@ -112,7 +112,6 @@ export class RegistroEmpresaComponent implements OnInit {
 
 
   registroEmpresaService = () => {
-    debugger;
     if(!this.validadorRuc  &&  !this.validadorTipoDocumento &&  !this.validadorNroDocumento && !this.validadorApellidos && !this.validadorNombres && !this.validadorCelular && !this.validadorCelularLength && !this.validadorCorreo && !this.validadorContrasena && !this.validadorContrasenaRep && !this.validadorContrasenaRepetir   && !this.validadorRequisitosContrasena && !this.validadorTerminos ){  
       this._alertService.alertConfirm(
           "",
@@ -141,7 +140,6 @@ export class RegistroEmpresaComponent implements OnInit {
             }
             this.componenteLoginService.RegistroPersona(Data)
             .then(resp => {
-              debugger;
               this.spinner.hide();
               if (resp.data.value > 0) {
               if(resp.messages.length > 0){
@@ -223,7 +221,6 @@ export class RegistroEmpresaComponent implements OnInit {
       }
       this.componenteLoginService.buscarPersonaEmpresa(Data)
       .then(resp => {
-        debugger;
         if(resp.data != null){
         this.spinner.hide();
         this.nombres = resp.data.nombres;
@@ -433,7 +430,6 @@ export class RegistroEmpresaComponent implements OnInit {
 
 
   changeCorreoRep = () =>{
-    debugger;
     if(this.correo_rep == null || this.correo_rep == ""){
       this.validadorCorreoRep = true;
     }
