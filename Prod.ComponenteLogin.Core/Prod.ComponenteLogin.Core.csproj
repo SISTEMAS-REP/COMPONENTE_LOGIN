@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+    <PackageReference Include="Prod.ServiciosExternos" Version="1.3.73" />
+    <PackageReference Include="Release.Helper" Version="1.3.8" />
+    <PackageReference Include="Release.Helper.Data.ICore" Version="1.0.7" />
+    <PackageReference Include="System.ServiceModel.Duplex" Version="4.8.*" />
+    <PackageReference Include="System.ServiceModel.Http" Version="4.8.*" />
+    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.8.*" />
+    <PackageReference Include="System.ServiceModel.Security" Version="4.8.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\002_COMPONENTE_LOGIN\Prod.ComponenteLogin.Entidades\Prod.ComponenteLogin.Entidades.csproj" />
+    <ProjectReference Include="..\..\002_COMPONENTE_LOGIN\Prod.ComponenteLogin.MVC.Configuracion\Prod.ComponenteLogin.MVC.Configuracion.csproj" />
+    <ProjectReference Include="..\Prod.ComponenteLogin.Datos\Prod.ComponenteLogin.Datos.csproj" />
+  </ItemGroup>
+
+</Project>

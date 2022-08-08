@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+<ItemGroup>
+    <Compile Include="..\MapDB\Prod.VUSP.MapDB\Prod.VUSP.Datos\Modelo\*.cs">
+      <Link>Modelo\%(FileName)</Link>
+    </Compile>
+  </ItemGroup>
+<ItemGroup>
+  <Compile Remove="..\MapDB\Prod.VUSP.MapDB\Prod.VUSP.Datos\Modelo\p_crear_usuario_extranet_Result.cs" />
+  <Compile Remove="..\MapDB\Prod.VUSP.MapDB\Prod.VUSP.Datos\Modelo\p_enumerados_getAll_Result.cs" />
+</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.90" />
+    <PackageReference Include="Release.Helper.Data.Core" Version="1.0.7" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\002_COMPONENTE_LOGIN\Prod.ComponenteLogin.Entidades\Prod.ComponenteLogin.Entidades.csproj" />
+  </ItemGroup>
+
+</Project>
