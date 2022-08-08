@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ComponenteLoginService } from 'src/app/services/componenteLogin.service';
 import { AlertService } from 'src/app/shared/componentes/services/alert.service';
@@ -30,6 +31,7 @@ export class SesionPersonaComponent implements OnInit {
     private router: ActivatedRoute,
     private sanitizer: DomSanitizer,
     private _alertService: AlertService,
+    private route: Router
   ) {
   }
 

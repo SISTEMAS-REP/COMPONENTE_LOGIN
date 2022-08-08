@@ -25,7 +25,6 @@
     <Folder Include="Aplicacion\Interfaces\" />
     <Folder Include="Aplicacion\Proceso\" />
     <Folder Include="Aplicacion\Validacion\" />
-    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>
