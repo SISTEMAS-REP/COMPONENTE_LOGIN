@@ -35,6 +35,11 @@ export class CambiarContrasenaPersonaComponent implements OnInit {
   contentType: string = "image/png";
   urlArchivo: SafeResourceUrl;
 
+  Identificador: string = "";
+  Code: string = "";
+  Email: string = "";
+  UserName: string = "";
+
   constructor(
     private spinner: NgxSpinnerService,
     private componenteLoginService: ComponenteLoginService,
@@ -49,6 +54,10 @@ export class CambiarContrasenaPersonaComponent implements OnInit {
   ngOnInit(): void {
     this.router.queryParams.subscribe(params => {
       this.id_aplicacion = params['id_aplicacion'] || null;
+      this.Identificador = params['Identificador'] || null;
+      this.Code = params['Code'] || null;
+      this.Email = params['Email'] || null;
+      this.UserName = params['UserName'] || null;
       this.obtenerImagenByAplicacion();
     });
   }
@@ -88,14 +97,16 @@ export class CambiarContrasenaPersonaComponent implements OnInit {
      () => {
     this.spinner.show();
     let Data = {
-      id: "2496752",  //this.id,
-      dni: "753470004", // this.userName,
-      email: "JHOSEPH264@GMAIL.COM",// this.email,
-      clave: "produce", //this.form.get('contrasena').value,
+      id: this.Identificador,  //this.id,
+      dni: this.UserName, // this.userName,
+      email: this.Email,// this.email,
+      clave: this.contrasenaNueva, //this.form.get('contrasena').value,
     }
+    console.log(Data);
      this.componenteLoginService.CambiarContrasena(Data)
       .then(resp => {
        this.spinner.hide();
+       debugger
        if (resp.success) {
           this.isVisiblePaso2 = false;
           this.validaSuccess = true;
