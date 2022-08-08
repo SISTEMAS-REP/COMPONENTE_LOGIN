@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Prod.VUSP.Datos.Contexto
+namespace Prod.ComponenteLogin.Datos.Contexto
 {
-    public partial class VUSPDbContext
+    public partial class LoginUnicoDbContext
     {
         public void SaveChanges(string jsonAuthN)
         {

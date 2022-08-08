@@ -2,14 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Prod.ServiciosExternos;
 using Prod.ServiciosExternos.PRODUCE_VIRTUAL;
-using Prod.ServiciosExternos.SNE;
-using Prod.VUSP.Core.Aplicacion;
-using Prod.VUSP.Core.Aplicacion.Interfaces.Comando;
 using Prod.ComponenteLogin.MVC.Configuracion;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Prod.ComponenteLogin.Core.Api.App_Start
 {

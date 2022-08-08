@@ -7,16 +7,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Prod.VUSP.Core.Api.App_Start;
-using Prod.VUSP.Entidades.Config;
-using Prod.VUSP.MVC.Configuracion;
+using Prod.ComponenteLogin.Core.Api.App_Start;
+using Prod.ComponenteLogin.MVC.Configuracion;
 using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Prod.VUSP.Core.Api
+namespace Prod.ComponenteLogin.Core.Api
 {
     public class Startup
     {
@@ -42,8 +41,6 @@ namespace Prod.VUSP.Core.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<VariablesSitradoc>(options => Configuration.GetSection("AppConfig:VariablesSitradoc").Bind(options));
-
             services.AddControllers();
             services.AddMvc(options =>
             {
@@ -81,7 +78,7 @@ namespace Prod.VUSP.Core.Api
 
             app.UseRouting();
             app.UseMvc();
-            app.Run(context => context.Response.WriteAsync($"<h1 style='color:blue;'>Prod.VUSP.Core.API Environment: {env.EnvironmentName}</h1>"));
+            app.Run(context => context.Response.WriteAsync($"<h1 style='color:blue;'>Prod.ComponenteLogin.Core.API Environment: {env.EnvironmentName}</h1>"));
         }
     }
 }

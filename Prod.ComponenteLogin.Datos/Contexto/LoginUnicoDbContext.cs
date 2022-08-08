@@ -1,18 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Prod.VUSP.Datos.Modelo;
 using Release.Helper.Data.Core;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Prod.VUSP.Datos.Contexto
+namespace Prod.ComponenteLogin.Datos.Contexto
 {
 
-    public partial class VUSPDbContext : DbContext, IDbContext
+    public partial class LoginUnicoDbContext : DbContext, IDbContext
     {
         private readonly string _connstr;
 
-        public VUSPDbContext(string connstr)
+        public LoginUnicoDbContext(string connstr)
         {
             this._connstr = connstr;
         }
@@ -20,7 +20,7 @@ namespace Prod.VUSP.Datos.Contexto
         {
             //modelBuilder.Entity<employees>().Ignore(x => x.territories);
         }
-        public VUSPDbContext(DbContextOptions<VUSPDbContext> options)
+        public LoginUnicoDbContext(DbContextOptions<LoginUnicoDbContext> options)
             : base(options)
         {
         }
@@ -34,8 +34,6 @@ namespace Prod.VUSP.Datos.Contexto
         }
 
         /*Copiado Manualmente desde /MapDB/Prod.VUSP.Datos */
-        public virtual DbSet<enumerado> ENUMERADO { get; set; }
-        public virtual DbSet<tipo_enumerado> TIPO_ENUMERADO { get; set; }
 
     }
 }
