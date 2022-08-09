@@ -156,11 +156,6 @@ a:hover {
 }
 
 
-.login__administracion p {
-  margin-top: 0%;
-  margin-bottom: 0%;
-  padding-top: 0%;
-}
 
 
 .login__administracion :first-child {
@@ -168,11 +163,11 @@ a:hover {
 }
 
 .login__administracion :last-child {
-  margin-bottom: 0;
+  margin-bottom: 20px;
 }
  
  .login__administracion .personal p{
-  margin-top: 20px;
+  margin-top: 0px;
   font-size: 14px;
   border-bottom: 1px solid #000;
   text-align: left;
@@ -190,13 +185,12 @@ a:hover {
   color: #777;
   display: grid;
   gap: 0.5em;
-  padding: 1em 2em 1em 2em;
+  padding: 0em 2em 1em 2em;
 }
 
 .login label{
   text-align: left;
   font-size: 12px;
-  margin: 0px;
 }
 
 
@@ -209,7 +203,6 @@ a:hover {
   border-radius: 1px;
   box-sizing: border-box;
   font-size: 12px;
-  margin-bottom: 5px;
 }
 
 .login .input-wrapper {
