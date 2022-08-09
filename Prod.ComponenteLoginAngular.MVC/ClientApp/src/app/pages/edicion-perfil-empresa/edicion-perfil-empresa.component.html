@@ -11,8 +11,8 @@
            </div> 
          </div>        
          <div class="title">
-           <h3>Mi perfil</h3>
-           <p>Persona Jurídica</p>    
+           <h2>Mi perfil</h2>
+           <h3>Persona Jurídica</h3>    
        </div>
      </div>
           <div class="personal" *ngIf="isVisiblePerfil">
@@ -99,12 +99,12 @@
              </div>
           </div>
    
-           <div class="editar" *ngIf="isVisibleEditarImg">
-             <h3>Editar foto</h3>
+           <div *ngIf="isVisibleEditarImg">
+            <h2 align="center">Editar foto</h2>
+            <div class="editar">
              <div class="circle"> 
-               <div class="circleEditar"> 
-               </div> 
-             </div>    
+             </div> 
+            </div>   
              <input type="file" name="adjunto" accept=".pdf,.jpg,.png" multiple />
 
            <div class="button">

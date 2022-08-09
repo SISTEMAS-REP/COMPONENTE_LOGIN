@@ -81,10 +81,6 @@
     padding: 1.7em 2em 1.3em 2em;
   }
   
-  .form :last-child {
-    margin-bottom: 0;
-  }
-  
   .form h2 .icon {
     margin-right: 14px;
   }
@@ -102,11 +98,11 @@
     flex-wrap: wrap;
   }
 
-  .form .header h3{
-    text-align: left;
-    margin-top: 0%;
-    margin-bottom: 0%;
-    color: #000;
+.form .header h3{
+  text-align: left;
+  margin-top: 0%;
+  margin-bottom: 0%;
+  color: #000;
 }
 
   .form .header .title p{
@@ -145,7 +141,7 @@
   
     }
     .form .representante img{
-        margin-left: 115px;
+        margin-left: 148px;
        }
     
 
@@ -162,7 +158,7 @@
 
    
   .form .contacto img{
-    margin-left: 170px;
+    margin-left: 196px;
    }
 
 
@@ -187,17 +183,19 @@
 }
 
 
-  .form input {
-    background-color: #fff;
-    width: 100%;
-    padding: 5px 7px;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 1px;
-    box-sizing: border-box;
-    font-size: 12px;
-    margin-bottom: 5px;
-  }
+.form input {
+  background-color: #fff;
+  width: 100%;
+  padding: 5px 7px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 1px;
+  box-sizing: border-box;
+  font-size: 12px;
+  margin-bottom: 7px;
+  margin-top: 5px;
+}
+
 
   .form .input-wrapper {
     position: relative;
@@ -243,17 +241,28 @@
 
 
   .form select {
-    padding: 5px 7px;
+    padding: 6px 7px;
     width: 95%;
     font-size: 12px;
     border: 1px solid #ccc;
     border-radius: 1px;
     box-sizing: border-box;
-    margin-bottom: 5px;
+    margin-bottom: 7px;
+    margin-top: 5px;
+  }
+
+  .form select option { 
+    color:#000; 
+
+  }
+
+  .form select option:focus { 
+    color:#FFF; 
+    background-color:#EB1E23; 
   }
 
 
-  
+
   .form input[type="submit"] {
     display: block;
     margin: 0px auto;
@@ -280,7 +289,7 @@
   
   .left {
     width: 50%;
-    margin-top: 5px;
+    margin-top: 0px;
     
   }
 
@@ -289,7 +298,7 @@
   }
   .right {
     width: 50%;
-    margin-top: 5px;
+    margin-top: 0px;
   }
 
   .center {
@@ -521,37 +530,38 @@
 }
 
 .form .header .circle .circleEditar {
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
     border-radius: 50%;
     background: #eee;
-    margin: 90px 99px;
+    margin: 76px 80px;
     border: 1px solid #ccc;
-    padding: 6px 12px 10px 12px;
-    
+    padding: 8px 5px 10px 8px;
+ 
+}
+
+
+.form .editar {
+  background: #eee;
+  width: 360px;
+  height: 340px;
+  padding: 10px 0px 10px 0px;
+  margin-top: 20px;
 }
 
 .form .editar .circle {
-  width: 345px;
-  height: 280px;
-  background: #ccc;
-  margin: 20px 0px 20px 0px;
-  border: 1px solid #ccc;
-}
-
-.form .editar .circle .circleEditar {
-  width: 260px;
-  height: 260px;
+  width: 320px;
+  height: 300px;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
-  background: #eee;
-  margin: 10px 0px 0px 40px;
+  background: #ccc;
+  margin: 10px 0px 0px 20px;
   border: 1px solid #ccc;
- 
 }
+
 
   .title {
     width: 50%;

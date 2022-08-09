@@ -50,16 +50,19 @@
         </div>
       </div>
 
-        <div class="editar" *ngIf="isVisibleEditarImg">
-          <h3>Editar foto</h3>
-          <div class="circle"> 
-            <div class="circleEditar"> 
-            </div> 
-          </div>    
-          <input type="file" name="adjunto" accept=".pdf,.jpg,.png" multiple />
-          <button class="buttonSiguiente" >Guardar cambios</button>
-          <button class="buttonCancelar" (click)="clickCancelarImg()">Cancelar</button>
-        </div>
+      <div *ngIf="isVisibleEditarImg">
+        <h2 align="center">Editar foto</h2>
+        <div class="editar">
+         <div class="circle"> 
+         </div> 
+        </div>   
+         <input type="file" name="adjunto" accept=".pdf,.jpg,.png" multiple />
+
+       <div class="button">
+         <button class="buttonSiguiente">Guardar</button>
+         <button class="buttonCancelar" (click)="clickCancelarImg()">Cancelar</button>
+       </div>
+    </div>
   </div>
 </div>
 </body>

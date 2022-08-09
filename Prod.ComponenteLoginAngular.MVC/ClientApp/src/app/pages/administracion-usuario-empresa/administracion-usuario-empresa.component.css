@@ -136,17 +136,18 @@ a:hover {
 /* ---------- LOGIN ---------- */
 .login {
   width: 70%;
-  height: 70%;
-  background-color: #FFF
+  height: 100%;
+  background-color: #FFF;
+  margin-top: 100px;
 }
 
-.login__header {
-  background-color: #fff;
+.login__administracion {
+  background-color: #FFF;
   color: #000;
   padding: 2em 2em 2em 2em;
 }
 
-.login__header h3 {
+.login__administracion h3 {
   text-align: center;
   margin-top: 10px;
   margin-bottom: 0%;
@@ -155,21 +156,28 @@ a:hover {
 }
 
 
-.login__header p {
-  text-align: center;
+.login__administracion p {
   margin-top: 0%;
   margin-bottom: 0%;
   padding-top: 0%;
 }
 
 
-.login__header :first-child {
+.login__administracion :first-child {
   margin-top: 0;
 }
 
-.login__header :last-child {
+.login__administracion :last-child {
   margin-bottom: 0;
 }
+ 
+ .login__administracion .personal p{
+  margin-top: 20px;
+  font-size: 14px;
+  border-bottom: 1px solid #000;
+  text-align: left;
+ 
+  }
 
 .login h2 .icon {
   margin-right: 14px;
@@ -301,9 +309,10 @@ a:hover {
 
 .align-right {
   text-align: right;
-  margin-bottom: 12px;
-  font-size: 14px;
+  margin-bottom: 0px;
+  font-size: 12px;
 }
+
 
 .disabled {
   opacity: 0.6;
@@ -493,4 +502,70 @@ background-color: #000;
 
 }
 
- 
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  width: 50px;
+  height: 22px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 3px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #58595B;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #58595B;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.col-sm-10 {
+  padding-left: 0px !important;
+  margin-left: 0px !important;
+  margin-bottom: 30px;
+}
