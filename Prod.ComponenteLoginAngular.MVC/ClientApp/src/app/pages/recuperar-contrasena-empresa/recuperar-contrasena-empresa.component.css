@@ -186,7 +186,7 @@ a:hover {
 }
 
 .login__header :last-child {
-  margin-bottom: 0;
+  margin-bottom: 10px;
 }
 
 .login h2 .icon {
@@ -200,7 +200,7 @@ a:hover {
   color: #777;
   display: grid;
   gap: 0.5em;
-  padding: 0.8em 1.6em 1.3em 1.6em;
+  padding: 0.2em 1.6em 1.3em 1.6em;
   
 }
 
@@ -220,7 +220,8 @@ a:hover {
   border-radius: 1px;
   box-sizing: border-box;
   font-size: 12px;
-  margin-bottom: 5px;
+  margin-bottom: 7px;
+  margin-top: 5px;
 }
 
 .login .input-wrapper {
@@ -239,9 +240,10 @@ a:hover {
   width: 20px;
   height: 20px;
   left: 12px;
-  top: 66%;
+  top: 65%;
   transform: translateY(-50%);
 }
+
 
 .login .input-icon.password {
   left: unset;
@@ -320,9 +322,10 @@ a:hover {
 .right {
   width: 50%;
 }
+
 .center {
   text-align: center;
-  margin-bottom: 12px;
+  margin-bottom: 5px;
 }
 
 .disabled {

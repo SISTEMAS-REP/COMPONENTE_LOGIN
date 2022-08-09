@@ -158,13 +158,12 @@
     padding-top: 0%;
   }
   
-  
   .login__header :first-child {
     margin-top: 0;
   }
   
   .login__header :last-child {
-    margin-bottom: 0;
+    margin-bottom: 5px;
   }
   
   .login h2 .icon {
@@ -178,7 +177,7 @@
     color: #777;
     display: grid;
     gap: 0.5em;
-    padding: 1.2em 1.6em 1.3em 1.6em;
+    padding: 0.8em 1.6em 1.3em 1.6em;
     
   }
   
@@ -199,7 +198,8 @@
     border-radius: 1px;
     box-sizing: border-box;
     font-size: 12px;
-    margin-bottom: 5px;
+    margin-bottom: 7px;
+    margin-top: 5px;
   }
 
   .login .input-wrapper {
@@ -218,9 +218,10 @@
     width: 20px;
     height: 20px;
     left: 12px;
-    top: 66%;
+    top: 63%;
     transform: translateY(-50%);
   }
+  
   
   .login .input-icon.password {
     left: unset;
@@ -252,7 +253,8 @@
     border: 1px solid #ccc;
     border-radius: 1px;
     box-sizing: border-box;
-    margin-bottom: 5px;
+    margin-bottom: 7px;
+    margin-top: 5px;
   }
 
 
@@ -272,6 +274,7 @@
   .logo-aplicacion, h1, p {
     text-align: center;
     margin-top: 4px;
+    margin-bottom: 4px;
   
   } 
   .column {

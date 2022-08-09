@@ -11,7 +11,7 @@
           <img [src]="urlArchivo" alt="archivo"  width="138">
           <!--<img src="../../assets/img/logo_vusp.png" alt="Logo" title="Logo" width="138">-->
         </div>
-          <h3>REGISTRATE</h3>
+          <h2 align="center" >REGISTRATE</h2>
           <p>Persona Jurídica</p>
           <div class="Pasos">
             <button class="buttonPaso" (click)="clickPaso1()" >1</button>
@@ -23,7 +23,7 @@
 
     <form class="login__form" >     
     <div *ngIf="isVisiblePaso1">
-      <h5 class="center">DATOS EMPRESA</h5>
+      <h3 class="center">DATOS EMPRESA</h3>
       <div>
           <label for="ruc">RUC</label>
           <input type="text" id="ruc" name="ruc" placeholder="Ej. : 20543216789"  [(ngModel)]="ruc" (change)="changeRuc($event)"  maxlength="11" (blur)="btnBuscarRUC()" (keypress)="restrictNumeric($event)">
@@ -53,7 +53,7 @@
 
     <div *ngIf="isVisiblePaso2">
 
-      <h5 class="center">DATOS REPRESENTANTE LEGAL</h5>
+      <h3 class="center">DATOS REPRESENTANTE LEGAL</h3>
 
        <div class="column">
           <div class="left">
@@ -94,7 +94,7 @@
 
     <div *ngIf="isVisiblePaso3">
 
-        <h5 class="center">DATOS DE CONTACTO</h5>
+        <h3 class="center">DATOS DE CONTACTO</h3>
 
         <div>
           <label for="celular">CELULAR</label>

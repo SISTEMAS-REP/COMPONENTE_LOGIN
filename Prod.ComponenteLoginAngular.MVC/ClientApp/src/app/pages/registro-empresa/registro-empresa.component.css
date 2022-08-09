@@ -156,6 +156,12 @@ a:hover {
 .login__header :first-child {
   margin-top: 0;
 }
+
+.login__header :last-child {
+  margin-bottom: 10px;
+}
+
+
 .login__header {
   background-color: #fff;
   color: #000;
@@ -180,13 +186,6 @@ a:hover {
 }
 
 
-.login__header :first-child {
-  margin-top: 0;
-}
-
-.login__header :last-child {
-  margin-bottom: 0;
-}
 
 .login h2 .icon {
   margin-right: 14px;
@@ -199,8 +198,12 @@ a:hover {
   color: #777;
   display: grid;
   gap: 0.5em;
-  padding: 0.8em 1.6em 1.3em 1.6em;
+  padding: 0.2em 1.6em 1.3em 1.6em;
   
+}
+
+.login__form h3{
+  font-size: 12px;
 }
 
 
@@ -220,7 +223,8 @@ a:hover {
   border-radius: 1px;
   box-sizing: border-box;
   font-size: 12px;
-  margin-bottom: 5px;
+  margin-bottom: 7px;
+  margin-top: 5px;
 }
 
   
@@ -240,9 +244,10 @@ a:hover {
   width: 20px;
   height: 20px;
   left: 12px;
-  top: 66%;
+  top: 63%;
   transform: translateY(-50%);
 }
+
 
 .login .input-icon.password {
   left: unset;
@@ -273,7 +278,8 @@ a:hover {
   border: 1px solid #ccc;
   border-radius: 1px;
   box-sizing: border-box;
-  margin-bottom: 5px;
+  margin-bottom: 7px;
+  margin-top: 5px;
 }
 
 
@@ -303,6 +309,7 @@ a:hover {
 .logo-aplicacion, h1, p {
   text-align: center;
   margin-top: 4px;
+  margin-bottom: 4px;
 
 } 
 
@@ -320,7 +327,7 @@ a:hover {
 }
 .center {
   text-align: center;
-  margin-bottom: 12px;
+  margin-bottom: 5px;
 }
 
 .Pasos{

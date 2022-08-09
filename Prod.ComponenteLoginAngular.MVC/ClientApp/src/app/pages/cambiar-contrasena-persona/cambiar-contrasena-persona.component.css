@@ -168,8 +168,9 @@
   }
   
   .login__header :last-child {
-    margin-bottom: 0;
+    margin-bottom: 10px;
   }
+  
   
   .login h2 .icon {
     margin-right: 14px;
@@ -182,8 +183,8 @@
     color: #777;
     display: grid;
     gap: 0.5em;
-    padding: 0.8em 1.6em 1.3em 1.6em;
-
+    padding: 0.5em 1.6em 1.3em 1.6em;
+    
   }
   
   .login label{
@@ -202,7 +203,8 @@
     border-radius: 1px;
     box-sizing: border-box;
     font-size: 12px;
-    margin-bottom: 5px;
+    margin-bottom: 7px;
+    margin-top: 5px;
   }
   
   .login .input-wrapper {
@@ -221,9 +223,10 @@
     width: 20px;
     height: 20px;
     left: 12px;
-    top: 66%;
+    top: 63%;
     transform: translateY(-50%);
   }
+  
   
   .login .input-icon.password {
     left: unset;
@@ -303,7 +306,7 @@
   .align-right {
     text-align: right;
     margin-bottom: 12px;
-    font-size: 14px;
+    font-size: 12px;
   }
   
   .disabled {

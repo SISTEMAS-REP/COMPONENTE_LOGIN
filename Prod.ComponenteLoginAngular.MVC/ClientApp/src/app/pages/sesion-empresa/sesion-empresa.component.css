@@ -162,7 +162,7 @@ a:hover {
 }
 
 .login__header :last-child {
-  margin-bottom: 0;
+  margin-bottom: 10px;
 }
 
 .login h2 .icon {
@@ -197,6 +197,7 @@ a:hover {
   box-sizing: border-box;
   font-size: 12px;
   margin-bottom: 5px;
+  margin-top: 5px;
 }
 
 .login .input-wrapper {
@@ -215,7 +216,7 @@ a:hover {
   width: 20px;
   height: 20px;
   left: 12px;
-  top: 66%;
+  top: 65%;
   transform: translateY(-50%);
 }
 
@@ -272,8 +273,9 @@ a:hover {
 .logo-aplicacion, h1, p {
   text-align: center;
   margin-top: 4px;
+  margin-bottom: 4px;
+}
 
-} 
 
 
 .column {
@@ -298,7 +300,7 @@ a:hover {
 .align-right {
   text-align: right;
   margin-bottom: 12px;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 
