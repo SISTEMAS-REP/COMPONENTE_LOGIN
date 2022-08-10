@@ -102,10 +102,11 @@ export class AdministracionUsuarioEmpresaComponent implements OnInit {
 
   }
 
-  BtnCancelarContacto= () =>{ 
+  BtnCancelar= () =>{ 
     this.isVisiblePrincipal = true; 
     this.isVisibleEditarUsuario = false;
     this.isVisibleAgregarUsuario = false;  
+    this.limpiar();
   }
 
   changeNroDocumentoEditar = () =>{
@@ -253,6 +254,37 @@ export class AdministracionUsuarioEmpresaComponent implements OnInit {
 
     input = String.fromCharCode(e.which);
     return !!/[\d\s]/.test(input);
+   }
+
+   limpiar =()=>
+   {
+
+    this.numeroDocEditar = null;
+    this.numeroDocNew = null;
+    this.celularEditar  = null;
+    this.celularNew = null;
+    this.correoEditar  = null;
+    this.correoNew  = null;
+    this.nombresNew  = null;
+    this.apellidosNew  = null;
+    this.id_personaNew = null;
+    this.cod_departamentoNew = null;
+    this.cod_provinciaNew  = null;
+    this.cod_distritoNew = null;
+    this.direccionNew  = null;
+    this.validadorNroDocumentoEditar = false;
+    this.validadorCelularEditar  = false;
+    this.validadorCelularLengthEditar  = false;
+    this.validadorCorreoEditar = false;
+    this.validadorCorreoInvalidoEditar  = false;
+    this.validadorNroDocumentoNew = false;
+    this.validadorCorreoNew = false;
+    this.validadorCorreoInvalidoNew  = false;
+    this.validadorNombresNew = false;
+    this.validadorCelularNew = false;
+    this.validadorCelularLengthNew  = false;
+    this.validadorApellidosNew = false;
+
    }
 
 }
