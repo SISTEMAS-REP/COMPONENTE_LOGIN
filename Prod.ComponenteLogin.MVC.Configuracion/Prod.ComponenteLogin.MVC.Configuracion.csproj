@@ -12,4 +12,8 @@
     <PackageReference Include="Release.Helper.WebKoMvc" Version="1.1.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Prod.ComponenteLogin.Entidades\Prod.ComponenteLogin.Entidades.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -18,6 +18,10 @@ using PersonaResponse = Prod.ComponenteLoginAngular.MVC.Model.PersonaResponse;
 using Microsoft.AspNetCore.Authorization;
 using Prod.ComponenteLogin.Entidades.AplicacionUsuario;
 using Newtonsoft.Json.Linq;
+using Prod.ComponenteLogin.Entidades;
+using Prod.ServiciosExternos.SNE;
+using StatusResponse = Release.Helper.StatusResponse;
+using Prod.ComponenteLogin.MVC.Configuracion.Proxy;
 
 namespace Prod.ComponenteLoginAngular.MVC.Controllers
 {
@@ -33,6 +37,8 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
         private readonly ISunatServicio _sunatServicio;
         private readonly LoginProxy loginProxy;
         private readonly AppConfig appConfig;
+        private readonly IDomicilioElectronicoServicio domicilioElectronicoServicio;
+        private readonly ComponenteLoginProxy componenteLoginProxy;
 
         public ComponenteLoginController(
             ILogger<ComponenteLoginController> logger,
@@ -42,7 +48,8 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
             IReniecServicio reniecServicio,
             ISunatServicio sunatServicio,
             LoginProxy loginProxy,
-            AppConfig appConfig
+            AppConfig appConfig,
+            IDomicilioElectronicoServicio domicilioElectronicoServicio
             )
         {
             _logger = logger;
@@ -53,6 +60,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
             this._sunatServicio = sunatServicio;
             this.loginProxy = loginProxy;
             this.appConfig = appConfig;
+            this.domicilioElectronicoServicio = domicilioElectronicoServicio;
         }
 
         [AllowAnonymous]
@@ -450,6 +458,198 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
             }
 
             return Ok(aplicaciones);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        [HttpPost]
+        [Route("Listar_usuarios_representante_legal")]
+        public IActionResult Listar_usuarios_representante_legal()
+        {
+            var user = this.GetUser();
+            var result = this.produceVirtualServicio.GetUsuariosAdicionalesByRuc(user.RUC);
+            return Ok(result);
+        }
+
+        [HttpPost]
+        [Route("ObtenerPersonaPorRepresentanteLegal")]
+        public IActionResult ObtenerPersonaPorRepresentanteLegal([FromBody] PersonaRequest request)
+        {
+            var result = personasServicio.ObtenerPersona(new ServiciosExternos.Personas.PersonaGeneralRequest { nro_documento = request.NroDocumento });
+            return Ok(result);
+        }
+
+        [HttpPost]
+        [Route("CambiarEstadoUsuarioPorRepresentanteLegal")]
+        public IActionResult CambiarEstadoUsuarioPorRepresentanteLegal([FromBody] UsuarioResponse request)
+        {
+            Release.Helper.StatusResponse response = new Release.Helper.StatusResponse { Success = false };
+            var user = this.GetUser();
+            try
+            {
+                if (request.id_persona != 0)
+                {
+                    ServiciosExternos.Personas.PersonaRequest persona = new ServiciosExternos.Personas.PersonaRequest()
+                    {
+                        id = request.id_persona,
+                        celular = request.telefono,
+                        email = request.correo,
+                        usuario = "VUSP",
+                        nro_docpernatural = request.NumeroDocumento,
+                        id_tipo_persona = 1
+                    };
+                    var result = this.personasServicio.ActualizarPersonaById(persona);
+                    var cod_usuario = user.RUC + request.NumeroDocumento;
+
+                    ConsentimientoRequest resp = new ConsentimientoRequest();
+                    resp.user_name = cod_usuario;
+                    resp.id_persona = request.id_persona;
+                    var result_id_usuario_extranet = this.componenteLoginProxy.p_Obtener_id_usuario_extranet(resp);
+                    var dato_id_usuario_extranet = (UserInformationRequest)result_id_usuario_extranet.Data;
+
+
+                    var usuario = new List<NuevoUsuarioRequest>();
+                    usuario.Add(new NuevoUsuarioRequest()
+                    {
+                        id_contacto_extranet = Convert.ToInt32(dato_id_usuario_extranet.id_usuario_extranet),
+                        direccion_electronica = request.correo,
+                        telefono = request.telefono
+                    });
+
+                    this.domicilioElectronicoServicio.ActualizarUsuarioJuridicoCorreo(Convert.ToInt32(user.IdUsuario), user.RUC, usuario.ToArray(), "VUSP");
+                    var estadoCuenta = request.activo? 1 : 2;
+                    this.domicilioElectronicoServicio.ActivarDesactivarCuenta(user.RUC, Convert.ToInt32(dato_id_usuario_extranet.id_usuario_extranet), "VUSP", estadoCuenta, "Usuario desactivado en VUSP por un Representante Legal de la empresa, codigo:" + user.UserName);
+
+
+                    var resultCambioEstado = this.produceVirtualServicio.ActivarDesactivarUsuario(cod_usuario, request.activo);
+                    this.produceVirtualServicio.UpdateCorreoTelefonoPersona(request.id_persona, request.correo, request.telefono, Convert.ToInt32(dato_id_usuario_extranet.id_usuario_extranet));
+                    if (resultCambioEstado.Success)
+                    {
+                        var estado = request.activo ? "activo" : "desactivo";
+                        response.Success = true;
+                        response.Messages.Add("El usuario se " + estado + " correctamente.");
+                    }
+                    else
+                    {
+                        var estado = request.activo ? "activo" : " desactivo";
+                        response.Messages.Add("");
+                        response.Messages.Add("El usuario no se pudo " + estado + ".");
+                    }
+                }
+                else
+                {
+                    response.Messages.Add("El usuario no se encuentra registrado.");
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Messages.Add(ex.Message);
+            }
+            return Ok(response);
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("RegistrarNuevoUsuario")]
+        public IActionResult RegistrarNuevoUsuario([FromBody] PersonaRequest request)
+        {
+            Release.Helper.StatusResponse response = new Release.Helper.StatusResponse { Success = false };
+            try
+            {
+                var user = this.GetUser();
+                if (request.Id == 0)
+                {
+                    var obj = new ServiciosExternos.Personas.PersonaRequest()
+                    {
+
+                        id_sector = 1,
+                        nro_documento = request.NroDocumento,
+                        nro_docpernatural = request.NroDocPerNatural,
+                        nombres = request.Nombres,
+                        apellidos = request.Apellidos,
+                        celular = request.Celular,
+                        email = request.Email,
+                        razon_social = "",
+                        codigo_departamento = request.CodigoDepartamento,
+                        codigo_provincia = request.CodigoProvincia,
+                        codigo_distrito = request.CodigoDistrito,
+                        usuario = "VUSP",
+                        direccion = request.Direccion,
+                        flag = "A",
+                        telefono = request.Celular,
+                        id_tipo_identificacion = 1,
+                        id_tipo_persona = 1,
+                        representante_legal = "",
+                        nro_documento_representante = "",
+                        id_tipo_identificacion_rep_leg = 0,
+                    };
+
+                    var result_persona = personasServicio.RegistrarAdministrado(obj);
+
+                }
+                else
+                {
+                    var obj = new ServiciosExternos.Personas.PersonaRequest()
+                    {
+
+                        id = request.Id,
+                        nro_docpernatural = request.NroDocPerNatural,
+                        nombres = request.Nombres,
+                        apellidos = request.Apellidos,
+                        celular = request.Celular,
+                        direccion = request.Direccion,
+                        codigo_departamento = request.CodigoDepartamento,
+                        codigo_provincia = request.CodigoProvincia,
+                        codigo_distrito = request.CodigoDistrito,
+                        email = request.Email,
+                        usuario = "VUSP",
+                        id_tipo_persona = 1
+                    };
+                    this.personasServicio.ActualizarPersonaById(obj);
+                }
+
+
+                var servicio = this.produceVirtualServicio.CrearUsuarioJuridica(new CrearUsuarioJuridicaRequest()
+                {
+                    Dni = request.NroDocPerNatural,
+                    Email = request.Email,
+                    PhoneNumber = request.Celular,
+                    Ruc = user.RUC,
+                    UserRegister = "PV"
+                });
+                if (servicio.Success)
+                {
+                    var usuario = user.RUC + request.NroDocPerNatural;
+                    this.produceVirtualServicio.UpdateUserSector(usuario, 3);
+                    var codigo_usuario = this.produceVirtualServicio.AsignarUsuarioOtros(usuario);
+
+                    var resul_nuevo_usuario = this.domicilioElectronicoServicio.GuardarNuevoUsuario(Convert.ToInt32(user.IdUsuario), Convert.ToInt32(codigo_usuario.Data), user.RUC, request.Email, "PV", true, true, request.Celular);
+                    response.Success = true;
+                    response.Messages.Add("El registro se guardo correctamente");
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Success = true;
+            }
+
+
+            return Ok(response);
         }
     }
 
