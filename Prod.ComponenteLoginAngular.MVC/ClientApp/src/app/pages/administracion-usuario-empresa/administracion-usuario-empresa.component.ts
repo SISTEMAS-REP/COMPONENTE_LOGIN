@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ComponenteLoginService } from 'src/app/services/componenteLogin.service';
+import { AlertService } from 'src/app/shared/componentes/services/alert.service';
 
 @Component({
   selector: 'app-administracion-usuario-empresa',
@@ -17,6 +20,11 @@ export class AdministracionUsuarioEmpresaComponent implements OnInit {
   correoNew : string = null;
   nombresNew : string = null;
   apellidosNew : string = null;
+  id_personaNew  : string = null;
+  cod_departamentoNew  : string = null;
+  cod_provinciaNew  : string = null;
+  cod_distritoNew  : string = null;
+  direccionNew  : string = null;
   validadorNroDocumentoEditar :  boolean = false;
   validadorCelularEditar :  boolean = false;
   validadorCelularLengthEditar :  boolean = false;
@@ -32,10 +40,53 @@ export class AdministracionUsuarioEmpresaComponent implements OnInit {
 
 
 
-  constructor() { }
+  constructor(
+    private componenteLoginService: ComponenteLoginService,
+    private spinner: NgxSpinnerService,
+    private _alertService: AlertService
+  ) { }
 
   ngOnInit() {
   }
+
+
+  btnBuscarDNI = () =>{
+    if(!this.validadorNroDocumentoNew){
+    this.spinner.show();
+    let Data = {
+      NroDocumento : this.numeroDocNew,
+      IdTipoIdentificacion : 1
+    }
+    this.componenteLoginService.buscarPersonaEmpresa(Data)
+    .then(resp => {
+      if(resp.data != null){
+      this.spinner.hide();
+        this.id_personaNew =resp.data.id,
+        this.nombresNew = resp.data.nombres;      
+        this.apellidosNew = resp.data.apellidos;
+        this.cod_departamentoNew = resp.data.codigoDepartamento;
+        this.cod_provinciaNew = resp.data.codigoProvincia;
+        this.cod_distritoNew =resp.data.codigoDistrito;
+        this.direccionNew = resp.data.direccion
+        // this.changeTipoDocumento();
+        this.changeApellidosNew();
+        this.changeNombresNew();
+      }
+      else{    
+        this.nombresNew = null;
+        this.apellidosNew = null;
+        this.cod_departamentoNew = null;
+        this.cod_provinciaNew = null;
+        this.cod_distritoNew = null;
+        this.direccionNew = null
+        this._alertService.alertWarning("El número de documento es invalido.")
+        this.spinner.hide();
+      }   
+      })
+        .catch(err => {});
+      }
+  }
+
 
   BtnAgregarUsuario= () =>{ 
     this.isVisibleAgregarUsuario = true;
@@ -177,5 +228,31 @@ export class AdministracionUsuarioEmpresaComponent implements OnInit {
       this.validadorApellidosNew  = false;
     }
   }
+
+  public restrictNumeric(e) {
+    let input;
+    if (e.metaKey || e.ctrlKey) {
+      return true;
+    }
+    if (e.which === 32) {
+     return false;
+    }
+    if (e.which === 0) {
+     return true;
+    }
+    if (e.which === 46) {
+      return true;
+     }
+    if (e.which < 33) {
+      return true;
+    }
+    if (e.which === 188){
+        return true;
+      }
+     
+
+    input = String.fromCharCode(e.which);
+    return !!/[\d\s]/.test(input);
+   }
 
 }
