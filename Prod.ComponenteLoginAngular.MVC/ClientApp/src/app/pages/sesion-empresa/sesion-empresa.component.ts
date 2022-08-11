@@ -6,6 +6,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ComponenteLoginService } from 'src/app/services/componenteLogin.service';
 import { environment } from 'src/environments/environment';
 import { AlertService } from 'src/app/shared/componentes/services/alert.service';
+import { enumerados } from 'src/app/enums/enumerados';
 
 @Component({
   selector: 'app-sesion-empresa',
@@ -13,7 +14,7 @@ import { AlertService } from 'src/app/shared/componentes/services/alert.service'
   styleUrls: ['./sesion-empresa.component.css']
 })
 export class SesionEmpresaComponent implements OnInit {
-
+  enumerado: enumerados = new enumerados();
   numero_documento : string = null;
   contrasena : string = null;
   ruc: string = null;
@@ -65,6 +66,7 @@ export class SesionEmpresaComponent implements OnInit {
   }
 
   async iniciarSesionPersonaJuridica(){
+    debugger;
     if(this.id_aplicacion == null){
       return;
     }
@@ -81,13 +83,12 @@ export class SesionEmpresaComponent implements OnInit {
       }
   
       const resp = await this.componenteLoginService.IniciarSesionExtranet(Data)
-      .then(resp => {
-        //this.spinner.hide();
+      .then(async resp => {
         if (resp.id > 0) {
+          await this.fnCargarAplicacion();
           var frm = document.createElement('form');
           frm.id = "frmLogin";
           frm.method = 'POST';
-
           frm.action = `${environment.apiWebPV}/ExtranetToken/loginUnico`;
           var campo = document.createElement("input");
           campo.setAttribute("name", "Login");
@@ -98,42 +99,52 @@ export class SesionEmpresaComponent implements OnInit {
           var campo3 = document.createElement("input");
           campo3.setAttribute("name", "RememberMe");
           campo3.setAttribute("value", 'false');
+          var campo4 = document.createElement("input");
+          campo4.setAttribute("name", "Ndocumento");
+          campo4.setAttribute("value", this.ruc);
           var campo5 = document.createElement("input");
           campo5.setAttribute("name", "TipoPersona");
-          campo5.setAttribute("value", "1");
+          campo5.setAttribute("value", "2");
+
+          var campo6 = document.createElement("input");
+          campo6.setAttribute("name", "url_extranet_by_aplicacion");
+          campo6.setAttribute("value", this.targetURL);
+          
           frm.appendChild(campo);
           frm.appendChild(campo2);
           frm.appendChild(campo3);
           frm.appendChild(campo5);
+          frm.appendChild(campo6);
           document.body.append(frm);
           frm.submit();
           document.getElementById('frmLogin').remove();
-          this.spinner.hide();
+          this.spinner.hide();          
         }
        
+        else {
+          this.spinner.hide();
+          this._alertService.alertError("El usuario o contraseña ingresado es invalido");
+          // this._alertService.open(
+          //   "warning",
+          //   "Los datos ingresados son inválidos"
+          // );
+        }
       })
       .catch(err => []);
-      this._alertService.alertError("Los datos ingresados son incorrectos");
-      this.spinner.hide();
     }
-   
   }
 
+  targetURL : string = "";
   async fnCargarAplicacion (){
-    this.spinner.show();
+    debugger;
     const respss = await this.componenteLoginService.obtenerDatoAplicacionByUsuario({
-       IdTipoPersona: 1,
-       NroDocumento: this.numero_documento,
+       IdTipoPersona: this.enumerado.TIPO_PERSONA.JURIDICA,
+       NroDocumento: this.ruc,
        NroDocPerNatural: this.numero_documento,
        id_aplicacion: Number(this.id_aplicacion)
     })
     .then(resp => {
-      let targetURL = resp.data;
-      let newURL = document.createElement('a');
-      newURL.href = targetURL;
-      document.body.appendChild(newURL);
-      newURL.click();
-      this.spinner.hide();
+      this.targetURL = resp.data;      
     })
     .catch(err => []);
   }
