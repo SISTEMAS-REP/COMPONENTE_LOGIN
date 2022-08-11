@@ -1,4 +1,5 @@
 ﻿using Prod.ComponenteLogin.Entidades;
+using Prod.ComponenteLogin.Entidades.AplicacionUsuario;
 using Release.Helper;
 using Release.Helper.Proxy;
 using System;
@@ -16,12 +17,16 @@ namespace Prod.ComponenteLogin.MVC.Configuracion.Proxy
 
         public ComponenteLoginProxy(AppConfig appConfig)
         {
-            _url = string.Format("{0}ComunConsulta/", appConfig.Urls.URL_LOGIN_UNICO_API);
+            _url = string.Format("{0}ComponenteLogin/", appConfig.Urls.URL_LOGIN_UNICO_API);
         }
 
         public StatusResponse<UserInformationRequest> p_Obtener_id_usuario_extranet(ConsentimientoRequest request)
         {
             return this.CallWebApi<StatusResponse<UserInformationRequest>>(HttpMethod.Post, _url + "p_Obtener_id_usuario_extranet", this.GetJsonParameters(request));
+        }
+        public StatusResponse<List<AplicacionUsuarioResponse>> GetApliacionesByUsuario(string user_name)
+        {
+            return this.CallWebApi<StatusResponse<List<AplicacionUsuarioResponse>>>(HttpMethod.Get, _url + "GetApliacionesByUsuario", this.GetJsonParameters(user_name));
         }
     }
 }

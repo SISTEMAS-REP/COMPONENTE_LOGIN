@@ -6,6 +6,7 @@ using Release.Helper.Data.Core;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 
 namespace Prod.ComponenteLogin.Datos
 {
@@ -30,13 +31,13 @@ namespace Prod.ComponenteLogin.Datos
             try
             {
                 var param = new Parameter[]{
-                    new Parameter("@USERNAME",user_name),
+                    new Parameter("@USER_NAME",user_name),
                 };
-                var data = this.ExecuteReader<AplicacionUsuarioResponse>("transaccional.p_Obtener_Datos_Aplicacion_By_Usuario", CommandType.StoredProcedure, ref param);
+                var data = this.ExecuteReader<AplicacionUsuarioResponse>("usr_login_unico.sp_GetApliacionesByUsuario", CommandType.StoredProcedure, ref param).ToList();
                 if (data != null)
                 {
                     sr.Success = true;
-                    //sr.Data = data;
+                    sr.Data = data;
                     sr.Messages.Add("Se obtuvo correctamente");
                 }
                 else

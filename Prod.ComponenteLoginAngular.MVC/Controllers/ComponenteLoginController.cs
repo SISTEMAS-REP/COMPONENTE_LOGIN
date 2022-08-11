@@ -49,7 +49,8 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
             ISunatServicio sunatServicio,
             LoginProxy loginProxy,
             AppConfig appConfig,
-            IDomicilioElectronicoServicio domicilioElectronicoServicio
+            IDomicilioElectronicoServicio domicilioElectronicoServicio,
+            ComponenteLoginProxy componenteLoginProxy
             )
         {
             _logger = logger;
@@ -61,6 +62,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
             this.loginProxy = loginProxy;
             this.appConfig = appConfig;
             this.domicilioElectronicoServicio = domicilioElectronicoServicio;
+            this.componenteLoginProxy = componenteLoginProxy;
         }
 
         [AllowAnonymous]
@@ -430,8 +432,26 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                     user = produceVirtualServicio.GetUsuarioUserName(userName);
                 }
 
-                //var sr = comunConsultaProxy.p_Obtener_Datos_Aplicacion_By_Usuario(userName);
+                var url_aplicacion_actual = "";
+                var nombre_aplicacion = "";
+                var existe_aplicacion = this.componenteLoginProxy.GetApliacionesByUsuario(userName);
 
+                foreach (var elemento in existe_aplicacion.Data)
+                {
+                    if (request.id_aplicacion == elemento.id_aplicacion)
+                    {
+                        url_aplicacion_actual = elemento.url_extranet;
+                        nombre_aplicacion = elemento.nombre;
+                    }
+                }
+
+                if (url_aplicacion_actual == "")
+                {
+
+                    aplicaciones.Success = false;
+                    aplicaciones.Messages.Add("El usuario no tiene acceso a el aplicacion " + nombre_aplicacion);
+                    return Ok(aplicaciones);
+                }
               
                 dynamic jsonToken = new JObject();
                 jsonToken.userName = userName;
@@ -440,12 +460,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                 jsonToken.time = DateTime.Now;
                 jsonToken.appId = request.id_aplicacion;
                 string tokenEncrypted = Functions.Encrypt(jsonToken.ToString());
-                string customUrl = "https://detupa.produce.gob.pe/"; //elemento.url_extranet;
-                //if (customUrl.EndsWith("#"))
-                //{
-                    
-                //}
-
+                string customUrl = url_aplicacion_actual;
                 if (customUrl.EndsWith("/"))
                 {
                     customUrl = customUrl.TrimEnd('/');
@@ -454,7 +469,8 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
             }
             catch (Exception ex)
             {
-               
+                aplicaciones.Success = false;
+                aplicaciones.Messages.Add(ex.Message);
             }
 
             return Ok(aplicaciones);
