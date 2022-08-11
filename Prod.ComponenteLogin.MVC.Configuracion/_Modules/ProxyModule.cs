@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Prod.ServiciosExternos;
 using Prod.ServiciosExternos.PRODUCE_VIRTUAL;
 using Prod.ServiciosExternos.PRODUCE_VIRTUAL.Roles;
+using Prod.ServiciosExternos.SNE;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -32,6 +33,7 @@ namespace Prod.ComponenteLogin.MVC.Configuracion._Modules
             builder.RegisterType<ProduceVirtualServicio>().As<IProduceVirtualServicio>().WithParameter("baseUrl", AppConfig.Urls.URL_PRODUCE_VIRTUAL);
             builder.RegisterType<PersonasServicio>().As<IPersonasServicio>().WithParameter("baseUrl", AppConfig.Urls.URL_PERSONA_API);
             builder.RegisterType<RolesServicio>().As<IRolesServicio>().WithParameter("baseUrl", AppConfig.Urls.URL_ROLES_API);
+            builder.RegisterType<DomicilioElectronicoServicio>().As<IDomicilioElectronicoServicio>().WithParameter("baseUrlSne", AppConfig.Urls.URL_DOMICILIO_SNE_API);
 
             base.Load(builder);
         }

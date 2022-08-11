@@ -24,6 +24,8 @@ namespace Prod.ComponenteLogin.MVC.Configuracion
         public string URL_ROLES_API { get; set; }
         public string URL_PERSONA_API { get; set; }
         public string URL_SEGURIDAD { get; set; }
+        public string URL_DOMICILIO_SNE_API { get; set; }
+        public string URL_LOGIN_UNICO_API { get; set; }
     }
 
     public class RegistroUsuario

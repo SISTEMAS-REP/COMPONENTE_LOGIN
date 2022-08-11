@@ -105,5 +105,53 @@ export class ComponenteLoginService {
     }
   }
 
+  async Listar_usuarios_representante_legal(request) {
+    const formData = {...request};
+    const url = `${this.baseUrl}/Listar_usuarios_representante_legal`;
+    try {
+      const resp = await axios
+        .post(url, formData);
+      return resp.data;
+    } catch (err) {
+      throw err.data || err;
+    }
+  }
+
+  async ObtenerPersonaPorRepresentanteLegal(request) {
+    const formData = {...request};
+    const url = `${this.baseUrl}/ObtenerPersonaPorRepresentanteLegal`;
+    try {
+      const resp = await axios
+        .post(url, formData);
+      return resp.data;
+    } catch (err) {
+      throw err.data || err;
+    }
+  }
+
+  async CambiarEstadoUsuarioPorRepresentanteLegal(request) {
+    const formData = {...request};
+    const url = `${this.baseUrl}/CambiarEstadoUsuarioPorRepresentanteLegal`;
+    try {
+      const resp = await axios
+        .post(url, formData);
+      return resp.data;
+    } catch (err) {
+      throw err.data || err;
+    }
+  }
+
+  async RegistrarNuevoUsuario(request) {
+    const formData = {...request};
+    const url = `${this.baseUrl}/RegistrarNuevoUsuario`;
+    try {
+      const resp = await axios
+        .post(url, formData);
+      return resp.data;
+    } catch (err) {
+      throw err.data || err;
+    }
+  }
+
   
 }
