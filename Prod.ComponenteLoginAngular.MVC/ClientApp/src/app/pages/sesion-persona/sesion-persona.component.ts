@@ -80,6 +80,12 @@ export class SesionPersonaComponent implements OnInit {
       .then(async resp => {
         if (resp.id > 0) {
           await this.fnCargarAplicacion();
+          debugger
+          if(this.targetURL == null){
+            this.spinner.hide();
+            this._alertService.alertError("El usuario no tiene acceso a el aplicacion");
+            return;
+          }
           var frm = document.createElement('form');
           frm.id = "frmLogin";
           frm.method = 'POST';
