@@ -86,6 +86,11 @@ export class SesionEmpresaComponent implements OnInit {
       .then(async resp => {
         if (resp.id > 0) {
           await this.fnCargarAplicacion();
+          if(this.targetURL == null){
+            this.spinner.hide();
+            this._alertService.alertError("El usuario no tiene acceso a el aplicacion");
+            return;
+          }
           var frm = document.createElement('form');
           frm.id = "frmLogin";
           frm.method = 'POST';
@@ -113,6 +118,7 @@ export class SesionEmpresaComponent implements OnInit {
           frm.appendChild(campo);
           frm.appendChild(campo2);
           frm.appendChild(campo3);
+          frm.appendChild(campo4);
           frm.appendChild(campo5);
           frm.appendChild(campo6);
           document.body.append(frm);
