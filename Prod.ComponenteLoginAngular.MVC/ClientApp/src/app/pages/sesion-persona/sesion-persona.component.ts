@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { enumerados } from 'src/app/enums/enumerados';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ComponenteLoginService } from 'src/app/services/componenteLogin.service';
@@ -14,14 +15,12 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./sesion-persona.component.css']
 })
 export class SesionPersonaComponent implements OnInit {
-
+  enumerado: enumerados = new enumerados();
   numero_documento : string = null;
   contrasena : string = null;
-
   validadorNroDocumento: boolean = false;
   validadorContrasena: boolean = false;
   id_aplicacion : number = 0;
-
   contentType: string = "image/png";
   urlArchivo: SafeResourceUrl;
 
@@ -64,6 +63,7 @@ export class SesionPersonaComponent implements OnInit {
   }
 
   async iniciarSesionPersonaNatural(){
+    debugger;
     if(this.id_aplicacion == null){
       return;
     }
@@ -120,7 +120,7 @@ export class SesionPersonaComponent implements OnInit {
        
         else {
           this.spinner.hide();
-          this._alertService.alertError("Los datos ingresados son inválidos");
+          this._alertService.alertError("El usuario o contraseña ingresado es invalido");
           // this._alertService.open(
           //   "warning",
           //   "Los datos ingresados son inválidos"
@@ -134,8 +134,9 @@ export class SesionPersonaComponent implements OnInit {
 
   targetURL : string = "";
   async fnCargarAplicacion (){
+    debugger;
     const respss = await this.componenteLoginService.obtenerDatoAplicacionByUsuario({
-       IdTipoPersona: 1,
+       IdTipoPersona: this.enumerado.TIPO_PERSONA.NATURAL,
        NroDocumento: this.numero_documento,
        NroDocPerNatural: this.numero_documento,
        id_aplicacion: Number(this.id_aplicacion)

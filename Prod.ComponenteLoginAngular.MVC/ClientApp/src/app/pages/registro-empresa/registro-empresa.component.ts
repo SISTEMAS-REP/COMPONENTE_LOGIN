@@ -144,9 +144,10 @@ export class RegistroEmpresaComponent implements OnInit {
               if (resp.data.value > 0) {
               if(resp.messages.length > 0){
 
-          this._alertService.alertWarning(resp.messages[0],
-            () => {}
-            );
+             this._alertService.alertWarning(resp.messages[0],
+             () => {}
+             );
+             this.limpiar();
         }
         else{
           this._alertService.alertOk(
