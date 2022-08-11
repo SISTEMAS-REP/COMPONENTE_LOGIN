@@ -71,7 +71,9 @@
     
           <div>
             <button class="buttonSiguiente" (click)="clickPaso2()">Siguiente</button>
-            <button class="buttonCancelar">Cancelar</button>
+            <a href="/sesion-persona?id_aplicacion={{ id_aplicacion }}">
+              <button class="buttonCancelar">Cancelar</button>
+            </a>         
           </div>
       </div>
       <div *ngIf="isVisiblePaso2">
