@@ -666,6 +666,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
 
             return Ok(response);
         }
+
     }
 
 }

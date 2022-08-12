@@ -1,7 +1,9 @@
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { enumerados } from 'src/app/enums/enumerados';
 import { ComponenteLoginService } from 'src/app/services/componenteLogin.service';
 import { AlertService } from 'src/app/shared/componentes/services/alert.service';
 
@@ -11,6 +13,7 @@ import { AlertService } from 'src/app/shared/componentes/services/alert.service'
   styleUrls: ['./administracion-usuario-empresa.component.css']
 })
 export class AdministracionUsuarioEmpresaComponent implements OnInit {
+  enumerado: enumerados = new enumerados();
   listaUsuariosAsignados: Array<any>;
   isVisiblePrincipal : boolean = true;
   isVisibleEditarUsuario : boolean = false;
@@ -45,24 +48,28 @@ export class AdministracionUsuarioEmpresaComponent implements OnInit {
   validadorCelularLengthNew : boolean = false;
   validadorApellidosNew : boolean = false;
   idUsuario: boolean = false;
-
-
+  rucPrincipal: string = "20517834255";
+  id_aplicacion : number = 0;
 
   constructor(
     private componenteLoginService: ComponenteLoginService,
     private spinner: NgxSpinnerService,
     private _alertService: AlertService,
+    private router: ActivatedRoute,
     public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
     this.Listar_usuarios_representante_legal();
+    this.router.queryParams.subscribe(params => {
+      this.id_aplicacion = params['id_aplicacion'] || null;
+    });
   }
 
 
   Listar_usuarios_representante_legal = () =>{
     let Data = {
-      NroDocumento :'20517834255'
+      NroDocumento : this.rucPrincipal
     }
     this.componenteLoginService.Listar_usuarios_representante_legal(Data)
       .then(resp => {
@@ -84,6 +91,7 @@ export class AdministracionUsuarioEmpresaComponent implements OnInit {
       this.componenteLoginService.ObtenerPersonaPorRepresentanteLegal(Data)
       .then(resp => {
         if(resp.success){
+          debugger
         this.nombresEditar = resp.data.nombres;
         this.apellidosEditar = resp.data.apellidos;
         this.numeroDocEditar = resp.data.nro_documento;
@@ -105,7 +113,7 @@ export class AdministracionUsuarioEmpresaComponent implements OnInit {
         id_persona: this.id_personaEditar,             
         correo: this.correoEditar,
         telefono: this.celularEditar,
-        RUC:'20517834255',
+        RUC:this.rucPrincipal,
         NumeroDocumento: this.numeroDocEditar,
         id_contacto_extranet: this.idUsuario,
         activo: this.estado_act_desac
@@ -119,6 +127,7 @@ export class AdministracionUsuarioEmpresaComponent implements OnInit {
           this._alertService.alertOk(resp.messages[0],"",
           () => {
             this.dialog.closeAll();
+            this.BtnCancelar();
         });
         }
         else{
@@ -146,14 +155,15 @@ export class AdministracionUsuarioEmpresaComponent implements OnInit {
     this.componenteLoginService.buscarPersonaEmpresa(Data)
     .then(resp => {
       if(resp.data != null){
-      this.spinner.hide();
+        debugger
+        this.spinner.hide();
         this.id_personaNew =resp.data.id,
         this.nombresNew = resp.data.nombres;      
         this.apellidosNew = resp.data.apellidos;
         this.cod_departamentoNew = resp.data.codigoDepartamento;
         this.cod_provinciaNew = resp.data.codigoProvincia;
         this.cod_distritoNew =resp.data.codigoDistrito;
-        this.direccionNew = resp.data.direccion
+        this.direccionNew = resp.data.direccion,
         // this.changeTipoDocumento();
         this.changeApellidosNew();
         this.changeNombresNew();
@@ -182,6 +192,7 @@ export class AdministracionUsuarioEmpresaComponent implements OnInit {
     this.isVisibleEditarUsuario = false;
     this.isVisibleAgregarUsuario = false;  
     this.limpiar();
+    this.Listar_usuarios_representante_legal();
   }
 
   changeNroDocumentoEditar = () =>{
@@ -361,5 +372,59 @@ export class AdministracionUsuarioEmpresaComponent implements OnInit {
     this.validadorApellidosNew = false;
 
    }
+
+  registroEmpresaService = () => 
+  {
+    this._alertService.alertConfirm(  
+      "",
+      "¿Está seguro que desea guardar esta información?",
+      () => {
+        this.spinner.show();
+
+          let Data = {
+          Id: Number(this.id_personaNew),
+          IdSector: this.enumerado.TIPO_SECTOR_PERSONA.PESQUERIA,
+          IdTipoPersona: this.enumerado.TIPO_PERSONA.JURIDICA,
+          CodigoDepartamento: this.cod_departamentoNew,
+          CodigoProvincia: this.cod_provinciaNew,
+          CodigoDistrito: this.cod_distritoNew, 
+          IdTipoIdentificacion: 1,
+          RazonSocial: "-",
+          Nombres: this.nombresNew,
+          Apellidos: this.apellidosNew,
+          NroDocumento: this.rucPrincipal,
+          Direccion: this.direccionNew,
+          Celular: this.celularNew,
+          Email: this.correoNew,
+          Flag: this.enumerado.ESTADO_PERSONA.ACTIVO,
+          NroDocPerNatural: this.numeroDocNew,
+          Contrasena: null,
+          id_aplicacion: Number(this.id_aplicacion)
+        }
+        this.componenteLoginService.RegistroPersona(Data)
+        .then(resp => {
+          this.spinner.hide();
+          if (resp.data.value > 0) {
+            if(resp.messages.length > 0){
+
+              this._alertService.alertWarning(resp.messages[0],
+              () => {}
+              );
+            }
+            else{
+              this._alertService.alertOk("Registro exitoso");
+            }
+          }
+          else {
+          this._alertService.alertError("Ha ocurrido un error");
+          // alert("Error en registrarse");
+          }
+        })
+        .catch(err => {
+          this._alertService.alertError("Ha ocurrido un error");
+          this.spinner.hide();
+        });
+    });
+  }
 
 }

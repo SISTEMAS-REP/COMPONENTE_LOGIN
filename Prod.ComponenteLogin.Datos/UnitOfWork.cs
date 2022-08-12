@@ -61,11 +61,11 @@ namespace Prod.ComponenteLogin.Datos
 					new Parameter("@ID_PERSONA",id_persona),
 					new Parameter("@USER_NAME",user_name)
 				};
-				var data = this.ExecuteReader<UserInformationRequest>("transaccional.p_Obtener_id_usuario_extranet", CommandType.StoredProcedure, ref param);
+				var data = this.ExecuteReader<UserInformationRequest>("usr_login_unico.p_Obtener_id_usuario_extranet", CommandType.StoredProcedure, ref param).FirstOrDefault();
 				if (data != null)
 				{
 					sr.Success = true;
-					//sr.Data = data;
+					sr.Data = data;
 					sr.Messages.Add("Se obtuvo correctamente");
 				}
 				else
