@@ -66,7 +66,6 @@ export class SesionEmpresaComponent implements OnInit {
   }
 
   async iniciarSesionPersonaJuridica(){
-    debugger;
     if(this.id_aplicacion == null){
       return;
     }
@@ -142,7 +141,6 @@ export class SesionEmpresaComponent implements OnInit {
 
   targetURL : string = "";
   async fnCargarAplicacion (){
-    debugger;
     const respss = await this.componenteLoginService.obtenerDatoAplicacionByUsuario({
        IdTipoPersona: this.enumerado.TIPO_PERSONA.JURIDICA,
        NroDocumento: this.ruc,

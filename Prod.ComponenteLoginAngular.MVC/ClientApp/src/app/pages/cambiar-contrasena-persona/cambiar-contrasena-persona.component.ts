@@ -106,7 +106,6 @@ export class CambiarContrasenaPersonaComponent implements OnInit {
      this.componenteLoginService.CambiarContrasena(Data)
       .then(resp => {
        this.spinner.hide();
-       debugger
        if (resp.success) {
           this.isVisiblePaso2 = false;
           this.validaSuccess = true;

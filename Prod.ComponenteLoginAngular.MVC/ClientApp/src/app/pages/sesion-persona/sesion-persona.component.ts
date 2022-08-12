@@ -63,7 +63,6 @@ export class SesionPersonaComponent implements OnInit {
   }
 
   async iniciarSesionPersonaNatural(){
-    debugger;
     if(this.id_aplicacion == null){
       return;
     }
@@ -80,7 +79,6 @@ export class SesionPersonaComponent implements OnInit {
       .then(async resp => {
         if (resp.id > 0) {
           await this.fnCargarAplicacion();
-          debugger
           if(this.targetURL == null){
             this.spinner.hide();
             this._alertService.alertError("El usuario no tiene acceso a el aplicacion");
@@ -134,7 +132,6 @@ export class SesionPersonaComponent implements OnInit {
 
   targetURL : string = "";
   async fnCargarAplicacion (){
-    debugger;
     const respss = await this.componenteLoginService.obtenerDatoAplicacionByUsuario({
        IdTipoPersona: this.enumerado.TIPO_PERSONA.NATURAL,
        NroDocumento: this.numero_documento,

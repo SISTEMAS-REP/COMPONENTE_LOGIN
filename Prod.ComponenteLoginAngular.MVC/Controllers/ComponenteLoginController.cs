@@ -74,6 +74,16 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
             var resPersona = new sep.StatusResponse();
             sep.PersonaRequest persona = null;
 
+
+            var rolbyaplicacion = this.componenteLoginProxy.GetRolAdministradoByAplicacion(request.id_aplicacion.ToString());
+
+            if (!rolbyaplicacion.Success)
+            {
+                respuesta.Success = false;
+                respuesta.Messages.Add("No puede registrarse en este aplicacitivo.");
+                return Ok(respuesta);
+            }
+
             if (request.Id == 0)
             {
                 persona = new sep.PersonaRequest()
@@ -142,8 +152,8 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                     new roles.UsuarioRolesRequest()
                     {
                         CodigoUsuario = request.IdTipoPersona == 2 ? user.Data.IdPersonaNatural : int.Parse(resPersona.Value),
-                        IdAplicion = int.Parse(appConfig.RegistroUsuario.IdAplicacion),
-                        IdRol = int.Parse(appConfig.RegistroUsuario.IdRol),
+                        IdAplicion = rolbyaplicacion.Data.id_aplicacion, //int.Parse(appConfig.RegistroUsuario.IdAplicacion),
+                        IdRol = rolbyaplicacion.Data.id_rol, //int.Parse(appConfig.RegistroUsuario.IdRol),
                         Tipo = roles.TipoRol.Extranet
                     }, 1, 10);
 
@@ -169,8 +179,8 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                         Ruc = request.NroDocumento,
                         PhoneNumber = request.Celular,
                         UserRegister = appConfig.RegistroUsuario.Usuario,
-                        id_rol = int.Parse(appConfig.RegistroUsuario.IdRol),
-                        id_aplicacion = int.Parse(appConfig.RegistroUsuario.IdAplicacion),
+                        id_rol = rolbyaplicacion.Data.id_rol, // int.Parse(appConfig.RegistroUsuario.IdRol),
+                        id_aplicacion = rolbyaplicacion.Data.id_aplicacion, //int.Parse(appConfig.RegistroUsuario.IdAplicacion),
                         ingresarClave = request.Contrasena
                     });
                 }
@@ -182,8 +192,8 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                         Email = request.Email,
                         PhoneNumber = request.Celular,
                         UserRegister = appConfig.RegistroUsuario.Usuario,
-                        id_rol =  int.Parse(appConfig.RegistroUsuario.IdRol),
-                        id_aplicacion =  int.Parse(appConfig.RegistroUsuario.IdAplicacion),
+                        id_rol = rolbyaplicacion.Data.id_rol, // int.Parse(appConfig.RegistroUsuario.IdRol),
+                        id_aplicacion = rolbyaplicacion.Data.id_aplicacion, //int.Parse(appConfig.RegistroUsuario.IdAplicacion),
                         ingresarClave = request.Contrasena
                     });
 
@@ -191,9 +201,10 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                 respuesta.Data = resPersona;
                 respuesta.Success = result.Success;
                 respuesta.Messages = result.Messages;
-                
+
 
             }
+
             return Ok(respuesta);
         }
 

@@ -12,6 +12,6 @@ namespace Prod.ComponenteLogin.Datos
 		IEnumerable<int> GetListId();
 		StatusResponse<List<AplicacionUsuarioResponse>> GetApliacionesByUsuario(string user_name);
 		StatusResponse<UserInformationRequest> p_Obtener_id_usuario_extranet(int id_persona, string user_name);
-
+		StatusResponse<RolAplicacionResponse> GetRolAdministradoByAplicacion(string id_aplicacion);
 	}
 }

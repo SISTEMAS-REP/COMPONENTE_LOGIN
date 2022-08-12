@@ -80,6 +80,34 @@ namespace Prod.ComponenteLogin.Datos
 			}
 			return sr;
 		}
+		public StatusResponse<RolAplicacionResponse> GetRolAdministradoByAplicacion(string id_aplicacion)
+        {
+            StatusResponse<RolAplicacionResponse> sr = new StatusResponse<RolAplicacionResponse>();
+            try
+            {
+                var param = new Parameter[]{
+                    new Parameter("@ID_APLICACION",id_aplicacion),
+                };
+                var data = this.ExecuteReader<RolAplicacionResponse>("usr_login_unico.sp_GetRolByAplicacion", CommandType.StoredProcedure, ref param).FirstOrDefault();
+                if (data != null)
+                {
+                    sr.Success = true;
+                    sr.Data = data;
+                    sr.Messages.Add("Se obtuvo correctamente");
+                }
+                else
+                {
+                    sr.Success = false;
+                    sr.Messages.Add("Ocurrio un error");
+                }
+            }
+            catch (Exception ex)
+            {
+                sr.Success = false;
+                sr.Messages.Add("Ocurrio un error" + ex.Message);
+            }
+            return sr;
+        }
 
 	}
 }
