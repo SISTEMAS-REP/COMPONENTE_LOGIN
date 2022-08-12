@@ -14,17 +14,17 @@ namespace Prod.ComponenteLogin.Core.Controllers
     [Route("[controller]")]
     public class ComponenteLoginController : ControllerBase
     {
-		private readonly IUnitOfWork unitOfWork;
+		private readonly IUnitOfWork _unitOfWork;
 		public ComponenteLoginController(IUnitOfWork unitOfWork)
 		{
-			this.unitOfWork = unitOfWork;
+			this._unitOfWork = unitOfWork;
 		}
 
 		[HttpGet]
 		[Route("GetApliacionesByUsuario")]
 		public StatusResponse<List<AplicacionUsuarioResponse>> GetApliacionesByUsuario([FromBody] string user_name)
 		{
-			var sr = unitOfWork.GetApliacionesByUsuario(user_name);
+			var sr = this._unitOfWork.GetApliacionesByUsuario(user_name);
 			return sr;
 		}
 
@@ -35,11 +35,19 @@ namespace Prod.ComponenteLogin.Core.Controllers
 			StatusResponse<UserInformationRequest> response = new StatusResponse<UserInformationRequest>();
 			int id_persona = request.id_persona;
 			string user_name = request.user_name;
-			var sr = unitOfWork.p_Obtener_id_usuario_extranet(id_persona, user_name);
+			var sr = this._unitOfWork.p_Obtener_id_usuario_extranet(id_persona, user_name);
 			response.Data = sr.Data;
 			response.Success = sr.Success;
 			response.Messages = sr.Messages;
 			return response;
+		}
+
+		[HttpGet]
+		[Route("GetRolAdministradoByAplicacion")]
+		public StatusResponse<RolAplicacionResponse> GetRolAdministradoByAplicacion([FromBody] string id_aplicacion)
+		{
+			var sr = this._unitOfWork.GetRolAdministradoByAplicacion(id_aplicacion);
+			return sr;
 		}
 	}
 }

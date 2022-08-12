@@ -28,5 +28,9 @@ namespace Prod.ComponenteLogin.MVC.Configuracion.Proxy
         {
             return this.CallWebApi<StatusResponse<List<AplicacionUsuarioResponse>>>(HttpMethod.Get, _url + "GetApliacionesByUsuario", this.GetJsonParameters(user_name));
         }
+        public StatusResponse<RolAplicacionResponse> GetRolAdministradoByAplicacion(string id_aplicacion)
+        {
+            return this.CallWebApi<StatusResponse<RolAplicacionResponse>>(HttpMethod.Get, _url + "GetRolAdministradoByAplicacion", this.GetJsonParameters(id_aplicacion));
+        }
     }
 }

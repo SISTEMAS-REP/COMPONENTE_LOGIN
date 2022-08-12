@@ -130,7 +130,8 @@ export class RegistroPersonaComponent implements OnInit {
               Email: this.correo,
               Flag: this.enumerado.ESTADO_PERSONA.ACTIVO,
               NroDocPerNatural: this.numeroDoc,
-              Contrasena: this.contrasena
+              Contrasena: this.contrasena,
+              id_aplicacion: Number(this.id_aplicacion)
             }
             this.componenteLoginService.RegistroPersona(Data)
             .then(resp => {
