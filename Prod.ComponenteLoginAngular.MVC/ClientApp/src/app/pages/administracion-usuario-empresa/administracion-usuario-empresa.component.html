@@ -28,15 +28,15 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td class="table-detalle"></td>
-                <td class="table-detalle"></td>
-                <td class="table-detalle"></td>
-                <td class="table-detalle"></td>
-                <td class="table-detalle"></td>
-                <td class="table-detalle"></td>
+            <tr *ngFor="let app of listaUsuariosAsignados">
+              <td class="table-detalle">{{app.numeroDocumento}}</td>
+              <td class="table-detalle">{{app.nombres}}</td>
+              <td class="table-detalle">{{app.apellidoPaterno}}</td>
+              <td class="table-detalle">{{app.telefono}}</td>
+              <td class="table-detalle">{{app.correo}}</td>
+              <td class="table-detalle">{{app.activo == true ? 'Activo' : 'Inactivo'}}</td>
                 <td class="table-detalle">
-                    <a  class="btn btn-link btn-icon"  data-tooltip="tooltip" data-placement="bottom" title="Editar" (click)="BtnEditarUsuario()"><i class="fa fa-pencil"></i></a>
+                    <a  class="btn btn-link btn-icon"  data-tooltip="tooltip" data-placement="bottom" title="Editar" (click)="AbrirEditarUsuario(app)"><i class="fa fa-pencil"></i></a>
                 </td>
             </tr>
         </tbody>
@@ -48,12 +48,9 @@
 <div class="login__administracion" *ngIf="isVisibleEditarUsuario">
   <div class="col-md-10">
   <h2 >Usuario</h2>
- </div>
-<div class="col-md-2 align-right">
- <a  href="#">Eliminar cuenta</a>    
-</div><br><br><br>
+ </div><br><br><br>
 <div class="col-md-12">
-<div class="cont-usuario"> </div>
+<div class="cont-usuario"><p>{{ nombresEditar }} {{apellidosEditar}}</p> </div>
 </div>
 <div class="col-md-12 personal">
   <p>Información</p>
@@ -62,7 +59,7 @@
 <div class="col-md-6" >
   <div>
         <label for="dni">DNI</label>
-          <input type="text" id="dni" name="dni"  placeholder="Ej.:15234687"  [(ngModel)]="numeroDocEditar" (change)="changeNroDocumentoEditar($event)" (keypress)="restrictNumeric($event)"  maxlength="8">
+          <input type="text" id="dni" name="dni"  placeholder="Ej.:15234687"  [(ngModel)]="numeroDocEditar" (change)="changeNroDocumentoEditar($event)" (keypress)="restrictNumeric($event)"  maxlength="8" disabled>
           <p class="validador"  *ngIf="validadorNroDocumentoEditar">Debe ingresar el DNI.</p>  
   </div>
   <div>
@@ -86,7 +83,7 @@
   </div>
 <div class="col-sm-2">
   <label class="switch">
-    <input type="checkbox">
+    <input type="checkbox" [(ngModel)]="estado_act_desac">
     <span class="slider round"></span>
   </label>
 </div>
@@ -94,8 +91,8 @@
 </div>
 
 <div class="col-md-12">
-  <button class="buttonSiguiente">Guardar cambios</button> 
-  <button class="buttonCancelar" (click)="BtnCancelar()" >Cancelar</button>  
+  <button class="buttonSiguiente" (click)="BtnEditarUsuario()">Guardar cambios</button> 
+  <button class="buttonCancelar"  (click)="BtnCancelar()">Cancelar</button>  
 </div>
 </div>
 

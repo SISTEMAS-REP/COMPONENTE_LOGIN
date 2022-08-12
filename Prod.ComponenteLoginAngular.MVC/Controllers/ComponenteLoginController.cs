@@ -477,31 +477,17 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        [AllowAnonymous]
         [HttpPost]
         [Route("Listar_usuarios_representante_legal")]
-        public IActionResult Listar_usuarios_representante_legal()
+        public IActionResult Listar_usuarios_representante_legal([FromBody] PersonaRequest request)
         {
-            var user = this.GetUser();
-            var result = this.produceVirtualServicio.GetUsuariosAdicionalesByRuc(user.RUC);
+            //var user = this.GetUser();
+            var result = this.produceVirtualServicio.GetUsuariosAdicionalesByRuc(request.NroDocumento);
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [Route("ObtenerPersonaPorRepresentanteLegal")]
         public IActionResult ObtenerPersonaPorRepresentanteLegal([FromBody] PersonaRequest request)
@@ -510,12 +496,13 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [Route("CambiarEstadoUsuarioPorRepresentanteLegal")]
         public IActionResult CambiarEstadoUsuarioPorRepresentanteLegal([FromBody] UsuarioResponse request)
         {
             Release.Helper.StatusResponse response = new Release.Helper.StatusResponse { Success = false };
-            var user = this.GetUser();
+            //var user = this.GetUser();
             try
             {
                 if (request.id_persona != 0)
@@ -530,7 +517,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                         id_tipo_persona = 1
                     };
                     var result = this.personasServicio.ActualizarPersonaById(persona);
-                    var cod_usuario = user.RUC + request.NumeroDocumento;
+                    var cod_usuario = request.RUC + request.NumeroDocumento;
 
                     ConsentimientoRequest resp = new ConsentimientoRequest();
                     resp.user_name = cod_usuario;
@@ -547,9 +534,9 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                         telefono = request.telefono
                     });
 
-                    this.domicilioElectronicoServicio.ActualizarUsuarioJuridicoCorreo(Convert.ToInt32(user.IdUsuario), user.RUC, usuario.ToArray(), "VUSP");
-                    var estadoCuenta = request.activo? 1 : 2;
-                    this.domicilioElectronicoServicio.ActivarDesactivarCuenta(user.RUC, Convert.ToInt32(dato_id_usuario_extranet.id_usuario_extranet), "VUSP", estadoCuenta, "Usuario desactivado en VUSP por un Representante Legal de la empresa, codigo:" + user.UserName);
+                    this.domicilioElectronicoServicio.ActualizarUsuarioJuridicoCorreo(Convert.ToInt32(request.IdUsuario), request.RUC, usuario.ToArray(), "VUSP");
+                    var estadoCuenta = request.activo ? 1 : 2;
+                    this.domicilioElectronicoServicio.ActivarDesactivarCuenta(request.RUC, Convert.ToInt32(dato_id_usuario_extranet.id_usuario_extranet), "VUSP", estadoCuenta, "Usuario desactivado por un Representante Legal de la empresa, codigo:" + request.UserName);
 
 
                     var resultCambioEstado = this.produceVirtualServicio.ActivarDesactivarUsuario(cod_usuario, request.activo);
@@ -578,6 +565,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
             }
             return Ok(response);
         }
+
 
         [AllowAnonymous]
         [HttpPost]

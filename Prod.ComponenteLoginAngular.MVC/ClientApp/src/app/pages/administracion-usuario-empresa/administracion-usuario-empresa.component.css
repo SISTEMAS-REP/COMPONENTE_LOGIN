@@ -157,11 +157,6 @@ a:hover {
 
 
 
-
-.login__administracion :first-child {
-  margin-top: 0;
-}
-
 .login__administracion :last-child {
   margin-bottom: 20px;
 }
@@ -277,7 +272,7 @@ a:hover {
 
 .logo-aplicacion, h1, p {
   text-align: center;
-  margin-top: 4px;
+  margin-top: 8px;
 
 } 
 

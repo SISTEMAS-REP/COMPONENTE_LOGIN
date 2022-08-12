@@ -1,4 +1,6 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ComponenteLoginService } from 'src/app/services/componenteLogin.service';
 import { AlertService } from 'src/app/shared/componentes/services/alert.service';
@@ -9,9 +11,14 @@ import { AlertService } from 'src/app/shared/componentes/services/alert.service'
   styleUrls: ['./administracion-usuario-empresa.component.css']
 })
 export class AdministracionUsuarioEmpresaComponent implements OnInit {
+  listaUsuariosAsignados: Array<any>;
   isVisiblePrincipal : boolean = true;
   isVisibleEditarUsuario : boolean = false;
   isVisibleAgregarUsuario : boolean = false;
+  estado_act_desac: boolean = false;
+  nombresEditar: string = null;
+  apellidosEditar : string = null;
+  id_personaEditar: string = null;
   numeroDocEditar : string = null;
   numeroDocNew : string = null;
   celularEditar : string = null;
@@ -37,17 +44,96 @@ export class AdministracionUsuarioEmpresaComponent implements OnInit {
   validadorCelularNew : boolean = false;
   validadorCelularLengthNew : boolean = false;
   validadorApellidosNew : boolean = false;
+  idUsuario: boolean = false;
 
 
 
   constructor(
     private componenteLoginService: ComponenteLoginService,
     private spinner: NgxSpinnerService,
-    private _alertService: AlertService
+    private _alertService: AlertService,
+    public dialog: MatDialog
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.Listar_usuarios_representante_legal();
   }
+
+
+  Listar_usuarios_representante_legal = () =>{
+    let Data = {
+      NroDocumento :'20517834255'
+    }
+    this.componenteLoginService.Listar_usuarios_representante_legal(Data)
+      .then(resp => {
+        this.listaUsuariosAsignados = resp.data;
+      })
+      .catch(err => []);
+  }
+
+
+
+  AbrirEditarUsuario = (app)=>{
+    this.isVisibleEditarUsuario = true; 
+    this.isVisibleAgregarUsuario = false;
+    this.isVisiblePrincipal = false;  
+
+    let Data = {
+        NroDocumento: app.numeroDocumento,
+      }
+      this.componenteLoginService.ObtenerPersonaPorRepresentanteLegal(Data)
+      .then(resp => {
+        if(resp.success){
+        this.nombresEditar = resp.data.nombres;
+        this.apellidosEditar = resp.data.apellidos;
+        this.numeroDocEditar = resp.data.nro_documento;
+        this.correoEditar = resp.data.email;
+        this.celularEditar = resp.data.telefono;
+        this.id_personaEditar = resp.data.id_persona;
+        this.estado_act_desac = app.activo
+        this.idUsuario = app.idUsuario
+
+        }
+      })
+      .catch(err =>[]);
+    }
+  
+
+    BtnEditarUsuario = () =>{
+      debugger;
+      let Data = {
+        id_persona: this.id_personaEditar,             
+        correo: this.correoEditar,
+        telefono: this.celularEditar,
+        RUC:'20517834255',
+        NumeroDocumento: this.numeroDocEditar,
+        id_contacto_extranet: this.idUsuario,
+        activo: this.estado_act_desac
+      };
+      this.spinner.show();
+      this.componenteLoginService.CambiarEstadoUsuarioPorRepresentanteLegal(Data)
+      .then(resp => {
+        debugger;
+        this.spinner.hide();
+        if(resp.success){
+          this._alertService.alertOk(resp.messages[0],"",
+          () => {
+            this.dialog.closeAll();
+        });
+        }
+        else{
+          this._alertService.alertError(resp.messages[0]);
+        }
+      })
+      .catch(err =>[]);
+    }
+
+
+  BtnAgregarUsuario= () =>{ 
+      this.isVisibleAgregarUsuario = true;
+      this.isVisiblePrincipal = false;  
+      this.isVisibleEditarUsuario = false; 
+    }
 
 
   btnBuscarDNI = () =>{
@@ -88,19 +174,8 @@ export class AdministracionUsuarioEmpresaComponent implements OnInit {
   }
 
 
-  BtnAgregarUsuario= () =>{ 
-    this.isVisibleAgregarUsuario = true;
-    this.isVisiblePrincipal = false;  
-    this.isVisibleEditarUsuario = false; 
-  }
 
 
-  BtnEditarUsuario= () =>{ 
-    this.isVisibleEditarUsuario = true; 
-    this.isVisibleAgregarUsuario = false;
-    this.isVisiblePrincipal = false;  
-
-  }
 
   BtnCancelar= () =>{ 
     this.isVisiblePrincipal = true; 
