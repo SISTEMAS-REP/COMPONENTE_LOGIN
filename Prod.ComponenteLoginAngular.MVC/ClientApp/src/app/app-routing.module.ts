@@ -12,6 +12,7 @@ import { RegistroEmpresaComponent } from './pages/registro-empresa/registro-empr
 import { RegistroPersonaComponent } from './pages/registro-persona/registro-persona.component';
 import { SesionEmpresaComponent } from './pages/sesion-empresa/sesion-empresa.component';
 import { SesionPersonaComponent } from './pages/sesion-persona/sesion-persona.component';
+import { AplicacionesUsuarioComponent } from './pages/aplicaciones-usuario/aplicaciones-usuario.component';
 
 const routes: Routes = [
     { path: 'principal', component: PrincipalComponent },
@@ -26,7 +27,7 @@ const routes: Routes = [
     { path: 'registro-persona', component: RegistroPersonaComponent },
     { path: 'sesion-empresa', component: SesionEmpresaComponent },
     { path: 'sesion-persona', component: SesionPersonaComponent },
-
+    { path: 'aplicaciones-usuario', component: AplicacionesUsuarioComponent },
 
     { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];

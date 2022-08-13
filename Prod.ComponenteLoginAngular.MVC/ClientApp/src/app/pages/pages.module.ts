@@ -23,7 +23,6 @@ import { NgxBootstrapModule } from '../shared/modules/ngx-bootstrap.module';
 import { DatepickerComponent, ProgressBarComponent, ModalEnvelopeComponent, AlertComponent, AlertCustomComponent } from '../shared/componentes';
 import { DateFormatPipe } from '../pipes/date-format.pipe';
 // import { ModalResetearContrasenaComponent } from '../shared/modal/resetear-contrasena/resetear-contrasena.component';
-import { AplicacionesUsuarioComponent } from '../shared/aplicaciones-usuario/aplicaciones-usuario.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AdministracionUsuarioEmpresaComponent } from './administracion-usuario-empresa/administracion-usuario-empresa.component';
 import { CambiarContrasenaEmpresaComponent } from './cambiar-contrasena-empresa/cambiar-contrasena-empresa.component';
@@ -36,6 +35,8 @@ import { RegistroEmpresaComponent } from './registro-empresa/registro-empresa.co
 import { RegistroPersonaComponent } from './registro-persona/registro-persona.component';
 import { SesionEmpresaComponent } from './sesion-empresa/sesion-empresa.component';
 import { SesionPersonaComponent } from './sesion-persona/sesion-persona.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { AplicacionesUsuarioComponent } from './aplicaciones-usuario/aplicaciones-usuario.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,7 @@ import { SesionPersonaComponent } from './sesion-persona/sesion-persona.componen
     ModalEnvelopeComponent,
     AlertComponent,
     AlertCustomComponent,
-    DateFormatPipe,    
+    DateFormatPipe,
     AplicacionesUsuarioComponent
 
     // ModalResetearContrasenaComponent
@@ -81,7 +82,8 @@ import { SesionPersonaComponent } from './sesion-persona/sesion-persona.componen
     FormsModule,
     MaterialModule,
     NgxBootstrapModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    BrowserModule
   ],
   exports:[
     // ParticipantesComponent,

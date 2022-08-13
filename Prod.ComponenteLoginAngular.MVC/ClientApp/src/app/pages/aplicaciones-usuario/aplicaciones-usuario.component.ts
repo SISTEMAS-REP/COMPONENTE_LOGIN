@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ComunService } from '../../services/comun.service';
-import { SafeResourceUrl, DomSanitizer} from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
+import { ComponenteLoginService } from 'src/app/services/componenteLogin.service';
+
+
 @Component({
   selector: 'app-aplicaciones-usuario',
   templateUrl: './aplicaciones-usuario.component.html',
@@ -11,29 +14,26 @@ export class AplicacionesUsuarioComponent implements OnInit {
   listaAplicaciones: Array<any>;
   contentType: string = "image/png";
   urlArchivo: SafeResourceUrl;
+
+  token: string = "";
   constructor(
-    private comunService: ComunService,
+    private componenteLoginService: ComponenteLoginService,
     private sanitizer: DomSanitizer,
+    private router: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    this.comunService.obtenerDatosUsuario()
-    .then(resp => {
-      this.persona = resp.data;
-      if(resp.data.nroDocPerNatural.length == 11)
-      {
-        this.persona.nroDocPerNatural = resp.data.nroDocPerNatural.substring(2,10)
-      }
-      this.fnCargarAplicaciones(this.persona);
-    })
+    this.router.queryParams.subscribe(params => {
+      this.token = params['var'] || null; //"W3Y9more8V78gBM5OXAoZVW0eieVjlgwIslash1zxVmAlDVKSIequal";
+    });
+    this.fnCargarAplicaciones();
   }
 
-  fnCargarAplicaciones = (persona) =>{
-    this.comunService.p_Obtener_Datos_Aplicacion_By_Usuario({
-       IdTipoPersona: persona.idTipoPersona,
-       NroDocumento: persona.nroDocumento,
-       NroDocPerNatural: persona.nroDocPerNatural
-    })
+  fnCargarAplicaciones = () =>{
+    let data = {
+       url: this.token
+    }
+    this.componenteLoginService.ListAplicacionesByUsuario(data)
     .then(resp => {
       this.listaAplicaciones = resp;
       if(resp.length != 0){
@@ -54,5 +54,4 @@ export class AplicacionesUsuarioComponent implements OnInit {
     })
     .catch(err => []);
   }
-
 }

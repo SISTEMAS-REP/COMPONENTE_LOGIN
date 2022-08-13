@@ -39,6 +39,7 @@ import { HabiDesaDomicilioComponent } from './shared/modal/habi-desa-domicilio/h
 import { FormularioAdjuntarObservacionComponent } from './shared/modal/formulario-adjuntar-observacion/formulario-adjuntar-observacion.component';
 import { ActualizarDatosNotifFisicaComponent } from './shared/modal/actualizar-datos-notif-fisica/actualizar-datos-notif-fisica.component';
 import { ComponenteLoginService } from './services/componenteLogin.service';
+import { CommonModule } from '@angular/common'
 
 @NgModule({
   declarations: [
@@ -55,7 +56,6 @@ import { ComponenteLoginService } from './services/componenteLogin.service';
     HabiDesaDomicilioComponent,
     FormularioAdjuntarObservacionComponent,
     ActualizarDatosNotifFisicaComponent,
-    
     //componentes.DatepickerComponent,
     //DateFormatPipe
     // components.DatatableBodyComponent,
@@ -76,7 +76,8 @@ import { ComponenteLoginService } from './services/componenteLogin.service';
     BrowserAnimationsModule,
     MaterialModule,
     NgxBootstrapModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    CommonModule
   ],
   exports:[
     //componentes.DatepickerComponent,

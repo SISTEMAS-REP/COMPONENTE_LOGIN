@@ -153,5 +153,17 @@ export class ComponenteLoginService {
     }
   }
 
+  async ListAplicacionesByUsuario(request) {
+    const formData = {...request};
+    const url = `${this.baseUrl}/ListAplicacionesByUsuario`;
+    try {
+      const resp = await axios
+        .post(url, formData);
+      return resp.data;
+    } catch (err) {
+      throw err.data || err;
+    }
+  }
+
   
 }

@@ -22,6 +22,9 @@ using Prod.ComponenteLogin.Entidades;
 using Prod.ServiciosExternos.SNE;
 using StatusResponse = Release.Helper.StatusResponse;
 using Prod.ComponenteLogin.MVC.Configuracion.Proxy;
+using Serilog;
+using Newtonsoft.Json;
+using Nancy.Json;
 
 namespace Prod.ComponenteLoginAngular.MVC.Controllers
 {
@@ -578,7 +581,6 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
         }
 
 
-        [AllowAnonymous]
         [HttpPost]
         [Route("RegistrarNuevoUsuario")]
         public IActionResult RegistrarNuevoUsuario([FromBody] PersonaRequest request)
@@ -667,6 +669,67 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
             return Ok(response);
         }
 
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("ListAplicacionesByUsuario")]
+        public IActionResult ListAplicacionesByUsuario([FromBody] AplicacionUsuarioResponse request) 
+        {
+
+            var userName = "";
+
+            List<AplicacionUsuarioResponse> aplicaciones = new List<AplicacionUsuarioResponse>();
+            try
+            {
+                
+                string tokenDesEncrypted = Functions.Decrypt(request.url);
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                dynamic blogObject = js.Deserialize<dynamic>(tokenDesEncrypted);
+                string User_Name = blogObject["UserName"];
+                var sr = componenteLoginProxy.GetApliacionesByUsuario(User_Name);
+
+                foreach (var elemento in sr.Data)
+                {
+                    byte[] numArray;
+                    try
+                    {
+                        var carpetaRutaLogo = System.IO.Path.Combine(appConfig.RegistroTramite.RutaImagenLogo, elemento.id_aplicacion + ".png");
+                        numArray = System.IO.File.ReadAllBytes(carpetaRutaLogo);
+                    }
+                    catch (System.IO.FileNotFoundException ex)
+                    {
+                        var carpetaRutaLogoError = System.IO.Path.Combine(appConfig.RegistroTramite.RutaImagenLogo, "Logo_Temp.png");
+                        numArray = System.IO.File.ReadAllBytes(carpetaRutaLogoError);
+                    }
+
+
+                    dynamic jsonToken = new JObject();
+                    jsonToken.userName = User_Name;
+                    jsonToken.type = "E";
+                    jsonToken.dni = User_Name.Length > 8 ? User_Name.Substring(11, 8) : User_Name;
+                    jsonToken.time = DateTime.Now;
+                    jsonToken.appId = elemento.id_aplicacion;
+                    string tokenEncrypted = Functions.Encrypt(jsonToken.ToString());
+                    string customUrl = elemento.url_extranet;
+                    if (customUrl.EndsWith("#"))
+                    {
+                        continue;
+                    }
+                    if (customUrl.EndsWith("/"))
+                    {
+                        customUrl = customUrl.TrimEnd('/');
+                    }
+                    elemento.url = customUrl + string.Format("?var={0}", tokenEncrypted);
+                    elemento.conten_img = numArray;
+                    aplicaciones.Add(elemento);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("p_Obtener_Datos_Aplicacion_By_Usuario: " + ex.Message);
+            }
+
+            return Ok(aplicaciones);
+        }
     }
 
 }

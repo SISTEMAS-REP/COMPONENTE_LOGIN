@@ -91,7 +91,6 @@ export class AdministracionUsuarioEmpresaComponent implements OnInit {
       this.componenteLoginService.ObtenerPersonaPorRepresentanteLegal(Data)
       .then(resp => {
         if(resp.success){
-          debugger
         this.nombresEditar = resp.data.nombres;
         this.apellidosEditar = resp.data.apellidos;
         this.numeroDocEditar = resp.data.nro_documento;
@@ -108,7 +107,6 @@ export class AdministracionUsuarioEmpresaComponent implements OnInit {
   
 
     BtnEditarUsuario = () =>{
-      debugger;
       let Data = {
         id_persona: this.id_personaEditar,             
         correo: this.correoEditar,
@@ -121,7 +119,6 @@ export class AdministracionUsuarioEmpresaComponent implements OnInit {
       this.spinner.show();
       this.componenteLoginService.CambiarEstadoUsuarioPorRepresentanteLegal(Data)
       .then(resp => {
-        debugger;
         this.spinner.hide();
         if(resp.success){
           this._alertService.alertOk(resp.messages[0],"",
@@ -155,7 +152,6 @@ export class AdministracionUsuarioEmpresaComponent implements OnInit {
     this.componenteLoginService.buscarPersonaEmpresa(Data)
     .then(resp => {
       if(resp.data != null){
-        debugger
         this.spinner.hide();
         this.id_personaNew =resp.data.id,
         this.nombresNew = resp.data.nombres;      
