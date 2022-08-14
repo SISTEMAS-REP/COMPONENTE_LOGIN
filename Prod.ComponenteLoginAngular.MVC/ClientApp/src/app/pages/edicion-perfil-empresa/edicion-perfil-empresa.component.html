@@ -17,17 +17,15 @@
      </div>
           <div class="personal" *ngIf="isVisiblePerfil">
             <h5>Información de empresa</h5>
-               <p>RUC</p>
-               <p>Razón social</p>
-               <p>Dirección</p>
+               <p>RUC {{ruc}}</p>
+               <p>Razón social {{razon_social}}</p>
+               <p>Dirección {{direccion}}</p>
              </div>
              <div class="representante" *ngIf="isVisiblePerfil">
-                <h5>Información Representante Legal         
-                  <img src="../../assets/img/icono_editar.png" alt="Editar" title="Editar" width="20"  (click)="clickEditarRepresentante()">
-                </h5>
+                <h5>Información de persona</h5>
                     <div  *ngIf="isVisibleRepresentante">
-                     <p>DNI</p>
-                     <p>Nombres y apellidos</p>
+                     <p>DNI {{dni}}</p>
+                     <p>Nombres y apellidos {{nombre_completo}}</p>
                    </div>
                 </div>
                 <div class="column" *ngIf="isVisibleEditarRepresentante" >
@@ -75,8 +73,8 @@
              <img src="../../assets/img/icono_editar.png" alt="Editar" title="Editar" width="20" (click)="clickEditarContacto()">
            </h5>
              <div  *ngIf="isVisibleContacto">
-               <p>Celular</p>
-               <p>Correo</p>
+               <p>Celular {{celular}}</p>
+               <p>Correo {{correo}}</p>
              </div>
            </div>
    

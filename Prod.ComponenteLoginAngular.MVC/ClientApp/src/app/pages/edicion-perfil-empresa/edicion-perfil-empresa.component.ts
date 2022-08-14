@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ComponenteLoginService } from 'src/app/services/componenteLogin.service';
 import { AlertService } from 'src/app/shared/componentes/services/alert.service';
@@ -38,15 +39,49 @@ export class EdicionPerfilEmpresaComponent implements OnInit {
    validadorCorreoInvalido : boolean = false;
 
    isDisableNroDocumento: boolean = true;
-
+   var : string ="";
 
   constructor(
-    private spinner: NgxSpinnerService,
     private componenteLoginService: ComponenteLoginService,
-    private _alertService: AlertService
+    private spinner: NgxSpinnerService,
+    private _alertService: AlertService,
+    private router: ActivatedRoute
     ){}
 
   ngOnInit() {
+    this.router.queryParams.subscribe(params => {
+      this.var = params['var'] || null;
+      this.obtenerDatosUsuario();
+    });
+  }
+
+
+
+  dni : string = "";
+  nombre_completo: string = "";
+  direccion: string = "";
+  id_persona: number = 0;
+  usuario: string ="";
+  ruc: string = "";
+  razon_social: string ="";
+  obtenerDatosUsuario = () =>{
+    let Data = {
+      NroDocumento : this.var
+    }
+    this.componenteLoginService.obtenerDatosUsuario(Data)
+        .then(resp => {
+          debugger
+        this.id_persona = resp.data.id;
+        this.dni = resp.data.nroDocPerNatural;
+        this.nombre_completo = resp.data.nombreCompleto;
+        this.direccion = resp.data.direccion;
+        this.celular = resp.data.celular;
+        this.correo = resp.data.email;
+        this.usuario = resp.data.usuario;
+        this.ruc = resp.data.nroDocumento;
+        this.razon_social = resp.data.razonSocial;
+        })
+        .catch(err => []);
   }
 
 
@@ -76,10 +111,10 @@ export class EdicionPerfilEmpresaComponent implements OnInit {
      () => {
     this.spinner.show();
     let Data = {
-      Id: 2496732, //cambiar
+      Id: this.id_persona, //cambiar
       Email: this.correo,
       Telefono: this.celular,
-      idContactoExtranet: 15357//cambiar
+      Usuario: this.usuario//cambiar
     }
      this.componenteLoginService.UpdateCorreoTelefonoPersona(Data)
       .then(resp => {
@@ -290,8 +325,6 @@ export class EdicionPerfilEmpresaComponent implements OnInit {
     this.numeroDoc = null;
     this.apellidos = null;
     this.nombres = null;
-    this.celular = null;
-    this.correo = null;
 
     //Variables validador
     this.validadorTipoDocumento = false;

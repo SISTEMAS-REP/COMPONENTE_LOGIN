@@ -774,6 +774,8 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                 dni = UserName;
             }
 
+            var p = personasServicio.ObtenerPersona(new sep.PersonaGeneralRequest { nro_documento = dni });
+
             var persona = personasServicio.ObtenerPersona(new sep.PersonaGeneralRequest
             {
                 id_persona = Convert.ToInt32(IdUsuario)
@@ -786,8 +788,8 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                 IdTipoIdentificacion = persona.Data.id_tipo_identificacion,
                 IdTipoPersona = persona.Data.razon_social == "" ? 1 : 2,
                 RazonSocial = persona.Data.razon_social,
-                Nombres = persona.Data.nombres,
-                Apellidos = persona.Data.apellidos,
+                Nombres = p.Data.nombres,
+                Apellidos = p.Data.apellidos,
                 Direccion = persona.Data.direccion,
                 CodigoDepartamento = persona.Data.codigo_departamento,
                 CodigoProvincia = persona.Data.codigo_provincia,
@@ -796,7 +798,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                 Celular = persona.Data.celular,
                 NroDocumento = persona.Data.nro_documento,
                 NroDocPerNatural = dni,
-                NombreCompleto = persona.Data.nombres + " " + persona.Data.apellidos,
+                NombreCompleto = p.Data.nombres + " " + p.Data.apellidos,
                 Usuario = UserName
             };
 
