@@ -305,4 +305,8 @@ export class EdicionPerfilEmpresaComponent implements OnInit {
 
     this.isDisableNroDocumento = true;
   }
+  
+  CancelarSesion = () =>{
+    window.location.href = ('https://derapipez.produce.gob.pe/Producto/Producto/Index');
+   }
 }

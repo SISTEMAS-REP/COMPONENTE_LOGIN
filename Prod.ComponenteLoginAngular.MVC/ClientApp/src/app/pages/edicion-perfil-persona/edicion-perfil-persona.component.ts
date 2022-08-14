@@ -207,4 +207,7 @@ export class EdicionPerfilPersonaComponent implements OnInit {
 
   }
 
+  CancelarSesion = () =>{
+    window.location.href = ('https://derapipez.produce.gob.pe/Producto/Producto/Index');
+   }
 }
