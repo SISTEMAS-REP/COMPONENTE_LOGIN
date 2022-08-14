@@ -28,7 +28,7 @@
         </h5>
          <div *ngIf="isVisibleContacto"> 
           <p>Celular</p>
-          <p>Correo</p></div>        
+          <p>Correo</p></div>              
          </div>
         
         <div *ngIf="isVisibleEditarContacto">
@@ -62,8 +62,9 @@
          <button class="buttonSiguiente">Guardar</button>
          <button class="buttonCancelar" (click)="clickCancelarImg()">Cancelar</button>
        </div>
+    </div><br>
+    <button class="buttonVolver"  (click)="CancelarSesion()">Volver</button>   
     </div>
-  </div>
 </div>
 </body>
 

@@ -113,6 +113,10 @@ a:hover {
 .buttonSiguiente:hover {
   background-color: #000000;
 }
+.buttonCancelar:hover {
+  background-color: #EB1E23;
+  color: #FFF;
+}
 
 
 /* ---------- ICONS ---------- */

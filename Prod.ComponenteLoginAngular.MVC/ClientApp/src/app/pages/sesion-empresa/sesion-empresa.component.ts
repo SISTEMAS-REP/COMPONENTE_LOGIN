@@ -229,6 +229,8 @@ export class SesionEmpresaComponent implements OnInit {
     return !!/[\d\s]/.test(input);
    }
 
-
+   CancelarSesion = () =>{
+    window.location.href = ('https://derapipez.produce.gob.pe/Inicio/index');
+   }
 
 }

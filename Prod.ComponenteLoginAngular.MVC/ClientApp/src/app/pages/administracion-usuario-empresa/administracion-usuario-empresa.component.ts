@@ -439,4 +439,8 @@ export class AdministracionUsuarioEmpresaComponent implements OnInit {
     });
   }
 
+  CancelarSesion = () =>{
+    window.location.href = ('https://derapipez.produce.gob.pe/Producto/Producto/Index');
+   }
+
 }
