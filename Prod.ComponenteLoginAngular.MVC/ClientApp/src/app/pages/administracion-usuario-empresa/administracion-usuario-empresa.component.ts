@@ -80,12 +80,19 @@ export class AdministracionUsuarioEmpresaComponent implements OnInit {
   }
 
   async Listar_usuarios_representante_legal () {
+    this.spinner.show();
     let Data = {
       NroDocumento : this.rucPrincipal
     }
     this.componenteLoginService.Listar_usuarios_representante_legal(Data)
       .then(async resp => {
-        this.listaUsuariosAsignados = resp.data;
+        this.spinner.hide();
+        if(!resp.success){
+          this._alertService.alertError("No existen registros");
+        }
+        else{
+          this.listaUsuariosAsignados = resp.data;
+          }      
       })
       .catch(err => []);
   }
