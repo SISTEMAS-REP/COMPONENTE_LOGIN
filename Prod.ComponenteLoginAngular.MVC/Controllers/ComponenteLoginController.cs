@@ -496,9 +496,21 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
         [Route("Listar_usuarios_representante_legal")]
         public IActionResult Listar_usuarios_representante_legal([FromBody] PersonaRequest request)
         {
-            //var user = this.GetUser();
             var result = this.produceVirtualServicio.GetUsuariosAdicionalesByRuc(request.NroDocumento);
             return Ok(result);
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("obtenerRucDesencriptado")]
+        public IActionResult obtenerRucDesencriptado([FromBody] PersonaRequest request)
+        {
+            string tokenDesEncrypted = Functions.Decrypt(request.NroDocumento);
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            dynamic blogObject = js.Deserialize<dynamic>(tokenDesEncrypted);
+            string NroDocumento = blogObject["ruc"];
+
+            return Ok(NroDocumento);
         }
 
         [AllowAnonymous]
@@ -580,95 +592,6 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
             return Ok(response);
         }
 
-
-        [HttpPost]
-        [Route("RegistrarNuevoUsuario")]
-        public IActionResult RegistrarNuevoUsuario([FromBody] PersonaRequest request)
-        {
-            Release.Helper.StatusResponse response = new Release.Helper.StatusResponse { Success = false };
-            try
-            {
-                var user = this.GetUser();
-                if (request.Id == 0)
-                {
-                    var obj = new ServiciosExternos.Personas.PersonaRequest()
-                    {
-
-                        id_sector = 1,
-                        nro_documento = request.NroDocumento,
-                        nro_docpernatural = request.NroDocPerNatural,
-                        nombres = request.Nombres,
-                        apellidos = request.Apellidos,
-                        celular = request.Celular,
-                        email = request.Email,
-                        razon_social = "",
-                        codigo_departamento = request.CodigoDepartamento,
-                        codigo_provincia = request.CodigoProvincia,
-                        codigo_distrito = request.CodigoDistrito,
-                        usuario = "VUSP",
-                        direccion = request.Direccion,
-                        flag = "A",
-                        telefono = request.Celular,
-                        id_tipo_identificacion = 1,
-                        id_tipo_persona = 1,
-                        representante_legal = "",
-                        nro_documento_representante = "",
-                        id_tipo_identificacion_rep_leg = 0,
-                    };
-
-                    var result_persona = personasServicio.RegistrarAdministrado(obj);
-
-                }
-                else
-                {
-                    var obj = new ServiciosExternos.Personas.PersonaRequest()
-                    {
-
-                        id = request.Id,
-                        nro_docpernatural = request.NroDocPerNatural,
-                        nombres = request.Nombres,
-                        apellidos = request.Apellidos,
-                        celular = request.Celular,
-                        direccion = request.Direccion,
-                        codigo_departamento = request.CodigoDepartamento,
-                        codigo_provincia = request.CodigoProvincia,
-                        codigo_distrito = request.CodigoDistrito,
-                        email = request.Email,
-                        usuario = "VUSP",
-                        id_tipo_persona = 1
-                    };
-                    this.personasServicio.ActualizarPersonaById(obj);
-                }
-
-
-                var servicio = this.produceVirtualServicio.CrearUsuarioJuridica(new CrearUsuarioJuridicaRequest()
-                {
-                    Dni = request.NroDocPerNatural,
-                    Email = request.Email,
-                    PhoneNumber = request.Celular,
-                    Ruc = user.RUC,
-                    UserRegister = "PV"
-                });
-                if (servicio.Success)
-                {
-                    var usuario = user.RUC + request.NroDocPerNatural;
-                    this.produceVirtualServicio.UpdateUserSector(usuario, 3);
-                    var codigo_usuario = this.produceVirtualServicio.AsignarUsuarioOtros(usuario);
-
-                    var resul_nuevo_usuario = this.domicilioElectronicoServicio.GuardarNuevoUsuario(Convert.ToInt32(user.IdUsuario), Convert.ToInt32(codigo_usuario.Data), user.RUC, request.Email, "PV", true, true, request.Celular);
-                    response.Success = true;
-                    response.Messages.Add("El registro se guardo correctamente");
-                }
-            }
-            catch (Exception ex)
-            {
-                response.Success = true;
-            }
-
-
-            return Ok(response);
-        }
-
         [AllowAnonymous]
         [HttpPost]
         [Route("ListAplicacionesByUsuario")]
@@ -729,6 +652,97 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
             }
 
             return Ok(aplicaciones);
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("RegistrarNuevoUsuario")]
+        public IActionResult RegistrarNuevoUsuario([FromBody] PersonaRequest request)
+        {
+            Release.Helper.StatusResponse response = new Release.Helper.StatusResponse { Success = false };
+            var id_persona = 0;
+            try
+            {
+                if (request.Id == 0)
+                {
+                    var obj = new ServiciosExternos.Personas.PersonaRequest()
+                    {
+
+                        id_sector = 1,
+                        nro_documento = request.NroDocumento,
+                        nro_docpernatural = request.NroDocPerNatural,
+                        nombres = request.Nombres,
+                        apellidos = request.Apellidos,
+                        celular = request.Celular,
+                        email = request.Email,
+                        razon_social = "",
+                        codigo_departamento = request.CodigoDepartamento,
+                        codigo_provincia = request.CodigoProvincia,
+                        codigo_distrito = request.CodigoDistrito,
+                        usuario = "VUSP",
+                        direccion = request.Direccion,
+                        flag = "A",
+                        telefono = request.Celular,
+                        id_tipo_identificacion = 1,
+                        id_tipo_persona = 1,
+                        representante_legal = "",
+                        nro_documento_representante = "",
+                        id_tipo_identificacion_rep_leg = 0,
+                    };
+
+                    var result_persona = personasServicio.RegistrarAdministrado(obj);
+
+                    id_persona = Convert.ToInt32(result_persona.Value);
+                }
+                else
+                {
+                    var obj = new ServiciosExternos.Personas.PersonaRequest()
+                    {
+
+                        id = request.Id,
+                        nro_docpernatural = request.NroDocPerNatural,
+                        nombres = request.Nombres,
+                        apellidos = request.Apellidos,
+                        celular = request.Celular,
+                        direccion = request.Direccion,
+                        codigo_departamento = request.CodigoDepartamento,
+                        codigo_provincia = request.CodigoProvincia,
+                        codigo_distrito = request.CodigoDistrito,
+                        email = request.Email,
+                        usuario = "VUSP",
+                        id_tipo_persona = 1
+                    };
+                    this.personasServicio.ActualizarPersonaById(obj);
+                    id_persona = request.Id;
+                }
+
+
+                var servicio = this.produceVirtualServicio.CrearUsuarioJuridica(new CrearUsuarioJuridicaRequest()
+                {
+                    Dni = request.NroDocPerNatural,
+                    Email = request.Email,
+                    PhoneNumber = request.Celular,
+                    Ruc = request.ruc,
+                    UserRegister = "PV"
+                });
+                if (servicio.Success)
+                {
+                    var usuario = request.ruc + request.NroDocPerNatural;
+                    this.produceVirtualServicio.UpdateUserSector(usuario, 3);
+                    var codigo_usuario = this.produceVirtualServicio.AsignarUsuarioOtros(usuario);
+
+                    var resul_nuevo_usuario = this.domicilioElectronicoServicio.GuardarNuevoUsuario(id_persona, Convert.ToInt32(codigo_usuario.Data), request.ruc, request.Email, "PV", true, true, request.Celular);
+                    response.Success = true;
+                    response.Messages.Add("El registro se guardo correctamente");
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Success = true;
+            }
+
+
+            return Ok(response);
         }
     }
 

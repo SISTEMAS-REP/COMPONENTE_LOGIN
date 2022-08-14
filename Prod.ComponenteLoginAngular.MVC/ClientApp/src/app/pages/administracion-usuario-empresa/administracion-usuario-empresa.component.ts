@@ -1,4 +1,3 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
@@ -6,7 +5,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { enumerados } from 'src/app/enums/enumerados';
 import { ComponenteLoginService } from 'src/app/services/componenteLogin.service';
 import { AlertService } from 'src/app/shared/componentes/services/alert.service';
+import * as CryptoJS from 'crypto-js';  
 
+const key = 'TUc0emRqRXpkdw==';
 @Component({
   selector: 'app-administracion-usuario-empresa',
   templateUrl: './administracion-usuario-empresa.component.html',
@@ -48,9 +49,9 @@ export class AdministracionUsuarioEmpresaComponent implements OnInit {
   validadorCelularLengthNew : boolean = false;
   validadorApellidosNew : boolean = false;
   idUsuario: boolean = false;
-  rucPrincipal: string = "20517834255";
+  rucPrincipal: string = "";
   id_aplicacion : number = 0;
-
+  var : string ="";
   constructor(
     private componenteLoginService: ComponenteLoginService,
     private spinner: NgxSpinnerService,
@@ -60,23 +61,36 @@ export class AdministracionUsuarioEmpresaComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.Listar_usuarios_representante_legal();
     this.router.queryParams.subscribe(params => {
-      this.id_aplicacion = params['id_aplicacion'] || null;
+      this.var = params['var'] || null;     
+      this.obtenerRucDesencriptado(); 
     });
   }
 
+  async obtenerRucDesencriptado(){
+    let Data = {
+      NroDocumento : this.var
+    }
+    this.componenteLoginService.obtenerRucDesencriptado(Data)
+      .then(async resp => {
+        this.rucPrincipal = resp;
+        await this.Listar_usuarios_representante_legal();
+      })
+      .catch(err => []);
+  }
 
-  Listar_usuarios_representante_legal = () =>{
+  async Listar_usuarios_representante_legal () {
     let Data = {
       NroDocumento : this.rucPrincipal
     }
     this.componenteLoginService.Listar_usuarios_representante_legal(Data)
-      .then(resp => {
+      .then(async resp => {
         this.listaUsuariosAsignados = resp.data;
       })
       .catch(err => []);
   }
+  
+
 
 
 
@@ -91,11 +105,11 @@ export class AdministracionUsuarioEmpresaComponent implements OnInit {
       this.componenteLoginService.ObtenerPersonaPorRepresentanteLegal(Data)
       .then(resp => {
         if(resp.success){
-        this.nombresEditar = resp.data.nombres;
-        this.apellidosEditar = resp.data.apellidos;
-        this.numeroDocEditar = resp.data.nro_documento;
-        this.correoEditar = resp.data.email;
-        this.celularEditar = resp.data.telefono;
+        this.nombresEditar = app.nombres;
+        this.apellidosEditar = app.apellidoPaterno;
+        this.numeroDocEditar = app.numeroDocumento;
+        this.correoEditar = app.correo;
+        this.celularEditar = app.telefono;
         this.id_personaEditar = resp.data.id_persona;
         this.estado_act_desac = app.activo
         this.idUsuario = app.idUsuario
@@ -376,36 +390,38 @@ export class AdministracionUsuarioEmpresaComponent implements OnInit {
       "¿Está seguro que desea guardar esta información?",
       () => {
         this.spinner.show();
-
           let Data = {
           Id: Number(this.id_personaNew),
           IdSector: this.enumerado.TIPO_SECTOR_PERSONA.PESQUERIA,
-          IdTipoPersona: this.enumerado.TIPO_PERSONA.JURIDICA,
+          IdTipoPersona: this.enumerado.TIPO_PERSONA.NATURAL,
           CodigoDepartamento: this.cod_departamentoNew,
           CodigoProvincia: this.cod_provinciaNew,
           CodigoDistrito: this.cod_distritoNew, 
           IdTipoIdentificacion: 1,
-          RazonSocial: "-",
+          RazonSocial: "",
           Nombres: this.nombresNew,
           Apellidos: this.apellidosNew,
-          NroDocumento: this.rucPrincipal,
+          NroDocumento: this.numeroDocNew,
           Direccion: this.direccionNew,
           Celular: this.celularNew,
           Email: this.correoNew,
           Flag: this.enumerado.ESTADO_PERSONA.ACTIVO,
           NroDocPerNatural: this.numeroDocNew,
           Contrasena: null,
-          id_aplicacion: Number(this.id_aplicacion)
+          id_aplicacion: Number(this.id_aplicacion),
+          ruc: this.rucPrincipal
         }
-        this.componenteLoginService.RegistroPersona(Data)
+        this.componenteLoginService.RegistrarNuevoUsuario(Data)
         .then(resp => {
           this.spinner.hide();
-          if (resp.data.value > 0) {
+          if (resp.success) {
             if(resp.messages.length > 0){
 
-              this._alertService.alertWarning(resp.messages[0],
-              () => {}
-              );
+              this._alertService.alertOk(resp.messages[0],"",
+              () => {
+                this.dialog.closeAll();
+                this.BtnCancelar();
+              });
             }
             else{
               this._alertService.alertOk("Registro exitoso");

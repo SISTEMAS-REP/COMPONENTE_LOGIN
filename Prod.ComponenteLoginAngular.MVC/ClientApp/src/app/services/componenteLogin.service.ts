@@ -165,5 +165,16 @@ export class ComponenteLoginService {
     }
   }
 
-  
+  async obtenerRucDesencriptado(request) {
+    const formData = {...request};
+    const url = `${this.baseUrl}/obtenerRucDesencriptado`;
+    try {
+      const resp = await axios
+        .post(url, formData);
+      return resp.data;
+    } catch (err) {
+      throw err.data || err;
+    }
+  }
+
 }

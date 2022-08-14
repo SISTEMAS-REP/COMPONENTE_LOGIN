@@ -28,5 +28,6 @@
 		public bool Estado { get; set; }
 		public int idContactoExtranet { get; set; }
 		public int id_aplicacion { get; set; }
+		public string ruc { get; set; }
 	}
 }
