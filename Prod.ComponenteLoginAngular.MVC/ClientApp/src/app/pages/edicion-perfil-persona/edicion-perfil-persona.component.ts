@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ComponenteLoginService } from 'src/app/services/componenteLogin.service';
 import { AlertService } from 'src/app/shared/componentes/services/alert.service';
@@ -24,14 +25,19 @@ export class EdicionPerfilPersonaComponent implements OnInit {
   validadorCelularLength : boolean = false;
   validadorCorreo :  boolean = false;
   validadorCorreoInvalido : boolean = false;
-
+  var : string ="";
   constructor(
-    private spinner: NgxSpinnerService,
     private componenteLoginService: ComponenteLoginService,
-    private _alertService: AlertService
+    private spinner: NgxSpinnerService,
+    private _alertService: AlertService,
+    private router: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    this.router.queryParams.subscribe(params => {
+      this.var = params['var'] || null;
+      this.obtenerDatosUsuario();
+    });
   }
 
   btnGuardarContacto = () => {
@@ -45,10 +51,10 @@ export class EdicionPerfilPersonaComponent implements OnInit {
      () => {
     this.spinner.show();
     let Data = {
-      Id: 2496732, //cambiar
+      Id: this.id_persona, //cambiar
       Email: this.correo,
       Telefono: this.celular,
-      idContactoExtranet: 15357//cambiar
+      Usuario: this.usuario//cambiar
     }
      this.componenteLoginService.UpdateCorreoTelefonoPersona(Data)
       .then(resp => {
@@ -68,6 +74,28 @@ export class EdicionPerfilPersonaComponent implements OnInit {
    });
    }
  }
+
+  dni : string = "";
+  nombre_completo: string = "";
+  direccion: string = "";
+  id_persona: number = 0;
+  usuario: string ="";
+  obtenerDatosUsuario = () =>{
+    let Data = {
+      NroDocumento : this.var
+    }
+    this.componenteLoginService.obtenerDatosUsuario(Data)
+        .then(resp => {
+        this.id_persona = resp.data.id;
+        this.dni = resp.data.nroDocPerNatural;
+        this.nombre_completo = resp.data.nombreCompleto;
+        this.direccion = resp.data.direccion;
+        this.celular = resp.data.celular;
+        this.correo = resp.data.email;
+        this.usuario = resp.data.usuario;
+        })
+        .catch(err => []);
+  }
 
   clickEditarContacto = () =>{ 
     this.isVisibleEditarContacto = true;
@@ -168,8 +196,8 @@ export class EdicionPerfilPersonaComponent implements OnInit {
 
    limpiar =()=>
   {
-    this.celular = null;
-    this.correo = null;
+    // this.celular = null;
+    // this.correo = null;
 
     //Variables validador
     this.validadorCelular = false;

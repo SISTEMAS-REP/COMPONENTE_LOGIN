@@ -177,4 +177,16 @@ export class ComponenteLoginService {
     }
   }
 
+  async obtenerDatosUsuario(request) {
+    const formData = {...request};
+    const url = `${this.baseUrl}/obtenerDatosUsuario`;
+    try {
+      const resp = await axios
+        .post(url, formData);
+      return resp.data;
+    } catch (err) {
+      throw err.data || err;
+    }
+  }
+
 }

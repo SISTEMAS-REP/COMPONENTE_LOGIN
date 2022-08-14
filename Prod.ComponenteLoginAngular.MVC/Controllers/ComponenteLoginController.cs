@@ -397,7 +397,13 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
         [Route("UpdateCorreoTelefonoPersona")]
         public IActionResult UpdateCorreoTelefonoPersona([FromBody] PersonaRequest request)
         {
-            var sr = produceVirtualServicio.UpdateCorreoTelefonoPersona(request.Id,request.Email,request.Telefono,request.idContactoExtranet);
+            ConsentimientoRequest resp = new ConsentimientoRequest();
+            resp.user_name = request.Usuario;
+            resp.id_persona = request.Id;
+            var result_id_usuario_extranet = this.componenteLoginProxy.p_Obtener_id_usuario_extranet(resp);
+            var dato_id_usuario_extranet = (UserInformationRequest)result_id_usuario_extranet.Data;
+
+            var sr = produceVirtualServicio.UpdateCorreoTelefonoPersona(request.Id,request.Email,request.Telefono, dato_id_usuario_extranet.id_usuario_extranet);
             return Ok(sr);
         }
 
@@ -744,6 +750,60 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
 
             return Ok(response);
         }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("obtenerDatosUsuario")]
+        public IActionResult obtenerDatosUsuario([FromBody] PersonaRequest request)
+        {
+            var sr = new StatusResponse<PersonaResponse>();
+            string tokenDesEncrypted = Functions.Decrypt(request.NroDocumento);
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            dynamic blogObject = js.Deserialize<dynamic>(tokenDesEncrypted);
+            string UserName = blogObject["UserName"];
+            long IdUsuario = blogObject["IdUsuario"];
+            var dni = "";
+            var ruc = "";
+            if (UserName.Length > 8)
+            {
+                dni = UserName.Substring(11, 8);
+                ruc = UserName.Substring(0, 11);
+            }
+            else
+            {
+                dni = UserName;
+            }
+
+            var persona = personasServicio.ObtenerPersona(new sep.PersonaGeneralRequest
+            {
+                id_persona = Convert.ToInt32(IdUsuario)
+            });
+
+            sr.Success = true;
+            sr.Data = new PersonaResponse()
+            {
+                Id = persona.Data.id_persona,
+                IdTipoIdentificacion = persona.Data.id_tipo_identificacion,
+                IdTipoPersona = persona.Data.razon_social == "" ? 1 : 2,
+                RazonSocial = persona.Data.razon_social,
+                Nombres = persona.Data.nombres,
+                Apellidos = persona.Data.apellidos,
+                Direccion = persona.Data.direccion,
+                CodigoDepartamento = persona.Data.codigo_departamento,
+                CodigoProvincia = persona.Data.codigo_provincia,
+                CodigoDistrito = persona.Data.codigo_distrito,
+                Email = persona.Data.email,
+                Celular = persona.Data.celular,
+                NroDocumento = persona.Data.nro_documento,
+                NroDocPerNatural = dni,
+                NombreCompleto = persona.Data.nombres + " " + persona.Data.apellidos,
+                Usuario = UserName
+            };
+
+
+            return Ok(sr);
+        }
+
     }
 
 }
