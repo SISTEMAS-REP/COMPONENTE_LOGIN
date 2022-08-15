@@ -29,6 +29,10 @@ export class AplicacionesUsuarioComponent implements OnInit {
     this.fnCargarAplicaciones();
   }
 
+  ClickRegresar = () =>{
+    window.location.href = ('https://derapipez.produce.gob.pe/Producto/Producto/Index');
+   }
+   
   fnCargarAplicaciones = () =>{
     let data = {
        url: this.token

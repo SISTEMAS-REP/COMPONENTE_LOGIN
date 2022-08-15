@@ -19,8 +19,8 @@ export class CambiarContrasenaPersonaComponent implements OnInit {
   contrasenaActual: string = null;
   contrasenaNueva: string = null;
   contrasenaRep: string = null;
-  isVisiblePaso1 : boolean = true;
-  isVisiblePaso2 : boolean = false;
+  isVisiblePaso1 : boolean = false;
+  isVisiblePaso2 : boolean = true;
   validaSuccess : boolean = false;
   validadorContrasenaActual :  boolean = false;
   validadorContrasenaNueva :  boolean = false;
@@ -120,15 +120,15 @@ export class CambiarContrasenaPersonaComponent implements OnInit {
  }
 
  
-  clickPaso2 = () =>{
-    this.changeContrasenaActual();
+  // clickPaso2 = () =>{
+  //   this.changeContrasenaActual();
  
-      if(!this.validadorContrasenaActual){
-        this.isVisiblePaso1 = false;
-        this.isVisiblePaso2 = true;
-        //this.isVisiblePaso3 = false;
-      }       
-  }
+  //     if(!this.validadorContrasenaActual){
+  //       this.isVisiblePaso1 = false;
+  //       this.isVisiblePaso2 = true;
+  //       //this.isVisiblePaso3 = false;
+  //     }       
+  // }
 
 
   changeContrasenaActual = () =>{

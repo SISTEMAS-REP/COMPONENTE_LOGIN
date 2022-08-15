@@ -8,7 +8,6 @@ import { ComponenteLoginService } from 'src/app/services/componenteLogin.service
 import { AlertService } from 'src/app/shared/componentes/services/alert.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
-
 @Component({
   selector: 'app-registro-empresa',
   templateUrl: './registro-empresa.component.html',
@@ -79,6 +78,7 @@ export class RegistroEmpresaComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private _alertService: AlertService,
     private route: Router
+    
   ) {
   }
 
@@ -570,6 +570,10 @@ export class RegistroEmpresaComponent implements OnInit {
     }
   }
 
+  clickCancelar = () =>{
+    window.location.href = ('/sesion-empresa?id_aplicacion='+ this.id_aplicacion);
+  }   
+
   public restrictNumeric(e) {
     let input;
     if (e.metaKey || e.ctrlKey) {
@@ -655,4 +659,6 @@ export class RegistroEmpresaComponent implements OnInit {
   
     this.isDisableNroDocumento = true;
    }
+
+
 }

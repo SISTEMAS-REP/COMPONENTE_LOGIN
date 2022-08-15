@@ -32,14 +32,10 @@
 
 .box-app-content .nombre {
     text-transform: uppercase;
-    color: #cc0000;
+    color: #EB1E23;
     font-size: 15px;
     font-weight: 400;
     float: left;
-    -moz-min-width: 100%;
-    -ms-min-width: 100%;
-    -o-min-width: 100%;
-    -webkit-min-width: 100%;
     width: 100%;
     max-height: 23px !important;
     min-height: 23px !important;
@@ -62,26 +58,178 @@
 .box-app .box-view {
     display: block;
     position: absolute;
-    padding: 0 0 0 15px;
+    padding: 0 0 0 0px;
     top: auto;
-    right: 30px;
+    right: 29px;
     bottom: 15px;
     left: 30px;
     height: 50px;
     line-height: 50px;
     font-weight: 300;
     font-size: 16px;
-    color: #cc0000;
+    color: #EB1E23;
     z-index: 999;
     transition: all .2s ease-in;
     text-decoration: none;
 }
 
 .box-view:hover {
-    background-color: #cc0000;
+    background-color: #EB1E23;
     color: #ffffff !important;
     text-decoration: none;
 }
 .box-view:hover a{
-    color: #ffffff !important;
+    color: #000!important;
+    
 }
+
+/* ---------- GENERAL ---------- */
+* {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Varela Round', sans-serif;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0vmin;
+}
+
+
+/*min-block-size: 10vh;*/
+
+h2 {
+  font-size: 1.75rem;
+}
+
+h3 {
+  color: #000000;
+  text-align: center;
+  margin-top: 0%;
+  margin-bottom: 0%;
+}
+
+input {
+  background-image: none;
+  border: none;
+  font: inherit;
+  margin: 0px;
+  padding: 0px;
+  transition: all 0.3s;
+}
+
+
+p {
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
+}
+ 
+
+
+/* ---------- ALIGN ---------- */
+.align {
+  display: grid;
+  place-items: center;
+  background-color: #eee;
+}
+
+/* ---------- BUTTON ---------- */
+
+.buttonSiguiente {
+  background-color: #58595B;
+  color: #FFFFFF;
+  width: 100%;
+  font-size: 14px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid #58595B;
+}
+  
+.buttonRegresar {
+    background-color: #58595B;
+    color: #FFFFFF;
+    margin: 12px 0px 6px 0px;
+    width: 100%;
+    font-size: 12px;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 1px;
+    padding: 5px 7px;
+    border: 2px solid #58595B;
+  }
+
+.buttonCancelar {
+  background-color: #eee;
+  color: #000;
+  margin-bottom: 5px;
+  width: 100%;
+  font-size: 12px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 1px;
+  padding: 5px 7px;
+  border: 2px solid #ccc;
+}
+
+
+
+.buttonSiguiente:hover {
+  background-color:#000;
+  border: 2px solid #000;
+
+}
+
+.buttonRegresar:hover {
+    background-color: red;
+    border: 2px solid #EB1E23;
+  
+  }
+
+
+/* ---------- ICONS ---------- */
+.icons {
+  
+  display: none;
+}
+
+.icon {
+  fill: currentcolor;
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+}
+
+/* ---------- LOGIN ---------- */
+.login {
+  width: 80%;
+  height: 100%;
+  background-color: #FFF;
+}
+
+.login__administracion {
+  background-color: #FFF;
+  color: #000;
+  padding: 0em 2em 2em 2em;
+}
+
+.login__administracion h3 {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 0%;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+
+
+
+
+

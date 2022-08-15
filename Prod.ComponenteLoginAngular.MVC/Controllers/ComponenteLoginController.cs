@@ -261,12 +261,12 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                         sr.Messages.Add("El correo ingresado no coincide con el correo registrado al usuario.");
                     }
                 }
-                else if (user.Success && !string.IsNullOrEmpty(request.numeroDocumento) && (request.numeroDocumento.Length == 11) && (user.Data.IdPersonaJuridica != null))
+                else if (user.Success && !string.IsNullOrEmpty(request.numeroDocumento) && (request.numeroDocumento.Length == 19) && (user.Data.IdPersonaJuridica != null))
                 {
                     var correo = produceVirtualServicio.EnviarCorreoVerificacion(new CorreoConfirmacionRequest
                     {
                         Url = appConfig.Urls.URL_PRODUCE_VIRTUAL_WEB + "Verificaciones/EmailLoginUnico/[" + request.numeroDocumento + "]",
-                        Correo = request.email,
+                        Correo = user.Data.Email,
                         Identificador = guid
                     });
                     if (correo.Success)

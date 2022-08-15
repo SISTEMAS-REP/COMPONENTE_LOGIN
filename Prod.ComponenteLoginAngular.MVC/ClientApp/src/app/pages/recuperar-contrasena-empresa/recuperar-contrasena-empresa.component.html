@@ -19,14 +19,14 @@
       <form class="login__form">     
         <div *ngIf="!validaSuccess">
           <div>
-            <label for="ruc">RUC</label>
-            <input type="text" id="ruc" name="ruc" [(ngModel)]="numeroDocumento" placeholder="Ej.:10152346872"  maxlength="11" (change)="changeRuc()" (keypress)="restrictNumeric($event)">
+            <label for="numeroDocumento">RUC</label>
+            <input type="text" id="numeroDocumento" name="numeroDocumento" [(ngModel)]="numeroDocumento" placeholder="Ej.:10152346872"  maxlength="11" (change)="changeRuc()" (keypress)="restrictNumeric($event)">
             <p class="validador" *ngIf="validarRuc">Debe ingresar el número de RUC.</p>
          </div>
-          <!-- <div>
-              <label for="numeroDoc">NÚMERO DE DOCUMENTO</label>
-              <input type="text" id="numeroDoc" name="numeroDoc" placeholder="Ej.:15234687">
-          </div> -->
+           <div>
+              <label for="DocPerNatural"  >NÚMERO DE DOCUMENTO</label>
+              <input type="text" id="DocPerNatural" name="DocPerNatural" [(ngModel)]="DocPerNatural" placeholder="Ej.:15234687" >
+          </div> 
       
         <div>
           <button class="buttonSiguiente" (click)="fnBtnRecuperarContrasena()">Recuperar contraseña</button>    

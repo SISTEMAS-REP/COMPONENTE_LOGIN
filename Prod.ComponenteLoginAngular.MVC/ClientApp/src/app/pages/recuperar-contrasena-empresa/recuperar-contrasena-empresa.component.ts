@@ -17,6 +17,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 export class RecuperarContrasenaEmpresaComponent implements OnInit {
   id_aplicacion : number = 0;
   numeroDocumento : string = null;
+  DocPerNatural: string = null;
   validarRuc : boolean = false;
   validaSuccess: boolean = false;
   contentType: string = "image/png";
@@ -62,6 +63,7 @@ export class RecuperarContrasenaEmpresaComponent implements OnInit {
   }
 
   fnBtnRecuperarContrasena = () => {
+    debugger;
     this.changeRuc();
 
     if(!this.validarRuc){
@@ -72,10 +74,11 @@ export class RecuperarContrasenaEmpresaComponent implements OnInit {
 
       this.spinner.show();
       let Data = {
-       numeroDocumento: this.numeroDocumento
+       numeroDocumento: this.numeroDocumento + this.DocPerNatural
       }
       this.componenteLoginService.RecuperarContrasena(Data)
        .then(resp => {
+        debugger;
         this.spinner.hide();
          this.numeroDocumento = null
          if (resp.success) {

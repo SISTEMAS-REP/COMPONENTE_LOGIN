@@ -498,6 +498,9 @@ export class RegistroPersonaComponent implements OnInit {
     }
   }
   
+  clickCancelar = () =>{
+    window.location.href = ('/sesion-persona?id_aplicacion='+ this.id_aplicacion);
+  }   
 
   public restrictNumeric(e) {
     let input;

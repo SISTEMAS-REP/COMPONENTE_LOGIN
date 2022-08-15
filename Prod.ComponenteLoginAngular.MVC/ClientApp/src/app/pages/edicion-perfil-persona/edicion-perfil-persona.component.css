@@ -344,7 +344,7 @@ color: #000;
   border-radius: 50%;
 }
 
-.buttonVolver {
+.buttonRegresar {
   background-color: #58595B;
   color: #FFFFFF;
   margin: 12px 0px 6px 0px;
@@ -363,7 +363,7 @@ color: #000;
   background-color: #000000;
 }
 
-.buttonVolver:hover {
+.buttonRegresar:hover {
   background-color: red;
   border: 2px solid #EB1E23;
 
