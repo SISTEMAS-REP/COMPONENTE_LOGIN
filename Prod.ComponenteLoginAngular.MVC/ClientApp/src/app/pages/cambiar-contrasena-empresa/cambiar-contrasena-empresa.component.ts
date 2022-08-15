@@ -232,7 +232,7 @@ export class CambiarContrasenaEmpresaComponent implements OnInit {
     }
     
   CancelarSesion = () =>{
-      window.location.href = ('https://derapipez.produce.gob.pe/Inicio/index');
+      window.location.href = ('https://derapipez.produce.gob.pe/Inicio/index') ;
     }
 
   mostrarContrasenaNueva(){
