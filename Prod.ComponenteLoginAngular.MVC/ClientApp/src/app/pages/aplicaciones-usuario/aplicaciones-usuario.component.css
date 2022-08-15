@@ -108,7 +108,7 @@ h2 {
 
 h3 {
   color: #000000;
-  text-align: center;
+  text-align: left;
   margin-top: 0%;
   margin-bottom: 0%;
 }
@@ -221,7 +221,7 @@ p {
 }
 
 .login__administracion h3 {
-  text-align: center;
+  text-align: left;
   margin-top: 10px;
   margin-bottom: 0%;
   font-size: 22px;

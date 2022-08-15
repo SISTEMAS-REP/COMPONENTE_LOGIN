@@ -25,8 +25,10 @@
          </div>
            <div>
               <label for="DocPerNatural"  >NÚMERO DE DOCUMENTO</label>
-              <input type="text" id="DocPerNatural" name="DocPerNatural" [(ngModel)]="DocPerNatural" placeholder="Ej.:15234687" >
-          </div> 
+              <input type="text" id="DocPerNatural" name="DocPerNatural" [(ngModel)]="DocPerNatural" placeholder="Ej.:15234687" (change)="changeDocPerNatural()"  (keypress)="restrictNumeric($event)" maxlength="12" >
+              <p class="validador" *ngIf="validarDocPerNatural">Debe ingresar el número de documento.</p>
+
+            </div> 
       
         <div>
           <button class="buttonSiguiente" (click)="fnBtnRecuperarContrasena()">Recuperar contraseña</button>    
@@ -37,16 +39,15 @@
           <a href="/registro-empresa?id_aplicacion={{ id_aplicacion }}">Crea una ahora</a>
         </div>
         </div> 
-        
 
-
-        <div *ngIf="validaSuccess">
-          <h3>¡Listo!</h3>
-          <p>Se te ha enviado un link a tu correo registrado</p>
-        </div>
-        
+          <div *ngIf="validaSuccess">
+             <h3>¡Listo!</h3>
+             <p>Se te ha enviado un link a tu correo registrado</p>
+          <div>
+             <button class="buttonSiguiente" (click)="clickCancelar()">Ir a inicio</button> 
+          </div>
+        </div>       
       </form>
     </div>
-
   </body>
   

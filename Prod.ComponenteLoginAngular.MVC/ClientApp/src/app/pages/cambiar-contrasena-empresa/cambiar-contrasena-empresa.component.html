@@ -42,7 +42,7 @@
             <div class="input-wrapper">
               <label for="contrasenaNueva">CONTRASEÑA NUEVA</label>
               <input type="password"  id="contrasenaNueva" name="contrasenaNueva" placeholder="" [(ngModel)]="contrasenaNueva" (change)="changeContrasenaNueva($event)" maxlength="150" >      
-              <img src="../../assets/img/ver_on.png" (click)="mostrarContrasenaNueva()" id="eyeContrasena" class="input-icon password">
+              <img src="../../assets/img/ver_on.png" (click)="mostrarContrasenaNueva()" id="eyeContrasenaNueva" class="input-icon password">
             </div>
               <p class="validador" *ngIf="validadorContrasenaNueva">Debe ingresar la contraseña.</p>
               <p class="validador" *ngIf="validadorRequisitosContrasenaNueva">La contraseña debe cumplir con los requistos</p>
@@ -97,7 +97,7 @@
             </div>
 
            <div>
-             <button class="buttonSiguiente" >Ir a inicio</button>    
+            <button class="buttonSiguiente" (click)="CancelarSesion()">Ir a inicio</button> 
            </div>
         </div>
       </form>

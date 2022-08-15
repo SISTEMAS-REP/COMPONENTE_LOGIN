@@ -19,6 +19,7 @@ export class RecuperarContrasenaEmpresaComponent implements OnInit {
   numeroDocumento : string = null;
   DocPerNatural: string = null;
   validarRuc : boolean = false;
+  validarDocPerNatural : boolean = false;
   validaSuccess: boolean = false;
   contentType: string = "image/png";
   urlArchivo: SafeResourceUrl;
@@ -63,10 +64,10 @@ export class RecuperarContrasenaEmpresaComponent implements OnInit {
   }
 
   fnBtnRecuperarContrasena = () => {
-    debugger;
     this.changeRuc();
+    this.changeDocPerNatural();
 
-    if(!this.validarRuc){
+    if(!this.validarRuc  && !this.validarDocPerNatural){
       this._alertService.alertConfirm(
        "",
        "¿Está seguro que desea realizar esta acción?",
@@ -78,7 +79,6 @@ export class RecuperarContrasenaEmpresaComponent implements OnInit {
       }
       this.componenteLoginService.RecuperarContrasena(Data)
        .then(resp => {
-        debugger;
         this.spinner.hide();
          this.numeroDocumento = null
          if (resp.success) {
@@ -134,4 +134,17 @@ export class RecuperarContrasenaEmpresaComponent implements OnInit {
     return !!/[\d\s]/.test(input);
    }
   
+   clickCancelar = () =>{
+    window.location.href = ('/sesion-empresa?id_aplicacion='+ this.id_aplicacion);  
+  }   
+
+  changeDocPerNatural = () =>{
+    if(this.DocPerNatural == null || this.DocPerNatural == ""){
+      this.validarDocPerNatural = true;
+    }
+    else{
+      this.validarDocPerNatural = false;
+    }
+  }
+
 }

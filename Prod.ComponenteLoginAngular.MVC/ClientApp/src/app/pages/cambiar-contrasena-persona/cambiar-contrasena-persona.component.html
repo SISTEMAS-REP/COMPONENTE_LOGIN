@@ -47,6 +47,7 @@
               <p class="validador" *ngIf="validadorContrasenaNueva">Debe ingresar la contraseña.</p>
               <p class="validador" *ngIf="validadorRequisitosContrasenaNueva">La contraseña debe cumplir con los requistos</p>
         </div>
+
     
          <div>
             <div class="input-wrapper">
@@ -97,7 +98,7 @@
             </div>
 
            <div>
-             <button class="buttonSiguiente" >Ir a inicio</button>    
+             <button class="buttonSiguiente" (click)="CancelarSesion()">Ir a inicio</button> 
            </div>
         </div>
       </form>

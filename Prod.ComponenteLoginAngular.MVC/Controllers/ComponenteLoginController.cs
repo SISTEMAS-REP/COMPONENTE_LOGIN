@@ -374,7 +374,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                 Identificador = Guid.Parse(request.id)
             });
             if (validacion.Success)
-            {
+            {               
                 var password = produceVirtualServicio.CambioClaveUsuario(request.dni, request.clave);
                 if (password.Success)
                 {

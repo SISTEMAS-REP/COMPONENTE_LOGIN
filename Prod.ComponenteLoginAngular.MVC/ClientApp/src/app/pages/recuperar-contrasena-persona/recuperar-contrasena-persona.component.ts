@@ -142,4 +142,7 @@ export class RecuperarContrasenaPersonaComponent implements OnInit {
     return !!/[\d\s]/.test(input);
    }
 
+   clickCancelar = () =>{
+    window.location.href = ('/sesion-persona?id_aplicacion='+ this.id_aplicacion);  
+   }  
 }

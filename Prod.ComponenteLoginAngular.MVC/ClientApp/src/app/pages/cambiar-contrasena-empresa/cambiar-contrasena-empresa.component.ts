@@ -35,6 +35,11 @@ export class CambiarContrasenaEmpresaComponent implements OnInit {
   contentType: string = "image/png";
   urlArchivo: SafeResourceUrl;
 
+  Identificador: string = "";
+  Code: string = "";
+  Email: string = "";
+  UserName: string = "";
+
   constructor(
     private spinner: NgxSpinnerService,
     private componenteLoginService: ComponenteLoginService,
@@ -44,9 +49,14 @@ export class CambiarContrasenaEmpresaComponent implements OnInit {
     private route: Router
   ) { }
 
+
   ngOnInit(): void {
     this.router.queryParams.subscribe(params => {
       this.id_aplicacion = params['id_aplicacion'] || null;
+      this.Identificador = params['Identificador'] || null;
+      this.Code = params['Code'] || null;
+      this.Email = params['Email'] || null;
+      this.UserName = params['UserName'] || null;
       this.obtenerImagenByAplicacion();
     });
   }
@@ -85,10 +95,10 @@ export class CambiarContrasenaEmpresaComponent implements OnInit {
      () => {
     this.spinner.show();
     let Data = {
-      id: "2496752",  //this.id,
-      dni: "753470004", // this.userName,
-      email: "JHOSEPH264@GMAIL.COM",// this.email,
-      clave: "produce", //this.form.get('contrasena').value,
+      id: this.Identificador,  //this.id,
+      dni: this.UserName, // this.userName,
+      email: this.Email,// this.email,
+      clave: this.contrasenaNueva, //this.form.get('contrasena').value,
     }
      this.componenteLoginService.CambiarContrasena(Data)
       .then(resp => {
@@ -220,6 +230,10 @@ export class CambiarContrasenaEmpresaComponent implements OnInit {
         eyeContrasenaActual.style.opacity=0.4;
       }
     }
+    
+  CancelarSesion = () =>{
+      window.location.href = ('https://derapipez.produce.gob.pe/Inicio/index');
+    }
 
   mostrarContrasenaNueva(){
       let contrasenaNueva :any = document.getElementById('contrasenaNueva');
@@ -248,5 +262,7 @@ export class CambiarContrasenaEmpresaComponent implements OnInit {
         eyeContrasenaRep.style.opacity=0.4;
       }
     }
+
+
 
 }
