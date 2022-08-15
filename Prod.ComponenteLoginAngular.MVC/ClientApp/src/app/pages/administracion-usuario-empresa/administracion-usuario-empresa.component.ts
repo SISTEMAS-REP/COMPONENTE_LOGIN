@@ -128,6 +128,7 @@ export class AdministracionUsuarioEmpresaComponent implements OnInit {
   
 
     BtnEditarUsuario = () =>{
+      this.spinner.show();
       let Data = {
         id_persona: this.id_personaEditar,             
         correo: this.correoEditar,
@@ -136,8 +137,7 @@ export class AdministracionUsuarioEmpresaComponent implements OnInit {
         NumeroDocumento: this.numeroDocEditar,
         id_contacto_extranet: this.idUsuario,
         activo: this.estado_act_desac
-      };
-      this.spinner.show();
+      };     
       this.componenteLoginService.CambiarEstadoUsuarioPorRepresentanteLegal(Data)
       .then(resp => {
         this.spinner.hide();
@@ -390,6 +390,11 @@ export class AdministracionUsuarioEmpresaComponent implements OnInit {
 
    }
 
+   CancelarSesion = () =>{
+    window.location.href = ('https://derapipez.produce.gob.pe/Producto/Producto/Index');
+   }
+
+
   registroEmpresaService = () => 
   {
     this._alertService.alertConfirm(  
@@ -446,8 +451,5 @@ export class AdministracionUsuarioEmpresaComponent implements OnInit {
     });
   }
 
-  CancelarSesion = () =>{
-    window.location.href = ('https://derapipez.produce.gob.pe/Producto/Producto/Index');
-   }
 
 }

@@ -577,13 +577,15 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                     {
                         var estado = request.activo ? "activo" : "desactivo";
                         response.Success = true;
-                        response.Messages.Add("El usuario se " + estado + " correctamente.");
+                        response.Messages.Add("El usuario se actualizó correctamente.");
+                        //response.Messages.Add("El usuario se " + estado + " correctamente.");
                     }
                     else
                     {
                         var estado = request.activo ? "activo" : " desactivo";
                         response.Messages.Add("");
-                        response.Messages.Add("El usuario no se pudo " + estado + ".");
+                        response.Messages.Add("El usuario no se pudo actualizar." );
+                        // response.Messages.Add("El usuario no se pudo " + estado + ".");
                     }
                 }
                 else
@@ -685,7 +687,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                         codigo_departamento = request.CodigoDepartamento,
                         codigo_provincia = request.CodigoProvincia,
                         codigo_distrito = request.CodigoDistrito,
-                        usuario = "VUSP",
+                        usuario = "Login Unico",
                         direccion = request.Direccion,
                         flag = "A",
                         telefono = request.Celular,
@@ -715,7 +717,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                         codigo_provincia = request.CodigoProvincia,
                         codigo_distrito = request.CodigoDistrito,
                         email = request.Email,
-                        usuario = "VUSP",
+                        usuario = "Login Unico",
                         id_tipo_persona = 1
                     };
                     this.personasServicio.ActualizarPersonaById(obj);
