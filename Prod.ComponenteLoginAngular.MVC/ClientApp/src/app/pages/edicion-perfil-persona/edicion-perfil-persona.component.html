@@ -17,9 +17,9 @@
   </div>
        <div class="personal" *ngIf="isVisiblePerfil">
          <h5>Información personal</h5>
-            <p>DNI: {{dni}}</p>  
-            <p>Nombres y apellidos: {{nombre_completo}}</p>
-            <p>Dirección: {{direccion}}</p> 
+            <p>DNI : {{dni}}</p>  
+            <p>Nombres y apellidos : {{nombre_completo}}</p>
+            <p>Dirección : {{direccion}}</p> 
           </div>
 
         <div class="contacto" *ngIf="isVisiblePerfil">
@@ -27,8 +27,8 @@
           <img src="../../assets/img/icono_editar.png" alt="Editar" title="Editar" width="20" (click)="clickEditarContacto()">
         </h5>
          <div *ngIf="isVisibleContacto"> 
-          <p>Celular: {{celular}}</p> 
-          <p>Correo:  {{correo}}</p>
+          <p>Celular : {{celular}}</p> 
+          <p>Correo :  {{correo}}</p>
         </div>
         </div>
         
