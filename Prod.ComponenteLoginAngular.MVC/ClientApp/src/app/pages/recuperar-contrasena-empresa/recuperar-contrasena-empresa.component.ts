@@ -134,9 +134,9 @@ export class RecuperarContrasenaEmpresaComponent implements OnInit {
     return !!/[\d\s]/.test(input);
    }
   
-   clickCancelar = () =>{
-    window.location.href = ('/sesion-empresa?id_aplicacion='+ this.id_aplicacion);  
-  }   
+   CancelarSesion = () =>{
+    window.location.href = ('https://derapipez.produce.gob.pe/Inicio/index');
+   }
 
   changeDocPerNatural = () =>{
     if(this.DocPerNatural == null || this.DocPerNatural == ""){
