@@ -146,7 +146,7 @@ export class RegistroPersonaComponent implements OnInit {
                       "Registro exitoso",
                       '',
                       () => {
-                        this.route.navigateByUrl('/sesion-persona').then(e => {
+                        this.route.navigateByUrl('/sesion-persona?id_aplicacion=' + this.id_aplicacion).then(e => {
                               if (e) {
                                   console.log("Navigation is successful!");
                               } else {

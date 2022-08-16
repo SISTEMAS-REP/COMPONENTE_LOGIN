@@ -152,8 +152,8 @@ export class RegistroEmpresaComponent implements OnInit {
                       "Registro exitoso",
                       '',
                       () => {
-                        this.route.navigateByUrl('/sesion-empresa').then(e => {
-                              if (e) {
+                        this.route.navigateByUrl('/sesion-empresa?id_aplicacion=' + this.id_aplicacion).then(e => {
+                          if (e) {
                                   console.log("Navigation is successful!");
                               } else {
                                   console.log("Navigation has failed!");
