@@ -186,7 +186,7 @@ export class RegistroEmpresaComponent implements OnInit {
         this.razonSocial = resp.data.razonSocial;
         this.cod_departamento = resp.data.codigoDepartamento;
         this.cod_provincia = resp.data.codigoProvincia;
-        this.cod_distrito  = resp.data.codigo_distrito;
+        this.cod_distrito  = resp.data.codigoDistrito;
         this.direccion = resp.data.direccion;
         this.changeRazonSocial();
         this.changeDireccion();
