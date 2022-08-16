@@ -135,16 +135,24 @@ export class RegistroPersonaComponent implements OnInit {
             }
             this.componenteLoginService.RegistroPersona(Data)
             .then(resp => {
+              debugger;
               this.spinner.hide();
                 if(!resp.success){
                   this._alertService.alertWarning(resp.messages[0]);
+                  this.limpiar();
                 }
                 else{
                   this._alertService.alertOk(
                       "Registro exitoso",
                       '',
                       () => {
-                          this.route.navigateByUrl('/sesion-persona');
+                        this.route.navigateByUrl('/sesion-persona').then(e => {
+                              if (e) {
+                                  console.log("Navigation is successful!");
+                              } else {
+                                  console.log("Navigation has failed!");
+                              }
+                          });
                       }
                     );
                   }

@@ -77,135 +77,149 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
             var resPersona = new sep.StatusResponse();
             sep.PersonaRequest persona = null;
 
-
-            var rolbyaplicacion = this.componenteLoginProxy.GetRolAdministradoByAplicacion(request.id_aplicacion.ToString());
-
-            if (!rolbyaplicacion.Success)
+            try
             {
-                respuesta.Success = false;
-                respuesta.Messages.Add("No puede registrarse en este aplicacitivo.");
-                return Ok(respuesta);
-            }
+                var rolbyaplicacion = this.componenteLoginProxy.GetRolAdministradoByAplicacion(request.id_aplicacion.ToString());
 
-            if (request.Id == 0)
-            {
-                persona = new sep.PersonaRequest()
+                if (!rolbyaplicacion.Success)
                 {
-                    id_sector = request.IdSector,
-                    id_tipo_persona = request.IdTipoPersona,
-                    codigo_departamento = request.CodigoDepartamento,
-                    codigo_provincia = request.CodigoProvincia,
-                    codigo_distrito = request.CodigoDistrito,
-                    id_tipo_identificacion = request.IdTipoIdentificacion,
-                    razon_social = !string.IsNullOrEmpty(request.RazonSocial) ? request.RazonSocial : "-",
-                    nombres = !string.IsNullOrEmpty(request.Nombres) ? request.Nombres : "-",
-                    apellidos = !string.IsNullOrEmpty(request.Apellidos) ? request.Apellidos : "-",
-                    nro_documento = request.NroDocumento,
-                    direccion = request.Direccion,
-                    telefono = string.IsNullOrEmpty(request.Telefono) ? "" : request.Telefono,
-                    email = string.IsNullOrEmpty(request.Email) ? "" : request.Email,
-                    flag = request.Flag,
-                    usuario = appConfig.RegistroUsuario.Usuario,
-                    celular = string.IsNullOrEmpty(request.Celular) ? "" : request.Celular,
-                    representante_legal = "",
-                    nro_documento_representante = "",
-                    nro_docpernatural = request.NroDocPerNatural
-                };
-                resPersona = personasServicio.RegistrarAdministrado(persona);
-            }
-            else
-            {
-                persona = new sep.PersonaRequest()
+                    respuesta.Success = false;
+                    respuesta.Messages.Add("No puede registrarse en este aplicacitivo.");
+                    return Ok(respuesta);
+                }
+
+                if (request.Id == 0)
                 {
-                    id = request.Id,
-                    codigo_departamento = request.CodigoDepartamento,
-                    codigo_provincia = request.CodigoProvincia,
-                    codigo_distrito = request.CodigoDistrito,
-                    direccion = request.Direccion,
-                    telefono = string.IsNullOrEmpty(request.Telefono) ? "" : request.Telefono,
-                    email = string.IsNullOrEmpty(request.Email) ? "" : request.Email,
-                    celular = string.IsNullOrEmpty(request.Celular) ? "" : request.Celular,
-                    nro_docpernatural = request.NroDocPerNatural,
-                    usuario = "login_unico"
-                };
-                resPersona = personasServicio.ActualizarPersonaById(persona);
-            }
-
-
-
-            if (resPersona.Success && request.Flag == "A")
-            {
-                var result = new StatusResponse<Prod.ServiciosExternos.PRODUCE_VIRTUAL.OperationResult>();
-                var result1 = new StatusResponse<Prod.ServiciosExternos.PRODUCE_VIRTUAL.Roles.Paginado<Prod.ServiciosExternos.PRODUCE_VIRTUAL.Roles.UsuarioRolesResponse>>();
-                var userName = "";
-
-                if (request.IdTipoPersona == (int)TIPO_PERSONA.JURIDICA)
-                {
-                    userName = request.NroDocumento + request.NroDocPerNatural;
+                    persona = new sep.PersonaRequest()
+                    {
+                        id_sector = request.IdSector,
+                        id_tipo_persona = request.IdTipoPersona,
+                        codigo_departamento = request.CodigoDepartamento,
+                        codigo_provincia = request.CodigoProvincia,
+                        codigo_distrito = request.CodigoDistrito,
+                        id_tipo_identificacion = request.IdTipoIdentificacion,
+                        razon_social = !string.IsNullOrEmpty(request.RazonSocial) ? request.RazonSocial : "-",
+                        nombres = !string.IsNullOrEmpty(request.Nombres) ? request.Nombres : "-",
+                        apellidos = !string.IsNullOrEmpty(request.Apellidos) ? request.Apellidos : "-",
+                        nro_documento = request.NroDocumento,
+                        direccion = request.Direccion,
+                        telefono = string.IsNullOrEmpty(request.Telefono) ? "" : request.Telefono,
+                        email = string.IsNullOrEmpty(request.Email) ? "" : request.Email,
+                        flag = request.Flag,
+                        usuario = appConfig.RegistroUsuario.Usuario,
+                        celular = string.IsNullOrEmpty(request.Celular) ? "" : request.Celular,
+                        representante_legal = "",
+                        nro_documento_representante = "",
+                        nro_docpernatural = request.NroDocPerNatural
+                    };
+                    resPersona = personasServicio.RegistrarAdministrado(persona);
                 }
                 else
                 {
-                    userName = request.NroDocPerNatural;
+                    persona = new sep.PersonaRequest()
+                    {
+                        id = request.Id,
+                        codigo_departamento = request.CodigoDepartamento,
+                        codigo_provincia = request.CodigoProvincia,
+                        codigo_distrito = request.CodigoDistrito,
+                        direccion = request.Direccion,
+                        telefono = string.IsNullOrEmpty(request.Telefono) ? "" : request.Telefono,
+                        email = string.IsNullOrEmpty(request.Email) ? "" : request.Email,
+                        celular = string.IsNullOrEmpty(request.Celular) ? "" : request.Celular,
+                        nro_docpernatural = request.NroDocPerNatural,
+                        usuario = "login_unico"
+                    };
+                    resPersona = personasServicio.ActualizarPersonaById(persona);
+
                 }
 
-                var user = produceVirtualServicio.GetUsuarioUserName(userName);
-                if (user.Data != null)
+
+
+                if (resPersona.Success && request.Flag == "A")
                 {
-                    result1 = rolesServicio.GetUsuarioRoles(
-                    new roles.UsuarioRolesRequest()
+                    var result = new StatusResponse<Prod.ServiciosExternos.PRODUCE_VIRTUAL.OperationResult>();
+                    var result1 = new StatusResponse<Prod.ServiciosExternos.PRODUCE_VIRTUAL.Roles.Paginado<Prod.ServiciosExternos.PRODUCE_VIRTUAL.Roles.UsuarioRolesResponse>>();
+                    var userName = "";
+
+                    if (request.IdTipoPersona == (int)TIPO_PERSONA.JURIDICA)
                     {
-                        CodigoUsuario = request.IdTipoPersona == 2 ? user.Data.IdPersonaNatural : int.Parse(resPersona.Value),
-                        IdAplicion = rolbyaplicacion.Data.id_aplicacion, //int.Parse(appConfig.RegistroUsuario.IdAplicacion),
+                        userName = request.NroDocumento + request.NroDocPerNatural;
+                    }
+                    else
+                    {
+                        userName = request.NroDocPerNatural;
+                    }
+
+                    var user = produceVirtualServicio.GetUsuarioUserName(userName);
+ 
+                    if (user.Data != null)
+                    {
+                        result1 = rolesServicio.GetUsuarioRoles(
+                        new roles.UsuarioRolesRequest()
+                        {
+                            CodigoUsuario = request.IdTipoPersona == 2 ? user.Data.IdPersonaNatural : int.Parse(resPersona.Value),
+                            IdAplicion = rolbyaplicacion.Data.id_aplicacion, //int.Parse(appConfig.RegistroUsuario.IdAplicacion),
                         IdRol = rolbyaplicacion.Data.id_rol, //int.Parse(appConfig.RegistroUsuario.IdRol),
                         Tipo = roles.TipoRol.Extranet
-                    }, 1, 10);
+                        }, 1, 10);
 
-                    if (result1.Success)
-                    {
-                        if (result1.Data.TotalItems > 0)
+
+                        if (result1.Success)
                         {
-                            respuesta.Success = false;
-                            respuesta.Messages.Add("Este usuario ya existe como administrado");
-                            return Ok(respuesta);
+                            if (result1.Data.TotalItems > 0)
+                            {
+                                respuesta.Success = false;
+                                respuesta.Messages.Add("Este usuario ya existe como administrado");
+                                return Ok(respuesta);
+                            }
                         }
                     }
-                }
 
 
 
-                if (request.IdTipoPersona == 2) //(int)TIPO_PERSONA.JURIDICA
-                {
-                    result = produceVirtualServicio.CrearPersonaJuridicaByAplicacion(new CrearUsuarioJuridicaRequest
+                    if (request.IdTipoPersona == 2) //(int)TIPO_PERSONA.JURIDICA
                     {
-                        Dni = request.NroDocPerNatural,
-                        Email = request.Email,
-                        Ruc = request.NroDocumento,
-                        PhoneNumber = request.Celular,
-                        UserRegister = appConfig.RegistroUsuario.Usuario,
-                        id_rol = rolbyaplicacion.Data.id_rol, // int.Parse(appConfig.RegistroUsuario.IdRol),
-                        id_aplicacion = rolbyaplicacion.Data.id_aplicacion, //int.Parse(appConfig.RegistroUsuario.IdAplicacion),
-                        ingresarClave = request.Contrasena
-                    });
-                }
-                else
-                {
-                    result = produceVirtualServicio.CrearPersonaNaturalByAplicacion(new CrearUsuarioNaturalRequest
+                        result = produceVirtualServicio.CrearPersonaJuridicaByAplicacion(new CrearUsuarioJuridicaRequest
+                        {
+                            Dni = request.NroDocPerNatural,
+                            Email = request.Email,
+                            Ruc = request.NroDocumento,
+                            PhoneNumber = request.Celular,
+                            UserRegister = appConfig.RegistroUsuario.Usuario,
+                            id_rol = rolbyaplicacion.Data.id_rol, // int.Parse(appConfig.RegistroUsuario.IdRol),
+                            id_aplicacion = rolbyaplicacion.Data.id_aplicacion, //int.Parse(appConfig.RegistroUsuario.IdAplicacion),
+                            ingresarClave = request.Contrasena
+                        });
+
+                    }
+                    else
                     {
-                        Dni = request.NroDocPerNatural,
-                        Email = request.Email,
-                        PhoneNumber = request.Celular,
-                        UserRegister = appConfig.RegistroUsuario.Usuario,
-                        id_rol = rolbyaplicacion.Data.id_rol, // int.Parse(appConfig.RegistroUsuario.IdRol),
-                        id_aplicacion = rolbyaplicacion.Data.id_aplicacion, //int.Parse(appConfig.RegistroUsuario.IdAplicacion),
-                        ingresarClave = request.Contrasena
-                    });
+                        result = produceVirtualServicio.CrearPersonaNaturalByAplicacion(new CrearUsuarioNaturalRequest
+                        {
+                            Dni = request.NroDocPerNatural,
+                            Email = request.Email,
+                            PhoneNumber = request.Celular,
+                            UserRegister = appConfig.RegistroUsuario.Usuario,
+                            id_rol = rolbyaplicacion.Data.id_rol, // int.Parse(appConfig.RegistroUsuario.IdRol),
+                            id_aplicacion = rolbyaplicacion.Data.id_aplicacion, //int.Parse(appConfig.RegistroUsuario.IdAplicacion),
+                            ingresarClave = request.Contrasena
+                        });
+                    
+
+                    }
+                    respuesta.Data = resPersona;
+                    respuesta.Success = result.Success;
+                    respuesta.Messages = result.Messages;
+
+
 
                 }
-                respuesta.Data = resPersona;
-                respuesta.Success = result.Success;
-                respuesta.Messages = result.Messages;
+            }
 
+            catch (Exception exc) {
 
+                Log.Error(exc.Message);
+            
             }
 
             return Ok(respuesta);

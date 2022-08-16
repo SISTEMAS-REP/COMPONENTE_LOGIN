@@ -141,36 +141,28 @@ export class RegistroEmpresaComponent implements OnInit {
             }
             this.componenteLoginService.RegistroPersona(Data)
             .then(resp => {
+              debugger;
               this.spinner.hide();
-              if (resp.data.value > 0) {
-              if(resp.messages.length > 0){
-
-             this._alertService.alertWarning(resp.messages[0],
-             () => {}
-             );
-             this.limpiar();
-        }
-        else{
-          this._alertService.alertOk(
-            "Registro exitoso",
-            '',
-            () => {
-              this.route.navigateByUrl('/sesion-empresa').then(e => {
-                    if (e) {
-                        console.log("Navigation is successful!");
-                    } else {
-                        console.log("Navigation has failed!");
-                    }
-                });
-            }
-          );
-        }
-      }
-      else {
-        this._alertService.alertError("Ha ocurrido un error");
-        // alert("Error en registrarse");
-      }
-    })
+                if(!resp.success){
+                  this._alertService.alertWarning(resp.messages[0]);
+                  this.limpiar();
+                }
+                else{
+                  this._alertService.alertOk(
+                      "Registro exitoso",
+                      '',
+                      () => {
+                        this.route.navigateByUrl('/sesion-empresa').then(e => {
+                              if (e) {
+                                  console.log("Navigation is successful!");
+                              } else {
+                                  console.log("Navigation has failed!");
+                              }
+                          });
+                      }
+                    );
+                  }
+            })
       .catch(err => {
         this._alertService.alertError("Ha ocurrido un error");
         this.spinner.hide();
