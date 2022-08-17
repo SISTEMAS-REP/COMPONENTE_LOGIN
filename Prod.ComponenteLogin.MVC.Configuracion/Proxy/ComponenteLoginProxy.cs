@@ -30,7 +30,9 @@ namespace Prod.ComponenteLogin.MVC.Configuracion.Proxy
         }
         public StatusResponse<RolAplicacionResponse> GetRolAdministradoByAplicacion(string id_aplicacion)
         {
-            return this.CallWebApi<StatusResponse<RolAplicacionResponse>>(HttpMethod.Get, _url + "GetRolAdministradoByAplicacion", this.GetJsonParameters(id_aplicacion));
+            ConsentimientoRequest request = new ConsentimientoRequest();
+            request.id_aplicacion = id_aplicacion;
+            return this.CallWebApi<StatusResponse<RolAplicacionResponse>>(HttpMethod.Get, _url + "GetRolAdministradoByAplicacion", this.GetJsonParameters(request));
         }
     }
 }

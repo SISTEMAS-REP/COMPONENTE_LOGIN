@@ -23,5 +23,7 @@ namespace Prod.ComponenteLogin.Entidades
         public string direccion { get; set; }
         public bool es_persona_juridica { get; set; }
         public DateTime? fecha_registro { get; set; }
+        public string id_aplicacion { get; set; }
+
     }
 }

@@ -44,8 +44,9 @@ namespace Prod.ComponenteLogin.Core.Controllers
 
 		[HttpGet]
 		[Route("GetRolAdministradoByAplicacion")]
-		public StatusResponse<RolAplicacionResponse> GetRolAdministradoByAplicacion([FromBody] string id_aplicacion)
+		public StatusResponse<RolAplicacionResponse> GetRolAdministradoByAplicacion([FromBody] ConsentimientoRequest request)
 		{
+			string id_aplicacion = request.id_aplicacion;
 			var sr = this._unitOfWork.GetRolAdministradoByAplicacion(id_aplicacion);
 			return sr;
 		}
