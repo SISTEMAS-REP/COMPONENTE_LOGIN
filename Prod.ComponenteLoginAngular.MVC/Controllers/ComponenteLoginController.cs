@@ -169,7 +169,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                             if (result1.Data.TotalItems > 0)
                             {
                                 respuesta.Success = false;
-                                respuesta.Messages.Add("Este usuario ya existe como administrado");
+                                respuesta.Messages.Add("Este usuario ya está registrado en la aplicación");
                                 return Ok(respuesta);
                             }
                         }
@@ -207,10 +207,10 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                     
 
                     }
-                    respuesta.Data = resPersona;
-                    respuesta.Success = result.Success;
-                    respuesta.Messages = result.Messages;
-
+                   //respuesta.Data = resPersona;
+                   //respuesta.Success = result.Success;
+                   //espuesta.Messages = result.Messages;
+                    respuesta.Success = true;
 
 
                 }
