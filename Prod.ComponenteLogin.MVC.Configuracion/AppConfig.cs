@@ -13,6 +13,7 @@ namespace Prod.ComponenteLogin.MVC.Configuracion
         public RegistroTramite RegistroTramite { get; set; }
         public ReportConfig ReportConfig { get; set; }
         public Recaptcha Recaptcha { get; set; }
+        public UrlsAppIntegrado UrlsAppIntegrado { get; set; }
     }
     public class Urls
     {
@@ -70,6 +71,14 @@ namespace Prod.ComponenteLogin.MVC.Configuracion
         public string RutaUploadCargoRecepcion { get; set; }
         public string RutaUploadCargoRecepcionFirmado { get; set; }
         public string UrlFirmador { get; set; }
+    }
+
+
+    public class UrlsAppIntegrado
+    {
+        public string UrlInicio { get; set; }
+        public string UrlLogeado { get; set; }
+
     }
 
 }

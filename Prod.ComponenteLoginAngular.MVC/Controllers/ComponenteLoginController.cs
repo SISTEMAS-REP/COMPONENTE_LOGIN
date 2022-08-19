@@ -745,7 +745,7 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
                     Email = request.Email,
                     PhoneNumber = request.Celular,
                     Ruc = request.ruc,
-                    UserRegister = "PV"
+                    UserRegister = "Login_Unico"
                 });
                 if (servicio.Success)
                 {
@@ -820,6 +820,26 @@ namespace Prod.ComponenteLoginAngular.MVC.Controllers
 
 
             return Ok(sr);
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("ObtenerUrlsVolver")]
+        public IActionResult ObtenerUrlsVolver([FromBody] AplicacionUsuarioResponse request)
+        {
+            StatusResponse response = new StatusResponse();
+            var url = "";
+
+            if (request.TipoBtn == 1)
+            {
+                url = this.appConfig.UrlsAppIntegrado.UrlInicio;
+            }
+            else {
+                url = this.appConfig.UrlsAppIntegrado.UrlLogeado;
+            }
+
+            response.Data = url;
+            return Ok(response);
         }
 
     }

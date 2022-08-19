@@ -19,5 +19,6 @@ namespace Prod.ComponenteLogin.Entidades.AplicacionUsuario
         public string nombre_categoria { get; set; }
         public string url { get; set; }
         public byte[] conten_img { get; set; }
+        public int TipoBtn { get; set; }
     }
 }

@@ -70,7 +70,6 @@ export class EdicionPerfilEmpresaComponent implements OnInit {
     }
     this.componenteLoginService.obtenerDatosUsuario(Data)
         .then(resp => {
-          debugger
         this.id_persona = resp.data.id;
         this.dni = resp.data.nroDocPerNatural;
         this.nombre_completo = resp.data.nombreCompleto;
@@ -340,6 +339,13 @@ export class EdicionPerfilEmpresaComponent implements OnInit {
   }
   
   ClickRegresar = () =>{
-    window.location.href = ('https://derapipez.produce.gob.pe/Producto/Producto/Index');
+    this.componenteLoginService.ObtenerUrlsVolver({
+      TipoBtn : 2
+    })
+      .then(resp => {
+      window.location.href  = resp.data;      
+      })
+
+      .catch(err => []);
    }
 }

@@ -87,7 +87,6 @@ export class CambiarContrasenaPersonaComponent implements OnInit {
 
   cambiarContrasena = () => 
   {
-    debugger;
     this.changeContrasenaNueva();
     this.changeContrasenaRep();
 
@@ -106,7 +105,6 @@ export class CambiarContrasenaPersonaComponent implements OnInit {
     console.log(Data);
      this.componenteLoginService.CambiarContrasena(Data)
       .then(resp => {
-        debugger;
        this.spinner.hide();
        if (resp.success) {
           this.isVisiblePaso2 = false;
@@ -252,7 +250,14 @@ export class CambiarContrasenaPersonaComponent implements OnInit {
     }
 
     CancelarSesion = () =>{
-      window.location.href = ('https://derapipez.produce.gob.pe/Inicio/index');
+      this.componenteLoginService.ObtenerUrlsVolver({
+        TipoBtn : 1
+      })
+        .then(resp => {
+        window.location.href  = resp.data;      
+        })
+  
+        .catch(err => []);
      } 
 
     mostrarContrasenaRep(){

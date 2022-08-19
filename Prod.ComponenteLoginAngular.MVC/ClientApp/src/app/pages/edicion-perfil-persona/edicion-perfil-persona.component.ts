@@ -208,6 +208,13 @@ export class EdicionPerfilPersonaComponent implements OnInit {
   }
 
   ClickRegresar = () =>{
-    window.location.href = ('https://derapipez.produce.gob.pe/Producto/Producto/Index');
+    this.componenteLoginService.ObtenerUrlsVolver({
+      TipoBtn : 2
+    })
+      .then(resp => {
+      window.location.href  = resp.data;      
+      })
+
+      .catch(err => []);
    }
 }

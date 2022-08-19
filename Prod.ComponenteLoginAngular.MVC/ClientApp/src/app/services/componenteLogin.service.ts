@@ -189,4 +189,16 @@ export class ComponenteLoginService {
     }
   }
 
+  async ObtenerUrlsVolver(request) {
+    const formData = {...request};
+    const url = `${this.baseUrl}/ObtenerUrlsVolver`;
+    try {
+      const resp = await axios
+        .post(url, formData);
+      return resp.data;
+    } catch (err) {
+      throw err.data || err;
+    }
+  }
+
 }

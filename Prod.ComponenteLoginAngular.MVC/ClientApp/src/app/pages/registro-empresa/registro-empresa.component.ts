@@ -141,7 +141,6 @@ export class RegistroEmpresaComponent implements OnInit {
             }
             this.componenteLoginService.RegistroPersona(Data)
             .then(resp => {
-              debugger;
               this.spinner.hide();
                 if(!resp.success){
                   this._alertService.alertWarning(resp.messages[0]);
