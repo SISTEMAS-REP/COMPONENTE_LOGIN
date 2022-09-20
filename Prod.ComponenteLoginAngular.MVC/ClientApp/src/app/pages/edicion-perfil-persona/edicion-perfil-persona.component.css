@@ -56,8 +56,6 @@ a:hover {
 /* ---------- ALIGN ---------- */
   .align {
       display: grid;
-      place-items: center;
-      background-color: #eee;
     }
     
 /* ---------- LOGIN ---------- */
@@ -70,7 +68,6 @@ a:hover {
 }
 
 .form {
-  width: 410px;
   background-color: #fff;
   border-bottom-left-radius: 0em;
   border-bottom-right-radius: 0em;
@@ -142,7 +139,7 @@ a:hover {
 
   }
   .form .representante img{
-      margin-left: 125px;
+      margin-left: 0px;
      }
   
 
@@ -160,7 +157,7 @@ a:hover {
 
  
 .form .contacto img{
-  margin-left: 196px;
+  margin-left: 0px;
  }
 
 
@@ -183,7 +180,22 @@ margin-top: 0%;
 margin-bottom: 0%;
 color: #000;
 }
-
+.login input {
+  background-color: #fff;
+  width: 100%;
+  padding: 10px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 1px;
+  box-sizing: border-box;
+  font-size: 12px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+.login input:focus {
+  border: 1px solid rgba(229, 0, 0, 0.8) !important;
+  outline: 1px solid rgba(229, 0, 0, 0.8) !important;
+}
 
 .form input {
   background-color: #fff;
@@ -302,9 +314,8 @@ color: #000;
 /* ---------- BUTTON ---------- */
 
 
-
 .buttonSiguiente {
-  background-color: #58595B;
+  background-color: #a4a4a4;
   color: #FFFFFF;
   margin: 12px 0px 6px 0px;
   width: 100%;
@@ -314,13 +325,14 @@ color: #000;
   cursor: pointer;
   border-radius: 1px;
   padding: 5px 7px;
-  border: 2px solid #58595B;
+  font-family: 'plutosansregular';
+  border: 0;
 }
   
 .buttonCancelar {
-  background-color: #eee;
-  color: #000;
-  margin-bottom: 5px;
+  background-color: #f2f2f2;
+  color: #d4d4d4;
+  margin: 12px 0px 6px 0px;
   width: 100%;
   font-size: 12px;
   text-align: center;
@@ -328,7 +340,23 @@ color: #000;
   cursor: pointer;
   border-radius: 1px;
   padding: 5px 7px;
-  border: 2px solid #ccc;
+  border: 0px solid #ccc;
+  font-family: 'plutosansregular';
+}
+
+.buttonRegresar {
+  background-color: #58595B;
+  color: #FFFFFF;
+  margin: 12px 0px 6px 0px;
+  width: 50%;
+  font-size: 12px;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 1px;
+  padding: 5px 7px;
+  border: 2px solid #58595B;
+  font-family: 'plutosansregular';
 }
 
 .buttonPaso {
@@ -345,19 +373,6 @@ color: #000;
   border-radius: 50%;
 }
 
-.buttonRegresar {
-  background-color: #58595B;
-  color: #FFFFFF;
-  margin: 12px 0px 6px 0px;
-  width: 50%;
-  font-size: 12px;
-  text-align: left;
-  text-decoration: none;
-  cursor: pointer;
-  border-radius: 1px;
-  padding: 5px 7px;
-  border: 2px solid #58595B;
-}
 
 
 .buttonSiguiente:hover {
@@ -555,7 +570,7 @@ background-color: #000;
   width: 360px;
   height: 340px;
   padding: 10px 0px 10px 0px;
-  margin-top: 20px;
+  margin: 20px auto;
 }
 
 .form .editar .circle {
@@ -573,4 +588,43 @@ background-color: #000;
   width: 50%;
   padding: 25px 10px 10px 25px;
   color: #000;
+}
+@media only screen and (max-width: 320px) {
+  .login {
+    position: relative;
+    box-shadow: 0 4px 10px 0 rgb(0 0 0 / 20%), 0 4px 20px 0 rgb(0 0 0 / 19%);
+    -webkit-box-shadow: 0 4px 10px 0 rgb(0 0 0 / 20%), 0 4px 20px 0 rgb(0 0 0 / 19%);
+    border-radius: 4px;
+    max-width: 320px !important;
+    padding: 40px;
+    height: fit-content;
+    margin: 50px auto 20px;
+}
+
+.login {
+  max-width: 320px !important;  
+}
+/* ---------- ALIGN ---------- */
+.align {
+  display: grid;
+  place-items: flex-start;
+}
+
+}
+@media only screen and (min-width: 780px) {
+  .login {
+    position: relative;
+    box-shadow: 0 4px 10px 0 rgb(0 0 0 / 20%), 0 4px 20px 0 rgb(0 0 0 / 19%);
+    -webkit-box-shadow: 0 4px 10px 0 rgb(0 0 0 / 20%), 0 4px 20px 0 rgb(0 0 0 / 19%);
+    border-radius: 4px;
+    width: 700px !important;
+    padding: 40px;
+    height: fit-content;
+    margin: 50px auto 20px;
+}
+
+.login {
+  width: 700px !important;  
+}
+
 }

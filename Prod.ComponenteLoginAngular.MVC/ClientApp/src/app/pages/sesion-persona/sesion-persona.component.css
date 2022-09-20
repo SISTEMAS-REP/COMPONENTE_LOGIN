@@ -8,7 +8,7 @@ html {
 }
 
 body {
-  font-family: 'Varela Round', sans-serif;
+  font-family: 'Pluto Sans', sans-serif;
   line-height: 1.5;
   margin: 0;
   padding: 0vmin;
@@ -30,8 +30,6 @@ input {
   padding: 0px;
   transition: all 0.3s;
 }
-
-
 
 p {
   margin: 0px;
@@ -61,24 +59,25 @@ a:hover {
 /* ---------- ALIGN ---------- */
 .align {
   display: grid;
-  place-items: center;
-  background-color: #eee;
 }
+
 
 /* ---------- BUTTON ---------- */
 
 .buttonSiguiente {
-  background-color: #58595B;
+  background-color: rgba(88, 89, 91, 0.8);
   color: #FFFFFF;
   margin: 12px 0px 6px 0px;
   width: 100%;
-  font-size: 12px;
+  font-size: 16px;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
   border-radius: 1px;
   padding: 5px 7px;
-  border: 2px solid #58595B;
+  border: 0px solid #58595B;
+  font-family: 'plutosansregular';
+  font-weight: 500;
 }
   
 .buttonCancelar {
@@ -86,13 +85,15 @@ a:hover {
   color: #000;
   margin-bottom: 5px;
   width: 100%;
-  font-size: 12px;
+  font-size: 16px;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
   border-radius: 1px;
   padding: 5px 7px;
-  border: 2px solid #ccc;
+  border: 0px solid #ccc;
+  font-family: 'plutosansregular';
+  font-weight: 500;
 }
 
 
@@ -134,11 +135,7 @@ a:hover {
 }
 
 /* ---------- LOGIN ---------- */
-.login {
-  width: 410px;
-  height: 620px;
-  background-color: #FFF
-}
+
 
 .login__header {
   background-color: #fff;
@@ -193,15 +190,20 @@ a:hover {
 .login input {
   background-color: #fff;
   width: 100%;
-  padding: 5px 7px;
+  padding: 10px;
   display: inline-block;
-  border: 1px solid #ccc;
+  border: 1px solid rgba(88, 89, 91, 0.8);
   border-radius: 1px;
   box-sizing: border-box;
   font-size: 12px;
   margin-bottom: 5px;
   margin-top: 5px;
 }
+.login input:focus {
+  border: 1px solid rgba(229, 0, 0, 0.8) !important;
+  outline: 1px solid rgba(229, 0, 0, 0.8) !important;
+}
+
 
 .login .input-wrapper {
   position: relative;
@@ -214,7 +216,7 @@ a:hover {
 }
 
 .login .input-icon {
-  color: #191919;
+  color: rgba(229, 0, 0, 0.8) !important;
   position: absolute;
   width: 20px;
   height: 20px;
@@ -448,6 +450,10 @@ background-color: #000;
   background-color: #000;
 }
 
+.form:focus{
+  border: 1px solid red;
+}
+
 /* Crea el indicador (el punto/círculo - oculto cuando no está marcado) */
 .checkradio:after {
   content: "";
@@ -471,4 +477,45 @@ background-color: #000;
   color: #EB1E23;
   text-align: left;
   margin-bottom: 6px;
+}
+@media only screen and (max-width: 320px) {
+  .login {
+    position: relative;
+    box-shadow: 0 4px 10px 0 rgb(0 0 0 / 20%), 0 4px 20px 0 rgb(0 0 0 / 19%);
+    -webkit-box-shadow: 0 4px 10px 0 rgb(0 0 0 / 20%), 0 4px 20px 0 rgb(0 0 0 / 19%);
+    border-radius: 4px;
+    margin: 50px auto 20px;
+    max-width: 320px !important;
+    padding: 40px;
+    height: fit-content !important;
+}
+
+.login {
+  max-width: 320px !important;  
+}
+/* ---------- ALIGN ---------- */
+.align {
+  display: grid;
+  place-items: flex-start;
+}
+
+
+}
+@media only screen and (min-width: 780px) {
+  .login {
+    position: relative;
+    box-shadow: 0 4px 10px 0 rgb(0 0 0 / 20%), 0 4px 20px 0 rgb(0 0 0 / 19%);
+    -webkit-box-shadow: 0 4px 10px 0 rgb(0 0 0 / 20%), 0 4px 20px 0 rgb(0 0 0 / 19%);
+    border-radius: 4px;
+    margin: 50px auto 20px;
+    width: 700px !important;
+    padding: 40px;
+    height: fit-content !important;
+
+}
+
+.login {
+  width: 700px !important;  
+}
+
 }

@@ -3,7 +3,6 @@
     padding: 1.25rem;
     border: none;
     margin-top: 30%;
-    a
 
   {
     color: teal;
@@ -22,7 +21,8 @@
   }
 
   .modal-body {
-    font-size: 0.875rem;
+    font-size: 13px;
+    font-family: 'plutosansregular';
   }
 
   .modal-footer {
@@ -33,10 +33,10 @@
 </style>
 <ng-template #modal>
   <div class="modal-header">
-    <h5 class="modal-title">{{ modalConfig.modalTitle }}</h5>
+    <h5 class="modal-title" >{{ modalConfig.modalTitle }}</h5>
   </div>
-  <div class="modal-body">
-    <ng-content></ng-content>
+  <div class="modal-body" style="font-family: 'plutosansregular'; font-size: 13px;">
+    <ng-content ></ng-content>
   </div>
   <div class="modal-footer">
     <button type="button"

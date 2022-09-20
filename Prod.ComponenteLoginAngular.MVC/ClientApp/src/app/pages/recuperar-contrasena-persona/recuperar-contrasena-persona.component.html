@@ -5,31 +5,31 @@
     <div class="login">
       <header class="login__header">
         <div class="logo-produce">
-          <img src="../../assets/img/logo_produce.PNG" alt="Logo" title="Logo" width="138">
+          <img src="../../assets/img/logo_produce.PNG" alt="Logo" title="Logo">
         </div>  
         <div class="logo-aplicacion">
           <img [src]="urlArchivo" alt="archivo"  width="138">
           <!--<img src="../../assets/img/logo_vusp.png" alt="Logo" title="Logo" width="138">-->
         </div>
         <div class="title" *ngIf="!validaSuccess">
-          <h2 align="center">Recuperar contraseña</h2>
-          <p>Persona Natural</p>
+          <h2 style="text-align: center; font-size: 26px;">Recuperar contraseña</h2>
+          <p style="text-align: center; font-size: 20px; font-family:'plutosanslight';">Persona Natural</p>
         </div>         
     </header>
 
       <form action="#" class="login__form" method="POST"> 
         <div  *ngIf="!validaSuccess">
           <div>
-            <label for="numeroDoc">NÚMERO DE DOCUMENTO</label>
-            <input type="text" id="numeroDoc" name="numeroDoc"  [(ngModel)]="numeroDocumento" placeholder="Ej.:15234687" (change)="changeNroDocumento()"  (keypress)="restrictNumeric($event)" maxlength="12">
-            <p class="validador" *ngIf="validarNroDocumento">Debe ingresar el número de documento.</p>
+            <label for="numeroDoc"  style="color: rgba(88, 89, 91, 0.8);font-size:13px; font-family:'plutosansregular'; font-weight: 400;">NÚMERO DE DOCUMENTO</label>
+            <input type="text" id="numeroDoc" name="numeroDoc"  [(ngModel)]="numeroDocumento" placeholder="Ej.:15234687" (change)="changeNroDocumento()"  (keypress)="restrictNumeric($event)" maxlength="12" style="font-family: 'plutosansregular';font-size: 13px; font-weight: 400; color: rgba(88, 89, 91, 0.8);">
+            <p class="validador" *ngIf="validarNroDocumento" style="color: rgba(230, 0, 0, 0.8);font-family:'plutosanslight'; font-size: 11px; font-weight: 400;">Debe ingresar el número de documento.</p>
         </div>
   
    
         <div>
-          <label for="correo">CORREO ELECTRONICO</label>
-          <input type="text" id="correo" name="correo"  [(ngModel)]="email" placeholder="Ej.:camila.flores@ejemplo.com" (change)="changeEmail()">
-          <p class="validador" *ngIf="validarEmail">Debe ingresar el correo electronico.</p>
+          <label for="correo"  style="color: rgba(88, 89, 91, 0.8);font-size:13px; font-family:'plutosansregular'; font-weight: 400;">CORREO ELECTRONICO</label>
+          <input type="text" id="correo" name="correo"  [(ngModel)]="email" placeholder="Ej.:camila.flores@ejemplo.com" (change)="changeEmail()" style="font-family: 'plutosansregular';font-size: 13px; font-weight: 400; color: rgba(88, 89, 91, 0.8);">
+          <p class="validador" *ngIf="validarEmail" style="color: rgba(230, 0, 0, 0.8);font-family:'plutosanslight'; font-size: 11px; font-weight: 400;">Debe ingresar el correo electronico.</p>
         </div>
   
       <div>
@@ -37,8 +37,8 @@
       </div>
 
       <div class="footer">
-        <p>¿No tienes una cuenta de persona?</p>  
-        <a href="/registro-persona?id_aplicacion={{ id_aplicacion }}">Crea una ahora</a>
+        <p style="color: rgba(88, 89, 91, 0.8); font-family: 'plutosansregular';font-size: 13px; font-weight: 300">¿Ya tienes una cuenta?</p>  
+        <a href="/registro-persona?id_aplicacion={{ id_aplicacion }}" style="font-family: 'plutosansregular';font-size: 13px; font-weight: 500; color: #000000; background-color: white !important;">Crea una ahora</a>
       </div>
         </div>             
           
