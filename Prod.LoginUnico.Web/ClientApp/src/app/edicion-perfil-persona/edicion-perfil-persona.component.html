@@ -1,0 +1,81 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+  <p style="font-size: 20px; color: white">Procesando información, por favor no cierre la ventana.</p>
+</ngx-spinner>
+<body class="align">
+  <div class="container login">
+ <div class="form"> 
+     <div class="header" *ngIf="isVisiblePerfil">
+      <div class="circle"> 
+        <div class="circleEditar"> 
+            <img src="../../assets/img/icono_editar.png" alt="Editar" title="Editar" width="20" (click)="clickEditarImg()">
+        </div> 
+      </div>        
+      <div class="title" >
+        <h2 style="text-align: left; font-size: 26px;">Mi perfil</h2>
+        <h3 style="text-align: left; font-size: 20px; font-family:'plutosanslight';">Persona Natural</h3> 
+    </div>
+  </div>
+  <div class="col-sm-12" style="padding-left: 0; padding-right:0"> 
+    <div class="col-sm-5" style="padding-left: 0; padding-right:0">
+       <div class="personal" *ngIf="isVisiblePerfil">
+         <h5 style="color: black;font-size:16px; font-family:'plutosansregular'; font-weight: 300;">Información personal</h5>
+            <p style="color: rgba(88, 89, 91, 0.8);font-size:12px; font-family:'plutosansregular'; font-weight: 400;">DNI : {{dni}}</p>  
+            <p style="color: rgba(88, 89, 91, 0.8);font-size:12px; font-family:'plutosansregular'; font-weight: 400;">Nombres y apellidos : {{nombre_completo}}</p>
+            <p style="color: rgba(88, 89, 91, 0.8);font-size:12px; font-family:'plutosansregular'; font-weight: 400;">Dirección : {{direccion}}</p> 
+          </div>
+        </div>
+        <div class="col-sm-2"></div>
+
+        <div class="col-sm-5" style="padding-left: 0; padding-right:0">
+        <div class="contacto" *ngIf="isVisiblePerfil">
+        <h5 style="color: black;font-size:16px; font-family:'plutosansregular'; font-weight: 300;">Información de contacto         
+          <img src="../../assets/img/icono_editar.png" alt="Editar" title="Editar" width="20" (click)="clickEditarContacto()" style="float: right;">
+        </h5>
+         <div *ngIf="isVisibleContacto"> 
+          <p style="color: rgba(88, 89, 91, 0.8);font-size:12px; font-family:'plutosansregular'; font-weight: 400;">Celular : {{celular}}</p> 
+          <p style="color: rgba(88, 89, 91, 0.8);font-size:12px; font-family:'plutosansregular'; font-weight: 400;">Correo :  {{correo}}</p>
+        </div>
+        </div>
+      
+        
+        <div *ngIf="isVisibleEditarContacto">
+        <div>
+          <label for="apellidos" style="color: rgba(88, 89, 91, 0.8);font-size:12px; font-family:'plutosansregular'; font-weight: 400;">Celular</label>
+          <input type="text" id="apellidos" name="apellidos" placeholder="Ej.:999123045"  [(ngModel)]="celular" (change)="changeCelular()" maxlength="9" (keypress)="restrictNumeric($event)" style="color: rgba(88, 89, 91, 0.8);font-size:12px; font-family:'plutosansregular'; font-weight: 400;">
+          <p class="validador" *ngIf="validadorCelular" style="color: rgba(230, 0, 0, 0.8);font-family:'plutosanslight'; font-size: 11px; font-weight: 400;">Debe ingresar el celular.</p>
+               <p class="validador" *ngIf="validadorCelularLength" style="color: rgba(230, 0, 0, 0.8);font-family:'plutosanslight'; font-size: 11px; font-weight: 400;">El celular debe contener 9 digitos</p>
+        </div>
+        <div>
+          <label for="nombres" style="color: rgba(88, 89, 91, 0.8);font-size:12px; font-family:'plutosansregular'; font-weight: 400;">Correo</label>
+          <input type="text" id="nombres" name="nombres" placeholder="Ej.:camila.flores@ejemplo.com" [(ngModel)]="correo"  (change)="changeCorreo()" maxlength="150" style="color: rgba(88, 89, 91, 0.8);font-size:12px; font-family:'plutosansregular'; font-weight: 400;">
+          <p class="validador" *ngIf="validadorCorreo" style="color: rgba(230, 0, 0, 0.8);font-family:'plutosanslight'; font-size: 11px; font-weight: 400;">Debe ingresar el correo.</p>
+          <p class="validador" *ngIf="validadorCorreoInvalido" style="color: rgba(230, 0, 0, 0.8);font-family:'plutosanslight'; font-size: 11px; font-weight: 400;">Correo inválido.</p>
+        </div>
+        <div class="button">
+          <button class="buttonSiguiente"  (click)="btnGuardarContacto()">Guardar cambios</button>
+          <button class="buttonCancelar" (click)="clickCancelarContacto()">Cancelar</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+      <div *ngIf="isVisibleEditarImg">
+        <h2 style="text-align: center; font-size: 26px; color: black;">Editar foto</h2>
+        <div class="editar">
+         <div class="circle"> 
+         </div> 
+        </div>   
+         <input type="file" name="adjunto" accept=".pdf,.jpg,.png" multiple style="color: rgba(88, 89, 91, 0.8);font-size:12px; font-family:'plutosansregular'; font-weight: 400;"/>
+
+       <div class="button">
+         <button class="buttonSiguiente">Guardar</button>
+         <button class="buttonCancelar" (click)="clickCancelarImg()">Cancelar</button>
+       </div>
+    </div><br>
+    <button class="buttonRegresar"  (click)="ClickRegresar()">Regresar</button>   
+    </div>
+</div>
+</body>
+
+

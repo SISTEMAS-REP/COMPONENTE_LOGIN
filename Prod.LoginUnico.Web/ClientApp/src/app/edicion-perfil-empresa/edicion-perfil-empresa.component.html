@@ -1,0 +1,142 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+  <p style="font-size: 20px; color: white">Procesando información, por favor no cierre la ventana.</p>
+</ngx-spinner>
+<body class="align">
+  <div class="container login">
+    <div class="form"> 
+        <div class="header" *ngIf="isVisiblePerfil">
+         <div class="circle"> 
+           <div class="circleEditar"> 
+               <img src="../../assets/img/icono_editar.png" alt="Editar" title="Editar" width="20" (click)="clickEditarImg()">
+           </div> 
+         </div>        
+         <div class="title">
+           <h2 style="text-align: left; font-size: 26px;">Mi perfil</h2>
+           <h3 style="text-align: left; font-size: 20px; font-family:'plutosanslight';">Persona Jurídica</h3>    
+       </div>
+     </div>
+          <div class="personal" *ngIf="isVisiblePerfil">
+            <h5 style="color: black;font-size:16px; font-family:'plutosansregular'; font-weight: 300;">Información de empresa</h5>
+            <div class="col-sm-12" style="padding-left: 0; padding-right:0">
+              <div class="col-sm-6" style="padding-left: 0; padding-right:0">
+               <p style="color: rgba(88, 89, 91, 0.8);font-size:12px; font-family:'plutosansregular'; font-weight: 400;">RUC : {{ruc}}</p>
+               <p style="color: rgba(88, 89, 91, 0.8);font-size:12px; font-family:'plutosansregular'; font-weight: 400;">Razón social :  {{razon_social}}</p>
+              </div>
+              <div class="col-sm-6" style="padding-left: 0; padding-right:0">
+               <p style="color: rgba(88, 89, 91, 0.8);font-size:12px; font-family:'plutosansregular'; font-weight: 400;">Dirección : {{direccion}}</p>
+              </div>
+              </div>
+             </div>
+             <div class="col-sm-12" style="padding-left: 0; padding-right:0">
+             <div class="col-sm-5" style="padding-left: 0; padding-right:0">
+             <div class="representante" *ngIf="isVisiblePerfil">
+                <h5 style="color: black;font-size:16px; font-family:'plutosansregular'; font-weight: 300;">Información de persona
+                  <img src="../../assets/img/icono_editar.png" alt="Editar" title="Editar" width="20" (click)="clickEditarRepresentante()" style="float: right;">
+                </h5>
+                    <div  *ngIf="isVisibleRepresentante">
+                     <p style="color: rgba(88, 89, 91, 0.8);font-size:12px; font-family:'plutosansregular'; font-weight: 400;">DNI : {{dni}}</p>
+                     <p style="color: rgba(88, 89, 91, 0.8);font-size:12px; font-family:'plutosansregular'; font-weight: 400;">Nombres y apellidos : {{nombre_completo}}</p>
+                   </div>
+                </div>
+                <div class="column" *ngIf="isVisibleEditarRepresentante" >
+                    <div class="left">
+                        <label for="tipoDoc" style="color: rgba(88, 89, 91, 0.8);font-size:12px; font-family:'plutosansregular'; font-weight: 400;">Tipo documento</label>
+                        <select type="tipoDoc" name="select" placeholder="Seleccionar"  [(ngModel)]="tipoDoc" (change)="changeTipoDocumento()" style="color: rgba(88, 89, 91, 0.8);font-size:12px; font-family:'plutosansregular'; font-weight: 400;">
+                          <option value="0">--Seleccionar--</option>
+                          <option value="1">DNI</option>
+                          <option value="2">Carnet de Extranjería</option>
+                          </select>
+                          <p class="validador" *ngIf="validadorTipoDocumento" style="color: rgba(230, 0, 0, 0.8);font-family:'plutosanslight'; font-size: 11px; font-weight: 400;">Debe ingresar el tipo de documento.</p>
+                    </div>    
+          
+                    <div class="right">
+                        <label for="numeroDoc" style="color: rgba(88, 89, 91, 0.8);font-size:12px; font-family:'plutosansregular'; font-weight: 400;">N° documento</label>
+                        <input type="text" id="numeroDoc" name="numeroDoc" placeholder="Ej.:15234687" [(ngModel)]="numeroDoc" (change)="changeNroDocumento()" maxlength="12" (blur)="btnBuscarDNI()" [disabled]="isDisableNroDocumento" (keypress)="restrictNumeric($event)" style="color: rgba(88, 89, 91, 0.8);font-size:12px; font-family:'plutosansregular'; font-weight: 400;">
+                        <p class="validador" *ngIf="validadorNroDocumento" style="color: rgba(230, 0, 0, 0.8);font-family:'plutosanslight'; font-size: 11px; font-weight: 400;">Debe ingresar el N° de documento.</p>
+                      </div>
+                </div>
+
+                <div *ngIf="isVisibleEditarRepresentante">
+                  <div class="column"  >
+                     <div class="left">
+                         <label for="nombres" style="color: rgba(88, 89, 91, 0.8);font-size:12px; font-family:'plutosansregular'; font-weight: 400;">Nombres</label>
+                         <input type="text" id="nombres" name="nombres" placeholder="Ej.:Camila"  [(ngModel)]="nombres" (change)="changeNombres()" maxlength="150" disabled style="font-family: 'plutosansregular';font-size: 13px; font-weight: 400; color: rgba(88, 89, 91, 0.8);">
+                         <p class="validador" *ngIf="validadorNombres" style="color: rgba(230, 0, 0, 0.8);font-family:'plutosanslight'; font-size: 11px; font-weight: 400;">Debe ingresar los nombres.</p>                       
+                       </div>
+           
+                     <div class="right">
+                         <label for="apellidos" style="color: rgba(88, 89, 91, 0.8);font-size:12px; font-family:'plutosansregular'; font-weight: 400;">Apellidos</label>
+                         <input type="text" id="apellidos" name="apellidos" placeholder="Ejm:Flores Sánchez"  [(ngModel)]="apellidos" (change)="changeApellidos()" maxlength="150" disabled style="font-family: 'plutosansregular';font-size: 13px; font-weight: 400; color: rgba(88, 89, 91, 0.8);">
+                         <p class="validador" *ngIf="validadorApellidos" style="color: rgba(230, 0, 0, 0.8);font-family:'plutosanslight'; font-size: 11px; font-weight: 400;">Debe ingresar los apellidos.</p>
+                     </div>
+                  </div>
+ 
+                   <div class="button">
+                     <button class="buttonSiguiente" (click)="btnGuardarRepresentante()">Guardar cambios</button>
+                     <button class="buttonCancelar" (click)="clickCancelarRepresentante()" >Cancelar</button>
+                   </div>
+                 </div>
+           
+
+              </div>
+              <div class="col-sm-2" style="padding-left: 0; padding-right:0"></div>
+
+                
+                <div class="col-sm-5" style="padding-left: 0; padding-right:0">
+           <div class="contacto" *ngIf="isVisiblePerfil">
+           <h5 style="color: black;font-size:16px; font-family:'plutosansregular'; font-weight: 300;">Información de contacto         
+             <img src="../../assets/img/icono_editar.png" alt="Editar" title="Editar" width="20" (click)="clickEditarContacto()" style="float: right;">
+           </h5>
+             <div  *ngIf="isVisibleContacto">
+               <p style="color: rgba(88, 89, 91, 0.8);font-size:12px; font-family:'plutosansregular'; font-weight: 400;">Celular : {{celular}}</p>
+               <p style="color: rgba(88, 89, 91, 0.8);font-size:12px; font-family:'plutosansregular'; font-weight: 400;">Correo : {{correo}}</p>
+             </div>
+           </div>
+   
+           <div *ngIf="isVisibleEditarContacto">
+             <div>
+               <label for="apellidos"  style="color: rgba(88, 89, 91, 0.8);font-size:12px; font-family:'plutosansregular'; font-weight: 400;">Celular</label>
+               <input type="text" id="apellidos" name="apellidos" placeholder="Ej.:999123045"  [(ngModel)]="celular" (change)="changeCelular()" maxlength="9" (keypress)="restrictNumeric($event)" style="font-family: 'plutosansregular';font-size: 13px; font-weight: 400; color: rgba(88, 89, 91, 0.8);">
+               <p class="validador" *ngIf="validadorCelular" style="color: rgba(230, 0, 0, 0.8);font-family:'plutosanslight'; font-size: 11px; font-weight: 400;">Debe ingresar el celular.</p>
+               <p class="validador" *ngIf="validadorCelularLength" style="color: rgba(230, 0, 0, 0.8);font-family:'plutosanslight'; font-size: 11px; font-weight: 400;">El celular debe contener 9 digitos</p>
+             </div>
+             <div>
+               <label for="nombres" style="color: rgba(88, 89, 91, 0.8);font-size:12px; font-family:'plutosansregular'; font-weight: 400;">Correo</label>
+               <input type="text" id="nombres" name="nombres" placeholder="Ej.:camila.flores@ejemplo.com" [(ngModel)]="correo"  (change)="changeCorreo()" maxlength="150" style="font-family: 'plutosansregular';font-size: 13px; font-weight: 400; color: rgba(88, 89, 91, 0.8);">
+               <p class="validador" *ngIf="validadorCorreo" style="color: rgba(230, 0, 0, 0.8);font-family:'plutosanslight'; font-size: 11px; font-weight: 400;">Debe ingresar el correo.</p>
+               <p class="validador" *ngIf="validadorCorreoInvalido" style="color: rgba(230, 0, 0, 0.8);font-family:'plutosanslight'; font-size: 11px; font-weight: 400;">Correo inválido.</p> 
+            </div>
+             <div class="button">
+              <button class="buttonSiguiente" (click)="btnGuardarContacto()">Guardar cambios</button>
+               <button class="buttonCancelar" (click)="clickCancelarContacto()">Cancelar</button>
+             </div>
+          </div>
+        </div>
+      </div>
+   
+           <div *ngIf="isVisibleEditarImg">
+            <h2 style="text-align: center; font-size: 26px; color: black;">Editar foto</h2>
+            <div class="editar">
+             <div class="circle"> 
+             </div> 
+            </div>   
+             <input type="file" name="adjunto" accept=".pdf,.jpg,.png" multiple style="font-family: 'plutosansregular';font-size: 13px; font-weight: 400; color: rgba(88, 89, 91, 0.8);"/>
+
+             <div class="col-sm-12" style="padding-left: 1%; padding-right:1%">
+           <div class="button">
+            <div class="col-sm-6" style="padding-left: 1%; padding-right:1%">
+             <button class="buttonSiguiente">Guardar</button>
+            </div>
+            <div class="col-sm-6" style="padding-left: 0; padding-right:0">
+             <button class="buttonCancelar" (click)="clickCancelarImg()">Cancelar</button>
+            </div>
+           </div>
+          </div>
+        </div>
+        <button class="buttonRegresar"  (click)="ClickRegresar()">Regresar</button>   
+     </div>
+    </div>
+   </body>
+   
+   
+   

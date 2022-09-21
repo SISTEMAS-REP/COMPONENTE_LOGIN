@@ -1,0 +1,18 @@
+Fecha Evento: 2022-09-21 13:27:02.171 -05:00
+Tipo Evento: ERROR
+Clase: Microsoft.AspNetCore.SpaProxy.SpaProxyLaunchManager
+Mensaje: Couldn't start the SPA development server with command 'npm start'.
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 13:28:24.572 -05:00
+Tipo Evento: ERROR
+Clase: Microsoft.AspNetCore.SpaProxy.SpaProxyLaunchManager
+Mensaje: Couldn't start the SPA development server with command 'npm start'.
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 13:28:32.381 -05:00
+Tipo Evento: ERROR
+Clase: Microsoft.AspNetCore.SpaProxy.SpaProxyLaunchManager
+Mensaje: Couldn't start the SPA development server with command 'npm start'.
+Detalle del evento: 
+
