@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32630.194
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prod.ComponenteLoginAngular.MVC", "Prod.ComponenteLoginAngular.MVC\Prod.ComponenteLoginAngular.MVC.csproj", "{DFFE83C1-1941-4D1A-A4E0-B4992A7B8601}"
 EndProject
@@ -14,6 +14,24 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prod.ComponenteLogin.Core.Api", "Prod.ComponenteLogin.Core.Api\Prod.ComponenteLogin.Core.Api.csproj", "{D002D0F4-27B5-4362-A416-486957DA9C00}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prod.ComponenteLogin.Datos", "Prod.ComponenteLogin.Datos\Prod.ComponenteLogin.Datos.csproj", "{8762EEC1-0D97-47B5-8B14-4C10FD20A565}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{88FA2026-602A-41A4-A7F5-9941C415E8BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prod.LoginUnico.Domain", "Prod.LoginUnico.Domain\Prod.LoginUnico.Domain.csproj", "{4D37A2E0-086B-4398-9A68-4879E6147D12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prod.LoginUnico.Infrastructure", "Prod.LoginUnico.Infrastructure\Prod.LoginUnico.Infrastructure.csproj", "{D40EA070-F099-42F6-A63C-EE03050E3785}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prod.LoginUnico.Application", "Prod.LoginUnico.Application\Prod.LoginUnico.Application.csproj", "{9C398CC8-2AC0-4AF9-9A8A-1CE6017560FA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{4F3BD861-808C-4828-8610-42CCD286B3ED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{8AB8DD75-5E10-42FF-8DF9-02E142733374}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{FB92F4F6-2FCE-4B2F-8261-31DE8BDB25A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prod.LoginUnico.Persistence", "Prod.LoginUnico.Persistence\Prod.LoginUnico.Persistence.csproj", "{20228732-E7D4-4A73-AC97-0C4F9C89FC22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prod.LoginUnico.Web", "Prod.LoginUnico.Web\Prod.LoginUnico.Web.csproj", "{95FB1B30-8249-4F8E-9E62-D886223A0C26}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,9 +63,39 @@ Global
 		{8762EEC1-0D97-47B5-8B14-4C10FD20A565}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8762EEC1-0D97-47B5-8B14-4C10FD20A565}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8762EEC1-0D97-47B5-8B14-4C10FD20A565}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D37A2E0-086B-4398-9A68-4879E6147D12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D37A2E0-086B-4398-9A68-4879E6147D12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D37A2E0-086B-4398-9A68-4879E6147D12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D37A2E0-086B-4398-9A68-4879E6147D12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D40EA070-F099-42F6-A63C-EE03050E3785}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D40EA070-F099-42F6-A63C-EE03050E3785}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D40EA070-F099-42F6-A63C-EE03050E3785}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D40EA070-F099-42F6-A63C-EE03050E3785}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C398CC8-2AC0-4AF9-9A8A-1CE6017560FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C398CC8-2AC0-4AF9-9A8A-1CE6017560FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C398CC8-2AC0-4AF9-9A8A-1CE6017560FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C398CC8-2AC0-4AF9-9A8A-1CE6017560FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20228732-E7D4-4A73-AC97-0C4F9C89FC22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20228732-E7D4-4A73-AC97-0C4F9C89FC22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20228732-E7D4-4A73-AC97-0C4F9C89FC22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20228732-E7D4-4A73-AC97-0C4F9C89FC22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95FB1B30-8249-4F8E-9E62-D886223A0C26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95FB1B30-8249-4F8E-9E62-D886223A0C26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95FB1B30-8249-4F8E-9E62-D886223A0C26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95FB1B30-8249-4F8E-9E62-D886223A0C26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4D37A2E0-086B-4398-9A68-4879E6147D12} = {4F3BD861-808C-4828-8610-42CCD286B3ED}
+		{D40EA070-F099-42F6-A63C-EE03050E3785} = {8AB8DD75-5E10-42FF-8DF9-02E142733374}
+		{9C398CC8-2AC0-4AF9-9A8A-1CE6017560FA} = {4F3BD861-808C-4828-8610-42CCD286B3ED}
+		{4F3BD861-808C-4828-8610-42CCD286B3ED} = {88FA2026-602A-41A4-A7F5-9941C415E8BC}
+		{8AB8DD75-5E10-42FF-8DF9-02E142733374} = {88FA2026-602A-41A4-A7F5-9941C415E8BC}
+		{FB92F4F6-2FCE-4B2F-8261-31DE8BDB25A8} = {88FA2026-602A-41A4-A7F5-9941C415E8BC}
+		{20228732-E7D4-4A73-AC97-0C4F9C89FC22} = {8AB8DD75-5E10-42FF-8DF9-02E142733374}
+		{95FB1B30-8249-4F8E-9E62-D886223A0C26} = {FB92F4F6-2FCE-4B2F-8261-31DE8BDB25A8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {25B98352-A859-44FE-811A-24CCFB89E35B}
