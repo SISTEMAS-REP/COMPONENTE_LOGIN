@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+    apiGA: 'https://dega.produce.gob.pe',
+    apiPTD: 'https://detupa.produce.gob.pe',
+    apiUrl: 'http://127.0.0.1:43495',
+    apiWebPV: 'http://localhost:30700'
 };
 
 /*
