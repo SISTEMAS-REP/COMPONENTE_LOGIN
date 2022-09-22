@@ -24,6 +24,14 @@ public class AuthManager : IAuthManager
         var user = await _userManager
                 .FindByNameAsync(username);
 
+        //Consultar
+        //var aplicacion = await _userManager.busca(Identity, usu);
+
+        //if(aplicacion is null)
+        //{
+        //    throw new UnauthorizedAccessException("El usuario no tiene permisos.");
+        //}
+
         if (user is null)
         {
             throw new UnauthorizedAccessException("Usuario incorrecto.");

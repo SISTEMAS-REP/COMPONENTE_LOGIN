@@ -1014,3 +1014,434 @@ Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
 Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.13","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
 Detalle del evento: 
 
+Fecha Evento: 2022-09-21 22:00:44.320 -05:00
+Tipo Evento: WARNING
+Clase: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager
+Mensaje: No XML encryptor configured. Key {0310e415-41c0-46eb-95a3-0b7d04193bac} may be persisted to storage in unencrypted form.
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 22:01:42.505 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 22:02:11.194 -05:00
+Tipo Evento: WARNING
+Clase: Prod.LoginUnico.Application.Features.External.Queries.Logo.ExternalLogoQuery
+Mensaje: [ExternalLogoQuery] [{"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Long Running Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"} in 28684 ms.]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 22:02:11.197 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:23:12.489 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:30:26.482 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:30:34.441 -05:00
+Tipo Evento: WARNING
+Clase: Prod.LoginUnico.Application.Features.External.Queries.Logo.ExternalLogoQuery
+Mensaje: [ExternalLogoQuery] [{"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Long Running Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"} in 7915 ms.]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:30:34.443 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:31:20.106 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:31:20.139 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:32:17.194 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:32:17.229 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:32:40.744 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:32:40.782 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:33:14.777 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"71998036","Password":"asdasd","RememberMe":false,"ReturnUrl":"","$type":"ExternalAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:33:14.834 -05:00
+Tipo Evento: ERROR
+Clase: Prod.LoginUnico.Application.Features.External.Commands.Auth.ExternalAuthCommand
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Unhandled Exception for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"71998036","Password":"asdasd","RememberMe":false,"ReturnUrl":"","$type":"ExternalAuthCommand"}.] [ExMessage: Se han producido uno o más errores de validación.]
+Detalle del evento: Prod.LoginUnico.Application.Common.Exceptions.ValidationException: Se han producido uno o más errores de validación.
+   at Prod.LoginUnico.Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\ValidationBehavior.cs:line 34
+   at Prod.LoginUnico.Application.Common.Behaviors.UnhandledExceptionBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\UnhandledExceptionBehavior.cs:line 26
+
+
+Fecha Evento: 2022-09-21 23:34:10.860 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:34:10.892 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:34:19.465 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:34:19.510 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:34:57.323 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"71998036","Password":"sdlksdlsd","RememberMe":false,"ReturnUrl":"","$type":"ExternalAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:34:57.375 -05:00
+Tipo Evento: ERROR
+Clase: Prod.LoginUnico.Application.Features.External.Commands.Auth.ExternalAuthCommand
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Unhandled Exception for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"71998036","Password":"sdlksdlsd","RememberMe":false,"ReturnUrl":"","$type":"ExternalAuthCommand"}.] [ExMessage: Se han producido uno o más errores de validación.]
+Detalle del evento: Prod.LoginUnico.Application.Common.Exceptions.ValidationException: Se han producido uno o más errores de validación.
+   at Prod.LoginUnico.Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\ValidationBehavior.cs:line 34
+   at Prod.LoginUnico.Application.Common.Behaviors.UnhandledExceptionBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\UnhandledExceptionBehavior.cs:line 26
+
+
+Fecha Evento: 2022-09-21 23:35:36.103 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:35:36.138 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:36:27.227 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"71998036","Password":"sakdlasd","RememberMe":false,"ReturnUrl":"","$type":"ExternalAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:36:27.281 -05:00
+Tipo Evento: ERROR
+Clase: Prod.LoginUnico.Application.Features.External.Commands.Auth.ExternalAuthCommand
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Unhandled Exception for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"71998036","Password":"sakdlasd","RememberMe":false,"ReturnUrl":"","$type":"ExternalAuthCommand"}.] [ExMessage: Se han producido uno o más errores de validación.]
+Detalle del evento: Prod.LoginUnico.Application.Common.Exceptions.ValidationException: Se han producido uno o más errores de validación.
+   at Prod.LoginUnico.Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\ValidationBehavior.cs:line 34
+   at Prod.LoginUnico.Application.Common.Behaviors.UnhandledExceptionBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\UnhandledExceptionBehavior.cs:line 26
+
+
+Fecha Evento: 2022-09-21 23:37:02.467 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:37:02.501 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:37:37.348 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"71998036","Password":"djjalsdasd","RememberMe":false,"ReturnUrl":"","$type":"ExternalAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:37:37.402 -05:00
+Tipo Evento: ERROR
+Clase: Prod.LoginUnico.Application.Features.External.Commands.Auth.ExternalAuthCommand
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Unhandled Exception for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"71998036","Password":"djjalsdasd","RememberMe":false,"ReturnUrl":"","$type":"ExternalAuthCommand"}.] [ExMessage: Se han producido uno o más errores de validación.]
+Detalle del evento: Prod.LoginUnico.Application.Common.Exceptions.ValidationException: Se han producido uno o más errores de validación.
+   at Prod.LoginUnico.Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\ValidationBehavior.cs:line 34
+   at Prod.LoginUnico.Application.Common.Behaviors.UnhandledExceptionBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\UnhandledExceptionBehavior.cs:line 26
+
+
+Fecha Evento: 2022-09-21 23:50:27.489 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:50:27.518 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:50:50.886 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"71998036","Password":"jkmkmk","RememberMe":false,"ReturnUrl":"","$type":"ExternalAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:50:50.938 -05:00
+Tipo Evento: ERROR
+Clase: Prod.LoginUnico.Application.Features.External.Commands.Auth.ExternalAuthCommand
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Unhandled Exception for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"71998036","Password":"jkmkmk","RememberMe":false,"ReturnUrl":"","$type":"ExternalAuthCommand"}.] [ExMessage: Se han producido uno o más errores de validación.]
+Detalle del evento: Prod.LoginUnico.Application.Common.Exceptions.ValidationException: Se han producido uno o más errores de validación.
+   at Prod.LoginUnico.Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\ValidationBehavior.cs:line 34
+   at Prod.LoginUnico.Application.Common.Behaviors.UnhandledExceptionBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\UnhandledExceptionBehavior.cs:line 26
+
+
+Fecha Evento: 2022-09-21 23:51:22.542 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:51:22.570 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:51:42.602 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"71998036","Password":"sadad","RememberMe":false,"ReturnUrl":"","$type":"ExternalAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:51:42.654 -05:00
+Tipo Evento: ERROR
+Clase: Prod.LoginUnico.Application.Features.External.Commands.Auth.ExternalAuthCommand
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Unhandled Exception for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"71998036","Password":"sadad","RememberMe":false,"ReturnUrl":"","$type":"ExternalAuthCommand"}.] [ExMessage: Se han producido uno o más errores de validación.]
+Detalle del evento: Prod.LoginUnico.Application.Common.Exceptions.ValidationException: Se han producido uno o más errores de validación.
+   at Prod.LoginUnico.Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\ValidationBehavior.cs:line 34
+   at Prod.LoginUnico.Application.Common.Behaviors.UnhandledExceptionBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\UnhandledExceptionBehavior.cs:line 26
+
+
+Fecha Evento: 2022-09-21 23:53:16.327 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:53:16.362 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:53:30.896 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"71998036","Password":"prodice","RememberMe":false,"ReturnUrl":"","$type":"ExternalAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:53:30.948 -05:00
+Tipo Evento: ERROR
+Clase: Prod.LoginUnico.Application.Features.External.Commands.Auth.ExternalAuthCommand
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Unhandled Exception for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"71998036","Password":"prodice","RememberMe":false,"ReturnUrl":"","$type":"ExternalAuthCommand"}.] [ExMessage: Se han producido uno o más errores de validación.]
+Detalle del evento: Prod.LoginUnico.Application.Common.Exceptions.ValidationException: Se han producido uno o más errores de validación.
+   at Prod.LoginUnico.Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\ValidationBehavior.cs:line 34
+   at Prod.LoginUnico.Application.Common.Behaviors.UnhandledExceptionBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\UnhandledExceptionBehavior.cs:line 26
+
+
+Fecha Evento: 2022-09-21 23:53:40.744 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:53:40.780 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:54:09.527 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"71998036","Password":"dsdsdsd","RememberMe":false,"ReturnUrl":"","$type":"ExternalAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:54:09.580 -05:00
+Tipo Evento: ERROR
+Clase: Prod.LoginUnico.Application.Features.External.Commands.Auth.ExternalAuthCommand
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Unhandled Exception for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"71998036","Password":"dsdsdsd","RememberMe":false,"ReturnUrl":"","$type":"ExternalAuthCommand"}.] [ExMessage: Se han producido uno o más errores de validación.]
+Detalle del evento: Prod.LoginUnico.Application.Common.Exceptions.ValidationException: Se han producido uno o más errores de validación.
+   at Prod.LoginUnico.Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\ValidationBehavior.cs:line 34
+   at Prod.LoginUnico.Application.Common.Behaviors.UnhandledExceptionBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\UnhandledExceptionBehavior.cs:line 26
+
+
+Fecha Evento: 2022-09-21 23:54:17.058 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:54:17.094 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:54:52.911 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"71998036","Password":"asd","RememberMe":false,"ReturnUrl":"","$type":"ExternalAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:54:52.964 -05:00
+Tipo Evento: ERROR
+Clase: Prod.LoginUnico.Application.Features.External.Commands.Auth.ExternalAuthCommand
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Unhandled Exception for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"71998036","Password":"asd","RememberMe":false,"ReturnUrl":"","$type":"ExternalAuthCommand"}.] [ExMessage: Se han producido uno o más errores de validación.]
+Detalle del evento: Prod.LoginUnico.Application.Common.Exceptions.ValidationException: Se han producido uno o más errores de validación.
+   at Prod.LoginUnico.Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\ValidationBehavior.cs:line 34
+   at Prod.LoginUnico.Application.Common.Behaviors.UnhandledExceptionBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\UnhandledExceptionBehavior.cs:line 26
+
+
+Fecha Evento: 2022-09-21 23:57:06.222 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"71998036","Password":"sasas","RememberMe":false,"ReturnUrl":"","$type":"ExternalAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:57:06.394 -05:00
+Tipo Evento: ERROR
+Clase: Prod.LoginUnico.Application.Features.External.Commands.Auth.ExternalAuthCommand
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Unhandled Exception for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"71998036","Password":"sasas","RememberMe":false,"ReturnUrl":"","$type":"ExternalAuthCommand"}.] [ExMessage: Se han producido uno o más errores de validación.]
+Detalle del evento: Prod.LoginUnico.Application.Common.Exceptions.ValidationException: Se han producido uno o más errores de validación.
+   at Prod.LoginUnico.Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\ValidationBehavior.cs:line 34
+   at Prod.LoginUnico.Application.Common.Behaviors.UnhandledExceptionBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\UnhandledExceptionBehavior.cs:line 26
+
+
+Fecha Evento: 2022-09-21 23:57:24.513 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"71998036","Password":"sasas","RememberMe":false,"ReturnUrl":"","$type":"ExternalAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:57:24.577 -05:00
+Tipo Evento: ERROR
+Clase: Prod.LoginUnico.Application.Features.External.Commands.Auth.ExternalAuthCommand
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Unhandled Exception for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"71998036","Password":"sasas","RememberMe":false,"ReturnUrl":"","$type":"ExternalAuthCommand"}.] [ExMessage: Se han producido uno o más errores de validación.]
+Detalle del evento: Prod.LoginUnico.Application.Common.Exceptions.ValidationException: Se han producido uno o más errores de validación.
+   at Prod.LoginUnico.Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\ValidationBehavior.cs:line 34
+   at Prod.LoginUnico.Application.Common.Behaviors.UnhandledExceptionBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\UnhandledExceptionBehavior.cs:line 26
+
+
+Fecha Evento: 2022-09-21 23:57:40.832 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"71998036","Password":"sasas","RememberMe":false,"ReturnUrl":"","$type":"ExternalAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:57:40.894 -05:00
+Tipo Evento: ERROR
+Clase: Prod.LoginUnico.Application.Features.External.Commands.Auth.ExternalAuthCommand
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Unhandled Exception for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"71998036","Password":"sasas","RememberMe":false,"ReturnUrl":"","$type":"ExternalAuthCommand"}.] [ExMessage: Se han producido uno o más errores de validación.]
+Detalle del evento: Prod.LoginUnico.Application.Common.Exceptions.ValidationException: Se han producido uno o más errores de validación.
+   at Prod.LoginUnico.Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\ValidationBehavior.cs:line 34
+   at Prod.LoginUnico.Application.Common.Behaviors.UnhandledExceptionBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\UnhandledExceptionBehavior.cs:line 26
+
+
+Fecha Evento: 2022-09-21 23:58:26.983 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"dfdfdf","$type":"ExternalAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:58:31.870 -05:00
+Tipo Evento: WARNING
+Clase: Prod.LoginUnico.Application.Features.External.Commands.Auth.ExternalAuthCommand
+Mensaje: [ExternalAuthCommand] [{"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Long Running Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"dfdfdf","$type":"ExternalAuthCommand"} in 4887 ms.]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:58:31.871 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":{"ReturnUrl":"dfdfdf","$type":"ExternalAuthResponse"},"$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:58:53.289 -05:00
+Tipo Evento: ERROR
+Clase: Microsoft.AspNetCore.Server.Kestrel
+Mensaje: Connection id "0HMKSAR0AEDI3", Request id "0HMKSAR0AEDI3:00000005": An unhandled exception was thrown by the application.
+Detalle del evento: System.NotImplementedException: The method or operation is not implemented.
+   at Prod.LoginUnico.Infrastructure.Identity.RoleStore.Dispose() in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Infrastructure\Identity\RoleStore.cs:line 25
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose(Boolean disposing)
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.DisposeAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|227_0(HttpProtocol protocol, Stack`1 events)
+
+
+Fecha Evento: 2022-09-21 23:59:26.290 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:59:26.337 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:59:53.188 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"","$type":"ExternalAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-21 23:59:53.243 -05:00
+Tipo Evento: ERROR
+Clase: Prod.LoginUnico.Application.Features.External.Commands.Auth.ExternalAuthCommand
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Unhandled Exception for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"","$type":"ExternalAuthCommand"}.] [ExMessage: Se han producido uno o más errores de validación.]
+Detalle del evento: Prod.LoginUnico.Application.Common.Exceptions.ValidationException: Se han producido uno o más errores de validación.
+   at Prod.LoginUnico.Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\ValidationBehavior.cs:line 34
+   at Prod.LoginUnico.Application.Common.Behaviors.UnhandledExceptionBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\UnhandledExceptionBehavior.cs:line 26
+
+

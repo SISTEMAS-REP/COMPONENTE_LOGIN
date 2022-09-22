@@ -1,0 +1,470 @@
+Fecha Evento: 2022-09-22 00:02:08.129 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:02:08.256 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:02:25.236 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:02:25.270 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:03:14.053 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"","$type":"ExternalAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:03:19.714 -05:00
+Tipo Evento: WARNING
+Clase: Prod.LoginUnico.Application.Features.External.Commands.Auth.ExternalAuthCommand
+Mensaje: [ExternalAuthCommand] [{"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Long Running Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"","$type":"ExternalAuthCommand"} in 5660 ms.]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:03:19.714 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":{"ReturnUrl":"","$type":"ExternalAuthResponse"},"$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:05:11.768 -05:00
+Tipo Evento: ERROR
+Clase: Microsoft.AspNetCore.Server.Kestrel
+Mensaje: Connection id "0HMKSATSP199G", Request id "0HMKSATSP199G:00000003": An unhandled exception was thrown by the application.
+Detalle del evento: System.NotImplementedException: The method or operation is not implemented.
+   at Prod.LoginUnico.Infrastructure.Identity.RoleStore.Dispose() in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Infrastructure\Identity\RoleStore.cs:line 25
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose(Boolean disposing)
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.DisposeAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|227_0(HttpProtocol protocol, Stack`1 events)
+
+
+Fecha Evento: 2022-09-22 00:06:12.856 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:06:12.888 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:06:46.666 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"","$type":"ExternalAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:06:51.530 -05:00
+Tipo Evento: WARNING
+Clase: Prod.LoginUnico.Application.Features.External.Commands.Auth.ExternalAuthCommand
+Mensaje: [ExternalAuthCommand] [{"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Long Running Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"","$type":"ExternalAuthCommand"} in 4864 ms.]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:06:51.530 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":{"ReturnUrl":"","$type":"ExternalAuthResponse"},"$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:07:04.401 -05:00
+Tipo Evento: ERROR
+Clase: Microsoft.AspNetCore.Server.Kestrel
+Mensaje: Connection id "0HMKSATSP199I", Request id "0HMKSATSP199I:00000003": An unhandled exception was thrown by the application.
+Detalle del evento: System.NotImplementedException: The method or operation is not implemented.
+   at Prod.LoginUnico.Infrastructure.Identity.RoleStore.Dispose() in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Infrastructure\Identity\RoleStore.cs:line 25
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose(Boolean disposing)
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.DisposeAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|227_0(HttpProtocol protocol, Stack`1 events)
+
+
+Fecha Evento: 2022-09-22 00:08:05.923 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:08:05.954 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:08:13.297 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:08:13.328 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:08:30.863 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"","$type":"ExternalAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:08:30.935 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":{"ReturnUrl":"","$type":"ExternalAuthResponse"},"$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:08:33.410 -05:00
+Tipo Evento: ERROR
+Clase: Microsoft.AspNetCore.Server.Kestrel
+Mensaje: Connection id "0HMKSATSP199K", Request id "0HMKSATSP199K:00000003": An unhandled exception was thrown by the application.
+Detalle del evento: System.NotImplementedException: The method or operation is not implemented.
+   at Prod.LoginUnico.Infrastructure.Identity.RoleStore.Dispose() in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Infrastructure\Identity\RoleStore.cs:line 25
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose(Boolean disposing)
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.DisposeAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|227_0(HttpProtocol protocol, Stack`1 events)
+
+
+Fecha Evento: 2022-09-22 00:09:18.264 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:09:18.301 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:09:40.599 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"","$type":"ExternalAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:09:40.616 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":{"ReturnUrl":"","$type":"ExternalAuthResponse"},"$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:09:43.111 -05:00
+Tipo Evento: ERROR
+Clase: Microsoft.AspNetCore.Server.Kestrel
+Mensaje: Connection id "0HMKSATSP199M", Request id "0HMKSATSP199M:00000003": An unhandled exception was thrown by the application.
+Detalle del evento: System.NotImplementedException: The method or operation is not implemented.
+   at Prod.LoginUnico.Infrastructure.Identity.RoleStore.Dispose() in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Infrastructure\Identity\RoleStore.cs:line 25
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose(Boolean disposing)
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.DisposeAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|227_0(HttpProtocol protocol, Stack`1 events)
+
+
+Fecha Evento: 2022-09-22 00:12:34.108 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:12:34.155 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:12:38.893 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:12:38.934 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:12:47.701 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:12:47.733 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:13:12.130 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"https://derapipez.produce.gob.pe/Index","$type":"ExternalAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:13:12.144 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":{"ReturnUrl":"https://derapipez.produce.gob.pe/Index","$type":"ExternalAuthResponse"},"$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:13:26.745 -05:00
+Tipo Evento: ERROR
+Clase: Microsoft.AspNetCore.Server.Kestrel
+Mensaje: Connection id "0HMKSATSP199O", Request id "0HMKSATSP199O:0000000B": An unhandled exception was thrown by the application.
+Detalle del evento: System.NotImplementedException: The method or operation is not implemented.
+   at Prod.LoginUnico.Infrastructure.Identity.RoleStore.Dispose() in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Infrastructure\Identity\RoleStore.cs:line 25
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose(Boolean disposing)
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.DisposeAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|227_0(HttpProtocol protocol, Stack`1 events)
+
+
+Fecha Evento: 2022-09-22 00:17:31.691 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:17:31.731 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:17:40.158 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:17:40.199 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:18:06.722 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"https://derapipez.produce.gob.pe/Index","$type":"ExternalAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:18:06.738 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":{"ReturnUrl":"https://derapipez.produce.gob.pe/Index","$type":"ExternalAuthResponse"},"$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:18:52.246 -05:00
+Tipo Evento: ERROR
+Clase: Microsoft.AspNetCore.Server.Kestrel
+Mensaje: Connection id "0HMKSATSP199O", Request id "0HMKSATSP199O:00000017": An unhandled exception was thrown by the application.
+Detalle del evento: System.NotImplementedException: The method or operation is not implemented.
+   at Prod.LoginUnico.Infrastructure.Identity.RoleStore.Dispose() in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Infrastructure\Identity\RoleStore.cs:line 25
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose(Boolean disposing)
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.DisposeAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|227_0(HttpProtocol protocol, Stack`1 events)
+
+
+Fecha Evento: 2022-09-22 00:18:52.272 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:18:52.300 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:19:12.022 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"https://derapipez.produce.gob.pe/Index","$type":"ExternalAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:19:12.037 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":{"ReturnUrl":"https://derapipez.produce.gob.pe/Index","$type":"ExternalAuthResponse"},"$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:19:14.270 -05:00
+Tipo Evento: ERROR
+Clase: Microsoft.AspNetCore.Server.Kestrel
+Mensaje: Connection id "0HMKSATSP199P", Request id "0HMKSATSP199P:00000009": An unhandled exception was thrown by the application.
+Detalle del evento: System.NotImplementedException: The method or operation is not implemented.
+   at Prod.LoginUnico.Infrastructure.Identity.RoleStore.Dispose() in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Infrastructure\Identity\RoleStore.cs:line 25
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose(Boolean disposing)
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.DisposeAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|227_0(HttpProtocol protocol, Stack`1 events)
+
+
+Fecha Evento: 2022-09-22 00:20:40.141 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:20:40.179 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:20:48.538 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:20:48.570 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:21:06.901 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"https://derapipez.produce.gob.pe/Inicio/Index","$type":"ExternalAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:21:06.916 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":{"ReturnUrl":"https://derapipez.produce.gob.pe/Inicio/Index","$type":"ExternalAuthResponse"},"$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:21:09.031 -05:00
+Tipo Evento: ERROR
+Clase: Microsoft.AspNetCore.Server.Kestrel
+Mensaje: Connection id "0HMKSATSP199R", Request id "0HMKSATSP199R:00000007": An unhandled exception was thrown by the application.
+Detalle del evento: System.NotImplementedException: The method or operation is not implemented.
+   at Prod.LoginUnico.Infrastructure.Identity.RoleStore.Dispose() in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Infrastructure\Identity\RoleStore.cs:line 25
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose(Boolean disposing)
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.DisposeAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|227_0(HttpProtocol protocol, Stack`1 events)
+
+
+Fecha Evento: 2022-09-22 00:25:21.111 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:25:21.144 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:25:28.130 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:25:28.168 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:25:54.139 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"https://derapipez.produce.gob.pe/Inicio/Index","$type":"ExternalAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:25:54.154 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":{"ReturnUrl":"https://derapipez.produce.gob.pe/Inicio/Index","$type":"ExternalAuthResponse"},"$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:32:34.511 -05:00
+Tipo Evento: ERROR
+Clase: Microsoft.AspNetCore.Server.Kestrel
+Mensaje: Connection id "0HMKSATSP199R", Request id "0HMKSATSP199R:00000013": An unhandled exception was thrown by the application.
+Detalle del evento: System.NotImplementedException: The method or operation is not implemented.
+   at Prod.LoginUnico.Infrastructure.Identity.RoleStore.Dispose() in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Infrastructure\Identity\RoleStore.cs:line 25
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose(Boolean disposing)
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.DisposeAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|227_0(HttpProtocol protocol, Stack`1 events)
+
+
+Fecha Evento: 2022-09-22 00:34:57.846 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"https://derapipez.produce.gob.pe/Inicio/Index","$type":"ExternalAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:35:35.684 -05:00
+Tipo Evento: WARNING
+Clase: Prod.LoginUnico.Application.Features.External.Commands.Auth.ExternalAuthCommand
+Mensaje: [ExternalAuthCommand] [{"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Long Running Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"https://derapipez.produce.gob.pe/Inicio/Index","$type":"ExternalAuthCommand"} in 37836 ms.]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:35:35.685 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":{"ReturnUrl":"https://derapipez.produce.gob.pe/Inicio/Index","$type":"ExternalAuthResponse"},"$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 00:35:39.176 -05:00
+Tipo Evento: ERROR
+Clase: Microsoft.AspNetCore.Server.Kestrel
+Mensaje: Connection id "0HMKSATSP199R", Request id "0HMKSATSP199R:00000017": An unhandled exception was thrown by the application.
+Detalle del evento: System.NotImplementedException: The method or operation is not implemented.
+   at Prod.LoginUnico.Infrastructure.Identity.RoleStore.Dispose() in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Infrastructure\Identity\RoleStore.cs:line 25
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose(Boolean disposing)
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.DisposeAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|227_0(HttpProtocol protocol, Stack`1 events)
+
+

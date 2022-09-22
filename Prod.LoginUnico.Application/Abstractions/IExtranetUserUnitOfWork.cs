@@ -1,4 +1,5 @@
 ﻿using Prod.LoginUnico.Application.Common;
+using Prod.LoginUnico.Domain.Entities;
 using Prod.LoginUnico.Domain.Entities.ExtranetUser;
 
 namespace Prod.LoginUnico.Application.Abstractions;
@@ -12,4 +13,6 @@ public interface IExtranetUserUnitOfWork : IUnitOfWork
     Task<ExtranetUserEntity?> FindByUserName(string user_name);
 
     Task<int> Upsert(ExtranetUserEntity entity);
+
+    Task<UsuarioAplicacion?> BuscarAplicacionByUserName(string user_name, int id_aplicacion);
 }

@@ -46,6 +46,7 @@ export class SesionPersonaComponent implements OnInit {
 
     this.componenteLoginService.obtenerImagenByAplicacion(Data)
       .then((resp: { data: string; }) => {
+        debugger
         var binary = atob(resp.data.replace(/\s/g, ''));
         var len = binary.length;
         var buffer = new ArrayBuffer(len);
@@ -61,6 +62,7 @@ export class SesionPersonaComponent implements OnInit {
   }
 
   async iniciarSesionPersonaNatural(){
+    debugger
     if(this.id_aplicacion == null){
       return;
     }
@@ -69,59 +71,18 @@ export class SesionPersonaComponent implements OnInit {
 
     if(!this.validadorNroDocumento && !this.validadorContrasena){
       this.spinner.show();
-      let Data = {
-        dni: this.numero_documento,
-        clave: this.contrasena
-      }
-      const resp = await this.componenteLoginService.IniciarSesionExtranet(Data)
-      .then(async (resp: { id: number; }) => {
-        if (resp.id > 0) {
-          await this.fnCargarAplicacion();
-          if(this.targetURL == null){
-            this.spinner.hide();
-            // this._alertService.alertError("El usuario no tiene acceso a el aplicacion");
-            return;
-          }
-          var frm = document.createElement('form');
-          frm.id = "frmLogin";
-          frm.method = 'POST';
-          // frm.action = `${environment.apiWebPV}/ExtranetToken/loginUnico`;
-          var campo = document.createElement("input");
-          campo.setAttribute("name", "Login");
-          campo.setAttribute("value", this.numero_documento);
-          var campo2 = document.createElement("input");
-          campo2.setAttribute("name", "password");
-          campo2.setAttribute("value", this.contrasena);
-          var campo3 = document.createElement("input");
-          campo3.setAttribute("name", "RememberMe");
-          campo3.setAttribute("value", 'false');
-          var campo5 = document.createElement("input");
-          campo5.setAttribute("name", "TipoPersona");
-          campo5.setAttribute("value", "1");
-
-          var campo6 = document.createElement("input");
-          campo6.setAttribute("name", "url_extranet_by_aplicacion");
-          campo6.setAttribute("value", this.targetURL);
-          
-          frm.appendChild(campo);
-          frm.appendChild(campo2);
-          frm.appendChild(campo3);
-          frm.appendChild(campo5);
-          frm.appendChild(campo6);
-          document.body.append(frm);
-          frm.submit();
-          // document.getElementById('frmLogin').remove();
-          this.spinner.hide();          
-        }
-       
-        else {
-          this.spinner.hide();
-          // this._alertService.alertError("El usuario o contraseña ingresado es invalido");
-          // this._alertService.open(
-          //   "warning",
-          //   "Los datos ingresados son inválidos"
-          // );
-        }
+      const resp = await this.componenteLoginService.Auth(
+        { 
+          PersonType: 1, 
+          RucNumber: "", 
+          DocumentNumber: this.numero_documento, 
+          Password: this.contrasena, 
+          RememberMe: false, 
+          ReturnUrl: "https://derapipez.produce.gob.pe/Inicio/Index" })
+      .then((resp) => {
+        debugger
+        // window.location.href = resp.data.returnUrl;
+        this.spinner.hide();
       })
       .catch((err: any) => []);
     }

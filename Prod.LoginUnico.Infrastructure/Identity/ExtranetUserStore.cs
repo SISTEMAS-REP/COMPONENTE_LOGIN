@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Prod.LoginUnico.Application.Abstractions;
+using Prod.LoginUnico.Domain.Entities;
 using Prod.LoginUnico.Domain.Entities.ExtranetUser;
 
 namespace Prod.LoginUnico.Infrastructure.Identity;
@@ -54,6 +55,12 @@ public class ExtranetUserStore :
     public async Task<ExtranetUserEntity> FindByNameAsync(string normalizedUserName, CancellationToken cancellationToken)
     {
         var user = await _extranetUserUnitOfWork.FindByUserName(normalizedUserName);
+        return user;
+    }
+
+    public async Task<UsuarioAplicacion> BuscarAplicacionByUserName(string user_name, int id_aplicacion, CancellationToken cancellationToken)
+    {
+        var user = await _extranetUserUnitOfWork.BuscarAplicacionByUserName(user_name, id_aplicacion);
         return user;
     }
 

@@ -20,6 +20,18 @@ export class ComponenteLoginService {
     }
   }
 
+
+  async Auth(request: { PersonType: number; RucNumber: string; DocumentNumber: string; Password: string; RememberMe: Boolean; ReturnUrl: string }) {
+    const formData = {...request};
+    const url = `${this.baseUrl}/Auth`;
+    try {
+      const resp = await axios
+        .post(url, formData);
+      return resp.data;
+    } catch (err) {
+    }
+  }
+
   async IniciarSesionExtranet(request: { dni: string; clave: string; }) {
     const formData = {...request};
     const url = `${this.baseUrl}/IniciarSesionExtranet`;

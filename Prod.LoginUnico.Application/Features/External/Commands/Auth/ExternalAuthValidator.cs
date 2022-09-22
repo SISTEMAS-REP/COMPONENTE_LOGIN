@@ -50,8 +50,8 @@ public class ExternalAuthValidator : AbstractValidator<ExternalAuthCommand>
             .NotNull()
                 .WithMessage("{PropertyName} es inválido.");
 
-        RuleFor(p => p.ReturnUrl)
-            .Must(p => !string.IsNullOrEmpty(p))
-            .WithMessage("{PropertyName} es un valor obligatorio.");
+        //RuleFor(p => p.ReturnUrl)
+        //    .Must(p => !string.IsNullOrEmpty(p))
+        //    .WithMessage("{PropertyName} es un valor obligatorio.");
     }
 }
