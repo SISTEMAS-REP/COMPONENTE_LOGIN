@@ -9,13 +9,16 @@ public class AuthManager : IAuthManager
 {
     private readonly UserManager<ExtranetUserEntity> _userManager;
     private readonly SignInManager<ExtranetUserEntity> _signInManager;
+    private readonly IExtranetUserUnitOfWork _extranetUserUnitOfWork;
 
     public AuthManager(
         UserManager<ExtranetUserEntity> userManager,
-        SignInManager<ExtranetUserEntity> signInManager)
+        SignInManager<ExtranetUserEntity> signInManager,
+        IExtranetUserUnitOfWork extranetUserUnitOfWork)
     {
         _userManager = userManager;
         _signInManager = signInManager;
+        this._extranetUserUnitOfWork = extranetUserUnitOfWork;
     }
 
     public async Task<bool>
@@ -25,12 +28,12 @@ public class AuthManager : IAuthManager
                 .FindByNameAsync(username);
 
         //Consultar
-        //var aplicacion = await _userManager.busca(Identity, usu);
+        var aplicacion = await _extranetUserUnitOfWork.BuscarAplicacionByUserName(username, 159);
 
-        //if(aplicacion is null)
-        //{
-        //    throw new UnauthorizedAccessException("El usuario no tiene permisos.");
-        //}
+        if (aplicacion is null)
+        {
+            throw new UnauthorizedAccessException("El usuario no tiene permisos a la aplicacion");
+        }
 
         if (user is null)
         {

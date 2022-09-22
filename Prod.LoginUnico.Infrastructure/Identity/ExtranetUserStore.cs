@@ -58,12 +58,6 @@ public class ExtranetUserStore :
         return user;
     }
 
-    public async Task<UsuarioAplicacion> BuscarAplicacionByUserName(string user_name, int id_aplicacion, CancellationToken cancellationToken)
-    {
-        var user = await _extranetUserUnitOfWork.BuscarAplicacionByUserName(user_name, id_aplicacion);
-        return user;
-    }
-
     public Task<int> GetAccessFailedCountAsync(ExtranetUserEntity user, CancellationToken cancellationToken)
     {
         return Task.FromResult(user.access_failed_count);
