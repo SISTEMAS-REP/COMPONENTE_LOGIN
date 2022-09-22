@@ -1,16 +1,83 @@
 /* You can add global styles to this file, and also import other style files */
+body { margin: 0; font-family: Roboto, "plutosansregular", sans-serif; }
 
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+
+.mat-input-element {
+    /* font: inherit;
+    background: transparent;
+    color: currentColor;
+    border: none;
+    outline: none; */
+    padding: revert !important;
+    /* margin: 0;
+    width: 100%;
+    max-width: 100%;
+    vertical-align: bottom;
+    text-align: inherit; */
 }
 
-code {
-  color: #e01a76;
+/*Menu lateral*/
+ul.acorh,
+ul.acorh * {
+margin: 0;
+padding: 0;
+border: 0;
+}
+ul.acorh {
+margin: 10px auto;
+padding: 0;
+list-style: none;
+width: 100%;
+font-size: 18px;
+}
+ul.acorh li {
+list-style: none;
+}
+ul.acorh li a {
+display: block;
+padding: 10px 10px 10px 20px;
+background: #fff;
+color: #666;
+text-decoration: none;
+box-sizing: border-box;
+}
+ul.acorh li ul {
+max-height: 0;
+margin: 0;
+padding: 0;
+list-style: none;
+overflow: hidden;
+transition: .3s all ease-in;
+}
+ul.acorh li li a {
+padding: 10px 10px 10px 40px;
+background: #fff;
+color: #c92329;
+font-size: 1.3rem;
+border: 0;
+box-sizing: border-box;
+}
+ul.acorc li li:last-child a {
+border-bottom: 0;
+}
+ul.acorh li:hover ul {
+max-height: 300px;
+transition: .3s all ease-in;
+}
+ul.acorh li a:hover {
+background: #fff;
+color: #666;
+}
+ul.acorh li a.active {
+background: #c92329;
+color: #fff;
+	text-decoration: none;
+}
+ul.acorh li:hover ul,
+ul.acorh li:target ul {
+max-height: 300px;
+transition: .3s all ease-in;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
+
+

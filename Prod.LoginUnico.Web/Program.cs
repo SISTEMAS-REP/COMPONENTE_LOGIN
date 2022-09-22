@@ -1,15 +1,10 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 using Prod.LoginUnico.Application;
-using Prod.LoginUnico.Application.Abstractions;
 using Prod.LoginUnico.Application.Common.Options;
 using Prod.LoginUnico.Infrastructure;
-using Prod.LoginUnico.Infrastructure.Identity;
 using Prod.LoginUnico.Persistence;
 using Prod.LoginUnico.Web;
-using Prod.LoginUnico.Web.Services;
 using Serilog;
-using System.Text;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,34 +23,21 @@ builder.Services
     .AddPresentation()
     .AddApplication()
     .AddPersistence(AppSettings.ConnectionStrings.DefaultConnection)
-    .AddInfrastructure()
-    .AddIdentityCore();
+.AddInfrastructure();
 
 builder.Services
-    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
+    .AddCors(options => 
     {
-        options.RequireHttpsMetadata = false;
-        options.SaveToken = true;
-        options.TokenValidationParameters = new()
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-
-            ClockSkew = TimeSpan.Zero,
-
-            ValidIssuer = AppSettings.Authorization.Issuer,
-            ValidAudience = AppSettings.Authorization.Audience,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
-                .GetBytes(AppSettings.Authorization.SecurityKey)),
-            LifetimeValidator = (notBefore, expires, securityToken,
-            validationParameters) => expires != null
-                                        ? expires > DateTime.UtcNow
-                                        : false,
-        };
-    });
+        options
+            .AddPolicy("ProdCors", builder =>
+            {
+                var corsList = AppSettings.Cors.AllowedHosts.ToArray();
+                builder.WithOrigins(corsList)
+                    .AllowCredentials()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+            });
+});
 
 var app = builder.Build();
 
@@ -69,12 +51,6 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.UseSwaggerUi3(settings =>
-{
-    settings.Path = "/api";
-    settings.DocumentPath = "/api/specification.json";
-});
-
 app.UseRouting();
 
 app.UseAuthentication();
@@ -83,6 +59,8 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
+
+app.UseCors("ProdCors");
 
 app.MapFallbackToFile("index.html"); ;
 

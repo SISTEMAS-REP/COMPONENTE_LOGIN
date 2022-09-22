@@ -17,11 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prod.ComponenteLogin.Datos"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{88FA2026-602A-41A4-A7F5-9941C415E8BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prod.LoginUnico.Domain", "Prod.LoginUnico.Domain\Prod.LoginUnico.Domain.csproj", "{4D37A2E0-086B-4398-9A68-4879E6147D12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prod.LoginUnico.Domain", "Prod.LoginUnico.Domain\Prod.LoginUnico.Domain.csproj", "{4D37A2E0-086B-4398-9A68-4879E6147D12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prod.LoginUnico.Infrastructure", "Prod.LoginUnico.Infrastructure\Prod.LoginUnico.Infrastructure.csproj", "{D40EA070-F099-42F6-A63C-EE03050E3785}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prod.LoginUnico.Infrastructure", "Prod.LoginUnico.Infrastructure\Prod.LoginUnico.Infrastructure.csproj", "{D40EA070-F099-42F6-A63C-EE03050E3785}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prod.LoginUnico.Application", "Prod.LoginUnico.Application\Prod.LoginUnico.Application.csproj", "{9C398CC8-2AC0-4AF9-9A8A-1CE6017560FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prod.LoginUnico.Application", "Prod.LoginUnico.Application\Prod.LoginUnico.Application.csproj", "{9C398CC8-2AC0-4AF9-9A8A-1CE6017560FA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{4F3BD861-808C-4828-8610-42CCD286B3ED}"
 EndProject
@@ -29,9 +29,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{FB92F4F6-2FCE-4B2F-8261-31DE8BDB25A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prod.LoginUnico.Persistence", "Prod.LoginUnico.Persistence\Prod.LoginUnico.Persistence.csproj", "{20228732-E7D4-4A73-AC97-0C4F9C89FC22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prod.LoginUnico.Persistence", "Prod.LoginUnico.Persistence\Prod.LoginUnico.Persistence.csproj", "{20228732-E7D4-4A73-AC97-0C4F9C89FC22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prod.LoginUnico.Web", "Prod.LoginUnico.Web\Prod.LoginUnico.Web.csproj", "{95FB1B30-8249-4F8E-9E62-D886223A0C26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prod.LoginUnico.Web", "Prod.LoginUnico.Web\Prod.LoginUnico.Web.csproj", "{95FB1B30-8249-4F8E-9E62-D886223A0C26}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

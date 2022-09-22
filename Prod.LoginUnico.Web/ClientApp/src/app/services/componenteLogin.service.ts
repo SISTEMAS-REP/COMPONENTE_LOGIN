@@ -6,12 +6,12 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ComponenteLoginService {
-  baseUrl = `${environment.apiUrl}/ComponenteLogin`;
+  baseUrl = `${environment.apiUrl}/external`;
   constructor() { }
 
   async obtenerImagenByAplicacion(request: { id_aplicacion: number; }) {
     const formData = {...request};
-    const url = `${this.baseUrl}/Obtener_Imagen_By_Aplicacion`;
+    const url = `${this.baseUrl}/logo`;
     try {
       const resp = await axios
         .post(url, formData);

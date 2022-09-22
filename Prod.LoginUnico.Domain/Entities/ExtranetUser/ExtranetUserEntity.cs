@@ -14,6 +14,7 @@ public class ExtranetUserEntity
     [Key]
     public int id_usuario_extranet { get; set; }
 
+    
     public int id_persona_natural { get; set; }
 
     public int id_persona_juridica { get; set; }
@@ -39,4 +40,18 @@ public class ExtranetUserEntity
     public bool lockout_enable { get; set; }
 
     public int access_failed_count { get; set; }
+
+    public int id_contacto_extranet { get; set; }
+
+    public string usuario_registro { get; set; }
+
+    public DateTime? fecha_registro { get; set; }
+
+    public string usuario_modificacion { get; set; }
+
+    public DateTime fecha_modificacion { get; set; }
+
+    public int idsector { get; set; }
+
+    public bool Activo { get; set; }
 }

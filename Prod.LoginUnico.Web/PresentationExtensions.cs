@@ -5,8 +5,6 @@ using System.Net.Mime;
 using System.Net;
 using System.Text.Json;
 using FluentValidation.AspNetCore;
-using NSwag;
-using NSwag.Generation.Processors.Security;
 using Prod.LoginUnico.Application.Abstractions;
 using Prod.LoginUnico.Web.Services;
 using Prod.LoginUnico.Web.Filters;
@@ -20,20 +18,6 @@ public static class PresentationExtensions
     {
         services.AddScoped<ICurrentUserService, CurrentUserService>();
         services.AddHttpContextAccessor();
-
-        services.AddOpenApiDocument(configure =>
-        {
-            configure.Title = "Prod.LoginUnico.API";
-            configure.AddSecurity("JWT", Enumerable.Empty<string>(), new OpenApiSecurityScheme
-            {
-                Type = OpenApiSecuritySchemeType.ApiKey,
-                Name = "Authorization",
-                In = OpenApiSecurityApiKeyLocation.Header,
-                Description = "Type into the textbox: Bearer {your JWT token}."
-            });
-
-            configure.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT"));
-        });
 
         // Add services to the container.
         services.AddControllersWithViews(options =>

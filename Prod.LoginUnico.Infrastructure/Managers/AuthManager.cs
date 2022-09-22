@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Prod.LoginUnico.Application.Abstractions;
-using Prod.LoginUnico.Application.Common.Exceptions;
-using Prod.LoginUnico.Application.Models;
 using Prod.LoginUnico.Domain.Entities.ExtranetUser;
 using System.Text;
 
@@ -11,31 +9,31 @@ public class AuthManager : IAuthManager
 {
     private readonly UserManager<ExtranetUserEntity> _userManager;
     private readonly SignInManager<ExtranetUserEntity> _signInManager;
-    private readonly ITokenManager _tokenManager;
 
     public AuthManager(
         UserManager<ExtranetUserEntity> userManager,
-        SignInManager<ExtranetUserEntity> signInManager,
-        ITokenManager tokenManager)
+        SignInManager<ExtranetUserEntity> signInManager)
     {
         _userManager = userManager;
         _signInManager = signInManager;
-        _tokenManager = tokenManager;
     }
 
-    public async Task<Token>
-        LogIn(string username, string password)
+    public async Task<bool>
+        LogIn(string username, string password, bool rememberMe)
     {
         var user = await _userManager
                 .FindByNameAsync(username);
 
         if (user is null)
+        {
             throw new UnauthorizedAccessException("Usuario incorrecto.");
+        }
 
-        SignInResult result = await _signInManager
-            .CheckPasswordSignInAsync(
+        var result = await _signInManager
+            .PasswordSignInAsync(
             user: user,
             password: password,
+            isPersistent: rememberMe,
             lockoutOnFailure: true);
 
         if (result.IsLockedOut)
@@ -66,10 +64,11 @@ public class AuthManager : IAuthManager
         }
 
         if (!result.Succeeded)
+        {
             throw new UnauthorizedAccessException("Revise las credenciales ingresadas.");
+        }
 
-        return _tokenManager
-            .GenerateToken(user);
+        return true;
     }
 }
 

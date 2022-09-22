@@ -34,13 +34,16 @@ public class CurrentUserService : ICurrentUserService
 
         if (isAutenticated)
         {
-            userId = httpContext.User.Claims
+            /*userId = httpContext.User.Claims
                 .FirstOrDefault(q => q.Type == ClaimTypes.Sid)!
                 .Value ?? 0.ToString();
 
             personId = httpContext.User.Claims
                 .FirstOrDefault(q => q.Type == ClaimTypes.NameIdentifier)!
-                .Value ?? 0.ToString();
+                .Value ?? 0.ToString();*/
+
+            userId = "0";
+            personId = "0";
         }
 
         var userName = httpContext.User.Identity.Name ?? "Unknown";
