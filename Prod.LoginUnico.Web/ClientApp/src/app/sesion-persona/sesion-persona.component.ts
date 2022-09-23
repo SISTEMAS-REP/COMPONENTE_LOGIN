@@ -78,7 +78,8 @@ export class SesionPersonaComponent implements OnInit {
           DocumentNumber: this.numero_documento, 
           Password: this.contrasena, 
           RememberMe: false, 
-          ReturnUrl: "https://derapipez.produce.gob.pe/Inicio/Index" })
+          ReturnUrl: "https://derapipez.produce.gob.pe/Inicio/Index" ,
+          applicationId : this.id_aplicacion })
       .then((resp) => {
         debugger
         // window.location.href = resp.data.returnUrl;

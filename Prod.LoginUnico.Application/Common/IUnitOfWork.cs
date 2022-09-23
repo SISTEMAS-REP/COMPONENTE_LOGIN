@@ -9,5 +9,5 @@ namespace Prod.LoginUnico.Application.Common;
 
 public interface IUnitOfWork : IBaseUnitOfWork
 {
-
+    void ExecDispose();
 }

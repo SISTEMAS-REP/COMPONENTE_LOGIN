@@ -9,4 +9,8 @@ public class AppSettings
     public StaticFiles StaticFiles { get; set; }
 
     public Cors Cors { get; set; }
+
+    public Services Services { get; set; }
+
+    public UserAudit UserAudit { get; set; }
 }

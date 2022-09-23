@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ComponenteLoginService {
-  baseUrl = `${environment.apiUrl}/external`;
+  baseUrl = `${environment.apiUrl}/extranet`;
   constructor() { }
 
   async obtenerImagenByAplicacion(request: { id_aplicacion: number; }) {
@@ -21,7 +21,7 @@ export class ComponenteLoginService {
   }
 
 
-  async Auth(request: { PersonType: number; RucNumber: string; DocumentNumber: string; Password: string; RememberMe: Boolean; ReturnUrl: string }) {
+  async Auth(request: { PersonType: number; RucNumber: string; DocumentNumber: string; Password: string; RememberMe: Boolean; ReturnUrl: string; applicationId: number }) {
     const formData = {...request};
     const url = `${this.baseUrl}/Auth`;
     try {
