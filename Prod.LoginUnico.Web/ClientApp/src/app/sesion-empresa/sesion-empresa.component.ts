@@ -5,8 +5,9 @@ import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ComponenteLoginService } from 'src/app/services/componenteLogin.service';
 import { environment } from 'src/environments/environment';
-//import { AlertService } from 'src/app/shared/componentes/services/alert.service';
 import { enumerados } from 'src/app/enums/enumerados';
+import { NzModalService } from "ng-zorro-antd/modal";
+import { NzNotificationService } from "ng-zorro-antd/notification";
 
 @Component({
   selector: 'app-sesion-empresa',
@@ -33,7 +34,8 @@ export class SesionEmpresaComponent implements OnInit {
     private componenteLoginService: ComponenteLoginService,
     private router: ActivatedRoute,
     private sanitizer: DomSanitizer,
-    //private _alertService: AlertService,
+    private notification: NzNotificationService,
+    private modalService: NzModalService
   ) {
   }
 
@@ -75,83 +77,48 @@ export class SesionEmpresaComponent implements OnInit {
 
     if(!this.validadorRuc && !this.validadorNroDocumento && !this.validadorContrasena){
       this.spinner.show();
-      let Data = {
-        dni: this.numero_documento,
-        clave: this.contrasena,
-        ruc: this.ruc
-      }
-  
-      const resp = await this.componenteLoginService.IniciarSesionExtranet(Data)
-      .then(async resp => {
-        if (resp.id > 0) {
-          await this.fnCargarAplicacion();
-          if(this.targetURL == null){
-            this.spinner.hide();
-           // this._alertService.alertError("El usuario no tiene acceso a el aplicacion");
-            return;
-          }
-          var frm = document.createElement('form');
-          frm.id = "frmLogin";
-          frm.method = 'POST';
-          frm.action = `${environment.apiWebPV}/ExtranetToken/loginUnico`;
-          var campo = document.createElement("input");
-          campo.setAttribute("name", "Login");
-          campo.setAttribute("value", this.numero_documento);
-          var campo2 = document.createElement("input");
-          campo2.setAttribute("name", "password");
-          campo2.setAttribute("value", this.contrasena);
-          var campo3 = document.createElement("input");
-          campo3.setAttribute("name", "RememberMe");
-          campo3.setAttribute("value", 'false');
-          var campo4 = document.createElement("input");
-          campo4.setAttribute("name", "Ndocumento");
-          campo4.setAttribute("value", this.ruc);
-          var campo5 = document.createElement("input");
-          campo5.setAttribute("name", "TipoPersona");
-          campo5.setAttribute("value", "2");
-
-          var campo6 = document.createElement("input");
-          campo6.setAttribute("name", "url_extranet_by_aplicacion");
-          campo6.setAttribute("value", this.targetURL);
-          
-          frm.appendChild(campo);
-          frm.appendChild(campo2);
-          frm.appendChild(campo3);
-          frm.appendChild(campo4);
-          frm.appendChild(campo5);
-          frm.appendChild(campo6);
-          document.body.append(frm);
-          frm.submit();
-          //document.getElementById('frmLogin').remove();
-          this.spinner.hide();          
+      const resp = await this.componenteLoginService.Auth(
+        { 
+          PersonType: this.enumerado.TIPO_PERSONA.JURIDICA, 
+          RucNumber:  this.ruc, 
+          DocumentNumber: this.numero_documento, 
+          Password: this.contrasena, 
+          RememberMe: false, 
+          ReturnUrl: "" ,
+          applicationId : this.id_aplicacion })
+      .then((resp) => {
+        this.spinner.hide();
+        let tipo_mensaje = resp.succeeded ? 'success': 'error';
+        let elementos = '';
+        resp.errors.forEach((elemento: any) => {
+          elementos = elementos + `<li>${ elemento }</li>`;
+        });
+        this.createNotification(tipo_mensaje, 'Inicio de Sesión', `<ul>${ elementos }</ul>`);
+        if(resp.succeeded){
+          // window.location.href = resp.data.returnUrl;
         }
-       
-        else {
-          this.spinner.hide();
-          //this._alertService.alertError("El usuario o contraseña ingresado es invalido");
-          // this._alertService.open(
-          //   "warning",
-          //   "Los datos ingresados son inválidos"
-          // );
-        }
+        this.spinner.hide();
       })
-      .catch(err => []);
+      .catch((err: any) => {
+      });
     }
+  
   }
 
-  targetURL : string = "";
-  async fnCargarAplicacion (){
-    const respss = await this.componenteLoginService.obtenerDatoAplicacionByUsuario({
-       IdTipoPersona: this.enumerado.TIPO_PERSONA.JURIDICA,
-       NroDocumento: this.ruc,
-       NroDocPerNatural: this.numero_documento,
-       id_aplicacion: Number(this.id_aplicacion)
-    })
-    .then(resp => {
-      this.targetURL = resp.data;      
-    })
-    .catch(err => []);
-  }
+
+  // targetURL : string = "";
+  // async fnCargarAplicacion (){
+  //   const respss = await this.componenteLoginService.obtenerDatoAplicacionByUsuario({
+  //      IdTipoPersona: this.enumerado.TIPO_PERSONA.JURIDICA,
+  //      NroDocumento: this.ruc,
+  //      NroDocPerNatural: this.numero_documento,
+  //      id_aplicacion: Number(this.id_aplicacion)
+  //   })
+  //   .then(resp => {
+  //     this.targetURL = resp.data;      
+  //   })
+  //   .catch(err => []);
+  // }
 
 
   changeRuc = () =>{
@@ -238,4 +205,13 @@ export class SesionEmpresaComponent implements OnInit {
 
       .catch(err => []);
    }
+
+   createNotification = (type: string, title: string, message: string): void => {
+    this.notification.create(
+      type,
+      title,
+      message
+    );
+  };
+
 }

@@ -75,7 +75,7 @@ export class SesionPersonaComponent implements OnInit {
       this.spinner.show();
       const resp = await this.componenteLoginService.Auth(
         { 
-          PersonType: 1, 
+          PersonType:  this.enumerado.TIPO_PERSONA.NATURAL,  
           RucNumber: "", 
           DocumentNumber: this.numero_documento, 
           Password: this.contrasena, 
@@ -83,13 +83,13 @@ export class SesionPersonaComponent implements OnInit {
           ReturnUrl: "" ,
           applicationId : this.id_aplicacion })
       .then((resp) => {
-        
+        this.spinner.hide();
         let tipo_mensaje = resp.succeeded ? 'success': 'error';
         let elementos = '';
         resp.errors.forEach((elemento: any) => {
           elementos = elementos + `<li>${ elemento }</li>`;
         });
-        this.createNotification(tipo_mensaje, 'Inicio Sesión', `<ul>${ elementos }</ul>`);
+        this.createNotification(tipo_mensaje, 'Inicio de Sesión', `<ul>${ elementos }</ul>`);
         if(resp.succeeded){
           // window.location.href = resp.data.returnUrl;
         }
@@ -101,19 +101,19 @@ export class SesionPersonaComponent implements OnInit {
   
   }
 
-  targetURL : string = "";
-  async fnCargarAplicacion (){
-    const respss = await this.componenteLoginService.obtenerDatoAplicacionByUsuario({
-       IdTipoPersona: this.enumerado.TIPO_PERSONA.NATURAL,
-       NroDocumento: this.numero_documento,
-       NroDocPerNatural: this.numero_documento,
-       id_aplicacion: Number(this.id_aplicacion)
-    })
-    .then((resp: { data: string; }) => {
-      this.targetURL = resp.data;      
-    })
-    .catch((err: any) => []);
-  }
+  // targetURL : string = "";
+  // async fnCargarAplicacion (){
+  //   const respss = await this.componenteLoginService.obtenerDatoAplicacionByUsuario({
+  //      IdTipoPersona: this.enumerado.TIPO_PERSONA.NATURAL,
+  //      NroDocumento: this.numero_documento,
+  //      NroDocPerNatural: this.numero_documento,
+  //      id_aplicacion: Number(this.id_aplicacion)
+  //   })
+  //   .then((resp: { data: string; }) => {
+  //     this.targetURL = resp.data;      
+  //   })
+  //   .catch((err: any) => []);
+  // }
 
   changeNroDocumento = () =>{
     if(this.numero_documento == null || this.numero_documento == ""){
