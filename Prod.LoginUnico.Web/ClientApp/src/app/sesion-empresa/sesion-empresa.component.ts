@@ -22,6 +22,7 @@ export class SesionEmpresaComponent implements OnInit {
   id_aplicacion : number = 0;
   validadorRuc : boolean = false;
   validadorNroDocumento: boolean = false;
+  validadorNroDocumentoDigitos: boolean = false;
   validadorContrasena: boolean = false;
   validadorRucDigitos: boolean = false;
 
@@ -75,7 +76,7 @@ export class SesionEmpresaComponent implements OnInit {
     this.changeNroDocumento();
     this.changeContrasena();
 
-    if(!this.validadorRuc && !this.validadorNroDocumento && !this.validadorContrasena){
+    if(!this.validadorRuc && !this.validadorRucDigitos  && !this.validadorNroDocumento && !this.validadorNroDocumentoDigitos && !this.validadorContrasena){
       this.spinner.show();
       const resp = await this.componenteLoginService.Auth(
         { 
@@ -136,15 +137,32 @@ export class SesionEmpresaComponent implements OnInit {
       }    
     }
   }
+
   
   changeNroDocumento = () =>{
     if(this.numero_documento == null || this.numero_documento == ""){
       this.validadorNroDocumento = true;
     }
     else{
-      this.validadorNroDocumento = false;
+      if( this.numero_documento.length < 8){    
+        this.validadorNroDocumentoDigitos = true;
+        this.validadorNroDocumento = false;
+      }
+      else {
+        this.validadorNroDocumentoDigitos = false;
+        this.validadorNroDocumento = false;
+      }    
     }
   }
+  
+  // changeNroDocumento = () =>{
+  //   if(this.numero_documento == null || this.numero_documento == ""){
+  //     this.validadorNroDocumento = true;
+  //   }
+  //   else{
+  //     this.validadorNroDocumento = false;
+  //   }
+  // }
 
   changeContrasena = () =>{
     if(this.contrasena == null || this.contrasena == ""){

@@ -1,0 +1,423 @@
+Fecha Evento: 2022-09-23 00:12:04.143 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExtranetLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExtranetLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:12:04.338 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:12:58.593 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExtranetAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"","ApplicationId":159,"$type":"ExtranetAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:13:03.734 -05:00
+Tipo Evento: WARNING
+Clase: Prod.LoginUnico.Application.Features.Extranet.Commands.Auth.ExtranetAuthCommand
+Mensaje: [ExtranetAuthCommand] [{"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Long Running Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"","ApplicationId":159,"$type":"ExtranetAuthCommand"} in 5140 ms.]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:13:03.737 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":[],"Data":{"ReturnUrl":"https://derapipez.produce.gob.pe/home/index","$type":"ExtranetAuthResponse"},"$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:16:00.933 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExtranetLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExtranetLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:16:01.008 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:19:41.731 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExtranetLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExtranetLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:19:41.762 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:19:42.679 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExtranetLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExtranetLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:19:42.708 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:19:56.454 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExtranetLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExtranetLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:19:56.587 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:19:57.695 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExtranetLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExtranetLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:19:57.739 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:19:59.656 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExtranetLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExtranetLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:19:59.687 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:20:36.888 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExtranetLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExtranetLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:20:36.961 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:21:48.447 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExtranetLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExtranetLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:21:48.486 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:21:53.258 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExtranetLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExtranetLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:21:53.289 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:21:56.348 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExtranetLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExtranetLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:21:56.388 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:22:12.931 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExtranetAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":2,"RucNumber":"20266409461","DocumentNumber":"06075346","Password":"@Jrvv260","RememberMe":false,"ReturnUrl":"","ApplicationId":159,"$type":"ExtranetAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:22:13.138 -05:00
+Tipo Evento: WARNING
+Clase: Microsoft.AspNetCore.Identity.UserManager
+Mensaje: Invalid password for user.
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:22:13.139 -05:00
+Tipo Evento: WARNING
+Clase: Microsoft.AspNetCore.Identity.SignInManager
+Mensaje: User failed to provide the correct password.
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:22:13.201 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":false,"Message":null,"Errors":["Revise las credenciales ingresadas."],"Data":{"ReturnUrl":"","$type":"ExtranetAuthResponse"},"$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:22:21.617 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExtranetAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":2,"RucNumber":"20266409461","DocumentNumber":"06075346","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"","ApplicationId":159,"$type":"ExtranetAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:22:22.653 -05:00
+Tipo Evento: WARNING
+Clase: Prod.LoginUnico.Application.Features.Extranet.Commands.Auth.ExtranetAuthCommand
+Mensaje: [ExtranetAuthCommand] [{"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Long Running Request {"PersonType":2,"RucNumber":"20266409461","DocumentNumber":"06075346","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"","ApplicationId":159,"$type":"ExtranetAuthCommand"} in 1035 ms.]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:22:22.653 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":[],"Data":{"ReturnUrl":"https://derapipez.produce.gob.pe/home/index","$type":"ExtranetAuthResponse"},"$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:22:55.248 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExtranetLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExtranetLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:22:55.567 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:23:15.678 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExtranetAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv260","RememberMe":false,"ReturnUrl":"","ApplicationId":159,"$type":"ExtranetAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:23:15.965 -05:00
+Tipo Evento: WARNING
+Clase: Microsoft.AspNetCore.Identity.UserManager
+Mensaje: Invalid password for user.
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:23:15.965 -05:00
+Tipo Evento: WARNING
+Clase: Microsoft.AspNetCore.Identity.SignInManager
+Mensaje: User failed to provide the correct password.
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:23:15.987 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":false,"Message":null,"Errors":["Revise las credenciales ingresadas."],"Data":{"ReturnUrl":"","$type":"ExtranetAuthResponse"},"$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:23:20.856 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExtranetAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"","ApplicationId":159,"$type":"ExtranetAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:23:20.911 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":[],"Data":{"ReturnUrl":"https://derapipez.produce.gob.pe/home/index","$type":"ExtranetAuthResponse"},"$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:23:26.223 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExtranetAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"7268038","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"","ApplicationId":159,"$type":"ExtranetAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:23:26.414 -05:00
+Tipo Evento: ERROR
+Clase: Prod.LoginUnico.Application.Features.Extranet.Commands.Auth.ExtranetAuthCommand
+Mensaje: [ExtranetAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Unhandled Exception for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"7268038","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"","ApplicationId":159,"$type":"ExtranetAuthCommand"}.] [ExMessage: Se han producido uno o más errores de validación.]
+Detalle del evento: Prod.LoginUnico.Application.Common.Exceptions.ValidationException: Se han producido uno o más errores de validación.
+   at Prod.LoginUnico.Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_GIT_NEW01\Prod.LoginUnico.Application\Common\Behaviors\ValidationBehavior.cs:line 34
+   at Prod.LoginUnico.Application.Common.Behaviors.UnhandledExceptionBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_GIT_NEW01\Prod.LoginUnico.Application\Common\Behaviors\UnhandledExceptionBehavior.cs:line 26
+
+
+Fecha Evento: 2022-09-23 00:23:29.704 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExtranetAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"7268038","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"","ApplicationId":159,"$type":"ExtranetAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:23:29.828 -05:00
+Tipo Evento: ERROR
+Clase: Prod.LoginUnico.Application.Features.Extranet.Commands.Auth.ExtranetAuthCommand
+Mensaje: [ExtranetAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Unhandled Exception for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"7268038","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"","ApplicationId":159,"$type":"ExtranetAuthCommand"}.] [ExMessage: Se han producido uno o más errores de validación.]
+Detalle del evento: Prod.LoginUnico.Application.Common.Exceptions.ValidationException: Se han producido uno o más errores de validación.
+   at Prod.LoginUnico.Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_GIT_NEW01\Prod.LoginUnico.Application\Common\Behaviors\ValidationBehavior.cs:line 34
+   at Prod.LoginUnico.Application.Common.Behaviors.UnhandledExceptionBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_GIT_NEW01\Prod.LoginUnico.Application\Common\Behaviors\UnhandledExceptionBehavior.cs:line 26
+
+
+Fecha Evento: 2022-09-23 00:23:31.929 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExtranetAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"7268038","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"","ApplicationId":159,"$type":"ExtranetAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:23:32.005 -05:00
+Tipo Evento: ERROR
+Clase: Prod.LoginUnico.Application.Features.Extranet.Commands.Auth.ExtranetAuthCommand
+Mensaje: [ExtranetAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Unhandled Exception for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"7268038","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"","ApplicationId":159,"$type":"ExtranetAuthCommand"}.] [ExMessage: Se han producido uno o más errores de validación.]
+Detalle del evento: Prod.LoginUnico.Application.Common.Exceptions.ValidationException: Se han producido uno o más errores de validación.
+   at Prod.LoginUnico.Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_GIT_NEW01\Prod.LoginUnico.Application\Common\Behaviors\ValidationBehavior.cs:line 34
+   at Prod.LoginUnico.Application.Common.Behaviors.UnhandledExceptionBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_GIT_NEW01\Prod.LoginUnico.Application\Common\Behaviors\UnhandledExceptionBehavior.cs:line 26
+
+
+Fecha Evento: 2022-09-23 00:23:32.903 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExtranetAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"7268038","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"","ApplicationId":159,"$type":"ExtranetAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:23:32.991 -05:00
+Tipo Evento: ERROR
+Clase: Prod.LoginUnico.Application.Features.Extranet.Commands.Auth.ExtranetAuthCommand
+Mensaje: [ExtranetAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Unhandled Exception for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"7268038","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"","ApplicationId":159,"$type":"ExtranetAuthCommand"}.] [ExMessage: Se han producido uno o más errores de validación.]
+Detalle del evento: Prod.LoginUnico.Application.Common.Exceptions.ValidationException: Se han producido uno o más errores de validación.
+   at Prod.LoginUnico.Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_GIT_NEW01\Prod.LoginUnico.Application\Common\Behaviors\ValidationBehavior.cs:line 34
+   at Prod.LoginUnico.Application.Common.Behaviors.UnhandledExceptionBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_GIT_NEW01\Prod.LoginUnico.Application\Common\Behaviors\UnhandledExceptionBehavior.cs:line 26
+
+
+Fecha Evento: 2022-09-23 00:23:40.703 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExtranetAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"7268038","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"","ApplicationId":159,"$type":"ExtranetAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:23:40.765 -05:00
+Tipo Evento: ERROR
+Clase: Prod.LoginUnico.Application.Features.Extranet.Commands.Auth.ExtranetAuthCommand
+Mensaje: [ExtranetAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Unhandled Exception for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"7268038","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"","ApplicationId":159,"$type":"ExtranetAuthCommand"}.] [ExMessage: Se han producido uno o más errores de validación.]
+Detalle del evento: Prod.LoginUnico.Application.Common.Exceptions.ValidationException: Se han producido uno o más errores de validación.
+   at Prod.LoginUnico.Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_GIT_NEW01\Prod.LoginUnico.Application\Common\Behaviors\ValidationBehavior.cs:line 34
+   at Prod.LoginUnico.Application.Common.Behaviors.UnhandledExceptionBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_GIT_NEW01\Prod.LoginUnico.Application\Common\Behaviors\UnhandledExceptionBehavior.cs:line 26
+
+
+Fecha Evento: 2022-09-23 00:24:12.064 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExtranetLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExtranetLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:24:12.134 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:24:17.357 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExtranetLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExtranetLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:24:17.393 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:25:10.456 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExtranetLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExtranetLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:25:10.548 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:25:11.662 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExtranetLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExtranetLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:25:11.706 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:25:13.378 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExtranetLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExtranetLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:25:13.665 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:25:18.761 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExtranetLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExtranetLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:25:18.800 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:25:53.260 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExtranetAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":2,"RucNumber":"20266409461","DocumentNumber":"06075346","Password":"@Jrvv260","RememberMe":false,"ReturnUrl":"","ApplicationId":159,"$type":"ExtranetAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:25:53.293 -05:00
+Tipo Evento: WARNING
+Clase: Microsoft.AspNetCore.Identity.UserManager
+Mensaje: Invalid password for user.
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:25:53.293 -05:00
+Tipo Evento: WARNING
+Clase: Microsoft.AspNetCore.Identity.SignInManager
+Mensaje: User failed to provide the correct password.
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:25:53.312 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":false,"Message":null,"Errors":["Revise las credenciales ingresadas."],"Data":{"ReturnUrl":"","$type":"ExtranetAuthResponse"},"$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:25:56.252 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExtranetAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":2,"RucNumber":"20266409461","DocumentNumber":"06075346","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"","ApplicationId":159,"$type":"ExtranetAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-23 00:25:56.314 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"10.212.134.27","DeviceName":"DESKTOP-DB6ODVG","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":[],"Data":{"ReturnUrl":"https://derapipez.produce.gob.pe/home/index","$type":"ExtranetAuthResponse"},"$type":"Response`1"}]
+Detalle del evento: 
+

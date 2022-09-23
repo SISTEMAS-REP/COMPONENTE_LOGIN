@@ -20,7 +20,8 @@
               <label for="numeroDoc" style="font-family: 'plutosansregular';font-size: 13px; font-weight: 400; color: rgba(88, 89, 91, 0.8);">NÚMERO DOCUMENTO</label>
               <input type="text" id="numeroDoc" name="numeroDoc" [(ngModel)]="numero_documento" placeholder="Ej.:15234687" (change)="changeNroDocumento()"  (keypress)="restrictNumeric($event)" maxlength="12" style="font-size: 12px; font-family:'plutosansregular'; font-weight: 300;">
               <p class="validador" *ngIf="validadorNroDocumento" style="color: rgba(230, 0, 0, 0.8);font-family:'plutosanslight'; font-size: 11px; font-weight: 400;">Debe ingresar el número de documento.</p>
-          </div>
+              <p class="validador" *ngIf="validadorNroDocumentoDigitos" style="color: rgba(230, 0, 0, 0.8);font-family:'plutosanslight'; font-size: 11px; font-weight: 400;">El documento debe tener 8 digitos.</p>
+            </div>
     
           <div>
             <div class="input-wrapper">
