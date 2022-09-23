@@ -1,31 +1,27 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using Prod.LoginUnico.Application.Abstractions;
 using Prod.LoginUnico.Domain.Entities.ExtranetUser;
-using System.Resources;
 
 namespace Prod.LoginUnico.Infrastructure.Managers;
 
-public class ExtranetUserManager : UserManager<ExtranetUserEntity>
+public class ExtranetUserManager : IExtranetUserManager
 {
-    public ExtranetUserManager(IUserStore<ExtranetUserEntity> store, 
-        IOptions<IdentityOptions> optionsAccessor, 
-        IPasswordHasher<ExtranetUserEntity> passwordHasher, 
-        IEnumerable<IUserValidator<ExtranetUserEntity>> userValidators,
-        IEnumerable<IPasswordValidator<ExtranetUserEntity>> passwordValidators,
-        ILookupNormalizer keyNormalizer, 
-        IdentityErrorDescriber errors, 
-        IServiceProvider services, 
-        ILogger<UserManager<ExtranetUserEntity>> logger) 
-        : base(store, 
-            optionsAccessor, 
-            passwordHasher, 
-            userValidators, 
-            passwordValidators, 
-            keyNormalizer, 
-            errors, 
-            services, 
-            logger)
-    {
+    private UserManager<ExtranetUserEntity> UserManager { get; }
+
+	public ExtranetUserManager(UserManager<ExtranetUserEntity> userManager)
+	{
+        UserManager = userManager;	
+	}
+
+	public async Task<ExtranetUserEntity> 
+		FindByNameAsync(string userName)
+	{
+		return await UserManager.FindByNameAsync(userName);
+    }
+
+	public async Task<DateTimeOffset?> 
+		GetLockoutEndDateAsync(ExtranetUserEntity user)
+	{
+		return await UserManager.GetLockoutEndDateAsync(user);
     }
 }

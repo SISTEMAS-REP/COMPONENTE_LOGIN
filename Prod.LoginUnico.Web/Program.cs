@@ -1,10 +1,10 @@
 using Prod.LoginUnico.Application;
+using Prod.LoginUnico.Application.Common.Constants;
 using Prod.LoginUnico.Application.Common.Options;
 using Prod.LoginUnico.Infrastructure;
 using Prod.LoginUnico.Persistence;
 using Prod.LoginUnico.Web;
 using Serilog;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,14 +22,14 @@ builder.Services.Configure<AppSettings>(builder.Configuration);
 builder.Services
     .AddPresentation()
     .AddApplication()
-    .AddPersistence(AppSettings.ConnectionStrings.DefaultConnection)
-.AddInfrastructure();
+    .AddPersistence(AppSettings)
+    .AddInfrastructure(AppSettings);
 
 builder.Services
     .AddCors(options => 
     {
         options
-            .AddPolicy("ProdCors", builder =>
+            .AddPolicy(Constants.DefaultCorsPolicy, builder =>
             {
                 var corsList = AppSettings.Cors.AllowedHosts.ToArray();
                 builder.WithOrigins(corsList)
@@ -60,7 +60,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
 
-app.UseCors("ProdCors");
+app.UseCors(Constants.DefaultCorsPolicy);
 
 app.MapFallbackToFile("index.html"); ;
 

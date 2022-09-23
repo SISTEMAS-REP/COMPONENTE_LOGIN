@@ -2,13 +2,16 @@
 using Microsoft.Extensions.DependencyInjection;
 using Prod.LoginUnico.Application.Abstractions;
 using Prod.LoginUnico.Domain.Entities.ExtranetUser;
-using Prod.LoginUnico.Domain.Entities;
 using Prod.LoginUnico.Infrastructure.Identity;
 using Prod.LoginUnico.Infrastructure.Managers;
 using Prod.LoginUnico.Application.Common;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
+using Prod.ServiciosExternos;
+using Prod.LoginUnico.Application.Common.Options;
+using Prod.LoginUnico.Domain.Entities.RoleEntity;
+using Prod.LoginUnico.Infrastructure.Services;
 
 namespace Prod.LoginUnico.Infrastructure;
 
@@ -16,9 +19,14 @@ public static class InfrastructureExtensions
 {
     public static IServiceCollection
         AddInfrastructure(
-        this IServiceCollection services)
+        this IServiceCollection services, AppSettings options)
     {
-        services.AddScoped<IAuthManager, AuthManager>();
+        services.AddScoped<IPersonasServicio>(s => 
+            new PersonasServicio(options.Services.UrlPersons));
+        services.AddScoped<IPersonsService, PersonsService>();
+
+        services.AddScoped<IExtranetUserManager, ExtranetUserManager>();
+        services.AddScoped<IExtranetSignInManager, ExtranetSignInManager>();
 
         services.AddIdentity();
 
@@ -30,10 +38,6 @@ public static class InfrastructureExtensions
         services
             .AddIdentity<ExtranetUserEntity, RoleEntity>()
             .AddTokenProviders();
-            //.AddUserManager<ExtranetUserManager>()
-            //.AddSignInManager<ExtranetSignInManager>();
-
-        //services.AddScoped<SignInManager<ExtranetUserEntity>, ExtranetSignInManager>();
 
         services.AddTransient<IUserStore<ExtranetUserEntity>, ExtranetUserStore>();
         services.AddTransient<IRoleStore<RoleEntity>, RoleStore>();

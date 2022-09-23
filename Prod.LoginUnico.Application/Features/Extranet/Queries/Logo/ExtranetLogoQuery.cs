@@ -3,32 +3,32 @@ using Microsoft.Extensions.Options;
 using Prod.LoginUnico.Application.Abstractions;
 using Prod.LoginUnico.Application.Common.Options;
 using Prod.LoginUnico.Application.Common.Wrapper;
-using Prod.LoginUnico.Application.Features.External.Commands.Auth;
+using Prod.LoginUnico.Application.Features.Extranet.Commands.Auth;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Prod.LoginUnico.Application.Features.External.Queries.Logo;
+namespace Prod.LoginUnico.Application.Features.Extranet.Queries.Logo;
 
-public class ExternalLogoQuery : IRequest<Response<byte[]>>
+public class ExtranetLogoQuery : IRequest<Response<byte[]>>
 {
     public int? id_aplicacion { get; set; }
 }
 
-public class ExternalLogoQueryHandler
-    : IRequestHandler<ExternalLogoQuery, Response<byte[]>>
+public class ExtranetLogoQueryHandler
+    : IRequestHandler<ExtranetLogoQuery, Response<byte[]>>
 {
     private readonly StaticFiles _staticFiles;
 
-    public ExternalLogoQueryHandler(IOptions<AppSettings> appSettings)
+    public ExtranetLogoQueryHandler(IOptions<AppSettings> appSettings)
     {
         _staticFiles = appSettings.Value.StaticFiles;
     }
 
     public async Task<Response<byte[]>>
-        Handle(ExternalLogoQuery request, CancellationToken cancellationToken)
+        Handle(ExtranetLogoQuery request, CancellationToken cancellationToken)
     {
         byte[] logoBytes;
         try

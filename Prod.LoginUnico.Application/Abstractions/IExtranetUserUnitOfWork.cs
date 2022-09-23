@@ -6,12 +6,11 @@ namespace Prod.LoginUnico.Application.Abstractions;
 
 public interface IExtranetUserUnitOfWork : IUnitOfWork
 {
-    Task<ExtranetUserEntity?> FindByEmail(string email);
-
-    Task<ExtranetUserEntity?> FindByUserId(string id_usuario_extranet);
-
-    Task<ExtranetUserEntity?> FindByUserName(string user_name);
-
+    Task<ExtranetUserEntity?> FindExtranetUser(
+        int? extranetUserId = null,
+        string? userName = null,
+        string? email = null);
+    
     Task<int> Upsert(ExtranetUserEntity entity);
 
     Task<UsuarioAplicacion?> BuscarAplicacionByUserName(string user_name, int id_aplicacion);

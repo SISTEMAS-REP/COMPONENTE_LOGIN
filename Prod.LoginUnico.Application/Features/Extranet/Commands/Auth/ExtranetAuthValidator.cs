@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace Prod.LoginUnico.Application.Features.External.Commands.Auth;
+namespace Prod.LoginUnico.Application.Features.Extranet.Commands.Auth;
 
-public class ExternalAuthValidator : AbstractValidator<ExternalAuthCommand>
+public class ExtranetAuthValidator : AbstractValidator<ExtranetAuthCommand>
 {
-    public ExternalAuthValidator()
+    public ExtranetAuthValidator()
     {
         RuleFor(p => p.PersonType)
             .NotNull()

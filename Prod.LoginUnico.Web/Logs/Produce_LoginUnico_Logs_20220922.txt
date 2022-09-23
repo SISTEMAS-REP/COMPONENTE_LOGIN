@@ -468,3 +468,239 @@ Detalle del evento: System.NotImplementedException: The method or operation is n
    at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|227_0(HttpProtocol protocol, Stack`1 events)
 
 
+Fecha Evento: 2022-09-22 17:45:27.256 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalLogoQuery] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"id_aplicacion":159,"$type":"ExternalLogoQuery"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 17:45:27.396 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":"89504E470D0A1A0A0000000D49484452... (4241 bytes)","$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 17:46:24.938 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"https://derapipez.produce.gob.pe/Inicio/Index","$type":"ExternalAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 17:47:45.582 -05:00
+Tipo Evento: ERROR
+Clase: Prod.LoginUnico.Application.Features.External.Commands.Auth.ExternalAuthCommand
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Unhandled Exception for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"https://derapipez.produce.gob.pe/Inicio/Index","$type":"ExternalAuthCommand"}.] [ExMessage: El usuario no tiene permisos a la aplicacion]
+Detalle del evento: System.UnauthorizedAccessException: El usuario no tiene permisos a la aplicacion
+   at Prod.LoginUnico.Infrastructure.Managers.AuthManager.LogIn(String username, String password, Boolean rememberMe) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Infrastructure\Managers\AuthManager.cs:line 35
+   at Prod.LoginUnico.Application.Features.External.Commands.Auth.ExternalAuthCommandHandler.Handle(ExternalAuthCommand request, CancellationToken cancellationToken) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Features\External\Commands\Auth\ExternalAuthCommand.cs:line 36
+   at Prod.LoginUnico.Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\ValidationBehavior.cs:line 37
+   at Prod.LoginUnico.Application.Common.Behaviors.UnhandledExceptionBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\UnhandledExceptionBehavior.cs:line 26
+
+
+Fecha Evento: 2022-09-22 17:47:55.192 -05:00
+Tipo Evento: ERROR
+Clase: Microsoft.AspNetCore.Server.Kestrel
+Mensaje: Connection id "0HMKSTG4T93U6", Request id "0HMKSTG4T93U6:00000003": An unhandled exception was thrown by the application.
+Detalle del evento: System.NotImplementedException: The method or operation is not implemented.
+   at Prod.LoginUnico.Infrastructure.Identity.RoleStore.Dispose() in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Infrastructure\Identity\RoleStore.cs:line 25
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose(Boolean disposing)
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.DisposeAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|227_0(HttpProtocol protocol, Stack`1 events)
+
+
+Fecha Evento: 2022-09-22 17:49:12.536 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"https://derapipez.produce.gob.pe/Inicio/Index","$type":"ExternalAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 17:49:21.344 -05:00
+Tipo Evento: WARNING
+Clase: Prod.LoginUnico.Application.Features.External.Commands.Auth.ExternalAuthCommand
+Mensaje: [ExternalAuthCommand] [{"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Long Running Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"https://derapipez.produce.gob.pe/Inicio/Index","$type":"ExternalAuthCommand"} in 8807 ms.]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 17:49:21.344 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":{"ReturnUrl":"https://derapipez.produce.gob.pe/Inicio/Index","$type":"ExternalAuthResponse"},"$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 17:49:23.543 -05:00
+Tipo Evento: ERROR
+Clase: Microsoft.AspNetCore.Server.Kestrel
+Mensaje: Connection id "0HMKSTG4T93U7", Request id "0HMKSTG4T93U7:00000003": An unhandled exception was thrown by the application.
+Detalle del evento: System.NotImplementedException: The method or operation is not implemented.
+   at Prod.LoginUnico.Infrastructure.Identity.RoleStore.Dispose() in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Infrastructure\Identity\RoleStore.cs:line 25
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose(Boolean disposing)
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.DisposeAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|227_0(HttpProtocol protocol, Stack`1 events)
+
+
+Fecha Evento: 2022-09-22 17:50:48.318 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv260","RememberMe":false,"ReturnUrl":"dfdfdf","$type":"ExternalAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 17:50:53.159 -05:00
+Tipo Evento: WARNING
+Clase: Microsoft.AspNetCore.Identity.UserManager
+Mensaje: Invalid password for user.
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 17:50:53.159 -05:00
+Tipo Evento: WARNING
+Clase: Microsoft.AspNetCore.Identity.SignInManager
+Mensaje: User failed to provide the correct password.
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 17:50:53.319 -05:00
+Tipo Evento: ERROR
+Clase: Prod.LoginUnico.Application.Features.External.Commands.Auth.ExternalAuthCommand
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Unhandled Exception for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv260","RememberMe":false,"ReturnUrl":"dfdfdf","$type":"ExternalAuthCommand"}.] [ExMessage: Revise las credenciales ingresadas.]
+Detalle del evento: System.UnauthorizedAccessException: Revise las credenciales ingresadas.
+   at Prod.LoginUnico.Infrastructure.Managers.AuthManager.LogIn(String username, String password, Boolean rememberMe) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Infrastructure\Managers\AuthManager.cs:line 79
+   at Prod.LoginUnico.Application.Features.External.Commands.Auth.ExternalAuthCommandHandler.Handle(ExternalAuthCommand request, CancellationToken cancellationToken) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Features\External\Commands\Auth\ExternalAuthCommand.cs:line 36
+   at Prod.LoginUnico.Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\ValidationBehavior.cs:line 37
+   at Prod.LoginUnico.Application.Common.Behaviors.UnhandledExceptionBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\UnhandledExceptionBehavior.cs:line 26
+
+
+Fecha Evento: 2022-09-22 17:50:55.970 -05:00
+Tipo Evento: ERROR
+Clase: Microsoft.AspNetCore.Server.Kestrel
+Mensaje: Connection id "0HMKSTG4T93U9", Request id "0HMKSTG4T93U9:00000002": An unhandled exception was thrown by the application.
+Detalle del evento: System.NotImplementedException: The method or operation is not implemented.
+   at Prod.LoginUnico.Infrastructure.Identity.RoleStore.Dispose() in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Infrastructure\Identity\RoleStore.cs:line 25
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose(Boolean disposing)
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.DisposeAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|227_0(HttpProtocol protocol, Stack`1 events)
+
+
+Fecha Evento: 2022-09-22 17:51:34.183 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"dfdfdf","$type":"ExternalAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 17:51:42.240 -05:00
+Tipo Evento: WARNING
+Clase: Prod.LoginUnico.Application.Features.External.Commands.Auth.ExternalAuthCommand
+Mensaje: [ExternalAuthCommand] [{"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Long Running Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv2604","RememberMe":false,"ReturnUrl":"dfdfdf","$type":"ExternalAuthCommand"} in 8056 ms.]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 17:51:42.240 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [Response`1] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handled for Response {"Succeeded":true,"Message":null,"Errors":null,"Data":{"ReturnUrl":"dfdfdf","$type":"ExternalAuthResponse"},"$type":"Response`1"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 17:51:45.237 -05:00
+Tipo Evento: ERROR
+Clase: Microsoft.AspNetCore.Server.Kestrel
+Mensaje: Connection id "0HMKSTG4T93U9", Request id "0HMKSTG4T93U9:00000003": An unhandled exception was thrown by the application.
+Detalle del evento: System.NotImplementedException: The method or operation is not implemented.
+   at Prod.LoginUnico.Infrastructure.Identity.RoleStore.Dispose() in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Infrastructure\Identity\RoleStore.cs:line 25
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose(Boolean disposing)
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.DisposeAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|227_0(HttpProtocol protocol, Stack`1 events)
+
+
+Fecha Evento: 2022-09-22 17:52:16.351 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"72680383","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":true,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv264","RememberMe":false,"ReturnUrl":"dfdfdf","$type":"ExternalAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 17:52:16.388 -05:00
+Tipo Evento: WARNING
+Clase: Microsoft.AspNetCore.Identity.UserManager
+Mensaje: Invalid password for user.
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 17:52:16.388 -05:00
+Tipo Evento: WARNING
+Clase: Microsoft.AspNetCore.Identity.SignInManager
+Mensaje: User failed to provide the correct password.
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 17:52:16.537 -05:00
+Tipo Evento: ERROR
+Clase: Prod.LoginUnico.Application.Features.External.Commands.Auth.ExternalAuthCommand
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"72680383","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":true,"$type":"CurrentUser"} Unhandled Exception for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv264","RememberMe":false,"ReturnUrl":"dfdfdf","$type":"ExternalAuthCommand"}.] [ExMessage: Revise las credenciales ingresadas.]
+Detalle del evento: System.UnauthorizedAccessException: Revise las credenciales ingresadas.
+   at Prod.LoginUnico.Infrastructure.Managers.AuthManager.LogIn(String username, String password, Boolean rememberMe) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Infrastructure\Managers\AuthManager.cs:line 79
+   at Prod.LoginUnico.Application.Features.External.Commands.Auth.ExternalAuthCommandHandler.Handle(ExternalAuthCommand request, CancellationToken cancellationToken) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Features\External\Commands\Auth\ExternalAuthCommand.cs:line 36
+   at Prod.LoginUnico.Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\ValidationBehavior.cs:line 37
+   at Prod.LoginUnico.Application.Common.Behaviors.UnhandledExceptionBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\UnhandledExceptionBehavior.cs:line 26
+
+
+Fecha Evento: 2022-09-22 17:52:22.033 -05:00
+Tipo Evento: ERROR
+Clase: Microsoft.AspNetCore.Server.Kestrel
+Mensaje: Connection id "0HMKSTG4T93U9", Request id "0HMKSTG4T93U9:00000004": An unhandled exception was thrown by the application.
+Detalle del evento: System.NotImplementedException: The method or operation is not implemented.
+   at Prod.LoginUnico.Infrastructure.Identity.RoleStore.Dispose() in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Infrastructure\Identity\RoleStore.cs:line 25
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose(Boolean disposing)
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.DisposeAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|227_0(HttpProtocol protocol, Stack`1 events)
+
+
+Fecha Evento: 2022-09-22 17:52:55.306 -05:00
+Tipo Evento: INFORMATION
+Clase: Prod.LoginUnico.Application.Common.Behaviors.LoggingBehavior
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Handling for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv26","RememberMe":false,"ReturnUrl":"https://derapipez.produce.gob.pe/Inicio/Index","$type":"ExternalAuthCommand"}]
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 17:52:55.330 -05:00
+Tipo Evento: WARNING
+Clase: Microsoft.AspNetCore.Identity.UserManager
+Mensaje: Invalid password for user.
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 17:52:55.331 -05:00
+Tipo Evento: WARNING
+Clase: Microsoft.AspNetCore.Identity.SignInManager
+Mensaje: User failed to provide the correct password.
+Detalle del evento: 
+
+Fecha Evento: 2022-09-22 17:52:55.450 -05:00
+Tipo Evento: ERROR
+Clase: Prod.LoginUnico.Application.Features.External.Commands.Auth.ExternalAuthCommand
+Mensaje: [ExternalAuthCommand] [User {"UserId":"0","PersonId":"0","UserName":"Unknown","RemoteIpAddress":"192.168.206.231","DeviceName":"PC-740878681064.produccion.gob.pe","IsAuthenticated":false,"$type":"CurrentUser"} Unhandled Exception for Request {"PersonType":1,"RucNumber":"","DocumentNumber":"72680383","Password":"@Jrvv26","RememberMe":false,"ReturnUrl":"https://derapipez.produce.gob.pe/Inicio/Index","$type":"ExternalAuthCommand"}.] [ExMessage: Revise las credenciales ingresadas.]
+Detalle del evento: System.UnauthorizedAccessException: Revise las credenciales ingresadas.
+   at Prod.LoginUnico.Infrastructure.Managers.AuthManager.LogIn(String username, String password, Boolean rememberMe) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Infrastructure\Managers\AuthManager.cs:line 79
+   at Prod.LoginUnico.Application.Features.External.Commands.Auth.ExternalAuthCommandHandler.Handle(ExternalAuthCommand request, CancellationToken cancellationToken) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Features\External\Commands\Auth\ExternalAuthCommand.cs:line 36
+   at Prod.LoginUnico.Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\ValidationBehavior.cs:line 37
+   at Prod.LoginUnico.Application.Common.Behaviors.UnhandledExceptionBehavior`2.Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate`1 next) in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Application\Common\Behaviors\UnhandledExceptionBehavior.cs:line 26
+
+
+Fecha Evento: 2022-09-22 17:53:32.871 -05:00
+Tipo Evento: ERROR
+Clase: Microsoft.AspNetCore.Server.Kestrel
+Mensaje: Connection id "0HMKSTG4T93UA", Request id "0HMKSTG4T93UA:00000003": An unhandled exception was thrown by the application.
+Detalle del evento: System.NotImplementedException: The method or operation is not implemented.
+   at Prod.LoginUnico.Infrastructure.Identity.RoleStore.Dispose() in D:\COMPONENTE_LOGIN_808\Prod.LoginUnico.Infrastructure\Identity\RoleStore.cs:line 25
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose(Boolean disposing)
+   at Microsoft.AspNetCore.Identity.RoleManager`1.Dispose()
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.DisposeAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|227_0(HttpProtocol protocol, Stack`1 events)
+
+
