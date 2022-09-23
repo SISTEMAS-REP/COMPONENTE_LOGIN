@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ComponenteLoginService } from 'src/app/services/componenteLogin.service';
 import { environment } from 'src/environments/environment';
+import { NzModalService } from "ng-zorro-antd/modal";
+import { NzNotificationService } from "ng-zorro-antd/notification";
 
 @Component({
   selector: 'app-sesion-persona',
@@ -28,7 +30,9 @@ export class SesionPersonaComponent implements OnInit {
     private componenteLoginService: ComponenteLoginService,
     private router: ActivatedRoute,
     private sanitizer: DomSanitizer,
-    private route: Router
+    private route: Router,
+    private notification: NzNotificationService,
+    private modalService: NzModalService
   ) {
   }
 
@@ -76,15 +80,22 @@ export class SesionPersonaComponent implements OnInit {
           DocumentNumber: this.numero_documento, 
           Password: this.contrasena, 
           RememberMe: false, 
-          ReturnUrl: "https://derapipez.produce.gob.pe/Inicio/Index" ,
+          ReturnUrl: "" ,
           applicationId : this.id_aplicacion })
       .then((resp) => {
-        debugger
-        // window.location.href = resp.data.returnUrl;
+        
+        let tipo_mensaje = resp.succeeded ? 'success': 'error';
+        let elementos = '';
+        resp.errors.forEach((elemento: any) => {
+          elementos = elementos + `<li>${ elemento }</li>`;
+        });
+        this.createNotification(tipo_mensaje, 'Inicio Sesión', `<ul>${ elementos }</ul>`);
+        if(resp.succeeded){
+          // window.location.href = resp.data.returnUrl;
+        }
         this.spinner.hide();
       })
       .catch((err: any) => {
-        debugger
       });
     }
   
@@ -173,4 +184,14 @@ export class SesionPersonaComponent implements OnInit {
 
       .catch((err: any) => []);
    }
+
+
+   createNotification = (type: string, title: string, message: string): void => {
+    this.notification.create(
+      type,
+      title,
+      message
+    );
+  };
+
 }
