@@ -45,6 +45,10 @@ public class ExtranetAuthCommandHandler
     public async Task<Response<ExtranetAuthResponse>>
         Handle(ExtranetAuthCommand request, CancellationToken cancellationToken)
     {
+        var success = true;
+        var url_aplicacion = "";
+        List<string> mensajes = new List<string>();
+
         var userName = request.DocumentNumber!;
 
         if (request.PersonType == 2)
@@ -57,26 +61,44 @@ public class ExtranetAuthCommandHandler
 
         if (user is null)
         {
-            throw new UnauthorizedAccessException("Usuario incorrecto.");
+            success = false;
+            mensajes.Add("Usuario incorrecto.");
+            //throw new UnauthorizedAccessException("Usuario incorrecto.");
         }
 
         var apps = await _applicationUnitOfWork.FindAppsByUserName(userName, request.ApplicationId);
 
         if (apps.Count() <= 0)
         {
-            throw new UnauthorizedAccessException("El usuario no tiene permisos a la aplicacion");
+            success = false;
+            mensajes.Add("El usuario no tiene permisos a la aplicacion.");
+            //throw new UnauthorizedAccessException("El usuario no tiene permisos a la aplicacion");
+        }
+        else
+        {
+            var result = apps.FirstOrDefault();
+            url_aplicacion = result.url_extranet;
         }
 
-        await _extranetSignInManager
+        var result_login = await _extranetSignInManager
             .LogIn(user, request.Password!, request.RememberMe ?? false);
-                
+
+        if(!result_login.Succeeded)
+        {
+            success = result_login.Succeeded;
+            mensajes = result_login.Errors;
+            url_aplicacion = "";
+        }
+        
+
         return new()
         {
-            Succeeded = true,
+            Succeeded = success,
             Data = new()
             {
-                ReturnUrl = request.ReturnUrl!
-            }
+                ReturnUrl = url_aplicacion!
+            },
+            Errors = mensajes
         };
     }
 }

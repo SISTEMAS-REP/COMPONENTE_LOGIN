@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Prod.LoginUnico.Application.Abstractions;
+using Prod.LoginUnico.Application.Common.Wrapper;
+using Prod.LoginUnico.Application.Features.Extranet.Commands.Auth;
 using Prod.LoginUnico.Domain.Entities.ExtranetUser;
 using System.Text;
 
@@ -18,9 +20,12 @@ public class ExtranetSignInManager : IExtranetSignInManager
 		UserManager = userManager;
 	}
 
-	public async Task<Unit> 
+	public async Task<Response<Unit>>
         LogIn(ExtranetUserEntity user, string password, bool rememberMe)
 	{
+        var success = true;
+        List<string> mensajes = new List<string>();
+
         var result = await SignInManager
             .PasswordSignInAsync(
             user: user,
@@ -52,14 +57,23 @@ public class ExtranetSignInManager : IExtranetSignInManager
                     .Append(dtLockoutEnd.ToString("dd/MM/yyyy"));
             }
 
-            throw new UnauthorizedAccessException(stringBuilder.ToString());
+            success = false;
+            mensajes.Add(stringBuilder.ToString());
+
+            //throw new UnauthorizedAccessException(stringBuilder.ToString());
         }
 
         if (!result.Succeeded)
         {
-            throw new UnauthorizedAccessException("Revise las credenciales ingresadas.");
+            //throw new UnauthorizedAccessException("Revise las credenciales ingresadas.");
+            success = false;
+            mensajes.Add("Revise las credenciales ingresadas.");
         }
 
-        return Unit.Value;
+        return new()
+        {
+            Succeeded = success,            
+            Errors = mensajes
+        };
     }
 }

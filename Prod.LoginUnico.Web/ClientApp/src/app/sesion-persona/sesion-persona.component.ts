@@ -46,7 +46,6 @@ export class SesionPersonaComponent implements OnInit {
 
     this.componenteLoginService.obtenerImagenByAplicacion(Data)
       .then((resp: { data: string; }) => {
-        debugger
         var binary = atob(resp.data.replace(/\s/g, ''));
         var len = binary.length;
         var buffer = new ArrayBuffer(len);
@@ -62,7 +61,6 @@ export class SesionPersonaComponent implements OnInit {
   }
 
   async iniciarSesionPersonaNatural(){
-    debugger
     if(this.id_aplicacion == null){
       return;
     }
@@ -85,7 +83,9 @@ export class SesionPersonaComponent implements OnInit {
         // window.location.href = resp.data.returnUrl;
         this.spinner.hide();
       })
-      .catch((err: any) => []);
+      .catch((err: any) => {
+        debugger
+      });
     }
   
   }
