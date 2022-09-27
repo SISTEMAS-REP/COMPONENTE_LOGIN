@@ -1,1 +1,60 @@
-<p>login-company works!</p>
+<div class="main-content">
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-12">
+          <div class="card shadow-prod border-0">
+            <div class="card-header bg-transparent">
+              <div class="row">
+                <div class="col-sm-5">
+                  <img
+                    class="img-fluid"
+                    src="assets/img/logo_produce.PNG"
+                    alt="Produce"
+                    title="Produce"/>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="row justify-content-center mb-2">
+                <div class="col-4 col-sm-3">
+                  <img
+                  *ngIf="logo"
+                  class="img-fluid"
+                  [src]="logo"
+                  [alt]="applicationId"
+                  [title]="applicationId"
+                  />
+                </div>
+              </div>
+  
+              <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                  <h1 class="display-4">Inicio de Sesión</h1>
+                </div>
+                <div class="col-12 text-center">
+                  <h3 class="">Persona Jurídica</h3>
+                </div>
+              </div>
+  
+              <div #stepper class="bs-stepper">
+                <div class="bs-stepper-content">
+                  <app-login-company-first-step
+                  #firstStep
+                ></app-login-company-first-step>
+                  </div>
+              </div>   
+              
+              <div class="col-sm-12">
+                <div class="row justify-content-center">       
+                  <p>¿No tienes una cuenta de empresa?</p>
+                </div>
+                <div class="row justify-content-center">     
+                <a href="/recuperar-contrasena-persona?applicationId={{ applicationId }}" style="color: #000 ; border-bottom: 1px solid #000;">Crea una ahora</a>
+              </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

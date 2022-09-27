@@ -22,6 +22,8 @@ import { environment } from 'src/environments/environment';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { LoginPersonFirstStepComponent } from './pages/login-person/components/login-person-first-step/login-person-first-step.component';
+import { LoginCompanyFirstStepComponent } from './pages/login-company/components/login-company-first-step/login-company-first-step.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { NzNotificationModule } from 'ng-zorro-antd/notification';
     RegisterCompanyFourthStepComponent,
 
     OnlyNumbersDirective,
+      LoginPersonFirstStepComponent,
+      LoginCompanyFirstStepComponent,
   ],
   imports: [
     CommonModule,
