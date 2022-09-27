@@ -19,29 +19,30 @@ public class ExtranetUserEntity
 
     public int id_persona_juridica { get; set; }
 
+
     public string user_name { get; set; }
 
-    public byte[] password_hash { get; set; }
+    public byte[]? password_hash { get; set; }
 
-    public byte[] security_stamp { get; set; }
+    public byte[] security_stamp { get; set; } // validar
 
     public string email { get; set; }
 
     public bool email_confirmed { get; set; }
 
-    public string phone_number { get; set; }
+    public string? phone_number { get; set; }
 
     public bool phone_number_confirmed { get; set; }
 
-    public bool two_factor_enabled { get; set; }
+    public bool two_factor_enabled { get; set; } // validar con identity 
 
     public DateTime? lockout_end_date { get; set; }
 
-    public bool lockout_enable { get; set; }
+    public bool lockout_enable { get; set; } // validar con identity 
 
-    public int access_failed_count { get; set; }
+    public int access_failed_count { get; set; } // validar con identity 
 
-    public int id_contacto_extranet { get; set; }
+    //public int id_contacto_extranet { get; set; }
 
     public string usuario_registro { get; set; }
 
@@ -51,7 +52,7 @@ public class ExtranetUserEntity
 
     public DateTime fecha_modificacion { get; set; }
 
-    public int idsector { get; set; }
+    public int idsector { get; set; } // validar, ¿para que sirve?
 
     public bool Activo { get; set; }
 }

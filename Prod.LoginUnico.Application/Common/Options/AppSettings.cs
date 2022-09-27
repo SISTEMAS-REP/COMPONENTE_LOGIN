@@ -13,4 +13,6 @@ public class AppSettings
     public Services Services { get; set; }
 
     public UserAudit UserAudit { get; set; }
+
+    public ReCaptcha ReCaptcha { get; set; }
 }

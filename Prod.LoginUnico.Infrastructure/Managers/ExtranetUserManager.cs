@@ -13,15 +13,50 @@ public class ExtranetUserManager : IExtranetUserManager
         UserManager = userManager;	
 	}
 
+    // Buscar usuario por user_name
 	public async Task<ExtranetUserEntity> 
 		FindByNameAsync(string userName)
 	{
-		return await UserManager.FindByNameAsync(userName);
+        var user = await UserManager
+            .FindByNameAsync(userName);
+        return user;
     }
 
-	public async Task<DateTimeOffset?> 
+    // Buscar fecha fin del bloqueo de acceso para un usuario
+    public async Task<DateTimeOffset?> 
 		GetLockoutEndDateAsync(ExtranetUserEntity user)
 	{
-		return await UserManager.GetLockoutEndDateAsync(user);
+        var lockoutEndDate = await UserManager
+            .GetLockoutEndDateAsync(user);
+        return lockoutEndDate;
+    }
+
+    // Crear un usuario
+	public async Task<(bool status, string? errors)> 
+        CreateAsync(ExtranetUserEntity user, string password)
+	{
+        var result = await UserManager
+            .CreateAsync(
+            user: user,
+            password: password);
+
+        if (result.Succeeded)
+            return (status: true, errors: null);
+
+        var errors = result.Errors
+            .Select(e => $"{e.Code} : {e.Description}")
+            .Aggregate((i, j) => i + "\n" + j);
+
+        return (status: false, errors: errors);
+    }
+
+    // Forzar la actualización de la contraseña para un usuario
+    public async Task<bool> 
+        AddPasswordAsync(ExtranetUserEntity user, string password)
+    {
+        user.password_hash = null;
+        var result = await UserManager
+            .AddPasswordAsync(user, password);
+        return result.Succeeded;
     }
 }

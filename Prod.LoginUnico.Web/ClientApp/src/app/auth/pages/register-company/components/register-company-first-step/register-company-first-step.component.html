@@ -1,0 +1,100 @@
+<form [formGroup]="myForm" autocomplete="off">
+  <div id="step-1" class="content">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label class="form-control-label" for="rucNumber"> RUC </label>
+
+          <input
+            class="form-control"
+            [ngClass]="isInvalidField('rucNumber') ? ' is-invalid' : ''"
+            type="text"
+            [maxlength]="rucNumberLength"
+            id="rucNumber"
+            placeholder="Ej.: 20543216789"
+            formControlName="rucNumber"
+            appOnlyNumbers
+          />
+
+          <div
+            *ngIf="myForm.get('rucNumber')?.errors?.required"
+            class="invalid-feedback"
+          >
+            Es un campo requerido.
+          </div>
+          <div
+            *ngIf="
+              !myForm.get('rucNumber')?.errors?.required &&
+              myForm.get('rucNumber')?.errors?.minlength
+            "
+            class="invalid-feedback"
+          >
+            El RUC debe tener {{ rucNumberLength }} dígitos.
+          </div>
+          <div
+            *ngIf="
+              !myForm.get('rucNumber')?.errors?.required &&
+              !myForm.get('rucNumber')?.errors?.minlength &&
+              myForm.get('rucNumber')?.errors?.startsWith
+            "
+            class="invalid-feedback"
+          >
+            El número de RUC debe iniciar con 10.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label class="form-control-label" for="businessName">
+            RAZÓN SOCIAL
+          </label>
+
+          <input
+            class="form-control"
+            type="text"
+            id="businessName"
+            placeholder="Ej.: Base - Base Corporation"
+            formControlName="businessName"
+          />
+        </div>
+      </div>
+
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label class="form-control-label" for="address"> DIRECCIÓN </label>
+
+          <input
+            class="form-control"
+            type="text"
+            id="address"
+            placeholder="Ej.: Calle C 3517, Lima"
+            formControlName="address"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="row">
+      <div class="col">
+        <span>Valid</span>
+        <pre>{{ myForm.valid }}</pre>
+
+        <span>Pristine</span>
+        <pre>{{ myForm.pristine }}</pre>
+
+        <span>Touched</span>
+        <pre>{{ myForm.touched }}</pre>
+
+        <span>Value</span>
+        <pre>{{ myForm.value | json }}</pre>
+
+        <span>rucNumber</span>
+        <pre>{{ myForm.controls["rucNumber"].errors | json }}</pre>
+      </div>
+    </div> -->
+
+    <button (click)="next()" class="btn btn-darker btn-block">Siguiente</button>
+    <button class="btn btn-outline-dark btn-block">Cancelar</button>
+  </div>
+</form>

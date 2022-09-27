@@ -32,11 +32,16 @@
               }
             ],
             "styles": [
-              "src/theme.less",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.css"
+              "src/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css",
+              "src/assets/css/base.css",
+              "src/assets/css/bs-stepper.css",
+              "src/styles.css",
+              "src/theme.less"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "bs-stepper"
+            ]
           },
           "configurations": {
             "production": {

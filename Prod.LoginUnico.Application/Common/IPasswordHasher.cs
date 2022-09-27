@@ -4,5 +4,9 @@ namespace Prod.LoginUnico.Application.Common;
 
 public interface IPasswordHasher
 {
-    bool VerifyHashedPassword(ExtranetUserEntity user, string hashedPassword, string providedPassword);
+    bool 
+        VerifyHashedPassword(ExtranetUserEntity user, string hashedPassword, string providedPassword);
+
+    string? 
+        HashPassword(ExtranetUserEntity user, string password);
 }

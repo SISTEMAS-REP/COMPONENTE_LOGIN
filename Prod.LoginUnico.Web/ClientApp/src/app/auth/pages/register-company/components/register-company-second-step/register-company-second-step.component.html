@@ -1,0 +1,120 @@
+<form [formGroup]="myForm" autocomplete="off">
+  <div id="step-2" class="content">
+    <div class="row">
+      <div class="col-sm-12 col-md-6">
+        <div class="form-group">
+          <label class="form-control-label" for="chMes">
+            Tipo de documento
+          </label>
+
+          <select
+            class="form-control"
+            [ngClass]="isInvalidField('documentType') ? ' is-invalid' : ''"
+            id="documentType"
+            formControlName="documentType"
+          >
+            <option value="0">Seleccione</option>
+
+            <option *ngFor="let docType of docTypes" [value]="docType.key">
+              {{ docType.value }}
+            </option>
+          </select>
+          <div *ngIf="isInvalidField('documentType')" class="invalid-feedback">
+            Debe seleccionar un tipo de documento.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-6">
+        <div class="form-group">
+          <label class="form-control-label" for="documentNumber">
+            Número de documento
+          </label>
+
+          <input
+            class="form-control"
+            [ngClass]="isInvalidField('documentNumber') ? ' is-invalid' : ''"
+            [maxlength]="documentNumberLength"
+            type="text"
+            id="documentNumber"
+            placeholder="Ej.: 15234687"
+            formControlName="documentNumber"
+            appOnlyNumbers
+          />
+
+          <div
+            *ngIf="myForm.get('documentNumber')?.errors?.required"
+            class="invalid-feedback"
+          >
+            Es un campo requerido.
+          </div>
+          <div
+            *ngIf="
+              !myForm.get('documentNumber')?.errors?.required &&
+              myForm.get('documentNumber')?.errors?.minlength
+            "
+            class="invalid-feedback"
+          >
+            El número de documento debe tener
+            {{ documentNumberLength }} dígitos.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label class="form-control-label" for="lastName"> Apellidos </label>
+
+          <input
+            class="form-control"
+            type="text"
+            id="lastName"
+            placeholder="Ej.: Flores Sánchez"
+            formControlName="lastName"
+          />
+        </div>
+      </div>
+
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label class="form-control-label" for="firstName"> Nombres </label>
+
+          <input
+            class="form-control"
+            type="text"
+            id="firstName"
+            placeholder="Ej.: Camila"
+            formControlName="firstName"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="row">
+      <div class="col">
+        <span>Valid</span>
+        <pre>{{ myForm.valid }}</pre>
+
+        <span>Pristine</span>
+        <pre>{{ myForm.pristine }}</pre>
+
+        <span>Touched</span>
+        <pre>{{ myForm.touched }}</pre>
+
+        <span>Value</span>
+        <pre>{{ myForm.value | json }}</pre>
+
+        <span>documentType</span>
+        <pre>{{ myForm.controls["documentType"].errors | json }}</pre>
+
+        <span>documentNumber</span>
+        <pre>{{ myForm.controls["documentNumber"].errors | json }}</pre>
+      </div>
+    </div> -->
+
+    <button (click)="next()" class="btn btn-darker btn-block">Siguiente</button>
+    <button (click)="preview()" class="btn btn-outline-dark btn-block">
+      Anterior
+    </button>
+  </div>
+</form>

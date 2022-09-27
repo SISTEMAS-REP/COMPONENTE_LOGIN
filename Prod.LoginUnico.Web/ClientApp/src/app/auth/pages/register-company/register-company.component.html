@@ -1,0 +1,100 @@
+<div class="main-content">
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-7 col-md-12">
+        <div class="card shadow-prod border-0">
+          <div class="card-header bg-transparent">
+            <div class="row">
+              <div class="col-sm-4">
+                <img
+                  class="img-fluid"
+                  src="assets/img/logo_produce.PNG"
+                  alt="Produce"
+                  title="Produce"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row justify-content-center">
+              <div class="col-4 col-sm-3">
+                <img
+                  *ngIf="logo"
+                  class="img-fluid"
+                  [src]="logo"
+                  [alt]="applicationId"
+                  [title]="applicationId"
+                />
+              </div>
+            </div>
+
+            <div class="row justify-content-center">
+              <div class="col-12 text-center">
+                <h1 class="display-4">REGÍSTRATE</h1>
+              </div>
+              <div class="col-12 text-center">
+                <h3 class="">Persona Jurídica</h3>
+              </div>
+            </div>
+
+            <div #stepper class="bs-stepper">
+              <div class="bs-stepper-header">
+                <div class="step" data-target="#step-1">
+                  <button class="step-trigger">
+                    <span class="bs-stepper-circle">1</span>
+                  </button>
+                </div>
+                <!-- <div class="line"></div> -->
+                <div class="step" data-target="#step-2">
+                  <button class="step-trigger">
+                    <span class="bs-stepper-circle">2</span>
+                  </button>
+                </div>
+                <div class="step" data-target="#step-3">
+                  <button class="step-trigger">
+                    <span class="bs-stepper-circle">3</span>
+                  </button>
+                </div>
+                <div class="step" data-target="#step-4">
+                  <button class="step-trigger">
+                    <span class="bs-stepper-circle">4</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="bs-stepper-content">
+                <app-register-company-first-step
+                  #firstStep
+                  [sunatResponse]="sunatResponse"
+                  (onSendRucNumber)="onSendRucNumber($event)"
+                  (onNextFormButton)="onNextStep($event)"
+                ></app-register-company-first-step>
+                <app-register-company-second-step
+                  #secondStep
+                  [reniecResponse]="reniecResponse"
+                  (onSendDocumentNumber)="onSendDocumentNumber($event)"
+                  (onNextFormButton)="onNextStep($event)"
+                  (onPreviewFormButton)="onPreviewStep()"
+                ></app-register-company-second-step>
+                <app-register-company-third-step
+                  #thirdStep
+                  (onNextFormButton)="onNextStep($event)"
+                  (onPreviewFormButton)="onPreviewStep()"
+                ></app-register-company-third-step>
+                <app-register-company-fourth-step
+                  #fourthStep
+                  (onNextFormButton)="onNextStep($event)"
+                  (onPreviewFormButton)="onPreviewStep()"
+                ></app-register-company-fourth-step>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-footer">
+            <a class="text-muted" href="javascript:void(0)"> Request a demo </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

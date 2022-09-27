@@ -1,0 +1,101 @@
+<div class="main-content">
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-7 col-md-12">
+        <div class="card shadow-prod border-0">
+          <div class="card-header bg-transparent">
+            <div class="row">
+              <div class="col-sm-4">
+                <img
+                  class="img-fluid"
+                  src="assets/img/logo_produce.PNG"
+                  alt="Produce"
+                  title="Produce"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row justify-content-center">
+              <div class="col-4 col-sm-3">
+                <img
+                  *ngIf="logo"
+                  class="img-fluid"
+                  [src]="logo"
+                  [alt]="applicationId"
+                  [title]="applicationId"
+                />
+              </div>
+            </div>
+
+            <div class="row justify-content-center">
+              <div class="col-12 text-center">
+                <h1 class="display-4">REGÍSTRATE</h1>
+              </div>
+              <div class="col-12 text-center">
+                <h3 class="">Persona Natural</h3>
+              </div>
+            </div>
+
+            <div #stepper class="bs-stepper">
+              <div class="bs-stepper-header">
+                <div class="step" data-target="#step-1">
+                  <button class="step-trigger">
+                    <span class="bs-stepper-circle">1</span>
+                  </button>
+                </div>
+                <div class="step" data-target="#step-2">
+                  <button class="step-trigger">
+                    <span class="bs-stepper-circle">2</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="bs-stepper-content">
+                <app-register-person-first-step
+                  #firstStep
+                  [reniecResponse]="reniecResponse"
+                  (onSendDocumentNumber)="onSendDocumentNumber($event)"
+                  (onNextFormButton)="onNextStep($event)"
+                ></app-register-person-first-step>
+                <app-register-person-second-step
+                  #secondStep
+                  (onNextFormButton)="onNextStep($event)"
+                  (onPreviewFormButton)="onPreviewStep()"
+                ></app-register-person-second-step>
+              </div>
+
+              <!-- <div class="nav-wrapper">
+                  <tabset
+                    #steps
+                    type="pills"
+                    class="nav-pills-circle nav-align-center nav-pills-darker"
+                  >
+                    <tab heading="1" #step1="tab"
+                      ><app-register-person-first-step
+                        *ngIf="step1.active"
+                      ></app-register-person-first-step
+                    ></tab>
+                    <tab heading="2" #step2="tab"
+                      ><app-register-person-second-step
+                        *ngIf="step2.active"
+                      ></app-register-person-second-step>
+                    </tab>
+                  </tabset>
+                </div> -->
+            </div>
+
+            <div class="card-footer">
+              <a class="text-muted text-center" href="javascript:void(0)">
+                ¿Ya tienes una cuenta?
+              </a>
+              <a class="text-muted text-center" href="javascript:void(0)">
+                Ingresa aquí
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -33,6 +33,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prod.LoginUnico.Persistence
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prod.LoginUnico.Web", "Prod.LoginUnico.Web\Prod.LoginUnico.Web.csproj", "{95FB1B30-8249-4F8E-9E62-D886223A0C26}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "demo", "demo", "{03E20F17-14E5-4D1A-BB9D-9D3DF553D8EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prod.RutaDigital.MVC", "Prod.RutaDigital.MVC\Prod.RutaDigital.MVC.csproj", "{51718A01-70F5-474B-AF35-FE04E8E6CA55}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +87,10 @@ Global
 		{95FB1B30-8249-4F8E-9E62-D886223A0C26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95FB1B30-8249-4F8E-9E62-D886223A0C26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95FB1B30-8249-4F8E-9E62-D886223A0C26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51718A01-70F5-474B-AF35-FE04E8E6CA55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51718A01-70F5-474B-AF35-FE04E8E6CA55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51718A01-70F5-474B-AF35-FE04E8E6CA55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51718A01-70F5-474B-AF35-FE04E8E6CA55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -96,6 +104,7 @@ Global
 		{FB92F4F6-2FCE-4B2F-8261-31DE8BDB25A8} = {88FA2026-602A-41A4-A7F5-9941C415E8BC}
 		{20228732-E7D4-4A73-AC97-0C4F9C89FC22} = {8AB8DD75-5E10-42FF-8DF9-02E142733374}
 		{95FB1B30-8249-4F8E-9E62-D886223A0C26} = {FB92F4F6-2FCE-4B2F-8261-31DE8BDB25A8}
+		{51718A01-70F5-474B-AF35-FE04E8E6CA55} = {03E20F17-14E5-4D1A-BB9D-9D3DF553D8EB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {25B98352-A859-44FE-811A-24CCFB89E35B}

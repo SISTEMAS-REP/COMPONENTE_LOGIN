@@ -6,15 +6,14 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ComponenteLoginService {
-  baseUrl = `${environment.apiUrl}/extranet`;
+  baseUrl = `${environment.apiUrl}`;
   constructor() { }
 
   async obtenerImagenByAplicacion(request: { id_aplicacion: number; }) {
-    const formData = {...request};
-    const url = `${this.baseUrl}/logo`;
+    const url = `${this.baseUrl}/general/logo`;
     try {
       const resp = await axios
-        .post(url, formData);
+        .get(url, { params: { applicationId: request.id_aplicacion }});
       return resp.data;
     } catch (err) {
     }
@@ -23,7 +22,7 @@ export class ComponenteLoginService {
 
   async Auth(request: { PersonType: number; RucNumber: string; DocumentNumber: string; Password: string; RememberMe: Boolean; ReturnUrl: string; applicationId: number }) {
     const formData = {...request};
-    const url = `${this.baseUrl}/Auth`;
+    const url = `${this.baseUrl}/extranet/auth`;
     try {
       const resp = await axios
         .post(url, formData);

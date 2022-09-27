@@ -10,4 +10,9 @@ public class PasswordHasher : IPasswordHasher
     {
         return new PasswordHasher<ExtranetUserEntity>().VerifyHashedPassword(user, hashedPassword, providedPassword) != PasswordVerificationResult.Failed;
     }
+
+    public string? HashPassword(ExtranetUserEntity user, string password)
+    {
+        return new PasswordHasher<ExtranetUserEntity>().HashPassword(user, password);
+    }
 }

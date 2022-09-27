@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -25,8 +24,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 registerLocaleData(es);
-
-
+import { PresentationComponent } from './pages/presentation/presentation.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -42,35 +41,24 @@ registerLocaleData(es);
     RecuperarContrasenaPersonaComponent,
     RecuperarContrasenaEmpresaComponent,
     EdicionPerfilPersonaComponent,
-    EdicionPerfilEmpresaComponent
+    EdicionPerfilEmpresaComponent,
 
+    PresentationComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     CommonModule,
+    BrowserAnimationsModule,
+
     NgxSpinnerModule,
     NzModalModule,
     NzNotificationModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'sesion-persona', component: SesionPersonaComponent },
-      { path: 'sesion-empresa', component: SesionEmpresaComponent },
-      { path: 'registro-persona', component: RegistroPersonaComponent },
-      { path: 'registro-empresa', component: RegistroEmpresaComponent },
-      { path: 'recuperar-contrasena-persona', component: RecuperarContrasenaPersonaComponent },
-      { path: 'recuperar-contrasena-empresa', component: RecuperarContrasenaEmpresaComponent },
-      { path: 'edicion-perfil-persona', component: EdicionPerfilPersonaComponent },
-      { path: 'edicion-perfil-empresa', component: EdicionPerfilEmpresaComponent }
-    ]),
-    BrowserAnimationsModule
+
+    AppRoutingModule,
   ],
-  providers: [
-    { provide: NZ_I18N, useValue: es_ES }
-  ],
-  bootstrap: [AppComponent]
+  providers: [{ provide: NZ_I18N, useValue: es_ES }],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

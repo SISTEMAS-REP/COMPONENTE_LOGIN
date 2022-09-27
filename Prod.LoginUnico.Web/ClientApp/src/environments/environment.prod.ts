@@ -4,7 +4,10 @@ export const environment = {
   apiGA: 'https://dega.produce.gob.pe',
   apiPTD: 'https://detupa.produce.gob.pe',
   apiWebPV: 'https://desistemasv2.produce.gob.pe',
-  apiUrl: 'https://delogin.produce.gob.pe'
+  apiUrl: 'https://delogin.produce.gob.pe',
+  recaptcha: {
+    siteKey: '6Lerei4iAAAAAIm-X1gxwvn6M7WmA9XwsvHQ2f-f',
+  },
 
   // ----------------calidad-------------------------
   // apiGA: 'https://pega.produce.gob.pe',
@@ -13,8 +16,8 @@ export const environment = {
   // apiUrl: 'https://pevsp.produce.gob.pe'
 
   // ---------------produccion-----------------------
-      // apiGA: 'https://ga.produce.gob.pe',
-      // apiPTD: 'https://etupa.produce.gob.pe',
-      // apiWebPV: 'https://sistemas.produce.gob.pe',
-      // apiUrl: 'https://vsp.produce.gob.pe'
+  // apiGA: 'https://ga.produce.gob.pe',
+  // apiPTD: 'https://etupa.produce.gob.pe',
+  // apiWebPV: 'https://sistemas.produce.gob.pe',
+  // apiUrl: 'https://vsp.produce.gob.pe'
 };
