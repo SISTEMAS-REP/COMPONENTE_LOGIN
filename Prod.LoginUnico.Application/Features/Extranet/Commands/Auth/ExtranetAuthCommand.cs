@@ -22,6 +22,7 @@ public class ExtranetAuthCommand : IRequest<Response<ExtranetAuthResponse>>
     public string? ReturnUrl { get; set; }
 
     public int ApplicationId { get; set; }
+    public string recaptchaToken { get; set; }
 }
 
 public class ExtranetAuthCommandHandler
@@ -31,15 +32,17 @@ public class ExtranetAuthCommandHandler
     private readonly IExtranetUserManager _extranetUserManager;
     private readonly IExtranetSignInManager _extranetSignInManager;
     private readonly IApplicationUnitOfWork _applicationUnitOfWork;
-
+    private readonly IReCaptchaService _reCaptchaService;
     public ExtranetAuthCommandHandler(
         IExtranetUserManager extranetUserManager,
         IExtranetSignInManager extranetSignInManager,
-        IApplicationUnitOfWork applicationUnitOfWork)
+        IApplicationUnitOfWork applicationUnitOfWork,
+        IReCaptchaService reCaptchaService)
     {
         _extranetUserManager = extranetUserManager;
         _extranetSignInManager = extranetSignInManager;
         _applicationUnitOfWork = applicationUnitOfWork;
+        _reCaptchaService = reCaptchaService;
     }
 
     public async Task<Response<ExtranetAuthResponse>>
@@ -48,6 +51,20 @@ public class ExtranetAuthCommandHandler
         var success = true;
         var url_aplicacion = "";
         List<string> mensajes = new List<string>();
+
+        var recaptchaResult = await _reCaptchaService.Validate(request.recaptchaToken);
+
+        if (!recaptchaResult.Success)
+        {
+            var errors = recaptchaResult.ErrorCodes
+                .Select(e => e)
+                .Aggregate((i, j) => i + ", " + j);
+
+            success = false;
+            mensajes.Add($"ReCaptcha validation failed: {errors}");
+        }
+
+      
 
         var userName = request.DocumentNumber!;
 
@@ -86,7 +103,7 @@ public class ExtranetAuthCommandHandler
         if(!result_login.Succeeded)
         {
             success = result_login.Succeeded;
-            mensajes = result_login.Errors;
+            mensajes.Add(result_login.Errors[0].ToString());
             url_aplicacion = "";
         }
         

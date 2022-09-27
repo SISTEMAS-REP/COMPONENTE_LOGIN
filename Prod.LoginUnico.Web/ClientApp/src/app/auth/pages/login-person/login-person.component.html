@@ -1,1 +1,72 @@
-<p>login-person works!</p>
+<div class="main-content">
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-7 col-md-12">
+        <div class="card shadow-prod border-0">
+          <div class="card-header bg-transparent">
+            <div class="row">
+              <div class="col-sm-4">
+                <img
+                  class="img-fluid"
+                  src="assets/img/logo_produce.PNG"
+                  alt="Produce"
+                  title="Produce"/>
+              </div>
+            </div>
+          </div>
+          <div class="card-body login">
+            <div class="row justify-content-center">
+              <div class="col-4 col-sm-3">
+                <img [src]="urlArchivo" alt="archivo"  width="138">
+              </div>
+            </div>
+
+            <div class="row justify-content-center">
+              <div class="col-12 text-center">
+                <h1 class="display-4">Inicio de Sesión</h1>
+              </div>
+              <div class="col-12 text-center">
+                <h3 class="">Persona Natural</h3>
+              </div>
+            </div>
+            <form class="login__form">
+              <div>
+                  <label for="numeroDoc" style="font-family: 'plutosansregular';font-size: 13px; font-weight: 400; color: rgba(88, 89, 91, 0.8);">NÚMERO DOCUMENTO</label>
+                  <input type="text" id="numeroDoc" name="numeroDoc" [(ngModel)]="numero_documento" placeholder="Ej.:15234687" (change)="changeNroDocumento()"  (keypress)="restrictNumeric($event)" maxlength="12" style="font-size: 12px; font-family:'plutosansregular'; font-weight: 300;">
+                  <p class="validador" *ngIf="validadorNroDocumento" style="color: rgba(230, 0, 0, 0.8);font-family:'plutosanslight'; font-size: 11px; font-weight: 400;">Debe ingresar el número de documento.</p>
+                  <p class="validador" *ngIf="validadorNroDocumentoDigitos" style="color: rgba(230, 0, 0, 0.8);font-family:'plutosanslight'; font-size: 11px; font-weight: 400;">El documento debe tener 8 digitos.</p>
+                </div>
+    
+              <div>
+                <div class="input-wrapper">
+                  <label for="contrasena" style="font-family: 'plutosansregular';font-size: 13px; font-weight: 400; color: rgba(88, 89, 91, 0.8);">CONTRASEÑA</label>
+                  <input type="password"  id="contrasena" name="contrasena" placeholder="" [(ngModel)]="contrasena" (change)="changeContrasena()" maxlength="150"  class="form">
+                  <img src="../assets/img/ver_on.png" (click)="mostrarContrasena()" id="eyeContrasena" class="input-icon password">
+                </div>
+                <p class="validador" *ngIf="validadorContrasena" style="color: rgba(230, 0, 0, 0.8);font-family:'plutosanslight'; font-size: 11px; font-weight: 400;">Debe ingresar la contraseña.</p>
+              </div>
+    
+    
+            <div class="align-right" style="font-family: 'plutosansregular';font-size: 13px; font-weight: 500; color: #000000">
+              <a href="/recuperar-contrasena-persona?id_aplicacion={{ id_aplicacion }}" style="background-color: white !important;">Recuperar contraseña</a>
+            </div>
+    
+            <div>
+              <button class="buttonSiguiente" (click)="guardar()">Ingresar</button>
+              <button class="buttonCancelar"  (click)="CancelarSesion()">Cancelar</button>
+    
+            </div>
+    
+            <div class="footer bg-white">
+              <p style="color: rgba(88, 89, 91, 0.8); font-family: 'plutosansregular';font-size: 13px; font-weight: 300">¿No tienes una cuenta de persona?</p>
+              <a href="/registro-persona?id_aplicacion={{ id_aplicacion }}" style="font-family: 'plutosansregular';font-size: 13px; font-weight: 500; color: #000000; background-color: white !important;">Crea una ahora</a>
+            </div>
+            </form>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

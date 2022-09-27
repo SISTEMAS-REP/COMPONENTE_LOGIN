@@ -19,6 +19,9 @@ import { RegisterCompanyFourthStepComponent } from './pages/register-company/com
 import { OnlyNumbersDirective } from '../helpers/only-numbers.directive';
 import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
 import { environment } from 'src/environments/environment';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 
 @NgModule({
   declarations: [
@@ -45,6 +48,10 @@ import { environment } from 'src/environments/environment';
 
     RecaptchaV3Module,
 
+    NgxSpinnerModule,
+    NzModalModule,
+    NzNotificationModule,
+    
     RouterModule,
     AuthRoutingModule,
   ],
