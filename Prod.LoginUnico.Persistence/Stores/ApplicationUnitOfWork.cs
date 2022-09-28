@@ -30,4 +30,24 @@ public class ApplicationUnitOfWork : UnitOfWork, IApplicationUnitOfWork
 
         return await Task.FromResult(result);
     }
+    public async Task<int>
+        RegistrationLogSessionExtranet(bool Estado, DateTime FechaHora, int IdUsuarioExtranet, string Ip, string InformacionHost, string PcName, bool navigation_valid)
+    {
+        var parms = new Parameter[]
+        {
+            new Parameter("@id_usuario_extranet", IdUsuarioExtranet),
+            new Parameter("@date_time", FechaHora),
+            new Parameter("@name_host", PcName),
+            new Parameter("@ip_host", Ip),
+            new Parameter("@agent_host",InformacionHost),
+            new Parameter("@status", Estado.ToString()),
+            new Parameter("@navigation_valid", navigation_valid)
+        };
+
+        var result = ExecuteScalar<int>(
+            "usr_login_unico.sp_registro_log_login_extranet",
+            CommandType.StoredProcedure, ref parms);
+
+        return await Task.FromResult(result);
+    }
 }

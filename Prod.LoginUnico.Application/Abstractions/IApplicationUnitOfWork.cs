@@ -12,4 +12,6 @@ public interface IApplicationUnitOfWork : IUnitOfWork
 {
     Task<IEnumerable<ApplicationEntity>>
         FindAppsByUserName(string user_name, int id_aplicacion);
+    Task<int>
+        RegistrationLogSessionExtranet(bool Estado, DateTime FechaHora, int IdUsuarioExtranet, string Ip, string InformacionHost, string PcName, bool navigation_valid);
 }

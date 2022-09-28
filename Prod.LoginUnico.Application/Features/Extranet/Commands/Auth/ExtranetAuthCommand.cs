@@ -1,9 +1,13 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Owin;
 using Prod.LoginUnico.Application.Abstractions;
 using Prod.LoginUnico.Application.Common.Exceptions;
 using Prod.LoginUnico.Application.Common.Wrapper;
+using System.Net;
 using static System.Net.Mime.MediaTypeNames;
+using UAParser;
 
 namespace Prod.LoginUnico.Application.Features.Extranet.Commands.Auth;
 
@@ -101,12 +105,25 @@ public class ExtranetAuthCommandHandler
             .LogIn(user, request.Password!, request.RememberMe ?? false);
 
         if(!result_login.Succeeded)
-        {
+        {   
             success = result_login.Succeeded;
             mensajes.Add(result_login.Errors[0].ToString());
             url_aplicacion = "";
         }
-        
+
+        string localIP = "";
+        IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());// objeto para guardar la ip 
+        foreach (IPAddress ip in host.AddressList)
+        {
+            if (ip.AddressFamily.ToString() == "InterNetwork")
+            {
+                localIP = ip.ToString();// esta es nuestra ip
+            }
+        }
+
+        await _applicationUnitOfWork.RegistrationLogSessionExtranet(result_login.Succeeded,DateTime.Now, user.id_usuario_extranet, localIP, "LoginUnico", host.HostName, recaptchaResult.Success);
+
+
 
         return new()
         {
