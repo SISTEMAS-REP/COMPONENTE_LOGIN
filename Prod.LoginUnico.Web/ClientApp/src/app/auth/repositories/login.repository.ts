@@ -31,4 +31,14 @@ export class LoginRepository {
       .login(request, recaptchaToken)
       .pipe(catchError(this.appMapping.throwError));
   };
+
+  loginCompany = (
+    request: LoginRequest,
+    recaptchaToken: string
+  ): Observable<void> => {
+    return this.extranetService
+      .login(request, recaptchaToken)
+      .pipe(catchError(this.appMapping.throwError));
+  };
+
 }
