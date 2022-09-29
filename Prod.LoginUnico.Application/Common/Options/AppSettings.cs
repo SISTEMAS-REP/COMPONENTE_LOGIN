@@ -15,4 +15,6 @@ public class AppSettings
     public UserAudit UserAudit { get; set; }
 
     public ReCaptcha ReCaptcha { get; set; }
+
+    public SecuritySettings SecuritySettings { get; set; }
 }

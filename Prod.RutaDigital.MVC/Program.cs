@@ -2,16 +2,24 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using Prod.RutaDigital.MVC.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// Params
+var ss = builder.Configuration
+    .GetSection("SecuritySettings")
+    .Get<SecuritySettings>();
+
 builder.Services
     .AddDataProtection()
-    .PersistKeysToFileSystem(new DirectoryInfo(@"C:\Key"))
-    .SetApplicationName("SharedCookieApp");
+    .PersistKeysToFileSystem(new DirectoryInfo(ss.KeyDirectory))
+    .SetApplicationName(ss.ApplicationName);
 
 builder.Services.AddScoped<CustomCookieAuthenticationEvents>();
 
@@ -23,7 +31,7 @@ builder.Services
     })
     .AddCookie(IdentityConstants.ApplicationScheme, options =>
     {
-        options.Cookie.Name = ".AspNet.SharedCookie.Extranet";
+        options.Cookie.Name = ss.CookieName;
         options.EventsType = typeof(CustomCookieAuthenticationEvents);
     });
 

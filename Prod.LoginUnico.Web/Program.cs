@@ -27,7 +27,7 @@ builder.Services
     .AddPresentation();
 
 builder.Services
-    .AddIdentity()
+    .AddIdentity(AppSettings)
     .AddPersistence(AppSettings);
 
 builder.Services.AddPersistence(AppSettings);

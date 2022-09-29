@@ -95,7 +95,7 @@ public static class InfrastructureExtensions
 
 
     public static IServiceCollection 
-        AddIdentity(this IServiceCollection services)
+        AddIdentity(this IServiceCollection services,AppSettings appSettings)
     {
         services
             .AddIdentity<ExtranetUserEntity, RoleEntity>()
@@ -110,12 +110,12 @@ public static class InfrastructureExtensions
         services.AddScoped<IPasswordHasher, PasswordHasher>();
 
         services.AddDataProtection()
-            .PersistKeysToFileSystem(new DirectoryInfo(@"C:\Key"))
-            .SetApplicationName("SharedCookieApp");
+            .PersistKeysToFileSystem(new DirectoryInfo(appSettings.SecuritySettings.KeyDirectory))
+            .SetApplicationName(appSettings.SecuritySettings.ApplicationName);
 
         services.ConfigureApplicationCookie(options =>
         {
-            options.Cookie.Name = ".AspNet.SharedCookie.Extranet";
+            options.Cookie.Name = appSettings.SecuritySettings.CookieName;
             options.Cookie.SameSite = SameSiteMode.Lax;
             /*options.Cookie.SameSite = SameSiteMode.None;
             options.Cookie.SecurePolicy = CookieSecurePolicy.Always;*/
