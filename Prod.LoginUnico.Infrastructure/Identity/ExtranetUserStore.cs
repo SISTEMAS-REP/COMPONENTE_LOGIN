@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Prod.LoginUnico.Application.Abstractions;
-using Prod.LoginUnico.Domain.Entities;
 using Prod.LoginUnico.Domain.Entities.ExtranetUser;
 
 namespace Prod.LoginUnico.Infrastructure.Identity;

@@ -6,24 +6,42 @@ using Prod.LoginUnico.Infrastructure.Identity;
 using Prod.LoginUnico.Infrastructure.Managers;
 using Prod.LoginUnico.Application.Common;
 using Microsoft.AspNetCore.DataProtection;
-using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
-using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 using Prod.ServiciosExternos;
 using Prod.LoginUnico.Application.Common.Options;
 using Prod.LoginUnico.Domain.Entities.RoleEntity;
 using Prod.LoginUnico.Infrastructure.Services;
-using Microsoft.Extensions.Options;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Builder;
+using Prod.LoginUnico.Application.Common.Constants;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Prod.LoginUnico.Infrastructure;
 
 public static class InfrastructureExtensions
 {
+    private static void ChecksSameSite(HttpContext httpContext, CookieOptions options)
+    {
+        if (options.SameSite == SameSiteMode.None)
+        {
+            var userAgent = httpContext.Request.Headers["User-Agent"].ToString();
+            if (userAgent == "someoldbrowser")
+            {
+                options.SameSite = SameSiteMode.Unspecified;
+            }
+        }
+    }
+
     public static IServiceCollection
         AddInfrastructure(
-        this IServiceCollection services, AppSettings options)
+        this IServiceCollection services, AppSettings options, IWebHostEnvironment environment)
     {
+        services.Configure<CookiePolicyOptions>(options =>
+        {
+            // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+            options.CheckConsentNeeded = context => true;
+            options.MinimumSameSitePolicy = SameSiteMode.Lax;
+        });
+
         services.AddScoped<IPersonasServicio>(s => 
             new PersonasServicio(options.Services.UrlPersons));
         services.AddScoped<IPersonsService, PersonsService>();
@@ -46,52 +64,64 @@ public static class InfrastructureExtensions
         services.AddScoped<IExtranetSignInManager, ExtranetSignInManager>();
         services.AddScoped<IPasswordHasher, PasswordHasher>();
 
+        services.AddHttpContextAccessor()
+            .AddResponseCompression()
+            .AddMemoryCache()
+            .AddHealthChecks();
 
-        services.AddIdentity();
+        services.AddCustomCors(options);
 
         return services;
     }
 
-    public static IServiceCollection AddIdentity(this IServiceCollection services)
+    private static IServiceCollection 
+        AddCustomCors(this IServiceCollection services, AppSettings options)
+    {
+        services.AddCors(o =>
+        {
+            o.AddPolicy(Constants.DefaultCorsPolicy,
+                builder =>
+                {
+                    var corsList = options.Cors.AllowedHosts;
+                    builder.WithOrigins(corsList)
+                        .AllowCredentials()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                });
+        });
+
+        return services;
+    }
+
+
+    public static IServiceCollection 
+        AddIdentity(this IServiceCollection services)
     {
         services
             .AddIdentity<ExtranetUserEntity, RoleEntity>()
             .AddTokenProviders();
+        /*services
+            .AddDefaultIdentity<ExtranetUserEntity>(options => 
+                options.SignIn.RequireConfirmedAccount = true)
+            .AddTokenProviders();*/
 
         services.AddTransient<IUserStore<ExtranetUserEntity>, ExtranetUserStore>();
         services.AddTransient<IRoleStore<RoleEntity>, RoleStore>();
         services.AddScoped<IPasswordHasher, PasswordHasher>();
 
         services.AddDataProtection()
-            .UseCryptographicAlgorithms(
-            new AuthenticatedEncryptorConfiguration()
-            {
-                EncryptionAlgorithm = EncryptionAlgorithm.AES_256_CBC,
-                ValidationAlgorithm = ValidationAlgorithm.HMACSHA256
-            })
             .PersistKeysToFileSystem(new DirectoryInfo(@"C:\Key"))
-            .SetApplicationName("Prod.LoginUnico")
-            .SetDefaultKeyLifetime(TimeSpan.FromDays(600));
+            .SetApplicationName("SharedCookieApp");
 
         services.ConfigureApplicationCookie(options =>
         {
-            options.Cookie.Name = ".AspNet.SharedCookie";
-            options.Cookie.Domain = "localhost";
-            options.Cookie.Path = "/";
-            options.Cookie.HttpOnly = true;
-            options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-
-            options.LoginPath = "/GetLogin";
-            options.LogoutPath = "/GetLogout";
-            //options.AccessDeniedPath = "/GetAccessDenied";
+            options.Cookie.Name = ".AspNet.SharedCookie.Extranet";
+            options.Cookie.SameSite = SameSiteMode.Lax;
+            /*options.Cookie.SameSite = SameSiteMode.None;
+            options.Cookie.SecurePolicy = CookieSecurePolicy.Always;*/
         });
 
-        services.Configure<CookiePolicyOptions>(options =>
-        {
-            // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-            options.CheckConsentNeeded = context => true;
-            options.MinimumSameSitePolicy = SameSiteMode.None;
-        });
+        services.AddAntiforgery(o => o.SuppressXFrameOptionsHeader = true);
 
         ConfigureOptions(services);
 

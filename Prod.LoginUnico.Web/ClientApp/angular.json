@@ -34,13 +34,15 @@
             "styles": [
               "src/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css",
               "src/assets/css/base.css",
+              "src/assets/css/toastr.css",
               "src/assets/css/bs-stepper.css",
               "src/styles.css",
               "src/theme.less"
             ],
             "scripts": [],
             "allowedCommonJsDependencies": [
-              "bs-stepper"
+              "bs-stepper",
+              "qs"
             ]
           },
           "configurations": {

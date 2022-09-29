@@ -8,11 +8,12 @@ public class ExtranetController : BaseApiController
 {
     [AllowAnonymous]
     [HttpPost]
-    public async Task<IActionResult> Auth([FromBody] ExtranetAuthCommand request)
+    public async Task<IActionResult> Auth([FromForm] ExtranetAuthCommand request)
     {
         request.recaptchaToken = HttpContext.Request.Headers["x-captcha-token"];
-        var result = await Mediator.Send(request);
-        return Ok(result);
+        await Mediator.Send(request);
+
+        return Ok();
     }
     
     [AllowAnonymous]

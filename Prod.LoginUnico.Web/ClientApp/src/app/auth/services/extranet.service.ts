@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import * as qs from 'qs';
 import { Observable } from 'rxjs';
 import { ApiService } from '../../services/api.service';
 import { LoginRequest } from '../interfaces/request/login.request';
@@ -13,14 +14,19 @@ export class ExtranetService extends ApiService {
   }
 
   login = (request: LoginRequest, captcha: string): Observable<any> => {
-    return this.post('auth', request, {
+    var body = qs.stringify(request);
+    return this.post('auth', body, {
       headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
         'x-captcha-token': captcha,
       },
     });
   };
 
-  register = (request: RegisterRequest, recaptchaToken: string): Observable<any> => {
+  register = (
+    request: RegisterRequest,
+    recaptchaToken: string
+  ): Observable<any> => {
     return this.post('register', request, {
       headers: {
         'x-captcha-token': recaptchaToken,

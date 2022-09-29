@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,22 +11,19 @@ builder.Services.AddControllersWithViews();
 builder.Services
     .AddDataProtection()
     .PersistKeysToFileSystem(new DirectoryInfo(@"C:\Key"))
-    .SetApplicationName("Prod.LoginUnico");
+    .SetApplicationName("SharedCookieApp");
 
 builder.Services.AddScoped<CustomCookieAuthenticationEvents>();
 
 builder.Services
-    .AddAuthentication("Identity.Application")
-    .AddCookie("Identity.Application", options =>
+    .AddAuthentication(o =>
     {
-        options.Cookie.Name = ".AspNet.SharedCookie";
-        options.Cookie.HttpOnly = true;
-        options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-
-        /*options.LoginPath = "/GetLogin";
-        options.LogoutPath = "/GetLogout";
-        options.AccessDeniedPath = "/GetAccessDenied";*/
-
+        o.DefaultScheme = IdentityConstants.ApplicationScheme;
+        o.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+    })
+    .AddCookie(IdentityConstants.ApplicationScheme, options =>
+    {
+        options.Cookie.Name = ".AspNet.SharedCookie.Extranet";
         options.EventsType = typeof(CustomCookieAuthenticationEvents);
     });
 
@@ -39,8 +37,9 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseStaticFiles();
+//app.UseCookiePolicy();
 
 app.UseRouting();
 
@@ -62,10 +61,20 @@ public class CustomCookieAuthenticationEvents
 
     public override Task RedirectToLogin(RedirectContext<CookieAuthenticationOptions> redirectContext)
     {
-        //var context = redirectContext.HttpContext;
-        redirectContext.RedirectUri = "https://localhost:4200/#/session-persona" +
-            "?applicationId=232" +
+        redirectContext.RedirectUri = "https://localhost:44428/auth/login-person" +
+        "?applicationId=159" +
             "&returnUrl=https://localhost:7096";
+
+        /*redirectContext.RedirectUri = "https://localhost:4200/sesion-persona" +
+        "?id_aplicacion=98" +
+            "&url=https://localhost:7096";*/
+
+        /*redirectContext.RedirectUri = "https://localhost:7212/Identity/Account/Login" +
+        "?id_aplicacion=98" +
+            "&ReturnUrl=https://localhost:7096";*/
+
+
+
         return base.RedirectToLogin(redirectContext);
     }
 }

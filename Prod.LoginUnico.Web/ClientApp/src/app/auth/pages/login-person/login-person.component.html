@@ -1,7 +1,7 @@
 <div class="main-content">
   <div class="container mt-5">
     <div class="row justify-content-center">
-      <div class="col-lg-8 col-md-12">
+      <div class="col-lg-7 col-md-12">
         <div class="card shadow-prod border-0">
           <div class="card-header bg-transparent">
             <div class="row">
@@ -10,7 +10,8 @@
                   class="img-fluid"
                   src="assets/img/logo_produce.PNG"
                   alt="Produce"
-                  title="Produce"/>
+                  title="Produce"
+                />
               </div>
             </div>
           </div>
@@ -18,11 +19,11 @@
             <div class="row justify-content-center mb-2">
               <div class="col-4 col-sm-3">
                 <img
-                *ngIf="logo"
-                class="img-fluid"
-                [src]="logo"
-                [alt]="applicationId"
-                [title]="applicationId"
+                  *ngIf="logo"
+                  class="img-fluid"
+                  [src]="logo"
+                  [alt]="applicationId"
+                  [title]="applicationId"
                 />
               </div>
             </div>
@@ -38,20 +39,29 @@
 
             <div #stepper class="bs-stepper">
               <div class="bs-stepper-content">
-                <app-login-person-first-step
-                #firstStep
-              ></app-login-person-first-step>
-                </div>
-            </div>   
-            
+                <app-login-person-form
+                  #loginForm
+                  (onSendForm)="sendForm($event)"
+                  (onSendCancel)="sendCancel()"
+                ></app-login-person-form>
+              </div>
+            </div>
+
             <div class="col-sm-12">
-              <div class="row justify-content-center">       
+              <div class="row justify-content-center">
                 <p>¿No tienes una cuenta de persona?</p>
               </div>
-              <div class="row justify-content-center">     
-              <a href="/recuperar-contrasena-persona?applicationId={{ applicationId }}" style="color: #000 ; border-bottom: 1px solid #000;">Crea una ahora</a>
+              <div class="row justify-content-center">
+                <a
+                  href="/recuperar-contrasena-persona?applicationId={{
+                    applicationId
+                  }}"
+                  style="color: #000; border-bottom: 1px solid #000"
+                  >Crea una ahora</a
+                >
+              </div>
             </div>
-            </div>
+          </div>
         </div>
       </div>
     </div>

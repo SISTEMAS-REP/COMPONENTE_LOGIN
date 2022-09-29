@@ -11,7 +11,7 @@ using UAParser;
 
 namespace Prod.LoginUnico.Application.Features.Extranet.Commands.Auth;
 
-public class ExtranetAuthCommand : IRequest<Response<ExtranetAuthResponse>>
+public class ExtranetAuthCommand : IRequest
 {
     public int? PersonType { get; set; }
 
@@ -26,11 +26,12 @@ public class ExtranetAuthCommand : IRequest<Response<ExtranetAuthResponse>>
     public string? ReturnUrl { get; set; }
 
     public int ApplicationId { get; set; }
+
     public string recaptchaToken { get; set; }
 }
 
 public class ExtranetAuthCommandHandler
-    : IRequestHandler<ExtranetAuthCommand, Response<ExtranetAuthResponse>>
+    : IRequestHandler<ExtranetAuthCommand>
 {
     //private readonly IAuthManager _manager;
     private readonly IExtranetUserManager _extranetUserManager;
@@ -49,13 +50,9 @@ public class ExtranetAuthCommandHandler
         _reCaptchaService = reCaptchaService;
     }
 
-    public async Task<Response<ExtranetAuthResponse>>
+    public async Task<Unit>
         Handle(ExtranetAuthCommand request, CancellationToken cancellationToken)
     {
-        var success = true;
-        var url_aplicacion = "";
-        List<string> mensajes = new List<string>();
-
         var recaptchaResult = await _reCaptchaService.Validate(request.recaptchaToken);
 
         if (!recaptchaResult.Success)
@@ -64,11 +61,8 @@ public class ExtranetAuthCommandHandler
                 .Select(e => e)
                 .Aggregate((i, j) => i + ", " + j);
 
-            success = false;
-            mensajes.Add($"ReCaptcha validation failed: {errors}");
+            throw new UnauthorizedAccessException("ReCaptcha validation failed: {errors}");
         }
-
-      
 
         var userName = request.DocumentNumber!;
 
@@ -82,34 +76,18 @@ public class ExtranetAuthCommandHandler
 
         if (user is null)
         {
-            success = false;
-            mensajes.Add("Usuario incorrecto.");
-            //throw new UnauthorizedAccessException("Usuario incorrecto.");
+            throw new UnauthorizedAccessException("Usuario incorrecto.");
         }
 
         var apps = await _applicationUnitOfWork.FindAppsByUserName(userName, request.ApplicationId);
 
         if (apps.Count() <= 0)
         {
-            success = false;
-            mensajes.Add("El usuario no tiene permisos a la aplicacion.");
-            //throw new UnauthorizedAccessException("El usuario no tiene permisos a la aplicacion");
-        }
-        else
-        {
-            var result = apps.FirstOrDefault();
-            url_aplicacion = result.url_extranet;
+            throw new UnauthorizedAccessException("El usuario no tiene permisos a la aplicacion");
         }
 
-        var result_login = await _extranetSignInManager
+        await _extranetSignInManager
             .LogIn(user, request.Password!, request.RememberMe ?? false);
-
-        if(!result_login.Succeeded)
-        {   
-            success = result_login.Succeeded;
-            mensajes.Add(result_login.Errors[0].ToString());
-            url_aplicacion = "";
-        }
 
         string localIP = "";
         IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());// objeto para guardar la ip 
@@ -121,18 +99,13 @@ public class ExtranetAuthCommandHandler
             }
         }
 
-        await _applicationUnitOfWork.RegistrationLogSessionExtranet(result_login.Succeeded,DateTime.Now, user.id_usuario_extranet, localIP, "LoginUnico", host.HostName, recaptchaResult.Success);
+        await _applicationUnitOfWork
+            .RegistrationLogSessionExtranet(true, 
+            DateTime.Now, 
+            user.id_usuario_extranet, 
+            localIP, "LoginUnico", 
+            host.HostName, recaptchaResult.Success);
 
-
-
-        return new()
-        {
-            Succeeded = success,
-            Data = new()
-            {
-                ReturnUrl = url_aplicacion!
-            },
-            Errors = mensajes
-        };
+        return Unit.Value;
     }
 }

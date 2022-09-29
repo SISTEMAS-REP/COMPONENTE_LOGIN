@@ -23,7 +23,6 @@ public class ExtranetSignInManager : IExtranetSignInManager
 	public async Task<Response<Unit>>
         LogIn(ExtranetUserEntity user, string password, bool rememberMe)
 	{
-        var success = true;
         List<string> mensajes = new List<string>();
 
         var result = await SignInManager
@@ -57,23 +56,16 @@ public class ExtranetSignInManager : IExtranetSignInManager
                     .Append(dtLockoutEnd.ToString("dd/MM/yyyy"));
             }
 
-            success = false;
             mensajes.Add(stringBuilder.ToString());
 
-            //throw new UnauthorizedAccessException(stringBuilder.ToString());
+            throw new UnauthorizedAccessException(stringBuilder.ToString());
         }
 
         if (!result.Succeeded)
         {
-            //throw new UnauthorizedAccessException("Revise las credenciales ingresadas.");
-            success = false;
-            mensajes.Add("Revise las credenciales ingresadas.");
+            throw new UnauthorizedAccessException("Revise las credenciales ingresadas.");
         }
 
-        return new()
-        {
-            Succeeded = success,            
-            Errors = mensajes
-        };
+        return new();
     }
 }

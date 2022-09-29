@@ -103,7 +103,7 @@ export class RegisterCompanySecondStepComponent implements OnInit {
       if (documentType === '1') {
         this.documentNumberLength = 8;
       } else if (documentType === '2') {
-        this.documentNumberLength = 11;
+        this.documentNumberLength = 9;
       } else {
         this.documentNumberLength = 0;
       }

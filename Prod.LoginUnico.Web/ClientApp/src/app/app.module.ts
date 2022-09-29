@@ -26,6 +26,8 @@ import { NzNotificationModule } from 'ng-zorro-antd/notification';
 registerLocaleData(es);
 import { PresentationComponent } from './pages/presentation/presentation.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ToastrModule } from 'ngx-toastr';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,12 @@ import { AppRoutingModule } from './app-routing.module';
     HttpClientModule,
     FormsModule,
     CommonModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot({
+      preventDuplicates: false,
+    }), // ToastrModule added
+    HttpClientModule,
+    SharedModule,
 
     NgxSpinnerModule,
     NzModalModule,
