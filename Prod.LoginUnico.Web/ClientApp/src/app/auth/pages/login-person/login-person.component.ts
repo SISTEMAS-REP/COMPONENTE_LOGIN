@@ -130,7 +130,7 @@ export class LoginPersonComponent implements OnInit {
 
           this.toastService.success('Login success');
 
-          window.location.href = this.returnUrl;
+          //window.location.href = this.returnUrl;
           /*
         TODO: REDIRECT
         */
