@@ -17,4 +17,6 @@ public class AppSettings
     public ReCaptcha ReCaptcha { get; set; }
 
     public SecuritySettings SecuritySettings { get; set; }
+
+    public Urls Urls { get; set; }
 }

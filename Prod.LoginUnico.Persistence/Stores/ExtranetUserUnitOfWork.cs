@@ -28,7 +28,7 @@ public class ExtranetUserUnitOfWork : UnitOfWork, IExtranetUserUnitOfWork
         };
 
         var result = ExecuteReader<ExtranetUserEntity>(
-            "core.MAE_USUARIO_EXTRANET_BUSCAR",
+            "usr_login_unico.MAE_USUARIO_EXTRANET_BUSCAR",
             CommandType.StoredProcedure, ref parms);
 
         return await Task.FromResult(result.FirstOrDefault());
@@ -62,7 +62,7 @@ public class ExtranetUserUnitOfWork : UnitOfWork, IExtranetUserUnitOfWork
         };
 
         var result = ExecuteScalar<int>(
-            "core.MAE_USUARIO_EXTRANET_INSERTAR_ACTUALIZAR",
+            "usr_login_unico.MAE_USUARIO_EXTRANET_INSERTAR_ACTUALIZAR",
             CommandType.StoredProcedure, ref parms);
 
         return await Task.FromResult(result);

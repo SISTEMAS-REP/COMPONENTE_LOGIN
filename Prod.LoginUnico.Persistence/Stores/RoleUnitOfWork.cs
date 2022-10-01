@@ -26,7 +26,7 @@ public class RoleUnitOfWork : UnitOfWork, IRoleUnitOfWork
         };
 
         var result = ExecuteReader<RoleEntity>(
-            "core.MAE_ROL_BUSCAR_X_APLICACION",
+            "usr_login_unico.MAE_ROL_BUSCAR_X_APLICACION",
             CommandType.StoredProcedure, ref parms);
 
         return await Task.FromResult(result);

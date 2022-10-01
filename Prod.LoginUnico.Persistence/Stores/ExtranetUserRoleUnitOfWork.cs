@@ -26,7 +26,7 @@ public class ExtranetUserRoleUnitOfWork : UnitOfWork, IExtranetUserRoleUnitOfWor
         };
 
         var result = ExecuteReader<ExtranetUserRoleEntity>(
-            "core.MAE_USUARIO_EXTRANET_BUSCAR",
+            "usr_login_unico.MAE_USUARIO_EXTRANET_BUSCAR",
             CommandType.StoredProcedure, ref parms);
 
         return await Task.FromResult(result);

@@ -1,6 +1,7 @@
 ﻿using Prod.LoginUnico.Application.Abstractions;
 using Prod.LoginUnico.Domain.Entities;
 using Prod.LoginUnico.Domain.Entities.ApplicationEntity;
+using Prod.LoginUnico.Domain.Entities.CheckEmailEntity;
 using Prod.LoginUnico.Persistence.Common;
 using Prod.LoginUnico.Persistence.Context;
 using Release.Helper.Data.Core;
@@ -46,6 +47,39 @@ public class ApplicationUnitOfWork : UnitOfWork, IApplicationUnitOfWork
 
         var result = ExecuteScalar<int>(
             "usr_login_unico.sp_registro_log_login_extranet",
+            CommandType.StoredProcedure, ref parms);
+
+        return await Task.FromResult(result);
+    }
+
+    public async Task<IEnumerable<CheckEmailEntity>>
+        CheckEmailUserExtranet(Guid identificador_solicitud, string correo_verificación)
+    {
+        var parms = new Parameter[]
+        {
+            new Parameter("@identificador_solicitud", identificador_solicitud),
+            new Parameter("@correo_verificación", correo_verificación)
+        };
+
+        var result = ExecuteReader<CheckEmailEntity>(
+            "usr_login_unico.SP_VERIFICAR_CORREO_USUARIO_EXTRANET",
+            CommandType.StoredProcedure, ref parms);
+
+        return await Task.FromResult(result);
+    }
+
+    public async Task<int>
+        RegisterEmailUserExtranet(Guid identificador_solicitud, string correo_verificación, Guid codigo_verificacion)
+    {
+        var parms = new Parameter[]
+        {
+            new Parameter("@identificador_solicitud", identificador_solicitud),
+            new Parameter("@correo_verificación", correo_verificación),
+            new Parameter("@codigo_verificacion", codigo_verificacion)
+        };
+
+        var result = ExecuteScalar<int>(
+            "usr_login_unico.SP_INSERTAR_CORREO_USUARIO_EXTRANET",
             CommandType.StoredProcedure, ref parms);
 
         return await Task.FromResult(result);
