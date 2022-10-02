@@ -12,7 +12,7 @@ export class RecoverPasswordCompanyFormComponent implements OnInit {
   @Output() onSendCancel: EventEmitter<any> = new EventEmitter();
 
   rucNumberLength: number = 11;
-  documentNumberLength: number = 8;
+  documentNumberLength: number = 12;
 
 
   myForm: FormGroup = this.fb.group({
@@ -34,7 +34,7 @@ export class RecoverPasswordCompanyFormComponent implements OnInit {
       {
         validators: [
           Validators.required,
-          Validators.minLength(this.documentNumberLength - 1),
+          Validators.minLength(this.documentNumberLength - 4),
           Validators.maxLength(this.documentNumberLength),
         ],
       },

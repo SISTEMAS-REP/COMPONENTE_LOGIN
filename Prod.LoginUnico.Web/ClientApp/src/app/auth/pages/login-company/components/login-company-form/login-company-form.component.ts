@@ -11,7 +11,7 @@ export class LoginCompanyFormComponent implements OnInit {
   @Input() applicationId?: number;
   @Output() onSendForm: EventEmitter<any> = new EventEmitter();
 
-  documentNumberLength: number = 8;
+  documentNumberLength: number = 12;
   rucNumberLength: number = 11;
   hidePassword: boolean = true;
 
@@ -34,7 +34,7 @@ export class LoginCompanyFormComponent implements OnInit {
       {
         validators: [
           Validators.required,
-          Validators.minLength(this.documentNumberLength),
+          Validators.minLength(this.documentNumberLength - 4),
           Validators.maxLength(this.documentNumberLength),
         ],
       },

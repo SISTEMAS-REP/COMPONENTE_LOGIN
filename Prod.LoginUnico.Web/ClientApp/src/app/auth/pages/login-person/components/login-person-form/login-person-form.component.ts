@@ -11,8 +11,7 @@ export class LoginPersonFormComponent implements OnInit {
   @Output() onSendForm: EventEmitter<any> = new EventEmitter();
   @Output() onSendCancel: EventEmitter<any> = new EventEmitter();
 
-  documentNumberLength: number = 8;
-  rucNumberLength: number = 11;
+  documentNumberLength: number = 12;
   hidePassword: boolean = true;
 
   myForm: FormGroup = this.fb.group({
@@ -21,7 +20,7 @@ export class LoginPersonFormComponent implements OnInit {
       {
         validators: [
           Validators.required,
-          Validators.minLength(this.documentNumberLength - 1),
+          Validators.minLength(this.documentNumberLength - 4),
           Validators.maxLength(this.documentNumberLength),
         ],
       },
