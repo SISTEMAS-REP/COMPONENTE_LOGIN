@@ -10,7 +10,7 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordRecover
     public class ExtranetPasswordRecoveryCommand : IRequest
     {
         public string? DocumentNumber { get; set; }
-        public string? Ruc { get; set; }
+        public string? rucNumber { get; set; }
         public string recaptchaToken { get; set; }
         public int? PersonType { get; set; }
         public string? email { get;set; }

@@ -51,7 +51,7 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordRecover
             //        .Aggregate((i, j) => i + ", " + j);
             //    throw new BadRequestException($"ReCaptcha validation failed: {errors}");
             //}
-            var numero_documento = request.PersonType == 1 ? request.DocumentNumber : request.Ruc + "" + request.DocumentNumber;
+            var numero_documento = request.PersonType == 1 ? request.DocumentNumber : request.rucNumber + "" + request.DocumentNumber;
             var guid = Guid.NewGuid();
             var guid2 = Guid.NewGuid();
             var urlBase = _appSettings.Urls.URL_LOGIN_UNICO_WEB + "Verificaciones/EmailLoginUnico/[" + numero_documento + "]";

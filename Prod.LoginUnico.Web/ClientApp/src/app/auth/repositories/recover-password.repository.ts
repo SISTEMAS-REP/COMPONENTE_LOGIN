@@ -28,7 +28,7 @@ export class RecoverPasswordRepository {
     recaptchaToken: string
   ): Observable<void> => {
     return this.extranetService
-      .login(request, recaptchaToken)
+      .recoveryPassword(request, recaptchaToken)
       .pipe(catchError(this.appMapping.throwError));
   };
 
@@ -37,7 +37,7 @@ export class RecoverPasswordRepository {
     recaptchaToken: string
   ): Observable<void> => {
     return this.extranetService
-      .login(request, recaptchaToken)
+      .recoveryPassword(request, recaptchaToken)
       .pipe(catchError(this.appMapping.throwError));
   };
 

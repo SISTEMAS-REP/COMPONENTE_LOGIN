@@ -5,10 +5,6 @@ export interface RecoverPasswordRequest {
   
     documentNumber?: string;
   
-    password?: string;
-  
-    rememberMe?: boolean;
-  
     returnUrl?: string;
   
     applicationId?: number;

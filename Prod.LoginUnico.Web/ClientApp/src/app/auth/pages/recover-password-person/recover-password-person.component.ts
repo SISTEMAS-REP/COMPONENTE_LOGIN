@@ -66,7 +66,7 @@ export class RecoverPasswordPersonComponent implements OnInit {
 
     this.RecoverPasswordRequest.personType = this.enums.TIPO_PERSONA.NATURAL;
     this.RecoverPasswordRequest.applicationId = this.applicationId;
-    this.RecoverPasswordRequest.rememberMe = false;
+   //this.RecoverPasswordRequest.rememberMe = false;
 
     this.setReCAPTCHA();
   }
@@ -104,6 +104,7 @@ export class RecoverPasswordPersonComponent implements OnInit {
 
 
   recoverPasswordPerson() {
+    debugger;
     this.RecoverPasswordRepository
       .recoverPasswordPerson(this.RecoverPasswordRequest!, this.recaptchaToken!)
       .subscribe({
