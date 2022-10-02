@@ -124,7 +124,7 @@ export class LoginPersonComponent implements OnInit {
       .subscribe({
         next: () => {
           this.spinner.hide();
-          console.log('loginCompany-next', 'login success');
+          console.log('loginPerson-next', 'login success');
 
           this.refresh();
 

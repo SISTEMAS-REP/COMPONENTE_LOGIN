@@ -24,6 +24,10 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { LoginCompanyFormComponent } from './pages/login-company/components/login-company-form/login-company-form.component';
 import { LoginPersonFormComponent } from './pages/login-person/components/login-person-form/login-person-form.component';
+import { RecoverPasswordPersonComponent } from './pages/recover-password-person/recover-password-person.component';
+import { RecoverPasswordCompanyComponent } from './pages/recover-password-company/recover-password-company.component';
+import { RecoverPasswordCompanyFormComponent } from './pages/recover-password-company/components/recover-password-company-form/recover-password-company-form.component';
+import { RecoverPasswordPersonFormComponent } from './pages/recover-password-person/components/recover-password-person-form/recover-password-person-form.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +47,10 @@ import { LoginPersonFormComponent } from './pages/login-person/components/login-
     OnlyNumbersDirective,
     LoginCompanyFormComponent,
     LoginPersonFormComponent,
+    RecoverPasswordPersonComponent,
+    RecoverPasswordCompanyComponent,
+    RecoverPasswordCompanyFormComponent,
+    RecoverPasswordPersonFormComponent,
   ],
   imports: [
     CommonModule,

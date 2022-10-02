@@ -6,6 +6,8 @@ import { LoginPersonComponent } from './pages/login-person/login-person.componen
 import { LostPasswordComponent } from './pages/lost-password/lost-password.component';
 import { RegisterCompanyComponent } from './pages/register-company/register-company.component';
 import { RegisterPersonComponent } from './pages/register-person/register-person.component';
+import { RecoverPasswordCompanyComponent } from './pages/recover-password-company/recover-password-company.component';
+import { RecoverPasswordPersonComponent } from './pages/recover-password-person/recover-password-person.component';
 
 export const authRoutes: Routes = [
   {
@@ -13,24 +15,34 @@ export const authRoutes: Routes = [
     component: AuthComponent,
     children: [
       {
-        path: 'login-person',
-        component: LoginPersonComponent,
-      },
-      {
         path: 'login-company',
         component: LoginCompanyComponent,
       },
+      {
+        path: 'login-person',
+        component: LoginPersonComponent,
+      },
+
       {
         path: 'lost-password',
         component: LostPasswordComponent,
       },
       {
+        path: 'register-company',
+        component: RegisterCompanyComponent,
+      },
+      {
         path: 'register-person',
         component: RegisterPersonComponent,
       },
+
       {
-        path: 'register-company',
-        component: RegisterCompanyComponent,
+        path: 'recover-password-company',
+        component: RecoverPasswordCompanyComponent,
+      },
+      {
+        path: 'recover-password-person',
+        component: RecoverPasswordPersonComponent,
       },
     ],
   },
