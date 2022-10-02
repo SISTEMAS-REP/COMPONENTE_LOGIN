@@ -52,24 +52,34 @@ public class ApplicationUnitOfWork : UnitOfWork, IApplicationUnitOfWork
         return await Task.FromResult(result);
     }
 
-    public async Task<IEnumerable<CheckEmailEntity>>
-        CheckEmailUserExtranet(Guid identificador_solicitud, string correo_verificación)
+    public async Task<int>
+        RegisterVerificationUserExtranet(Guid identificador_solicitud, string correo_verificación, Guid codigo_verificacion)
     {
-        var parms = new Parameter[]
+        try 
         {
-            new Parameter("@identificador_solicitud", identificador_solicitud),
-            new Parameter("@correo_verificación", correo_verificación)
-        };
+            var parms = new Parameter[]
+            {
+                new Parameter("@identificador_solicitud", identificador_solicitud),
+                new Parameter("@correo_verificación", correo_verificación),
+                new Parameter("@codigo_verificacion", codigo_verificacion)
+            };
 
-        var result = ExecuteReader<CheckEmailEntity>(
-            "usr_login_unico.SP_VERIFICAR_CORREO_USUARIO_EXTRANET",
-            CommandType.StoredProcedure, ref parms);
+            var result = ExecuteScalar<decimal>(
+                "usr_login_unico.SP_INS_VERIFICACION_CORREO_USUARIO_EXTRANET",
+                CommandType.StoredProcedure, ref parms);
+            return await Task.FromResult(Convert.ToInt32(result));
+        }
+        catch (Exception ex)
+        {
+            throw new UnauthorizedAccessException("Usuario incorrecto.");
+        }
+       
 
-        return await Task.FromResult(result);
+        
     }
 
-    public async Task<int>
-        RegisterEmailUserExtranet(Guid identificador_solicitud, string correo_verificación, Guid codigo_verificacion)
+    public async Task<bool>
+        UpdateVerificationUserExtranet(Guid identificador_solicitud, string correo_verificación, Guid codigo_verificacion)
     {
         var parms = new Parameter[]
         {
@@ -78,8 +88,8 @@ public class ApplicationUnitOfWork : UnitOfWork, IApplicationUnitOfWork
             new Parameter("@codigo_verificacion", codigo_verificacion)
         };
 
-        var result = ExecuteScalar<int>(
-            "usr_login_unico.SP_INSERTAR_CORREO_USUARIO_EXTRANET",
+        var result = ExecuteScalar<bool>(
+            "usr_login_unico.SP_UPD_VERIFICACION_CORREO_USUARIO_EXTRANET",
             CommandType.StoredProcedure, ref parms);
 
         return await Task.FromResult(result);

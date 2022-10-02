@@ -41,7 +41,7 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordRecover
 
         public async Task<Unit>
         Handle(ExtranetPasswordRecoveryCommand request, CancellationToken cancellationToken)
-        {
+            {
             //var recaptchaResult = await _reCaptchaService.Validate(request.recaptchaToken);
 
             //if (!recaptchaResult.Success)
@@ -67,7 +67,7 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordRecover
                 {
                     if (request.email.ToLower() == user.email.ToLower())
                     {
-                        //var resultChek = await _applicationUnitOfWork.RegisterEmailUserExtranet(guid, request.email.ToLower(), guid2);
+                        var resultChek = await _applicationUnitOfWork.RegisterVerificationUserExtranet(guid, request.email.ToLower(), guid2);
                         int pos = urlBase.IndexOf('[');
                         int posUlt = urlBase.IndexOf(']');
                         string userName = urlBase.Substring(pos + 1, posUlt - pos - 1);

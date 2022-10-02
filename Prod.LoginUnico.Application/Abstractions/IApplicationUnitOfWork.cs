@@ -15,8 +15,8 @@ public interface IApplicationUnitOfWork : IUnitOfWork
         FindAppsByUserName(string user_name, int id_aplicacion);
     Task<int>
         RegistrationLogSessionExtranet(bool Estado, DateTime FechaHora, int IdUsuarioExtranet, string Ip, string InformacionHost, string PcName, bool navigation_valid);
-    Task<IEnumerable<CheckEmailEntity>>
-            CheckEmailUserExtranet(Guid identificador_solicitud, string correo_verificación);
     Task<int>
-        RegisterEmailUserExtranet(Guid identificador_solicitud, string correo_verificación, Guid codigo_verificacion);
+        RegisterVerificationUserExtranet(Guid identificador_solicitud, string correo_verificación, Guid codigo_verificacion);
+    Task<bool>
+        UpdateVerificationUserExtranet(Guid identificador_solicitud, string correo_verificación, Guid codigo_verificacion);
 }
