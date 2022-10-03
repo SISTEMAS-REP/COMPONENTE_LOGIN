@@ -4,6 +4,7 @@ import { ApiService } from '../../services/api.service';
 import { LogoRequest } from '../interfaces/request/logo.request';
 import { SunatRequest } from '../interfaces/request/sunat.request';
 import { ReniecRequest } from '../interfaces/request/reniec.request';
+import { MigracionesResponse } from '../interfaces/response/migraciones.response';
 
 @Injectable({
   providedIn: 'root',
@@ -25,5 +26,9 @@ export class GeneralService extends ApiService {
 
   reniec = (request: ReniecRequest): Observable<any> => {
     return this.post('reniec', request);
+  };
+
+  migraciones = (request: MigracionesResponse): Observable<any> => {
+    return this.post('migraciones', request);
   };
 }

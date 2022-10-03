@@ -49,9 +49,5 @@ public class ExtranetAuthValidator : AbstractValidator<ExtranetAuthCommand>
         RuleFor(p => p.RememberMe)
             .NotNull()
                 .WithMessage("{PropertyName} es inválido.");
-
-        //RuleFor(p => p.ReturnUrl)
-        //    .Must(p => !string.IsNullOrEmpty(p))
-        //    .WithMessage("{PropertyName} es un valor obligatorio.");
     }
 }

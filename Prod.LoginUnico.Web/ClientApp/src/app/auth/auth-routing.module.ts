@@ -17,25 +17,24 @@ export const authRoutes: Routes = [
     component: AuthComponent,
     children: [
       {
-        path: 'login-company',
-        component: LoginCompanyComponent,
-      },
-      {
         path: 'login-person',
         component: LoginPersonComponent,
       },
-
+      {
+        path: 'login-company',
+        component: LoginCompanyComponent,
+      },
       {
         path: 'lost-password',
         component: LostPasswordComponent,
       },
       {
-        path: 'register-company',
-        component: RegisterCompanyComponent,
-      },
-      {
         path: 'register-person',
         component: RegisterPersonComponent,
+      },
+      {
+        path: 'register-company',
+        component: RegisterCompanyComponent,
       },
       {
         path: 'recover-password-company',

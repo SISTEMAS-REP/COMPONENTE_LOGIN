@@ -1,13 +1,8 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Owin;
-using Prod.LoginUnico.Application.Abstractions;
-using Prod.LoginUnico.Application.Common.Exceptions;
-using Prod.LoginUnico.Application.Common.Wrapper;
+using Prod.LoginUnico.Application.Abstractions.Managers;
+using Prod.LoginUnico.Application.Abstractions.Services;
+using Prod.LoginUnico.Application.Abstractions.Stores;
 using System.Net;
-using static System.Net.Mime.MediaTypeNames;
-using UAParser;
 
 namespace Prod.LoginUnico.Application.Features.Extranet.Commands.Auth;
 
@@ -25,9 +20,9 @@ public class ExtranetAuthCommand : IRequest
 
     public string? ReturnUrl { get; set; }
 
-    public int ApplicationId { get; set; }
+    public int? ApplicationId { get; set; }
 
-    public string recaptchaToken { get; set; }
+    public string? RecaptchaToken { get; set; }
 }
 
 public class ExtranetAuthCommandHandler
@@ -38,6 +33,7 @@ public class ExtranetAuthCommandHandler
     private readonly IExtranetSignInManager _extranetSignInManager;
     private readonly IApplicationUnitOfWork _applicationUnitOfWork;
     private readonly IReCaptchaService _reCaptchaService;
+
     public ExtranetAuthCommandHandler(
         IExtranetUserManager extranetUserManager,
         IExtranetSignInManager extranetSignInManager,
@@ -53,15 +49,15 @@ public class ExtranetAuthCommandHandler
     public async Task<Unit>
         Handle(ExtranetAuthCommand request, CancellationToken cancellationToken)
     {
-        var recaptchaResult = await _reCaptchaService.Validate(request.recaptchaToken);
+        var recaptchaResult = await _reCaptchaService.Validate(request.RecaptchaToken!);
 
         if (!recaptchaResult.Success)
         {
-            var errors = recaptchaResult.ErrorCodes
+            var errors = recaptchaResult.ErrorCodes!
                 .Select(e => e)
                 .Aggregate((i, j) => i + ", " + j);
 
-            throw new UnauthorizedAccessException("ReCaptcha validation failed: {errors}");
+            throw new UnauthorizedAccessException($"ReCaptcha validation failed: {errors}");
         }
 
         var userName = request.DocumentNumber!;
@@ -104,7 +100,8 @@ public class ExtranetAuthCommandHandler
             DateTime.Now, 
             user.id_usuario_extranet, 
             localIP, "LoginUnico", 
-            host.HostName, recaptchaResult.Success);
+            host.HostName, 
+            true);
 
         return Unit.Value;
     }

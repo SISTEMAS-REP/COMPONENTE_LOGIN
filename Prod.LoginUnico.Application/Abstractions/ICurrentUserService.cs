@@ -8,8 +8,8 @@ public interface ICurrentUserService
 }
 
 public record CurrentUser(string UserId,
-    string PersonId,
-    string UserName,
-    string RemoteIpAddress,
-    string DeviceName,
-    bool IsAuthenticated);
+                          string PersonId,
+                          string UserName,
+                          string RemoteIpAddress,
+                          string DeviceName,
+                          bool IsAuthenticated);

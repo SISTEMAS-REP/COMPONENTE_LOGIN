@@ -1,38 +1,31 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json.Linq;
-using Prod.LoginUnico.Application.Abstractions;
-using Prod.LoginUnico.Application.Common.Exceptions;
 using Prod.LoginUnico.Application.Common.Options;
-using Prod.LoginUnico.Application.Features.Extranet.Commands.Auth;
-using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Runtime.Intrinsics.Arm;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
+using Prod.LoginUnico.Application.Abstractions.Managers;
+using Prod.LoginUnico.Application.Abstractions.Services;
+using Prod.LoginUnico.Application.Abstractions.Stores;
+
+
+
 
 namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordRecovery
 {
     public class ExtranetPasswordRecoveryCommandHandler
         : IRequestHandler<ExtranetPasswordRecoveryCommand>
     {
-        private readonly IPersonsService _personsService;
         private readonly IReCaptchaService _reCaptchaService;
         private readonly IExtranetUserManager _extranetUserManager;
         private readonly IApplicationUnitOfWork _applicationUnitOfWork;
         private readonly AppSettings _appSettings;
         public ExtranetPasswordRecoveryCommandHandler(
-            IPersonsService personsService, 
             IReCaptchaService reCaptchaService, 
             IExtranetUserManager extranetUserManager, 
             IApplicationUnitOfWork applicationUnitOfWork,
             IOptions<AppSettings> options
             )
         {
-            _personsService = personsService;
             _reCaptchaService = reCaptchaService;
             _extranetUserManager = extranetUserManager;
             _applicationUnitOfWork = applicationUnitOfWork;

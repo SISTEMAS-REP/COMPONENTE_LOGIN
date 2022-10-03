@@ -9,7 +9,6 @@ import { LostPasswordComponent } from './pages/lost-password/lost-password.compo
 import { RegisterPersonComponent } from './pages/register-person/register-person.component';
 import { RegisterCompanyComponent } from './pages/register-company/register-company.component';
 import { AuthRoutingModule } from './auth-routing.module';
-import { TabsModule } from 'ngx-bootstrap/tabs';
 import { RegisterPersonFirstStepComponent } from './pages/register-person/components/register-person-first-step/register-person-first-step.component';
 import { RegisterPersonSecondStepComponent } from './pages/register-person/components/register-person-second-step/register-person-second-step.component';
 import { RegisterCompanyFirstStepComponent } from './pages/register-company/components/register-company-first-step/register-company-first-step.component';
@@ -20,8 +19,6 @@ import { OnlyNumbersDirective } from '../helpers/only-numbers.directive';
 import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
 import { environment } from 'src/environments/environment';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { NzModalModule } from 'ng-zorro-antd/modal';
-import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { LoginCompanyFormComponent } from './pages/login-company/components/login-company-form/login-company-form.component';
 import { LoginPersonFormComponent } from './pages/login-person/components/login-person-form/login-person-form.component';
 import { RecoverPasswordPersonComponent } from './pages/recover-password-person/recover-password-person.component';
@@ -64,13 +61,10 @@ import { ChangePasswordCompanyFormComponent } from './pages/change-password-comp
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    TabsModule,
 
     RecaptchaV3Module,
 
     NgxSpinnerModule,
-    NzModalModule,
-    NzNotificationModule,
 
     RouterModule,
     AuthRoutingModule,

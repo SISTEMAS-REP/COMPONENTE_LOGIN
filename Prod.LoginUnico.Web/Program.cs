@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.Extensions.Hosting.Internal;
 using Prod.LoginUnico.Application;
 using Prod.LoginUnico.Application.Common.Constants;
 using Prod.LoginUnico.Application.Common.Options;
@@ -9,6 +7,17 @@ using Prod.LoginUnico.Web;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+var configBuilder = new ConfigurationBuilder()
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{env ?? "Production"}.json", optional: true)
+    .AddEnvironmentVariables()
+    .Build();
+
+builder.WebHost.UseConfiguration(configBuilder);
 
 builder.Host.UseSerilog();
 
@@ -32,52 +41,43 @@ builder.Services
 
 builder.Services.AddPersistence(AppSettings);
 
-/*// In production, the Angular files will be served from this directory
-builder.Services.AddSpaStaticFiles(configuration =>
-{
-    configuration.RootPath = "ClientApp/dist/aspnetcorespa";
-});*/
-
 var app = builder.Build();
 
-// https://github.com/openiddict/openiddict-core/issues/518
-// And
-// https://github.com/aspnet/Docs/issues/2384#issuecomment-297980490
-var forwardOptions = new ForwardedHeadersOptions
-{
-    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-};
-forwardOptions.KnownNetworks.Clear();
-forwardOptions.KnownProxies.Clear();
+app.Logger.LogInformation("Starting Application");
 
-app.UseForwardedHeaders(forwardOptions);
-
-if (app.Environment.IsDevelopment())
+try
 {
-    app.UseDeveloperExceptionPage();
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseDeveloperExceptionPage();
+    }
+    else
+    {
+        app.UseExceptionHandler("/Error");
+    }
+
+    app.ConfigureExceptionHandler(
+        app.Services.GetRequiredService<ILogger<Program>>());
+
+    app.UseCookiePolicy();
+    app.UseHttpsRedirection();
+    app.UseDefaultFiles();
+    app.UseStaticFiles();
+    app.UseRouting();
+
+    app.UseCors(Constants.DefaultCorsPolicy);
+    app.UseAuthentication();
+    app.UseAuthorization();
+
+    app.MapControllerRoute(
+        name: "default",
+        pattern: "{controller}/{action=Index}/{id?}");
+
+    app.MapFallbackToFile("index.html"); ;
+
+    //app.Run(context => context.Response.WriteAsync($"<h1 style='color:blue;'>Prod.LoginUnico.Web > Environment: {app.Environment.EnvironmentName}</h1>"));
+    app.Run();
+} catch (Exception ex)
+{
+    app.Logger.LogError(ex, "[ExMessage: {@Message}]", ex.Message);
 }
-else
-{
-    app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-    app.UseResponseCompression();
-}
-
-app.UseCookiePolicy();
-//app.UseCustomExceptionHandler();
-app.UseHealthChecks("/health");
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
-app.UseCors(Constants.DefaultCorsPolicy);
-app.UseAuthentication();
-app.UseAuthorization();
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller}/{action=Index}/{id?}");
-app.MapFallbackToFile("index.html"); ;
-
-app.Run();

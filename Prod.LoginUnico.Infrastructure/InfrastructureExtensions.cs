@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
-using Prod.LoginUnico.Application.Abstractions;
 using Prod.LoginUnico.Domain.Entities.ExtranetUser;
 using Prod.LoginUnico.Infrastructure.Identity;
-using Prod.LoginUnico.Infrastructure.Managers;
 using Prod.LoginUnico.Application.Common;
 using Microsoft.AspNetCore.DataProtection;
 using Prod.ServiciosExternos;
@@ -14,49 +12,39 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
 using Prod.LoginUnico.Application.Common.Constants;
 using Microsoft.AspNetCore.Hosting;
+using Prod.LoginUnico.Application.Abstractions.Services;
+using Prod.LoginUnico.Application.Abstractions.Managers;
+using Prod.LoginUnico.Infrastructure.Identity.Stores;
+using Prod.LoginUnico.Infrastructure.Identity.Managers;
 
 namespace Prod.LoginUnico.Infrastructure;
 
 public static class InfrastructureExtensions
 {
-    private static void ChecksSameSite(HttpContext httpContext, CookieOptions options)
-    {
-        if (options.SameSite == SameSiteMode.None)
-        {
-            var userAgent = httpContext.Request.Headers["User-Agent"].ToString();
-            if (userAgent == "someoldbrowser")
-            {
-                options.SameSite = SameSiteMode.Unspecified;
-            }
-        }
-    }
-
     public static IServiceCollection
         AddInfrastructure(
-        this IServiceCollection services, AppSettings options, IWebHostEnvironment environment)
+        this IServiceCollection services, 
+        AppSettings options, 
+        IWebHostEnvironment environment)
     {
         services.Configure<CookiePolicyOptions>(options =>
         {
-            // This lambda determines whether user consent for non-essential cookies is needed for a given request.
             options.CheckConsentNeeded = context => true;
             options.MinimumSameSitePolicy = SameSiteMode.Lax;
         });
 
         services.AddScoped<IPersonasServicio>(s => 
-            new PersonasServicio(options.Services.UrlPersons));
-        services.AddScoped<IPersonsService, PersonsService>();
+            new PersonasServicio(options.Services?.UrlPersons));
+        services.AddScoped<IPersonasService, PersonasService>();
 
         services.AddScoped<ISunatServicio>(s =>
-            new SunatServicio(options.Services.UrlSunat));
-        services.AddScoped<ISunatService, SunatService>();
+            new SunatServicio(options.Services?.UrlSunat));
 
         services.AddScoped<IReniecServicio>(s =>
-            new ReniecServicio(options.Services.UrlReniec));
-        services.AddScoped<IReniecService, ReniecService>();
+            new ReniecServicio(options.Services?.UrlReniec));
         
         services.AddScoped<IMigracionesServicio>(s =>
-            new MigracionesServicio(options.Services.UrlReniec));
-        services.AddScoped<IMigracionesService, MigracionesService>();
+            new MigracionesServicio(options.Services?.UrlMigraciones));
 
         services.AddScoped<IReCaptchaService, ReCaptchaService>();
 
@@ -82,7 +70,7 @@ public static class InfrastructureExtensions
             o.AddPolicy(Constants.DefaultCorsPolicy,
                 builder =>
                 {
-                    var corsList = options.Cors.AllowedHosts;
+                    var corsList = options.Cors?.AllowedHosts!;
                     builder.WithOrigins(corsList)
                         .AllowCredentials()
                         .AllowAnyMethod()
@@ -100,10 +88,6 @@ public static class InfrastructureExtensions
         services
             .AddIdentity<ExtranetUserEntity, RoleEntity>()
             .AddTokenProviders();
-        /*services
-            .AddDefaultIdentity<ExtranetUserEntity>(options => 
-                options.SignIn.RequireConfirmedAccount = true)
-            .AddTokenProviders();*/
 
         services.AddTransient<IUserStore<ExtranetUserEntity>, ExtranetUserStore>();
         services.AddTransient<IRoleStore<RoleEntity>, RoleStore>();
@@ -117,8 +101,6 @@ public static class InfrastructureExtensions
         {
             options.Cookie.Name = appSettings.SecuritySettings.CookieName;
             options.Cookie.SameSite = SameSiteMode.Lax;
-            /*options.Cookie.SameSite = SameSiteMode.None;
-            options.Cookie.SecurePolicy = CookieSecurePolicy.Always;*/
         });
 
         services.AddAntiforgery(o => o.SuppressXFrameOptionsHeader = true);
@@ -161,7 +143,6 @@ public static class InfrastructureExtensions
 
             options.Tokens.EmailConfirmationTokenProvider = "EmailConfirmation";
 
-            // Default Lockout settings.
             options.Lockout.AllowedForNewUsers = true;
             options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
             options.Lockout.MaxFailedAccessAttempts = 5;
@@ -169,8 +150,7 @@ public static class InfrastructureExtensions
 
         services.Configure<PasswordHasherOptions>(option =>
         {
-            // option.IterationCount = 10000;
-            // option.CompatibilityMode = PasswordHasherCompatibilityMode.IdentityV2;
+
         });
     }
 }

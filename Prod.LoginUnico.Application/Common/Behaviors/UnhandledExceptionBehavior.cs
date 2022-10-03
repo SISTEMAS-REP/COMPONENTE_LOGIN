@@ -5,7 +5,8 @@ using Prod.LoginUnico.Application.Abstractions;
 namespace Prod.LoginUnico.Application.Common.Behaviors;
 
 public class UnhandledExceptionBehavior<TRequest, TResponse>
-    : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
+    : IPipelineBehavior<TRequest, TResponse> 
+    where TRequest : IRequest<TResponse>
 {
     private readonly ILogger<TRequest> _logger;
     private readonly ICurrentUserService _currentUserService;

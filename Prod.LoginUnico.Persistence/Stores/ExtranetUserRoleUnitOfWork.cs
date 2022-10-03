@@ -1,4 +1,4 @@
-﻿using Prod.LoginUnico.Application.Abstractions;
+﻿using Prod.LoginUnico.Application.Abstractions.Stores;
 using Prod.LoginUnico.Domain.Entities.ExtranetUserRoleEntity;
 using Prod.LoginUnico.Persistence.Common;
 using Prod.LoginUnico.Persistence.Context;
@@ -26,7 +26,7 @@ public class ExtranetUserRoleUnitOfWork : UnitOfWork, IExtranetUserRoleUnitOfWor
         };
 
         var result = ExecuteReader<ExtranetUserRoleEntity>(
-            "usr_login_unico.MAE_USUARIO_EXTRANET_BUSCAR",
+            "usr_login_unico.MAE_USUARIO_ROL_EXTRANET_BUSCAR",
             CommandType.StoredProcedure, ref parms);
 
         return await Task.FromResult(result);

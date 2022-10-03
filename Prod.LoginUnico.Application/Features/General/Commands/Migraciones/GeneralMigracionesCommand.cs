@@ -1,42 +1,86 @@
-﻿using MediatR;
-using Prod.LoginUnico.Application.Abstractions;
+﻿using AutoMapper;
+using MediatR;
 using Prod.LoginUnico.Application.Common.Exceptions;
 using Prod.LoginUnico.Application.Common.Wrapper;
-using Prod.LoginUnico.Application.Models;
+using Prod.LoginUnico.Application.Features.General.Commands.Sunat;
+using Prod.ServiciosExternos;
 
 namespace Prod.LoginUnico.Application.Features.General.Commands.Migraciones;
 
-public class GeneralMigracionesCommand : IRequest<Response<MigracionesResultModel>>
+public class GeneralMigracionesCommand
+    : IRequest<Response<GeneralMigracionesResponse>>
 {
     public string? documentNumber { get; set; }
 }
 
 public class GeneralMigracionesCommandHandler
-    : IRequestHandler<GeneralMigracionesCommand, Response<MigracionesResultModel>>
+    : IRequestHandler<GeneralMigracionesCommand, Response<GeneralMigracionesResponse>>
 {
-    private readonly IMigracionesService _migracionesService;
+    private readonly IPersonasServicio _personasService;
+    private readonly IMigracionesServicio _migracionesService;
+    private readonly IMapper _mapper;
 
-    public GeneralMigracionesCommandHandler(IMigracionesService migracionesService)
+    public GeneralMigracionesCommandHandler(IPersonasServicio personasService,
+                                            IMigracionesServicio migracionesService,
+                                            IMapper mapper)
     {
         _migracionesService = migracionesService;
+        _personasService = personasService;
+        _mapper = mapper;
     }
 
-    public async Task<Response<MigracionesResultModel>>
-        Handle(GeneralMigracionesCommand request, CancellationToken cancellationToken)
+    public async Task<Response<GeneralMigracionesResponse>>
+        Handle(GeneralMigracionesCommand request,
+               CancellationToken cancellationToken)
     {
-        var migracionesResult = await _migracionesService
-            .FindByDocument(request.documentNumber!);
+        // Buscar info en la base de datos
+        var personResponse = _personasService
+            .ObtenerPersona(new()
+            {
+                nro_documento = request.documentNumber,
+            });
 
-        if (migracionesResult is null)
+        // Si no existe info en la base de datos
+        if (personResponse is null
+            || personResponse.Data is null)
         {
-            throw new NotFoundException("");
+            // Buscar info en MIGRACIONES
+            var migracionesResponse = _migracionesService
+                .Buscar(request.documentNumber!);
+
+            // Si no existe info en MIGRACIONES
+            if (migracionesResponse is null
+                || !migracionesResponse.Success
+                || migracionesResponse.Data is null)
+            {
+                throw new NotFoundException("");
+            }
+
+            // Volver a buscar info en la base de datos
+            personResponse = _personasService
+            .ObtenerPersona(new()
+            {
+                nro_documento = request.documentNumber,
+            });
+
+            // Si aún no hay info en la base de datos
+            if (personResponse is null
+            || personResponse.Data is null)
+            {
+                throw new NotFoundException("");
+            }
+
         }
 
+        // Mapeo de campos
+        var result = _mapper
+                .Map<GeneralMigracionesResponse>(personResponse.Data);
+
         return await Task
-            .FromResult(new Response<MigracionesResultModel>()
+            .FromResult(new Response<GeneralMigracionesResponse>()
             {
                 Succeeded = true,
-                Data = migracionesResult
+                Data = result
             });
     }
 }

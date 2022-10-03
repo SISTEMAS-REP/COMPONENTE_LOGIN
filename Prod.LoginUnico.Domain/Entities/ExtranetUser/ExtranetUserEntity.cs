@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Prod.LoginUnico.Domain.Entities.ExtranetUser;
 
@@ -52,7 +47,7 @@ public class ExtranetUserEntity
 
     public DateTime fecha_modificacion { get; set; }
 
-    public int idsector { get; set; } // validar, ¿para que sirve?
+    public int idsector { get; set; }
 
     public bool Activo { get; set; }
 }

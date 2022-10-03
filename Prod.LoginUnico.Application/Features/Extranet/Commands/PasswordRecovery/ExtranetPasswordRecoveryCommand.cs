@@ -11,7 +11,7 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordRecover
     {
         public string? DocumentNumber { get; set; }
         public string? rucNumber { get; set; }
-        public string recaptchaToken { get; set; }
+        public string? RecaptchaToken { get; set; }
         public int? PersonType { get; set; }
         public string? email { get;set; }
     }

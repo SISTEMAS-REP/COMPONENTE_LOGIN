@@ -130,7 +130,7 @@ export class LoginCompanyComponent implements OnInit {
           this.toastService.success('Login success');
 
          // window.location.href = this.returnUrl;
-          
+
           /*
           TODO: REDIRECT
           */
@@ -140,8 +140,12 @@ export class LoginCompanyComponent implements OnInit {
           console.log('loginCompany-error', err);
 
           this.refreshRecaptchaToken();
-          this.toastService.danger(err.error.detail, err.error.title);
+          this.toastService.danger(err.error?.detail, err.error?.title);
         },
       });
+  }
+
+  onCancel() {
+    this.toastService.danger('Acción para cancelar el inicio de sesión.', 'Cancelar');
   }
 }

@@ -5,9 +5,9 @@ using System.Net.Mime;
 using System.Net;
 using System.Text.Json;
 using FluentValidation.AspNetCore;
-using Prod.LoginUnico.Application.Abstractions;
 using Prod.LoginUnico.Web.Services;
 using Prod.LoginUnico.Web.Filters;
+using Prod.LoginUnico.Application.Abstractions;
 
 namespace Prod.LoginUnico.Web;
 

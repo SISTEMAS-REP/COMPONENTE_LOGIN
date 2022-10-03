@@ -1,18 +1,9 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
-using Prod.LoginUnico.Application.Abstractions;
 using Prod.LoginUnico.Application.Common.Options;
-using Prod.LoginUnico.Application.Common.Wrapper;
-using Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordRecovery;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using Prod.LoginUnico.Application.Abstractions.Stores;
+
 
 namespace Prod.LoginUnico.Application.Features.Extranet.Commands.VerificationPasswordRecovery
 {

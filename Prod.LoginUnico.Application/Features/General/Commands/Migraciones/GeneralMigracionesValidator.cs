@@ -2,7 +2,8 @@
 
 namespace Prod.LoginUnico.Application.Features.General.Commands.Migraciones;
 
-public class GeneralMigracionesValidator : AbstractValidator<GeneralMigracionesCommand>
+public class GeneralMigracionesValidator 
+    : AbstractValidator<GeneralMigracionesCommand>
 {
     public GeneralMigracionesValidator()
     {

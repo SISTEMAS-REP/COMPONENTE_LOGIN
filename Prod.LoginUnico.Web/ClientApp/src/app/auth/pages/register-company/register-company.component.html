@@ -10,7 +10,8 @@
                   class="img-fluid"
                   src="assets/img/logo_produce.PNG"
                   alt="Produce"
-                  title="Produce"/>
+                  title="Produce"
+                />
               </div>
             </div>
           </div>
@@ -67,10 +68,12 @@
                   [sunatResponse]="sunatResponse"
                   (onSendRucNumber)="onSendRucNumber($event)"
                   (onNextFormButton)="onNextStep($event)"
+                  (onCancelFormButton)="onCancel()"
                 ></app-register-company-first-step>
                 <app-register-company-second-step
                   #secondStep
                   [reniecResponse]="reniecResponse"
+                  [migracionesResponse]="migracionesResponse"
                   (onSendDocumentNumber)="onSendDocumentNumber($event)"
                   (onNextFormButton)="onNextStep($event)"
                   (onPreviewFormButton)="onPreviewStep()"
@@ -90,7 +93,12 @@
           </div>
 
           <div class="card-footer">
-            <a class="text-muted" href="javascript:void(0)"> Request a demo </a>
+            <a class="text-muted text-center" href="javascript:void(0)">
+              ¿Ya tienes una cuenta?
+            </a>
+            <a class="text-muted text-center" href="javascript:void(0)">
+              Ingresa aquí
+            </a>
           </div>
         </div>
       </div>

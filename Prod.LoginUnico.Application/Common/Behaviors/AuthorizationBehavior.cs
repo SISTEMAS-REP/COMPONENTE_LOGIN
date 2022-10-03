@@ -7,7 +7,8 @@ using System.Reflection;
 namespace Prod.LoginUnico.Application.Common.Behaviors;
 
 public class AuthorizationBehavior<TRequest, TResponse>
-    : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
+    : IPipelineBehavior<TRequest, TResponse> 
+    where TRequest : IRequest<TResponse>
 {
     private readonly ICurrentUserService _currentUserService;
 
@@ -15,7 +16,7 @@ public class AuthorizationBehavior<TRequest, TResponse>
         ICurrentUserService currentUserService)
     {
         _currentUserService = currentUserService;
-        /*_identityService = identityService;*/
+        //_identityService = identityService;
     }
 
     public async Task<TResponse> Handle(TRequest request,

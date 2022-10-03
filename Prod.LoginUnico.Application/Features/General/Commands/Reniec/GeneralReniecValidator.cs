@@ -2,7 +2,8 @@
 
 namespace Prod.LoginUnico.Application.Features.General.Commands.Reniec;
 
-public class GeneralReniecValidator : AbstractValidator<GeneralReniecCommand>
+public class GeneralReniecValidator 
+    : AbstractValidator<GeneralReniecCommand>
 {
     public GeneralReniecValidator()
     {

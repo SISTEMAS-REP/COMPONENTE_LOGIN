@@ -10,16 +10,21 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DocumentType } from 'src/app/auth/interfaces/document-type';
 import { patternValidator } from 'src/app/helpers/custom-validators';
 import { ReniecResponse } from '../../../../interfaces/response/reniec.response';
+import { SunatResponse } from '../../../../interfaces/response/sunat.response';
 
 @Component({
   selector: 'app-register-person-first-step',
   templateUrl: './register-person-first-step.component.html',
 })
 export class RegisterPersonFirstStepComponent implements OnInit {
+  @Input() sunatResponse?: SunatResponse;
   @Input() reniecResponse?: ReniecResponse;
+  @Input() migracionesResponse?: ReniecResponse;
 
-  @Output() onSendDocumentNumber: EventEmitter<string> = new EventEmitter();
+  @Output() onSendRucNumber: EventEmitter<string> = new EventEmitter();
+  @Output() onSendDocumentNumber: EventEmitter<any> = new EventEmitter();
   @Output() onNextFormButton: EventEmitter<any> = new EventEmitter();
+  @Output() onCancelFormButton: EventEmitter<any> = new EventEmitter();
 
   docTypes: DocumentType[] = [
     {
@@ -27,7 +32,7 @@ export class RegisterPersonFirstStepComponent implements OnInit {
       value: 'DNI',
     },
     {
-      key: 2,
+      key: 7,
       value: 'CARNET DE EXTRANJERÍA',
     },
   ];
@@ -39,22 +44,18 @@ export class RegisterPersonFirstStepComponent implements OnInit {
   showRucNumberField: boolean = false;
 
   myForm: FormGroup = this.fb.group({
-    personId: [0],
-
+    personId: [0, [Validators.required, Validators.min(1)]],
     enableRuc: [null],
-    rucNumber: [null],
+    rucNumber: [null, { updateOn: 'blur' }],
 
     documentType: [0, [Validators.required, Validators.min(1)]],
     documentNumber: [
       null,
       { validators: [Validators.required], updateOn: 'blur' },
     ],
-    firstName: [{ value: null, disabled: true }, [Validators.required]],
-    lastName: [{ value: null, disabled: true }, [Validators.required]],
-    departmentCode: [null],
-    provinceCode: [null],
-    districtCode: [null],
-    address: [null],
+    firstName: [{ value: null, disabled: true }],
+    lastName: [{ value: null, disabled: true }],
+
     phoneNumber: [
       null,
       [
@@ -65,58 +66,192 @@ export class RegisterPersonFirstStepComponent implements OnInit {
     ],
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {
+    this.myForm.get('enableRuc')?.valueChanges.subscribe((enableRuc) => {
+      console.log('valueChanges-enableRuc', enableRuc);
+      this.showRucNumberField = enableRuc;
+      this.setSunatFields(false);
+      this.resetRucValidators(enableRuc);
+    });
+
+    this.myForm.get('rucNumber')?.valueChanges.subscribe((rucNumber) => {
+      console.log('valueChanges-rucNumber', rucNumber);
+      if (
+        this.myForm.get('rucNumber')?.valid &&
+        this.myForm.get('rucNumber')?.value !== null
+      ) {
+        this.onSendRucNumber.emit(rucNumber);
+      }
+    });
+
+    this.myForm.get('documentType')?.valueChanges.subscribe((documentType) => {
+      console.log('valueChanges-documentType', documentType);
+      this.setDocumentNumberLength(documentType);
+
+      if (documentType == 1) {
+        this.setReniecFields(false);
+      } else if (documentType == 7) {
+        this.setMigracionesFields(false);
+      }
+
+      this.resetDocumentValidators();
+    });
+
+    this.myForm
+      .get('documentNumber')
+      ?.valueChanges.subscribe((documentNumber) => {
+        console.log('valueChanges-documentNumber', documentNumber);
+        if (this.myForm.get('documentNumber')?.valid) {
+          this.onSendDocumentNumber.emit({
+            documentType: this.myForm.get('documentType')?.value,
+            documentNumber: documentNumber,
+          });
+        }
+      });
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (changes['sunatResponse']) {
+      console.log('ngOnChanges-sunatResponse', this.sunatResponse);
+      this.setSunatFields();
+    }
+
     if (changes['reniecResponse']) {
-      this.resetReniecFields();
+      console.log('ngOnChanges-reniecResponse', this.reniecResponse);
+      this.setReniecFields();
+    }
+
+    if (changes['migracionesResponse']) {
+      console.log('ngOnChanges-migracionesResponse', this.migracionesResponse);
+      this.setMigracionesFields();
+    }
+  }
+
+  setDocumentNumberLength(documentType: number) {
+    console.log('setDocumentNumberLength', documentType);
+    if (documentType == 1) {
+      this.documentNumberLength = 8;
+    } else if (documentType == 7) {
+      this.documentNumberLength = 9;
+    } else {
+      this.documentNumberLength = 0;
     }
   }
 
   resetFormFields() {
+    console.log('resetFormFields');
     this.myForm.reset({
+      personId: 0,
       enableRuc: null,
       rucNumber: null,
 
       documentType: 0,
       documentNumber: null,
+      firstName: null,
+      lastName: null,
       phoneNumber: null,
     });
-
-    this.resetReniecFields();
   }
 
-  resetReniecFields() {
+  setSunatFields(isUpdate: boolean = true) {
+    console.log('setSunatFields', isUpdate);
+
     this.myForm
       .get('personId')
-      ?.reset(this.reniecResponse?.personId || 0, { emitEvent: false });
+      ?.reset(isUpdate ? this.sunatResponse?.personId || 0 : 0, {
+        emitEvent: false,
+      });
+
+    if (!isUpdate) {
+      this.myForm.get('rucNumber')?.reset(null, {
+        emitEvent: false,
+      });
+    }
+
+    const documentType = isUpdate ? this.sunatResponse?.documentType || 0 : 0;
+    this.myForm.get('documentType')?.reset(documentType, {
+      emitEvent: false,
+    });
+
+    this.myForm
+      .get('documentNumber')
+      ?.reset(isUpdate ? this.sunatResponse?.documentNumber || null : null, {
+        emitEvent: false,
+      });
+    this.setDocumentNumberLength(documentType);
+    this.resetDocumentValidators();
 
     this.myForm
       .get('firstName')
-      ?.reset(this.reniecResponse?.firstName || null, { emitEvent: false });
-    this.myForm
-      .get('lastName')
-      ?.reset(this.reniecResponse?.lastName || null, { emitEvent: false });
-
-    this.myForm
-      .get('departmentCode')
-      ?.reset(this.reniecResponse?.departmentCode || null, {
+      ?.reset(isUpdate ? this.sunatResponse?.firstName || null : null, {
         emitEvent: false,
       });
+
     this.myForm
-      .get('provinceCode')
-      ?.reset(this.reniecResponse?.provinceCode || null, { emitEvent: false });
-    this.myForm
-      .get('districtCode')
-      ?.reset(this.reniecResponse?.districtCode || null, { emitEvent: false });
-    this.myForm.get('address')?.reset(this.reniecResponse?.address || null, {
-      emitEvent: false,
-    });
+      .get('lastName')
+      ?.reset(isUpdate ? this.sunatResponse?.lastName || null : null, {
+        emitEvent: false,
+      });
   }
 
-  resetRucField(enableRuc: boolean) {
-    this.myForm.get('rucNumber')?.reset(null);
+  setReniecFields(isUpdate: boolean = true) {
+    console.log('setReniecFields', isUpdate);
 
+    this.myForm
+      .get('personId')
+      ?.reset(isUpdate ? this.reniecResponse?.personId || 0 : 0, {
+        emitEvent: false,
+      });
+
+    if (!isUpdate) {
+      this.myForm.get('documentNumber')?.reset(null, {
+        emitEvent: false,
+      });
+    }
+
+    this.myForm
+      .get('firstName')
+      ?.reset(isUpdate ? this.reniecResponse?.firstName || null : null, {
+        emitEvent: false,
+      });
+
+    this.myForm
+      .get('lastName')
+      ?.reset(isUpdate ? this.reniecResponse?.lastName || null : null, {
+        emitEvent: false,
+      });
+  }
+
+  setMigracionesFields(isUpdate: boolean = true) {
+    console.log('setMigracionesFields', isUpdate);
+
+    this.myForm
+      .get('personId')
+      ?.reset(isUpdate ? this.migracionesResponse?.personId || 0 : 0, {
+        emitEvent: false,
+      });
+
+    if (!isUpdate) {
+      this.myForm.get('documentNumber')?.reset(null, {
+        emitEvent: false,
+      });
+    }
+
+    this.myForm
+      .get('firstName')
+      ?.reset(isUpdate ? this.migracionesResponse?.firstName || null : null, {
+        emitEvent: false,
+      });
+
+    this.myForm
+      .get('lastName')
+      ?.reset(isUpdate ? this.migracionesResponse?.lastName || null : null, {
+        emitEvent: false,
+      });
+  }
+
+  resetRucValidators(enableRuc: boolean) {
+    console.log('resetRucValidators', enableRuc);
     if (enableRuc) {
       this.myForm.get('rucNumber')?.setValidators([
         Validators.required,
@@ -128,11 +263,11 @@ export class RegisterPersonFirstStepComponent implements OnInit {
     } else {
       this.myForm.get('rucNumber')?.clearValidators();
     }
-    this.myForm.get('rucNumber')?.updateValueAndValidity();
+
+    this.myForm.get('rucNumber')?.updateValueAndValidity({ emitEvent: false });
   }
 
-  resetDocumentNumberField() {
-    this.myForm.get('documentNumber')?.reset(null);
+  resetDocumentValidators() {
     this.myForm
       .get('documentNumber')
       ?.setValidators([
@@ -140,60 +275,12 @@ export class RegisterPersonFirstStepComponent implements OnInit {
         Validators.minLength(this.documentNumberLength),
         Validators.maxLength(this.documentNumberLength),
       ]);
-    this.myForm.get('documentNumber')?.updateValueAndValidity();
-
-    this.myForm.get('personId')?.reset(null, { emitEvent: false });
-
-    this.myForm.get('lastName')?.reset(
-      {
-        value: null,
-        disabled: this.myForm.get('documentType')?.value !== '2',
-      },
-      { emitEvent: false }
-    );
-    this.myForm.get('firstName')?.reset(
-      {
-        value: null,
-        disabled: this.myForm.get('documentType')?.value !== '2',
-      },
-      { emitEvent: false }
-    );
-
-    this.myForm.get('departmentCode')?.reset(null, {
-      emitEvent: false,
-    });
-    this.myForm.get('provinceCode')?.reset(null, { emitEvent: false });
-    this.myForm.get('districtCode')?.reset(null, { emitEvent: false });
-    this.myForm.get('address')?.reset(null, { emitEvent: false });
-  }
-
-  ngOnInit(): void {
-    this.myForm.get('enableRuc')?.valueChanges.subscribe((enableRuc) => {
-      this.showRucNumberField = enableRuc;
-      this.resetRucField(enableRuc);
-    });
-
-    this.myForm.get('documentType')?.valueChanges.subscribe((documentType) => {
-      if (documentType === '1') {
-        this.documentNumberLength = 8;
-      } else if (documentType === '2') {
-        this.documentNumberLength = 9;
-      } else {
-        this.documentNumberLength = 0;
-      }
-
-      this.resetDocumentNumberField();
-    });
-
     this.myForm
       .get('documentNumber')
-      ?.valueChanges.subscribe((documentNumber) => {
-        if (this.myForm.get('documentNumber')?.valid) {
-          //console.log('documentNumber', documentNumber);
-          this.onSendDocumentNumber.emit(documentNumber);
-        }
-      });
+      ?.updateValueAndValidity({ emitEvent: false });
   }
+
+  ngOnInit(): void {}
 
   next() {
     if (this.myForm.invalid) {
@@ -202,6 +289,10 @@ export class RegisterPersonFirstStepComponent implements OnInit {
     }
 
     this.onNextFormButton.emit({ data: this.myForm.getRawValue() });
+  }
+
+  cancel() {
+    this.onCancelFormButton.emit();
   }
 
   isInvalidField(campo: string) {

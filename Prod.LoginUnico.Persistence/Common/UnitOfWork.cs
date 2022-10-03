@@ -1,4 +1,4 @@
-﻿using Prod.LoginUnico.Application.Common;
+﻿using Prod.LoginUnico.Application.Common.Stores;
 using Prod.LoginUnico.Persistence.Context;
 using Release.Helper.Data.Core;
 

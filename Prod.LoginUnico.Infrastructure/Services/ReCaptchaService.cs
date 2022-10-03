@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using Prod.LoginUnico.Application.Abstractions;
+using Prod.LoginUnico.Application.Abstractions.Services;
 using Prod.LoginUnico.Application.Common.Options;
 using Prod.LoginUnico.Application.Models;
 using System;
@@ -28,12 +28,12 @@ public class ReCaptchaService : IReCaptchaService
 			var request = new FormUrlEncodedContent(
 				new Dictionary<string, string>
 				{
-					{"secret", _options.ReCaptcha.SecretKey },
+					{"secret", _options?.ReCaptcha?.SecretKey! },
 					{"response", recaptchaToken }
 				});
 
 			var response = await http
-				.PostAsync(_options.ReCaptcha.UrlValidator, request);
+				.PostAsync(_options?.ReCaptcha?.UrlValidator, request);
 
 			var content = response.Content.ReadAsStringAsync().Result;
 			var result = JsonConvert.DeserializeObject<ReCaptchaResultModel>(content);

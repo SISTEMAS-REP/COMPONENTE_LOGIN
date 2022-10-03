@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { patternValidator } from 'src/app/helpers/custom-validators';
 
 @Component({
   selector: 'app-login-person-form',
@@ -9,7 +8,7 @@ import { patternValidator } from 'src/app/helpers/custom-validators';
 export class LoginPersonFormComponent implements OnInit {
   @Input() applicationId?: number;
   @Output() onSendForm: EventEmitter<any> = new EventEmitter();
-  @Output() onSendCancel: EventEmitter<any> = new EventEmitter();
+  @Output() onCancelFormButton: EventEmitter<any> = new EventEmitter();
 
   documentNumberLength: number = 12;
   hidePassword: boolean = true;
@@ -46,7 +45,7 @@ export class LoginPersonFormComponent implements OnInit {
     );
   }
 
-  guardar = () => {
+  saveForm = () => {
     if (this.myForm.invalid) {
       this.myForm.markAllAsTouched();
       return;
@@ -55,7 +54,7 @@ export class LoginPersonFormComponent implements OnInit {
     this.onSendForm.emit(this.myForm.getRawValue());
   };
 
-  cancel = () => {
-    this.onSendCancel.emit();
+  cancel() {
+    this.onCancelFormButton.emit();
   }
 }

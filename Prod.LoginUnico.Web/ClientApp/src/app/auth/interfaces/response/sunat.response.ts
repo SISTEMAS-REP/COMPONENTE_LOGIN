@@ -3,17 +3,10 @@ export interface SunatResponse {
 
   rucNumber?: string;
   businessName?: string;
-
-  comercialName?: string;
-  registrationDate?: Date;
-
-  departmentCode?: string;
-  provinceCode?: string;
-  districtCode?: string;
-  ubigeoCode?: string;
   businessAddress?: string;
 
-  status?: boolean;
-  businessType?: string;
-  ciiu?: string;
+  documentType?: number;
+  documentNumber?: string;
+  lastName?: string;
+  firstName?: string;
 }

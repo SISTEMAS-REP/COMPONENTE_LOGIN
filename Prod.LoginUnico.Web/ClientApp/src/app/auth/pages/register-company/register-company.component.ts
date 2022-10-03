@@ -5,7 +5,7 @@ import { RegisterRepository } from '../../repositories/register.repository';
 import { LogoRequest } from '../../interfaces/request/logo.request';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { RegisterRequest } from '../../interfaces/request/register.request';
+import { RegisterCompanyRequest } from '../../interfaces/request/register-company.request';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { ReniecRequest } from '../../interfaces/request/reniec.request';
 import { ReniecResponse } from '../../interfaces/response/reniec.response';
@@ -15,6 +15,10 @@ import { RegisterCompanyFirstStepComponent } from './components/register-company
 import { RegisterCompanySecondStepComponent } from './components/register-company-second-step/register-company-second-step.component';
 import { RegisterCompanyFourthStepComponent } from './components/register-company-fourth-step/register-company-fourth-step.component';
 import { RegisterCompanyThirdStepComponent } from './components/register-company-third-step/register-company-third-step.component';
+import { MigracionesResponse } from '../../interfaces/response/migraciones.response';
+import { MigracionesRequest } from '../../interfaces/request/migraciones.request';
+import { ToastService } from 'src/app/services/toast.service';
+import { enumerados } from 'src/app/enums/enumerados';
 @Component({
   selector: 'app-register-company',
   templateUrl: './register-company.component.html',
@@ -27,14 +31,19 @@ export class RegisterCompanyComponent implements OnInit {
   @ViewChild('stepper', { static: true }) steps: any;
   stepper?: Stepper;
 
+  enumerado: enumerados = new enumerados();
+
   applicationId: number = 0;
-  returnUrl: string = "";
+  sectorId: number = 1;
+  personType: number = 1;
+  returnUrl: string = '';
   logo?: SafeUrl;
 
   sunatResponse?: SunatResponse;
   reniecResponse?: ReniecResponse;
+  migracionesResponse?: MigracionesResponse;
 
-  registerRequest?: RegisterRequest;
+  registerRequest?: RegisterCompanyRequest;
   recaptchaToken?: string;
 
   constructor(
@@ -42,12 +51,13 @@ export class RegisterCompanyComponent implements OnInit {
     private router: ActivatedRoute,
     private spinner: NgxSpinnerService,
     private sanitizer: DomSanitizer,
-    private recaptchaV3Service: ReCaptchaV3Service
+    private recaptchaV3Service: ReCaptchaV3Service,
+    private toastService: ToastService
   ) {
     this.router.queryParams.subscribe((params) => {
-      console.log("queryParams", params);
+      console.log('queryParams', params);
       this.applicationId = params['applicationId'] || 0;
-      this.returnUrl = params['returnUrl'] || "";
+      this.returnUrl = params['returnUrl'] || '';
     });
   }
 
@@ -58,6 +68,8 @@ export class RegisterCompanyComponent implements OnInit {
     });
 
     this.loadLogo();
+
+    //this.stepper?.to(4);
   }
 
   refreshRecaptchaToken() {
@@ -98,43 +110,83 @@ export class RegisterCompanyComponent implements OnInit {
   }
 
   onSendRucNumber($event: any) {
-    //console.log('onSendRucNumber', $event);
+    console.log('onSendRucNumber', $event);
     this.spinner.show();
     var request: SunatRequest = {
       rucNumber: $event,
     };
-    this.registerRepository.sunat(request).subscribe({
-      next: (data: SunatResponse) => {
-        this.spinner.hide();
-        console.log('onSendRucNumber-next', data);
 
-        this.sunatResponse = data;
-      },
-      error: (err) => {
-        this.spinner.hide();
-        console.log('onSendRucNumber-error', err);
-      },
-    });
+    this.searchRucOnSunat(request);
   }
 
-  onSendDocumentNumber($event: string) {
-    //console.log('onSendDocumentNumber', $event);
-    this.spinner.show();
-    var request: ReniecRequest = {
-      documentNumber: $event,
-    };
-    this.registerRepository.reniec(request).subscribe({
-      next: (data: ReniecResponse) => {
-        this.spinner.hide();
-        console.log('onSendDocumentNumber-next', data);
+  searchRucOnSunat(request: SunatRequest) {
+    if (request) {
+      this.spinner.show();
+      this.registerRepository.sunat(request).subscribe({
+        next: (data: SunatResponse) => {
+          this.spinner.hide();
+          console.log('searchRucOnSunat-next', data);
 
-        this.reniecResponse = data;
-      },
-      error: (err) => {
-        this.spinner.hide();
-        console.log('onSendDocumentNumber-error', err);
-      },
-    });
+          this.sunatResponse = data;
+        },
+        error: (err) => {
+          this.spinner.hide();
+          console.log('searchRucOnSunat-error', err);
+        },
+      });
+    }
+  }
+
+  onSendDocumentNumber($event: any) {
+    console.log('onSendDocumentNumber', $event);
+
+    if ($event.documentType == 1) {
+      var request: ReniecRequest = {
+        documentNumber: $event.documentNumber,
+      };
+      this.searchDocumentOnReniec(request);
+    } else if ($event.documentType == 2) {
+      var request: MigracionesRequest = {
+        documentNumber: $event.documentNumber,
+      };
+      this.searchDocumentOnReniec(request);
+    }
+  }
+
+  searchDocumentOnReniec(request: ReniecRequest) {
+    if (request) {
+      this.spinner.show();
+      this.registerRepository.reniec(request).subscribe({
+        next: (data: ReniecResponse) => {
+          this.spinner.hide();
+          console.log('searchDocumentOnReniec-next', data);
+
+          this.reniecResponse = data;
+        },
+        error: (err) => {
+          this.spinner.hide();
+          console.log('searchDocumentOnReniec-error', err);
+        },
+      });
+    }
+  }
+
+  searchDocumentOnMigraciones(request: MigracionesRequest) {
+    if (request) {
+      this.spinner.show();
+      this.registerRepository.migraciones(request).subscribe({
+        next: (data: MigracionesResponse) => {
+          this.spinner.hide();
+          console.log('searchDocumentOnMigraciones-next', data);
+
+          this.reniecResponse = data;
+        },
+        error: (err) => {
+          this.spinner.hide();
+          console.log('searchDocumentOnMigraciones-error', err);
+        },
+      });
+    }
   }
 
   onPreviewStep() {
@@ -142,7 +194,7 @@ export class RegisterCompanyComponent implements OnInit {
   }
 
   onNextStep($event: any) {
-    var data = $event.data as RegisterRequest;
+    var data = $event.data as RegisterCompanyRequest;
 
     this.registerRequest = {
       ...this.registerRequest,
@@ -154,6 +206,10 @@ export class RegisterCompanyComponent implements OnInit {
       this.stepper?.next();
       return;
     }
+
+    this.registerRequest.applicationId = this.applicationId
+    this.registerRequest.sectorId = this.enumerado.TIPO_SECTOR_PERSONA.PESQUERIA;
+    this.registerRequest.personType = this.enumerado.TIPO_PERSONA.NATURAL;
 
     this.setReCAPTCHA();
   }
@@ -178,11 +234,13 @@ export class RegisterCompanyComponent implements OnInit {
   evalRegister() {
     if (!this.registerRequest) {
       console.log('evalRegister', 'registerRequest is null or undefined');
+      this.spinner.hide();
       return;
     }
 
     if (!this.recaptchaToken) {
       console.log('evalRegister', 'recaptchaToken is null or undefined');
+      this.spinner.hide();
       return;
     }
 
@@ -190,6 +248,7 @@ export class RegisterCompanyComponent implements OnInit {
   }
 
   registerCompany() {
+    console.log('registerCompany', this.registerRequest);
     //this.spinner.show();
     this.registerRepository
       .registerCompany(this.registerRequest!, this.recaptchaToken!)
@@ -199,13 +258,19 @@ export class RegisterCompanyComponent implements OnInit {
           console.log('registerCompany-next', 'register success');
 
           this.refresh();
+          this.toastService.success('Registro realizado exitosamente', 'Éxito');
         },
         error: (err) => {
           this.spinner.hide();
           console.log('registerCompany-error', err);
 
-          //this.refresh();
+          this.refreshRecaptchaToken();
+          this.toastService.danger(err.error?.detail, err.error?.title);
         },
       });
+  }
+
+  onCancel() {
+    this.toastService.warning('Acción para cancelar el registro.', 'Cancelar');
   }
 }

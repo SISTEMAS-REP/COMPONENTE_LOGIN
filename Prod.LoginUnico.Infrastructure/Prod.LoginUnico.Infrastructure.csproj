@@ -16,4 +16,8 @@
     <ProjectReference Include="..\Prod.LoginUnico.Application\Prod.LoginUnico.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Common\" />
+  </ItemGroup>
+
 </Project>

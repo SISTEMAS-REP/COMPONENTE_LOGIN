@@ -1,42 +1,84 @@
-﻿using MediatR;
-using Prod.LoginUnico.Application.Abstractions;
+﻿using AutoMapper;
+using MediatR;
 using Prod.LoginUnico.Application.Common.Exceptions;
 using Prod.LoginUnico.Application.Common.Wrapper;
-using Prod.LoginUnico.Application.Models;
+using Prod.ServiciosExternos;
 
 namespace Prod.LoginUnico.Application.Features.General.Commands.Reniec;
 
-public class GeneralReniecCommand : IRequest<Response<ReniecResultModel>>
+public class GeneralReniecCommand
+    : IRequest<Response<GeneralReniecResponse>>
 {
     public string? documentNumber { get; set; }
 }
 
 public class GeneralReniecCommandHandler
-    : IRequestHandler<GeneralReniecCommand, Response<ReniecResultModel>>
+    : IRequestHandler<GeneralReniecCommand, Response<GeneralReniecResponse>>
 {
-    private readonly IReniecService _reniecService;
+    private readonly IPersonasServicio _personasService;
+    private readonly IReniecServicio _reniecService;
+    private readonly IMapper _mapper;
 
-    public GeneralReniecCommandHandler(IReniecService reniecService)
+    public GeneralReniecCommandHandler(IPersonasServicio personasService,
+                                       IReniecServicio reniecService,
+                                       IMapper mapper)
     {
         _reniecService = reniecService;
+        _personasService = personasService;
+        _mapper = mapper;
     }
 
-    public async Task<Response<ReniecResultModel>>
-        Handle(GeneralReniecCommand request, CancellationToken cancellationToken)
+    public async Task<Response<GeneralReniecResponse>>
+        Handle(GeneralReniecCommand request,
+               CancellationToken cancellationToken)
     {
-        var reniecResult = await _reniecService
-            .FindByDocument(request.documentNumber!);
+        // Buscar info en la base de datos
+        var personResponse = _personasService
+            .ObtenerPersona(new()
+            {
+                nro_documento = request.documentNumber,
+            });
 
-        if (reniecResult is null)
+        // Si no existe info en la base de datos
+        if (personResponse is null
+            || personResponse.Data is null)
         {
-            throw new NotFoundException("");
+            // Buscar info en RENIEC
+            var reniecResponse = _reniecService
+                .Buscar(request.documentNumber!);
+
+            // Si no existe info en RENIEC
+            if (reniecResponse is null
+                || !reniecResponse.Success
+                || reniecResponse.Data is null)
+            {
+                throw new NotFoundException("");
+            }
+
+            // Volver a buscar info en la base de datos
+            personResponse = _personasService
+            .ObtenerPersona(new()
+            {
+                nro_documento = reniecResponse.Data.dni,
+            });
+
+            // Si aún no hay info en la base de datos
+            if (personResponse is null
+            || personResponse.Data is null)
+            {
+                throw new NotFoundException("");
+            }
         }
 
+        // Mapeo de campos
+        var result = _mapper
+                .Map<GeneralReniecResponse>(personResponse.Data);
+
         return await Task
-            .FromResult(new Response<ReniecResultModel>()
+            .FromResult(new Response<GeneralReniecResponse>()
             {
                 Succeeded = true,
-                Data = reniecResult
+                Data = result
             });
     }
 }

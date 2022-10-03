@@ -4,10 +4,7 @@
 
 export const environment = {
   production: false,
-  apiGA: 'https://dega.produce.gob.pe',
-  apiPTD: 'https://detupa.produce.gob.pe',
   apiUrl: 'https://localhost:7086/api',
-  apiWebPV: 'http://localhost:30700',
   recaptcha: {
     siteKey: '6Lerei4iAAAAAIm-X1gxwvn6M7WmA9XwsvHQ2f-f'
   }

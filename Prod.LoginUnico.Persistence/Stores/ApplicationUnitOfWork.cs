@@ -1,7 +1,6 @@
-﻿using Prod.LoginUnico.Application.Abstractions;
+﻿using Prod.LoginUnico.Application.Abstractions.Stores;
 using Prod.LoginUnico.Domain.Entities;
 using Prod.LoginUnico.Domain.Entities.ApplicationEntity;
-using Prod.LoginUnico.Domain.Entities.CheckEmailEntity;
 using Prod.LoginUnico.Persistence.Common;
 using Prod.LoginUnico.Persistence.Context;
 using Release.Helper.Data.Core;
@@ -17,7 +16,7 @@ public class ApplicationUnitOfWork : UnitOfWork, IApplicationUnitOfWork
     }
 
     public async Task<IEnumerable<ApplicationEntity>> 
-        FindAppsByUserName(string user_name, int id_aplicacion)
+        FindAppsByUserName(string? user_name, int? id_aplicacion)
     {
         var parms = new Parameter[]
         {
@@ -31,6 +30,8 @@ public class ApplicationUnitOfWork : UnitOfWork, IApplicationUnitOfWork
 
         return await Task.FromResult(result);
     }
+
+
     public async Task<int>
         RegistrationLogSessionExtranet(bool Estado, DateTime FechaHora, int IdUsuarioExtranet, string Ip, string InformacionHost, string PcName, bool navigation_valid)
     {
@@ -52,10 +53,11 @@ public class ApplicationUnitOfWork : UnitOfWork, IApplicationUnitOfWork
         return await Task.FromResult(result);
     }
 
+
     public async Task<int>
-        RegisterVerificationUserExtranet(Guid identificador_solicitud, string correo_verificación, Guid codigo_verificacion)
+       RegisterVerificationUserExtranet(Guid identificador_solicitud, string correo_verificación, Guid codigo_verificacion)
     {
-        try 
+        try
         {
             var parms = new Parameter[]
             {
@@ -73,9 +75,7 @@ public class ApplicationUnitOfWork : UnitOfWork, IApplicationUnitOfWork
         {
             throw new UnauthorizedAccessException("Usuario incorrecto.");
         }
-       
 
-        
     }
 
     public async Task<bool>
@@ -94,4 +94,5 @@ public class ApplicationUnitOfWork : UnitOfWork, IApplicationUnitOfWork
 
         return await Task.FromResult(result);
     }
+
 }

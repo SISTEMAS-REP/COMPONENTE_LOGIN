@@ -19,11 +19,12 @@ export class RegisterCompanyFirstStepComponent implements OnInit {
 
   @Output() onSendRucNumber: EventEmitter<string> = new EventEmitter();
   @Output() onNextFormButton: EventEmitter<any> = new EventEmitter();
+  @Output() onCancelFormButton: EventEmitter<any> = new EventEmitter();
 
   rucNumberLength: number = 11;
 
   myForm: FormGroup = this.fb.group({
-    personId: [0],
+    juridicalPersonId: [0, [Validators.required, Validators.min(1)]],
     rucNumber: [
       null,
       {
@@ -38,31 +39,42 @@ export class RegisterCompanyFirstStepComponent implements OnInit {
       },
     ],
     businessName: [{ value: null, disabled: true }],
-    departmentCode: [null],
-    provinceCode: [null],
-    districtCode: [null],
-    address: [{ value: null, disabled: true }],
+    businessAddress: [{ value: null, disabled: true }],
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {
+    this.myForm.get('rucNumber')?.valueChanges.subscribe((rucNumber) => {
+      console.log('valueChanges-rucNumber', rucNumber);
+      if (
+        this.myForm.get('rucNumber')?.valid &&
+        this.myForm.get('rucNumber')?.value !== null
+      ) {
+        this.onSendRucNumber.emit(rucNumber);
+      }
+    });
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['sunatResponse']) {
-      this.resetSunatFields();
+      console.log('ngOnChanges-sunatResponse', this.sunatResponse);
+      this.setSunatFields();
     }
   }
 
   resetFormFields() {
     this.myForm.reset({
+      juridicalPersonId: 0,
       rucNumber: null,
+      businessName: null,
+      businessAddress: null,
     });
-
-    this.resetSunatFields();
   }
 
-  resetSunatFields() {
+  setSunatFields() {
+    console.log('setSunatFields', this.sunatResponse);
+
     this.myForm
-      .get('personId')
+      .get('juridicalPersonId')
       ?.reset(this.sunatResponse?.personId || 0, { emitEvent: false });
 
     this.myForm
@@ -70,29 +82,13 @@ export class RegisterCompanyFirstStepComponent implements OnInit {
       ?.reset(this.sunatResponse?.businessName || null, { emitEvent: false });
 
     this.myForm
-      .get('departmentCode')
-      ?.reset(this.sunatResponse?.departmentCode || null, { emitEvent: false });
-    this.myForm
-      .get('provinceCode')
-      ?.reset(this.sunatResponse?.provinceCode || null, { emitEvent: false });
-    this.myForm
-      .get('districtCode')
-      ?.reset(this.sunatResponse?.districtCode || null, { emitEvent: false });
-    this.myForm
-      .get('address')
+      .get('businessAddress')
       ?.reset(this.sunatResponse?.businessAddress || null, {
         emitEvent: false,
       });
   }
 
-  ngOnInit(): void {
-    this.myForm.get('rucNumber')?.valueChanges.subscribe((rucNumber) => {
-      if (this.myForm.get('rucNumber')?.valid) {
-        //console.log('rucNumber', rucNumber);
-        this.onSendRucNumber.emit(rucNumber);
-      }
-    });
-  }
+  ngOnInit(): void {}
 
   next() {
     if (this.myForm.invalid) {
@@ -103,7 +99,9 @@ export class RegisterCompanyFirstStepComponent implements OnInit {
     this.onNextFormButton.emit({ data: this.myForm.getRawValue() });
   }
 
-  preview() {}
+  cancel() {
+    this.onCancelFormButton.emit();
+  }
 
   isInvalidField(campo: string) {
     return (

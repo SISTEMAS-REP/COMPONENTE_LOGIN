@@ -17,7 +17,7 @@ public class ExtranetLogoQueryHandler
 
     public ExtranetLogoQueryHandler(IOptions<AppSettings> appSettings)
     {
-        _staticFiles = appSettings.Value.StaticFiles;
+        _staticFiles = appSettings?.Value?.StaticFiles!;
     }
 
     public async Task<Response<byte[]>>

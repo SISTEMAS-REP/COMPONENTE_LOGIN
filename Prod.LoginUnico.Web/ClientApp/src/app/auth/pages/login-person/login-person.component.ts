@@ -140,12 +140,12 @@ export class LoginPersonComponent implements OnInit {
           console.log('loginPerson-error', err);
 
           this.refreshRecaptchaToken();
-          this.toastService.danger(err.error.detail, err.error.title);
+          this.toastService.danger(err.error?.detail, err.error?.title);
         },
       });
   }
 
-  sendCancel() {
-    this.toastService.danger('Cancel button pressed.', 'Cancel');
+  onCancel() {
+    this.toastService.danger('Acción para cancelar el inicio de sesión.', 'Cancelar');
   }
 }

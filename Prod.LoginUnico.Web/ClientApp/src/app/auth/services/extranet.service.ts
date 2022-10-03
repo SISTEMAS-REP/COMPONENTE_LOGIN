@@ -3,7 +3,8 @@ import * as qs from 'qs';
 import { Observable } from 'rxjs';
 import { ApiService } from '../../services/api.service';
 import { LoginRequest } from '../interfaces/request/login.request';
-import { RegisterRequest } from '../interfaces/request/register.request';
+import { RegisterCompanyRequest } from '../interfaces/request/register-company.request';
+import { RegisterPersonRequest } from '../interfaces/request/register-person.request';
 import { RecoverPasswordRequest } from '../interfaces/request/recover-password.request';
 import { ChangePasswordRequest } from '../interfaces/request/change-password.request';
 
@@ -25,11 +26,22 @@ export class ExtranetService extends ApiService {
     });
   };
 
-  register = (
-    request: RegisterRequest,
+  naturalRegister = (
+    request: RegisterPersonRequest,
     recaptchaToken: string
   ): Observable<any> => {
-    return this.post('register', request, {
+    return this.post('naturalperson', request, {
+      headers: {
+        'x-captcha-token': recaptchaToken,
+      },
+    });
+  };
+
+  juridicalRegister = (
+    request: RegisterCompanyRequest,
+    recaptchaToken: string
+  ): Observable<any> => {
+    return this.post('juridicalcompany', request, {
       headers: {
         'x-captcha-token': recaptchaToken,
       },

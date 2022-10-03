@@ -1,4 +1,4 @@
-﻿using Prod.LoginUnico.Application.Abstractions;
+﻿using Prod.LoginUnico.Application.Abstractions.Stores;
 using Prod.LoginUnico.Domain.Entities;
 using Prod.LoginUnico.Domain.Entities.ExtranetUser;
 using Prod.LoginUnico.Persistence.Common;

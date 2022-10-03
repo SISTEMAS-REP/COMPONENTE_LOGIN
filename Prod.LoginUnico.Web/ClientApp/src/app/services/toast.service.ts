@@ -5,31 +5,38 @@ import { ToastrService } from 'ngx-toastr';
   providedIn: 'root',
 })
 export class ToastService {
+  private readonly defaultWargErrMessage: string =
+    'Ocurrió un problema para procesar su solicitud, inténtelo nuevamente';
+
   constructor(private toastrService: ToastrService) {}
 
   default(message?: string, title?: string, type: string = 'default') {
-    this.show(message, title, type);
+    this.show(message ?? '', title ?? '', type);
   }
 
   info(message?: string, title?: string, type: string = 'info') {
-    this.show(message, title, type);
+    this.show(message ?? '', title ?? 'Información', type);
   }
 
   success(message?: string, title?: string, type: string = 'success') {
-    this.show(message, title, type);
+    this.show(message ?? '', title ?? 'Éxito', type);
   }
 
   warning(message?: string, title?: string, type: string = 'warning') {
-    this.show(message, title, type);
+    this.show(
+      message ?? this.defaultWargErrMessage,
+      title ?? 'Importante',
+      type
+    );
   }
 
   danger(message?: string, title?: string, type: string = 'error') {
-    this.show(message, title, type);
+    this.show(message ?? this.defaultWargErrMessage, title ?? 'Atención', type);
   }
 
   private show(
-    message?: string,
-    titlle?: string,
+    message: string,
+    titlle: string,
     type: string = 'default',
     position: string = 'top-right'
   ) {
