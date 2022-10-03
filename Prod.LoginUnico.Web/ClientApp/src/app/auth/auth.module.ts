@@ -28,6 +28,10 @@ import { RecoverPasswordPersonComponent } from './pages/recover-password-person/
 import { RecoverPasswordCompanyComponent } from './pages/recover-password-company/recover-password-company.component';
 import { RecoverPasswordCompanyFormComponent } from './pages/recover-password-company/components/recover-password-company-form/recover-password-company-form.component';
 import { RecoverPasswordPersonFormComponent } from './pages/recover-password-person/components/recover-password-person-form/recover-password-person-form.component';
+import { ChangePasswordPersonComponent } from './pages/change-password-person/change-password-person.component';
+import { ChangePasswordCompanyComponent } from './pages/change-password-company/change-password-company.component';
+import { ChangePasswordPersonFormComponent } from './pages/change-password-person/components/change-password-person-form/change-password-person-form.component';
+import { ChangePasswordCompanyFormComponent } from './pages/change-password-company/components/change-password-company-form/change-password-company-form.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +55,10 @@ import { RecoverPasswordPersonFormComponent } from './pages/recover-password-per
     RecoverPasswordCompanyComponent,
     RecoverPasswordCompanyFormComponent,
     RecoverPasswordPersonFormComponent,
+    ChangePasswordPersonComponent,
+    ChangePasswordCompanyComponent,
+    ChangePasswordPersonFormComponent,
+    ChangePasswordCompanyFormComponent,
   ],
   imports: [
     CommonModule,

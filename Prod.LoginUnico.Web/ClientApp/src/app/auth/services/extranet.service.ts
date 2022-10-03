@@ -5,6 +5,7 @@ import { ApiService } from '../../services/api.service';
 import { LoginRequest } from '../interfaces/request/login.request';
 import { RegisterRequest } from '../interfaces/request/register.request';
 import { RecoverPasswordRequest } from '../interfaces/request/recover-password.request';
+import { ChangePasswordRequest } from '../interfaces/request/change-password.request';
 
 @Injectable({
   providedIn: 'root',
@@ -48,6 +49,17 @@ export class ExtranetService extends ApiService {
     recaptchaToken: string
   ): Observable<any> => {
     return this.post('PasswordRecovery', request, {
+      headers: {
+        'x-captcha-token': recaptchaToken,
+      },
+    });
+  };
+
+  changePassword = (
+    request: ChangePasswordRequest,
+    recaptchaToken: string
+  ): Observable<any> => {
+    return this.post('PasswordChange', request, {
       headers: {
         'x-captcha-token': recaptchaToken,
       },

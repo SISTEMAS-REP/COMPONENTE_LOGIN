@@ -59,6 +59,7 @@ export class RecoverPasswordPersonFormComponent implements OnInit {
   }
 
   guardar = () => {
+    debugger;
     if (this.myForm.invalid) {
       this.myForm.markAllAsTouched();
       return;

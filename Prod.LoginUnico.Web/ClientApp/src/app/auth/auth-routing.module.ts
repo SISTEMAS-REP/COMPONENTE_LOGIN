@@ -8,6 +8,8 @@ import { RegisterCompanyComponent } from './pages/register-company/register-comp
 import { RegisterPersonComponent } from './pages/register-person/register-person.component';
 import { RecoverPasswordCompanyComponent } from './pages/recover-password-company/recover-password-company.component';
 import { RecoverPasswordPersonComponent } from './pages/recover-password-person/recover-password-person.component';
+import { ChangePasswordCompanyComponent } from './pages/change-password-company/change-password-company.component';
+import { ChangePasswordPersonComponent } from './pages/change-password-person/change-password-person.component';
 
 export const authRoutes: Routes = [
   {
@@ -35,7 +37,6 @@ export const authRoutes: Routes = [
         path: 'register-person',
         component: RegisterPersonComponent,
       },
-
       {
         path: 'recover-password-company',
         component: RecoverPasswordCompanyComponent,
@@ -43,6 +44,14 @@ export const authRoutes: Routes = [
       {
         path: 'recover-password-person',
         component: RecoverPasswordPersonComponent,
+      },
+      {
+        path: 'change-password-company',
+        component: ChangePasswordCompanyComponent,
+      },
+      {
+        path: 'change-password-person',
+        component: ChangePasswordPersonComponent,
       },
     ],
   },
