@@ -70,10 +70,6 @@ public class NaturalPersonInsertHandler
         // Definir el user_name basado en el tipo de persona
         // y lo digitado en el formulario
         var userName = $"{request.DocumentNumber}";
-        if (request.enableRuc ?? false)
-        {
-            userName = $"{request.RucNumber}{userName}";
-        }
 
         // Verificar si el usuario ya se encuentra registrado en la base de datos
         var user = await _extranetUserManager

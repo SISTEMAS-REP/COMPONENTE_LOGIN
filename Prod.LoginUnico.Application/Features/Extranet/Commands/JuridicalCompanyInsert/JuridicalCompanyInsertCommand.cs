@@ -19,6 +19,8 @@ public class JuridicalCompanyInsertCommand : IRequest
 
     public string? RucNumber { get; set; }
 
+    public string? DocumentNumber { get; set; }
+
     public int NaturalPersonId { get; set; } // De la búsqueda del representante en Reniec/Migraciones
 
     // Contacto
