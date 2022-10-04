@@ -46,6 +46,14 @@ public static class InfrastructureExtensions
         services.AddScoped<IMigracionesServicio>(s =>
             new MigracionesServicio(options.Services?.UrlMigraciones));
 
+
+        var baseFolder = "D:\\COMPONENTE_LOGIN_GIT_NEW01\\Prod.LoginUnico.Web\\";
+        var rootTemplates = Path.Combine(baseFolder, "Plantillas");
+        EmailSender.Templates = SenderManager.GetEmailTemplates(rootTemplates, EmailSender.Templates);
+
+        services.AddScoped<IEmailSender>(s =>
+            new EmailSender(options.Services?.UrlCorreo));
+
         services.AddScoped<IReCaptchaService, ReCaptchaService>();
 
         services.AddScoped<IExtranetUserManager, ExtranetUserManager>();

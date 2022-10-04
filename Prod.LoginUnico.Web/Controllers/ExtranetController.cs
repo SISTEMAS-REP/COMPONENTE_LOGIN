@@ -4,7 +4,7 @@ using Prod.LoginUnico.Application.Features.Extranet.Commands.Auth;
 using Prod.LoginUnico.Application.Features.Extranet.Commands.JuridicalCompanyInsert;
 using Prod.LoginUnico.Application.Features.Extranet.Commands.NaturalPersonInsert;
 using Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordRecovery;
-using Prod.LoginUnico.Application.Features.Extranet.Commands.VerificationPasswordRecovery;
+using Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordChange;
 
 namespace Prod.LoginUnico.Web.Controllers;
 
@@ -43,7 +43,7 @@ public class ExtranetController : BaseApiController
 
     [AllowAnonymous]
     [HttpPost]
-    public async Task<IActionResult> PasswordRecovery([FromBody] ExtranetPasswordRecoveryCommand request)
+    public async Task<IActionResult> PasswordRecovery([FromBody] PasswordRecoveryCommand request)
     {
         request.RecaptchaToken = HttpContext.Request.Headers["x-captcha-token"];
         var result = await Mediator.Send(request);
@@ -52,8 +52,9 @@ public class ExtranetController : BaseApiController
 
     [AllowAnonymous]
     [HttpPost]
-    public async Task<IActionResult> VerificationPasswordRecovery([FromBody] ExtranetVerificationPasswordRecoveryCommand request)
+    public async Task<IActionResult> PasswordChange([FromBody] PasswordChangeCommand request)
     {
+        request.RecaptchaToken = HttpContext.Request.Headers["x-captcha-token"];
         var result = await Mediator.Send(request);
         return Ok(result);
     }

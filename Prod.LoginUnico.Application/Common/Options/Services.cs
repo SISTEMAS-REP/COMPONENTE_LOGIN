@@ -3,10 +3,9 @@
 public class Services
 {
     public string? UrlPersons { get; set; }
-
     public string? UrlReniec { get; set; }
-
     public string? UrlSunat { get; set; }
-
     public string? UrlMigraciones { get; set; }
+    public string? UrlCorreo { get; set; }
+
 }

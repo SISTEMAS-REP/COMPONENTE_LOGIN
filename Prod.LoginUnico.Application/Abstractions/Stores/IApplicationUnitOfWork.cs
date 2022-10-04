@@ -17,12 +17,4 @@ public interface IApplicationUnitOfWork : IUnitOfWork
                                        string InformacionHost,
                                        string PcName,
                                        bool navigation_valid);
-    Task<int>
-        RegisterVerificationUserExtranet(Guid identificador_solicitud, 
-                                         string correo_verificación, 
-                                         Guid codigo_verificacion);
-    Task<bool>
-        UpdateVerificationUserExtranet(Guid identificador_solicitud, 
-                                       string correo_verificación, 
-                                       Guid codigo_verificacion);
 }

@@ -52,47 +52,4 @@ public class ApplicationUnitOfWork : UnitOfWork, IApplicationUnitOfWork
 
         return await Task.FromResult(result);
     }
-
-
-    public async Task<int>
-       RegisterVerificationUserExtranet(Guid identificador_solicitud, string correo_verificación, Guid codigo_verificacion)
-    {
-        try
-        {
-            var parms = new Parameter[]
-            {
-                new Parameter("@identificador_solicitud", identificador_solicitud),
-                new Parameter("@correo_verificación", correo_verificación),
-                new Parameter("@codigo_verificacion", codigo_verificacion)
-            };
-
-            var result = ExecuteScalar<decimal>(
-                "usr_login_unico.SP_INS_VERIFICACION_CORREO_USUARIO_EXTRANET",
-                CommandType.StoredProcedure, ref parms);
-            return await Task.FromResult(Convert.ToInt32(result));
-        }
-        catch (Exception ex)
-        {
-            throw new UnauthorizedAccessException("Usuario incorrecto.");
-        }
-
-    }
-
-    public async Task<bool>
-        UpdateVerificationUserExtranet(Guid identificador_solicitud, string correo_verificación, Guid codigo_verificacion)
-    {
-        var parms = new Parameter[]
-        {
-            new Parameter("@identificador_solicitud", identificador_solicitud),
-            new Parameter("@correo_verificación", correo_verificación),
-            new Parameter("@codigo_verificacion", codigo_verificacion)
-        };
-
-        var result = ExecuteScalar<bool>(
-            "usr_login_unico.SP_UPD_VERIFICACION_CORREO_USUARIO_EXTRANET",
-            CommandType.StoredProcedure, ref parms);
-
-        return await Task.FromResult(result);
-    }
-
 }
