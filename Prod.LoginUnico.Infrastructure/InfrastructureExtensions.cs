@@ -47,7 +47,7 @@ public static class InfrastructureExtensions
             new MigracionesServicio(options.Services?.UrlMigraciones));
 
 
-        var baseFolder = "D:\\COMPONENTE_LOGIN_GIT_NEW01\\Prod.LoginUnico.Web\\";
+        var baseFolder = "D:\\COMPONENTE_LOGIN_808_NEW\\COMPONENTE_LOGIN\\Prod.LoginUnico.Web\\";
         var rootTemplates = Path.Combine(baseFolder, "Plantillas");
         EmailSender.Templates = SenderManager.GetEmailTemplates(rootTemplates, EmailSender.Templates);
 
