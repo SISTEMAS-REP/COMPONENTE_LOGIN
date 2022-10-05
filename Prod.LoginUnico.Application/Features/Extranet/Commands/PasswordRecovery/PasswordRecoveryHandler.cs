@@ -7,9 +7,7 @@ using Prod.LoginUnico.Application.Abstractions.Managers;
 using Prod.LoginUnico.Application.Abstractions.Services;
 using Prod.LoginUnico.Application.Abstractions.Stores;
 using Prod.ServiciosExternos;
-
-
-
+using Release.Helper;
 
 namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordRecovery
 {
@@ -85,10 +83,7 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordRecover
                         var query = new NameValueCollection()
                         {
                             {"applicationId",   request.applicationId.ToString() },
-                            {"Identificador",   guid.ToString()},
-                            {"Code",            guid2.ToString()},
-                            {"Email",           request.email.ToLower()},
-                            {"UserName", userName}
+                            {"UserName",        Functions.Encrypt(userName) }
                         };
                         var qs = ToQueryString(query);
                         url = urlBase + qs;
@@ -103,7 +98,7 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordRecover
                             _EmailSender.Send("PasswordRecovery",
                             new ServiciosExternos.Entidades.EmailRequest
                             {
-                                to = "jhoseph264@gmail.com", //request.email,
+                                to = "jesus.angel.lrt@gmail.com", //request.email,
                                 isBodyHtml = true,
                                 subject = "LOGIN UNICO - Reiniciar Contraseña"
                             }, dinamicText);

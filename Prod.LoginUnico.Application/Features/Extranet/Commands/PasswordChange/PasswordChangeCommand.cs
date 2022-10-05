@@ -12,9 +12,7 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordChange
         public int applicationId { get; set; }
         public int? personType { get; set; }
         public string? RecaptchaToken { get; set; }
-        public string? Identificador { get; set; }
-        public string? Code { get; set; }
-        public string? Email { get; set; }
         public string? UserName { get; set; }
+        public string password { get; set; }
     }
 }

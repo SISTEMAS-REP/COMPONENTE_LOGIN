@@ -18,9 +18,9 @@ import { ToastService } from 'src/app/services/toast.service';
 export class ChangePasswordCompanyComponent implements OnInit {
   @ViewChild('changePasswordCompanyForm') changePasswordCompanyForm?: ChangePasswordCompanyFormComponent;
   applicationId: number = 0;
-  Identificador: string = "";
-  Code: string = "";
-  Email: string = "";
+  // Identificador: string = "";
+  // Code: string = "";
+  // Email: string = "";
   UserName: string = "";
 
   logo?: SafeUrl;
@@ -42,9 +42,9 @@ export class ChangePasswordCompanyComponent implements OnInit {
   ngOnInit(): void {
     this.router.queryParams.subscribe((params) => {
       this.applicationId = params['applicationId'] || null;
-      this.Identificador = params['Identificador'] || null;
-      this.Code = params['Code'] || null;
-      this.Email = params['Email'] || null;
+      // this.Identificador = params['Identificador'] || null;
+      // this.Code = params['Code'] || null;
+      // this.Email = params['Email'] || null;
       this.UserName = params['UserName'] || null;
       this.loadLogo();
     });
@@ -74,9 +74,9 @@ export class ChangePasswordCompanyComponent implements OnInit {
 
     this.ChangePasswordRequest.personType = this.enums.TIPO_PERSONA.JURIDICA;
     this.ChangePasswordRequest.applicationId = this.applicationId;
-    this.ChangePasswordRequest.Identificador = this.Identificador;
-    this.ChangePasswordRequest.Code = this.Code;
-    this.ChangePasswordRequest.Email = this.Email;
+    // this.ChangePasswordRequest.Identificador = this.Identificador;
+    // this.ChangePasswordRequest.Code = this.Code;
+    // this.ChangePasswordRequest.Email = this.Email;
     this.ChangePasswordRequest.UserName = this.UserName;
 
 

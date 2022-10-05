@@ -52,4 +52,18 @@ public class ApplicationUnitOfWork : UnitOfWork, IApplicationUnitOfWork
 
         return await Task.FromResult(result);
     }
+    public async Task<string> ActualizarPassword(string user_name, byte[] password_hash)
+    {
+        var parms = new Parameter[]
+        {
+            new Parameter("@user_name", user_name),
+            new Parameter("@password_hash", password_hash),
+        };
+
+        var result = ExecuteScalar<string>(
+            "usr_login_unico.SP_UPD_PASSWORD_USUARIO_EXTRANET",
+            CommandType.StoredProcedure, ref parms);
+
+        return await Task.FromResult(result);
+    }
 }
