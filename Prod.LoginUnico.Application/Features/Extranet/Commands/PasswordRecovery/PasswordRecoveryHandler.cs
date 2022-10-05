@@ -37,15 +37,6 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordRecover
         public async Task<Unit>
         Handle(PasswordRecoveryCommand request, CancellationToken cancellationToken)
         {
-            //var recaptchaResult = await _reCaptchaService.Validate(request.recaptchaToken);
-
-            //if (!recaptchaResult.Success)
-            //{
-            //    var errors = recaptchaResult.ErrorCodes
-            //        .Select(e => e)
-            //        .Aggregate((i, j) => i + ", " + j);
-            //    throw new BadRequestException($"ReCaptcha validation failed: {errors}");
-            //}
             var numero_documento = request.personType == 1 ? request.documentNumber : request.rucNumber + "" + request.documentNumber;
             var guid = Guid.NewGuid();
             var guid2 = Guid.NewGuid();
@@ -98,7 +89,7 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordRecover
                             _EmailSender.Send("PasswordRecovery",
                             new ServiciosExternos.Entidades.EmailRequest
                             {
-                                to = "jesus.angel.lrt@gmail.com", //request.email,
+                                to =  request.email,
                                 isBodyHtml = true,
                                 subject = "LOGIN UNICO - Reiniciar Contraseña"
                             }, dinamicText);
