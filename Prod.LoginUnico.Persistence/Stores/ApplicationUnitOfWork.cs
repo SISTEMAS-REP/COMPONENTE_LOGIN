@@ -1,4 +1,5 @@
 ﻿using Prod.LoginUnico.Application.Abstractions.Stores;
+using Prod.LoginUnico.Application.Features.Extranet.Commands.ApplicationsUserList;
 using Prod.LoginUnico.Domain.Entities;
 using Prod.LoginUnico.Domain.Entities.ApplicationEntity;
 using Prod.LoginUnico.Persistence.Common;
@@ -63,6 +64,19 @@ public class ApplicationUnitOfWork : UnitOfWork, IApplicationUnitOfWork
         var result = ExecuteScalar<string>(
             "usr_login_unico.SP_UPD_PASSWORD_USUARIO_EXTRANET",
             CommandType.StoredProcedure, ref parms);
+
+        return await Task.FromResult(result);
+    }
+    public async Task<List<ApplicationUserResponse>> GetListApplicationByUser(string user_name)
+    {
+        var parms = new Parameter[]
+        {
+            new Parameter("@USER_NAME", user_name),
+        };
+
+        var result = ExecuteReader<ApplicationUserResponse>(
+            "usr_login_unico.sp_GetApliacionesByUsuario",
+            CommandType.StoredProcedure, ref parms).ToList();
 
         return await Task.FromResult(result);
     }
