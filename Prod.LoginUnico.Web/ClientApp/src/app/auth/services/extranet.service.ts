@@ -7,6 +7,7 @@ import { RegisterCompanyRequest } from '../interfaces/request/register-company.r
 import { RegisterPersonRequest } from '../interfaces/request/register-person.request';
 import { RecoverPasswordRequest } from '../interfaces/request/recover-password.request';
 import { ChangePasswordRequest } from '../interfaces/request/change-password.request';
+import { ListApplicationsRequest } from '../interfaces/request/list-applications.request';
 
 @Injectable({
   providedIn: 'root',
@@ -77,5 +78,9 @@ export class ExtranetService extends ApiService {
       },
     });
   };
-
+  
+  ListApplicationsUser = (url: string
+  ): Observable<any> => {
+    return this.post('ApplicationsUserList', url);
+  };  
 }
