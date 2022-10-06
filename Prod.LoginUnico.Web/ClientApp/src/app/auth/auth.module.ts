@@ -29,6 +29,7 @@ import { ChangePasswordPersonComponent } from './pages/change-password-person/ch
 import { ChangePasswordCompanyComponent } from './pages/change-password-company/change-password-company.component';
 import { ChangePasswordPersonFormComponent } from './pages/change-password-person/components/change-password-person-form/change-password-person-form.component';
 import { ChangePasswordCompanyFormComponent } from './pages/change-password-company/components/change-password-company-form/change-password-company-form.component';
+import { ListApplicationsUserComponent } from './pages/list-applications-user/list-applications-user.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { ChangePasswordCompanyFormComponent } from './pages/change-password-comp
     ChangePasswordCompanyComponent,
     ChangePasswordPersonFormComponent,
     ChangePasswordCompanyFormComponent,
+    ListApplicationsUserComponent,
   ],
   imports: [
     CommonModule,

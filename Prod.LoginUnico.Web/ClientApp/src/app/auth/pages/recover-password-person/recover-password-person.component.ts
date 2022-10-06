@@ -108,6 +108,7 @@ export class RecoverPasswordPersonComponent implements OnInit {
       .recoverPasswordPerson(this.RecoverPasswordRequest!, this.recaptchaToken!)
       .subscribe({
         next: () => {
+          debugger;
           this.spinner.hide();
           console.log('recoverPasswordPerson-next', 'RecoverPassword success');
 

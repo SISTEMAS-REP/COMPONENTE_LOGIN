@@ -10,6 +10,7 @@ import { RecoverPasswordCompanyComponent } from './pages/recover-password-compan
 import { RecoverPasswordPersonComponent } from './pages/recover-password-person/recover-password-person.component';
 import { ChangePasswordCompanyComponent } from './pages/change-password-company/change-password-company.component';
 import { ChangePasswordPersonComponent } from './pages/change-password-person/change-password-person.component';
+import { ListApplicationsUserComponent } from './pages/list-applications-user/list-applications-user.component';
 
 export const authRoutes: Routes = [
   {
@@ -51,6 +52,10 @@ export const authRoutes: Routes = [
       {
         path: 'change-password-person',
         component: ChangePasswordPersonComponent,
+      },
+      {
+        path: 'list-applications-user',
+        component: ListApplicationsUserComponent,
       },
     ],
   },
