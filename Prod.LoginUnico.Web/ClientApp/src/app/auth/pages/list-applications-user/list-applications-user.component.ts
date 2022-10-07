@@ -13,12 +13,12 @@ import { ListApplicationsRepository } from '../../repositories/list-applications
 })
 export class ListApplicationsUserComponent implements OnInit {
   persona: any;
-  listaAplicaciones: Array<any> | undefined;
+  listaAplicaciones: Array<any> = [];
   contentType: string = "image/png";
   urlArchivo: SafeResourceUrl | undefined;
   url: string = "";
 
-  ListApplicationsRequest?: ListApplicationsRequest;
+  // ListApplicationsRequest?: ListApplicationsRequest;
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -67,11 +67,34 @@ export class ListApplicationsUserComponent implements OnInit {
 
   listApplicationsUser() {
     debugger;
+    let data : ListApplicationsRequest = {
+      UserName: this.url,
+      url: this.url
+    }
+
+   
+
     this.ListApplicationsRepository
-      .listApplicationsUser(this.url!)
+      .listApplicationsUser(data)
       .subscribe({
-        next: () => {
+        next: (dato:any) => {
         debugger;
+        this.listaAplicaciones = dato.data.applicationUser;
+          if(dato.data.applicationUser.length != 0){
+            for (var i = 0; i < dato.data.applicationUser.length; i++) {
+              var binary = atob(dato.data.applicationUser[i].conten_img.replace(/\s/g, ''));
+              var len = binary.length;
+              var buffer = new ArrayBuffer(len);
+              var view = new Uint8Array(buffer);
+              for (var e = 0; e < len; e++) {
+                view[e] = binary.charCodeAt(e);
+              }
+              var blob = new Blob([view], { type: this.contentType });
+              var urlArchivo = URL.createObjectURL(blob);
+              this.urlArchivo= this.sanitizer.bypassSecurityTrustResourceUrl(urlArchivo);
+              this.listaAplicaciones[i].urlArchivo = this.urlArchivo;
+            }
+          }
 
         },
         error: (err) => {

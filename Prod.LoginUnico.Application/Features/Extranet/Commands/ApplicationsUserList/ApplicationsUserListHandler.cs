@@ -42,12 +42,12 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.ApplicationsUse
         {
             List<ApplicationUserResponse> Listado = new List<ApplicationUserResponse>();
 
-            //string tokenDesEncrypted = Functions.Decrypt(request.UserName);
-            //JavaScriptSerializer js = new JavaScriptSerializer();
-            //dynamic blogObject = js.Deserialize<dynamic>(tokenDesEncrypted);
-            //string User_Name = blogObject["UserName"];
+            string tokenDesEncrypted = Functions.Decrypt(request.url);
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            dynamic blogObject = js.Deserialize<dynamic>(tokenDesEncrypted);
+            string User_Name = blogObject["UserName"];
 
-            var listado_aplicacion = await _applicationUnitOfWork.GetListApplicationByUser(request.UserName);
+            var listado_aplicacion = await _applicationUnitOfWork.GetListApplicationByUser(User_Name);
 
             foreach (var applicacion in listado_aplicacion)
             {

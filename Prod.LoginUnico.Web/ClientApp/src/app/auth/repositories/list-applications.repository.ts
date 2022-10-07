@@ -15,7 +15,7 @@ export class ListApplicationsRepository {
 
 
   listApplicationsUser = (
-    url: string
+    url: ListApplicationsRequest
   ): Observable<void> => {
     return this.extranetService
       .ListApplicationsUser(url)

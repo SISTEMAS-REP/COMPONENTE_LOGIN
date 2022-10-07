@@ -79,8 +79,10 @@ export class ExtranetService extends ApiService {
     });
   };
   
-  ListApplicationsUser = (url: string
+  ListApplicationsUser = (
+    request: ListApplicationsRequest,
   ): Observable<any> => {
-    return this.post('ApplicationsUserList', url);
+    debugger
+    return this.post('ApplicationsUserList', request);
   };  
 }
