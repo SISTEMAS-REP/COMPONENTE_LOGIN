@@ -108,7 +108,41 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordRecover
                 }
                 else
                 {
+                    //var resultChek = await _applicationUnitOfWork.RegisterVerificationUserExtranet(guid, request.email.ToLower(), guid2);
+                    int pos = urlBase.IndexOf('[');
+                    int posUlt = urlBase.IndexOf(']');
+                    string userName = urlBase.Substring(pos + 1, posUlt - pos - 1);
+                    urlBase = urlBase.Substring(0, pos);
 
+                    string url = string.Empty;
+
+                    var query = new NameValueCollection()
+                        {
+                            {"applicationId",   request.applicationId.ToString() },
+                            {"UserName",        Functions.Encrypt(userName) }
+                        };
+                    var qs = ToQueryString(query);
+                    url = urlBase + qs;
+
+                    var dinamicText = new
+                    {
+                        url = url
+                    };
+
+                    try
+                    {
+                        _EmailSender.Send("PasswordRecovery",
+                        new ServiciosExternos.Entidades.EmailRequest
+                        {
+                            to = user.email.ToLower(),
+                            isBodyHtml = true,
+                            subject = "LOGIN UNICO - Reiniciar Contraseña"
+                        }, dinamicText);
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
                 }
 
             }

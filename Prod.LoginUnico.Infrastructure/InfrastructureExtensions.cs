@@ -141,7 +141,7 @@ public static class InfrastructureExtensions
 
         services.Configure<IdentityOptions>(options =>
         {
-            options.User.RequireUniqueEmail = true;
+            options.User.RequireUniqueEmail = false;
 
             options.Password.RequiredLength = 6;
             options.Password.RequireNonAlphanumeric = true;
