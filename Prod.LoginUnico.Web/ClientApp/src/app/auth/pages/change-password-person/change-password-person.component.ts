@@ -19,13 +19,13 @@ export class ChangePasswordPersonComponent implements OnInit {
   @ViewChild('changePasswordPersonForm') changePasswordPersonForm?: ChangePasswordPersonFormComponent;
   applicationId: number = 0;
   UserName: string = "";
-
   logo?: SafeUrl;
-
   ChangePasswordRequest?: ChangePasswordRequest;
   recaptchaToken?: string;
-
   enums = new enumerados();
+
+  isVisibleForm : boolean = true;
+  validaSuccess : boolean = false;
 
   constructor(
     private spinner: NgxSpinnerService,
@@ -115,10 +115,10 @@ export class ChangePasswordPersonComponent implements OnInit {
           debugger;
           this.spinner.hide();
           console.log('changePasswordPerson-next', 'ChangePassword success');
-
-          this.refresh();
-
-          this.toastService.success('ChangePassword success');
+          this.isVisibleForm = false;
+          this.validaSuccess = true;
+          //this.refresh();
+         // this.toastService.success('ChangePassword success');
 
         },
         error: (err) => {

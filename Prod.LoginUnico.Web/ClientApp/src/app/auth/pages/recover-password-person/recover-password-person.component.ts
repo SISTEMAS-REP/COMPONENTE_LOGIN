@@ -19,11 +19,12 @@ export class RecoverPasswordPersonComponent implements OnInit {
   @ViewChild('recoverPasswordForm') recoverPasswordForm?: RecoverPasswordPersonFormComponent;
   applicationId: number = 0;
   logo?: SafeUrl;
-
   RecoverPasswordRequest?: RecoverPasswordRequest;
   recaptchaToken?: string;
-
   enums = new enumerados();
+
+  isVisibleForm : boolean = true;
+  validaSuccess : boolean = false;
 
 
   constructor(
@@ -111,10 +112,10 @@ export class RecoverPasswordPersonComponent implements OnInit {
           debugger;
           this.spinner.hide();
           console.log('recoverPasswordPerson-next', 'RecoverPassword success');
-
-          this.refresh();
-
-          this.toastService.success('RecoverPassword success');
+          this.isVisibleForm = false;
+          this.validaSuccess = true;
+          // this.refresh();
+          // this.toastService.success('RecoverPassword success');
 
         },
         error: (err) => {

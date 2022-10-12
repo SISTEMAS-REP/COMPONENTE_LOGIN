@@ -18,17 +18,14 @@ import { ToastService } from 'src/app/services/toast.service';
 export class ChangePasswordCompanyComponent implements OnInit {
   @ViewChild('changePasswordCompanyForm') changePasswordCompanyForm?: ChangePasswordCompanyFormComponent;
   applicationId: number = 0;
-  // Identificador: string = "";
-  // Code: string = "";
-  // Email: string = "";
   UserName: string = "";
-
   logo?: SafeUrl;
-
   ChangePasswordRequest?: ChangePasswordRequest;
   recaptchaToken?: string;
-
   enums = new enumerados();
+
+  isVisibleForm : boolean = true;
+  validaSuccess : boolean = false;
 
   constructor(
     private spinner: NgxSpinnerService,
@@ -125,10 +122,11 @@ export class ChangePasswordCompanyComponent implements OnInit {
           this.spinner.hide();
           console.log('changePasswordCompany-next', 'ChangePassword success');
 
-          this.refresh();
-
-          this.toastService.success('ChangePassword success');
-
+          this.isVisibleForm = false;
+          this.validaSuccess = true;
+          //this.refresh();
+          //this.toastService.success('ChangePassword success');
+          
         },
         error: (err) => {
           this.spinner.hide()
