@@ -38,17 +38,15 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordRecover
         Handle(PasswordRecoveryCommand request, CancellationToken cancellationToken)
         {
             var numero_documento = request.personType == 1 ? request.documentNumber : request.rucNumber + "" + request.documentNumber;
-            var guid = Guid.NewGuid();
-            var guid2 = Guid.NewGuid();
             var urlBase = "";
 
             if (request.personType == 1)
             {
-                urlBase = _appSettings.Urls.URL_LOGIN_UNICO_CAMBIAR_PERSONA + "[" + numero_documento + "]";
+                urlBase = _appSettings.Urls?.Url_cambiar_password_persona + "[" + numero_documento + "]";
             }
             else
             {
-                urlBase = _appSettings.Urls.URL_LOGIN_UNICO_CAMBIAR_EMPRESA + "[" + numero_documento + "]";
+                urlBase = _appSettings.Urls?.Url_cambiar_password_empresa + "[" + numero_documento + "]";
             }
 
             var user = await _extranetUserManager
@@ -61,7 +59,7 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordRecover
             {
                 if (request.personType == 1)
                 {
-                    if (request.email.ToLower() == user.email.ToLower())
+                    if (request.email?.ToLower() == user.email.ToLower())
                     {
                         //var resultChek = await _applicationUnitOfWork.RegisterVerificationUserExtranet(guid, request.email.ToLower(), guid2);
                         int pos = urlBase.IndexOf('[');

@@ -30,39 +30,11 @@ export class ListApplicationsUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.router.queryParams.subscribe(params => {
-      this.url = "W3Y9more8V78gBM5OXAoZVW0eieVjlgwIslash1zxVmAlDVKSIequal";
-      // this.url = params['var'] || null; 
+      //this.url = "W3Y9more8V78gBM5OXAoZVW0eieVjlgwIslash1zxVmAlDVKSIequal";
+       this.url = params['var'] || null; 
     });
     this.listApplicationsUser();
   }
-
-
-  // fnCargarAplicaciones = () =>{
-  //   let data = {
-  //      url: this.token
-  //   }
-  //   this.componenteLoginService.ListAplicacionesByUsuario(data)
-  //   .then(resp => {
-  //     this.listaAplicaciones = resp;
-  //     if(resp.length != 0){
-  //       for (var i = 0; i < resp.length; i++) {
-  //         var binary = atob(resp[i].conten_img.replace(/\s/g, ''));
-  //         var len = binary.length;
-  //         var buffer = new ArrayBuffer(len);
-  //         var view = new Uint8Array(buffer);
-  //         for (var e = 0; e < len; e++) {
-  //           view[e] = binary.charCodeAt(e);
-  //         }
-  //         var blob = new Blob([view], { type: this.contentType });
-  //         var urlArchivo = URL.createObjectURL(blob);
-  //         this.urlArchivo= this.sanitizer.bypassSecurityTrustResourceUrl(urlArchivo);
-  //         this.listaAplicaciones[i].urlArchivo = this.urlArchivo;
-  //       }
-  //     }
-  //   })
-  //   .catch(err => []);
-  // }
-
 
 
   listApplicationsUser() {

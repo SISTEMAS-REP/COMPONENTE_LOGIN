@@ -47,7 +47,7 @@ public static class InfrastructureExtensions
             new MigracionesServicio(options.Services?.UrlMigraciones));
 
         var ff = AppDomain.CurrentDomain.BaseDirectory;
-        var baseFolder = options.Urls.URL_DOMAIN_LOGIN_UNICO!;/* AppDomain.CurrentDomain.BaseDirectory;*/
+        var baseFolder = options.Urls.Url_domain_login_unico!;/* AppDomain.CurrentDomain.BaseDirectory;*/
         var rootTemplates = Path.Combine(baseFolder, "Plantillas");
         EmailSender.Templates = SenderManager.GetEmailTemplates(rootTemplates, EmailSender.Templates);
 

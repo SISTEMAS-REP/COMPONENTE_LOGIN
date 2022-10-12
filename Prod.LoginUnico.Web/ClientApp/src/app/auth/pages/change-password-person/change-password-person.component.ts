@@ -18,9 +18,6 @@ import { ToastService } from 'src/app/services/toast.service';
 export class ChangePasswordPersonComponent implements OnInit {
   @ViewChild('changePasswordPersonForm') changePasswordPersonForm?: ChangePasswordPersonFormComponent;
   applicationId: number = 0;
-  // Identificador: string = "";
-  // Code: string = "";
-  // Email: string = "";
   UserName: string = "";
 
   logo?: SafeUrl;
@@ -42,9 +39,6 @@ export class ChangePasswordPersonComponent implements OnInit {
   ngOnInit(): void {
     this.router.queryParams.subscribe((params) => {
       this.applicationId = params['applicationId'] || null;
-      // this.Identificador = params['Identificador'] || null;
-      // this.Code = params['Code'] || null;
-      // this.Email = params['Email'] || null;
       this.UserName = params['UserName'] || null;
       this.loadLogo();
     });
@@ -74,9 +68,6 @@ export class ChangePasswordPersonComponent implements OnInit {
 
     this.ChangePasswordRequest.personType = this.enums.TIPO_PERSONA.NATURAL;
     this.ChangePasswordRequest.applicationId = this.applicationId;
-    // this.ChangePasswordRequest.Identificador = this.Identificador;
-    // this.ChangePasswordRequest.Code = this.Code;
-    // this.ChangePasswordRequest.Email = this.Email;
     this.ChangePasswordRequest.UserName = this.UserName;
     
     this.setReCAPTCHA();
@@ -121,6 +112,7 @@ export class ChangePasswordPersonComponent implements OnInit {
       .changePasswordPerson(this.ChangePasswordRequest!, this.recaptchaToken!)
       .subscribe({
         next: () => {
+          debugger;
           this.spinner.hide();
           console.log('changePasswordPerson-next', 'ChangePassword success');
 

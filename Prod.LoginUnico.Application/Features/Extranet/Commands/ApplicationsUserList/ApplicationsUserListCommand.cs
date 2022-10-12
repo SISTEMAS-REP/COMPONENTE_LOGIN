@@ -13,6 +13,6 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.ApplicationsUse
     {
         public string? RecaptchaToken { get; set; }
         public string? UserName { get; set; }
-        public string url { get; set; }
+        public string? url { get; set; }
     }
 }

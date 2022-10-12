@@ -1,23 +1,12 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Options;
 using Nancy.Json;
-using Newtonsoft.Json.Linq;
-using Prod.LoginUnico.Application.Abstractions.Managers;
 using Prod.LoginUnico.Application.Abstractions.Services;
 using Prod.LoginUnico.Application.Abstractions.Stores;
 using Prod.LoginUnico.Application.Common.Options;
 using Prod.LoginUnico.Application.Common.Wrapper;
-using Prod.LoginUnico.Application.Features.Extranet.Commands.Auth;
-using Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordRecovery;
-using Prod.ServiciosExternos;
-using Prod.ServiciosExternos.PRODUCE_VIRTUAL;
 using Release.Helper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+
 
 namespace Prod.LoginUnico.Application.Features.Extranet.Commands.ApplicationsUserList
 {

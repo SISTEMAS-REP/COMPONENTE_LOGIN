@@ -8,9 +8,11 @@ namespace Prod.LoginUnico.Application.Common.Options
 {
     public class Urls
     {
-        public string? URL_LOGIN_UNICO_WEB { get; set; }
-        public string? URL_LOGIN_UNICO_CAMBIAR_PERSONA { get; set; }
-        public string? URL_LOGIN_UNICO_CAMBIAR_EMPRESA { get; set; }
-        public string? URL_DOMAIN_LOGIN_UNICO { get; set; }
+
+        public string? Url_login_unico_web { get; set; }
+        public string? Url_cambiar_password_persona { get; set; }
+        public string? Url_cambiar_password_empresa { get; set; }
+        public string? Url_domain_login_unico { get; set; }
+
     }
 }
