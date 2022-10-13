@@ -14,9 +14,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{4F3BD861-808C-4828-8610-42CCD286B3ED}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{8AB8DD75-5E10-42FF-8DF9-02E142733374}"
-	ProjectSection(SolutionItems) = preProject
-		Prod.LoginUnico.Domain\Models\PersonasServiceResponse.cs = Prod.LoginUnico.Domain\Models\PersonasServiceResponse.cs
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{FB92F4F6-2FCE-4B2F-8261-31DE8BDB25A8}"
 EndProject

@@ -16,4 +16,10 @@ public class ApplicationEntity
     public string? url_intranet { get; set; }
 
     public string? url_extranet { get; set; }
+
+    public bool estado { get; set; }
+
+    public bool es_intranet { get; set; }
+
+    public bool es_extranet { get; set; }
 }

@@ -26,4 +26,6 @@ export interface RegisterPersonRequest {
   repeatPassword?: string;
   termsAndConditions?: boolean;
   termsOfMessaging?: boolean;
+
+  //contactId?: number
 }

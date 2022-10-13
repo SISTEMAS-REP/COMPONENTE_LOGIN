@@ -7,9 +7,12 @@ namespace Prod.LoginUnico.Application.Abstractions.Stores;
 public interface IExtranetUserUnitOfWork : IUnitOfWork
 {
     Task<ExtranetUserEntity?>
-        FindExtranetUser(int? extranetUserId = null,
-                         string? userName = null,
-                         string? email = null);
+        Find(int? extranetUserId = null,
+             string? userName = null,
+             string? email = null);
+
+    Task<IEnumerable<ExtranetUser>>
+        FindByContactId(int extranetContactId);
 
     Task<int> 
         Upsert(ExtranetUserEntity entity);

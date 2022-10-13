@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Options;
 using Prod.LoginUnico.Application.Common.Options;
-using Prod.LoginUnico.Application.Common.Wrapper;
+using Prod.LoginUnico.Application.Common.Wrappers;
 
 namespace Prod.LoginUnico.Application.Features.General.Queries.Logo;
 

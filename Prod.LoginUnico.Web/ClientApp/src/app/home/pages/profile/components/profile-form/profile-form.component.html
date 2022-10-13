@@ -1,0 +1,77 @@
+<form class="text-left" [formGroup]="myForm" autocomplete="off">
+  <div class="form-group">
+    <label class="form-control-label" for="email"> Correo electrónico </label>
+
+    <input
+      class="form-control"
+      [ngClass]="isInvalidField('email') ? ' is-invalid' : ''"
+      type="text"
+      id="email"
+      placeholder="Ej.: camila.flores@ejemplo.com"
+      formControlName="email"
+    />
+
+    <div *ngIf="isInvalidField('email')" class="invalid-feedback">
+      El formato de correo electrónico es inválido.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="form-control-label" for="phoneNumber"> Número celular </label>
+    <input
+      class="form-control"
+      [ngClass]="isInvalidField('phoneNumber') ? ' is-invalid' : ''"
+      type="text"
+      [maxlength]="phoneNumberLength"
+      id="phoneNumber"
+      placeholder="Ej.: 987964246"
+      formControlName="phoneNumber"
+      appOnlyNumbers
+    />
+
+    <div
+      *ngIf="myForm.get('phoneNumber')?.errors?.required"
+      class="invalid-feedback"
+    >
+      Debe ingresar un número celular.
+    </div>
+    <div
+      *ngIf="
+        !myForm.get('phoneNumber')?.errors?.required &&
+        myForm.get('phoneNumber')?.errors?.minlength
+      "
+      class="invalid-feedback"
+    >
+      El número celular debe tener {{ phoneNumberLength }} dígitos.
+    </div>
+  </div>
+  <button (click)="save()" class="btn btn-darker btn-block">
+    GUARDAR CAMBIOS
+  </button>
+  <button (click)="back()" class="btn btn-outline-dark btn-block">
+    REGRESAR
+  </button>
+</form>
+
+<!-- <div class="row text-left">
+  <div class="col">
+    <span>Valid</span>
+    <pre>{{ myForm.valid }}</pre>
+
+    <span>Pristine</span>
+    <pre>{{ myForm.pristine }}</pre>
+
+    <span>Touched</span>
+    <pre>{{ myForm.touched }}</pre>
+
+    <span>Value</span>
+    <pre>{{ myForm.value | json }}</pre>
+
+    <span>email</span>
+    <pre>{{ myForm.controls["email"].errors | json }}</pre>
+
+    <span>phoneNumber</span>
+    <pre>{{ myForm.controls["phoneNumber"].errors | json }}</pre>
+  </div>
+</div>
+ -->

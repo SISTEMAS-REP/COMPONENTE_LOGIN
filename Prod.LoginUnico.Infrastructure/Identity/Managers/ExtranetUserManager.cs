@@ -22,6 +22,16 @@ public class ExtranetUserManager : IExtranetUserManager
         return user;
     }
 
+
+    // Buscar usuario por user_name
+    public async Task<ExtranetUserEntity>
+        FindByIdAsync(string userId)
+    {
+        var user = await UserManager
+            .FindByIdAsync(userId);
+        return user;
+    }
+
     // Buscar fecha fin del bloqueo de acceso para un usuario
     public async Task<DateTimeOffset?>
         GetLockoutEndDateAsync(ExtranetUserEntity user)
@@ -58,5 +68,22 @@ public class ExtranetUserManager : IExtranetUserManager
         var result = await UserManager
             .AddPasswordAsync(user, password);
         return result.Succeeded;
+    }
+
+    // Buscar usuario por user_name
+    public async Task<(bool status, string? errors)>
+        UpdateAsync(ExtranetUserEntity user)
+    {
+        var result = await UserManager
+            .UpdateAsync(user);
+
+        if (result.Succeeded)
+            return (status: true, errors: null);
+
+        var errors = result.Errors
+            .Select(e => $"{e.Code} : {e.Description}")
+            .Aggregate((i, j) => i + "\n" + j);
+
+        return (status: false, errors);
     }
 }

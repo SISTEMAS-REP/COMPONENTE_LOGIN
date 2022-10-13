@@ -15,10 +15,10 @@ public class ExtranetUserUnitOfWork : UnitOfWork, IExtranetUserUnitOfWork
     {
     }
 
-    public async Task<ExtranetUserEntity?> FindExtranetUser(
-        int? extranetUserId,
-        string? userName,
-        string? email)
+    public async Task<ExtranetUserEntity?> 
+        Find(int? extranetUserId,
+             string? userName,
+             string? email)
     {
         var parms = new Parameter[]
         {
@@ -32,6 +32,21 @@ public class ExtranetUserUnitOfWork : UnitOfWork, IExtranetUserUnitOfWork
             CommandType.StoredProcedure, ref parms);
 
         return await Task.FromResult(result.FirstOrDefault());
+    }
+
+    public async Task<IEnumerable<ExtranetUser>> 
+        FindByContactId(int extranetContactId)
+    {
+        var parms = new Parameter[]
+        {
+            new Parameter("@id_contacto_extranet", extranetContactId)
+        };
+
+        var result = ExecuteReader<ExtranetUser>(
+            "usr_login_unico.MAE_USUARIO_EXTRANET_LISTAR",
+            CommandType.StoredProcedure, ref parms);
+
+        return await Task.FromResult(result);
     }
 
     public async Task<int> Upsert(ExtranetUserEntity entity)

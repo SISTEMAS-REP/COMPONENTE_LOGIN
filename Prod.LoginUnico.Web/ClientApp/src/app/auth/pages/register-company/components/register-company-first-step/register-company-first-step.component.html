@@ -39,7 +39,7 @@
             "
             class="invalid-feedback"
           >
-            El número de RUC debe iniciar con 10.
+            El número de RUC debe iniciar con 20.
           </div>
         </div>
       </div>
@@ -52,25 +52,43 @@
 
           <input
             class="form-control"
+            [ngClass]="isInvalidField('businessName') ? ' is-invalid' : ''"
             type="text"
             id="businessName"
             placeholder="Ej.: Base - Base Corporation"
             formControlName="businessName"
+            [attr.disabled]="true"
           />
+          <div
+            *ngIf="myForm.get('businessName')?.errors?.required"
+            class="invalid-feedback"
+          >
+            Verifique el número de RUC.
+          </div>
         </div>
       </div>
 
       <div class="col-sm-12">
         <div class="form-group">
-          <label class="form-control-label" for="businessAddress"> DIRECCIÓN </label>
+          <label class="form-control-label" for="businessAddress">
+            DIRECCIÓN
+          </label>
 
           <input
             class="form-control"
+            [ngClass]="isInvalidField('businessAddress') ? ' is-invalid' : ''"
             type="text"
             id="businessAddress"
             placeholder="Ej.: Calle C 3517, Lima"
             formControlName="businessAddress"
+            [attr.disabled]="true"
           />
+          <div
+            *ngIf="myForm.get('businessAddress')?.errors?.required"
+            class="invalid-feedback"
+          >
+            Verifique el número de RUC.
+          </div>
         </div>
       </div>
     </div>
@@ -89,12 +107,20 @@
         <span>Value</span>
         <pre>{{ myForm.value | json }}</pre>
 
+        <span>juridicalPersonId</span>
+        <pre>{{ myForm.controls["juridicalPersonId"].errors | json }}</pre>
+
         <span>rucNumber</span>
         <pre>{{ myForm.controls["rucNumber"].errors | json }}</pre>
+
+        <span>businessName</span>
+        <pre>{{ myForm.controls["businessName"].errors | json }}</pre>
       </div>
     </div> -->
 
     <button (click)="next()" class="btn btn-darker btn-block">Siguiente</button>
-    <button (click)="cancel()" class="btn btn-outline-dark btn-block">Cancelar</button>
+    <button (click)="cancel()" class="btn btn-outline-dark btn-block">
+      Cancelar
+    </button>
   </div>
 </form>

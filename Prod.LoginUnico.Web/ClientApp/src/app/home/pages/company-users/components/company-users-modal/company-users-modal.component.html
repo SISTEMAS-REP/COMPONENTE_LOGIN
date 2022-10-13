@@ -1,0 +1,60 @@
+<div class="modal-header">
+  <h3 class="modal-title" id="modal-title-default">{{ modalTitle }}</h3>
+
+  <button
+    aria-label="Close"
+    class="close"
+    data-dismiss="modal"
+    type="button"
+    (click)="hide()"
+  >
+    <span aria-hidden="true"> × </span>
+  </button>
+</div>
+
+<div class="modal-body">
+  <div #stepper class="bs-stepper">
+    <div class="bs-stepper-header">
+      <div class="step" data-target="#step-1">
+        <button class="step-trigger">
+          <span class="bs-stepper-circle">1</span>
+        </button>
+      </div>
+      <div class="step" data-target="#step-2">
+        <button class="step-trigger">
+          <span class="bs-stepper-circle">2</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="bs-stepper-content">
+      <app-register-company-user-first-step
+        #firstStep
+        [sunatResponse]="sunatResponse"
+        [reniecResponse]="reniecResponse"
+        [migracionesResponse]="migracionesResponse"
+        (onSendRucNumber)="onSendRucNumber($event)"
+        (onSendDocumentNumber)="onSendDocumentNumber($event)"
+        (onNextFormButton)="onNextStep($event)"
+        (onCancelFormButton)="hide()"
+      ></app-register-company-user-first-step>
+      <app-register-company-user-second-step
+        #secondStep
+        (onNextFormButton)="onNextStep($event)"
+        (onPreviewFormButton)="onPreviewStep()"
+      ></app-register-company-user-second-step>
+    </div>
+  </div>
+</div>
+<!--
+<div class="modal-footer">
+  <button
+    class="btn btn-link ml-auto"
+    data-dismiss="modal"
+    type="button"
+    (click)="hide()"
+  >
+    Cerrar
+  </button>
+</div>
+ -->

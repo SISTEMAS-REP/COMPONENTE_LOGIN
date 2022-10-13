@@ -37,7 +37,7 @@ public class ExtranetUserEntity
 
     public int access_failed_count { get; set; } // validar con identity 
 
-    //public int id_contacto_extranet { get; set; }
+    public int id_contacto_extranet { get; set; }
 
     public string usuario_registro { get; set; }
 

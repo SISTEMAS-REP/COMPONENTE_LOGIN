@@ -6,7 +6,7 @@ namespace Prod.LoginUnico.Web.Controllers;
 
 [Authorize]
 [ApiController]
-[Route("api/[controller]/[action]")]
+[Route("api/[controller]")]
 public class BaseApiController : ControllerBase
 {
     private IMediator? _mediator;

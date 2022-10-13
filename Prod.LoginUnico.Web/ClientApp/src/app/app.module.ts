@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PresentationComponent } from './pages/presentation/presentation.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ToastrModule } from 'ngx-toastr';
-import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent, PresentationComponent],
@@ -25,7 +24,7 @@ import { SharedModule } from './shared/shared.module';
       preventDuplicates: false,
     }),
 
-    SharedModule,
+    //SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

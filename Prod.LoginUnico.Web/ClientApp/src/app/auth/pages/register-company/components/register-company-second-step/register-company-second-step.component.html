@@ -40,6 +40,9 @@
             placeholder="Ej.: 15234687"
             formControlName="documentNumber"
             appOnlyNumbers
+            [attr.disabled]="
+              myForm.get('documentType')?.value == 0 ? true : null
+            "
           />
 
           <div
@@ -67,11 +70,19 @@
 
           <input
             class="form-control"
+            [ngClass]="isInvalidField('lastName') ? ' is-invalid' : ''"
             type="text"
             id="lastName"
             placeholder="Ej.: Flores Sánchez"
             formControlName="lastName"
+            [attr.disabled]="true"
           />
+          <div
+            *ngIf="myForm.get('lastName')?.errors?.required"
+            class="invalid-feedback"
+          >
+            Verifique el número de documento.
+          </div>
         </div>
       </div>
 
@@ -81,11 +92,19 @@
 
           <input
             class="form-control"
+            [ngClass]="isInvalidField('firstName') ? ' is-invalid' : ''"
             type="text"
             id="firstName"
             placeholder="Ej.: Camila"
             formControlName="firstName"
+            [attr.disabled]="true"
           />
+          <div
+            *ngIf="myForm.get('firstName')?.errors?.required"
+            class="invalid-feedback"
+          >
+            Verifique el número de documento.
+          </div>
         </div>
       </div>
     </div>

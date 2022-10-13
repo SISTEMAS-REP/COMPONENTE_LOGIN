@@ -1,6 +1,4 @@
-﻿using Prod.LoginUnico.Application.Common.Options;
-using Prod.LoginUnico.Application.Features.Extranet.Commands.Auth;
-using Prod.LoginUnico.Application.Models.Services;
+﻿using Prod.LoginUnico.Application.Models.Services;
 
 namespace Prod.LoginUnico.Application.Abstractions.Services;
 

@@ -23,6 +23,14 @@ const PROXY_CONFIG = [
       Connection: "Keep-Alive",
     },
   },
+  {
+    context: ["/api/account"],
+    target: target,
+    secure: false,
+    headers: {
+      Connection: "Keep-Alive",
+    },
+  },
 ];
 
 module.exports = PROXY_CONFIG;

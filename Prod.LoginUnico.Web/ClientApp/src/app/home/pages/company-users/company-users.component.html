@@ -1,0 +1,39 @@
+<section class="py-6">
+  <div class="container-fluid">
+    <div class="row justify-content-center" *ngIf="companyUserSelected">
+      <div class="col-md-12 col-lg-6 mb-4">
+        <app-company-users-form
+          [companyUser]="companyUserSelected"
+          (onSaveFormButton)="saveForm($event)"
+        ></app-company-users-form>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-6 mb-4">
+        <app-custom-datatable
+          #usersTable
+          loaderName="users-table"
+          headerTitle="Listado de usuarios"
+          [columns]="columns"
+          [data]="companyUsers"
+          [headerButtons]="buttons"
+          [showScrollBarH]="false"
+          [showOptions]="true"
+          [showSearch]="false"
+          [selectionType]="selectionType"
+          (onSendLastSelected)="selectUser($event)"
+          (onSendClickButton)="showModal()"
+        ></app-custom-datatable>
+      </div>
+    </div>
+
+    <ng-template #registerUserModal>
+      <app-company-users-modal
+        modalTitle="Agregar usuario"
+        [applicationId]="applicationId"
+        (onHide)="defaultModal.hide()"
+      ></app-company-users-modal>
+    </ng-template>
+  </div>
+</section>

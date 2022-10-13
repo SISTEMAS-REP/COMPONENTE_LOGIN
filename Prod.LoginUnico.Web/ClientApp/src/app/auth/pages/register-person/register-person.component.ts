@@ -123,6 +123,9 @@ export class RegisterPersonComponent implements OnInit {
         error: (err) => {
           this.spinner.hide();
           console.log('searchRucOnSunat-error', err);
+          this.toastService.danger(err.error?.detail, err.error?.title);
+
+          this.sunatResponse = undefined;
         },
       });
     }
@@ -157,6 +160,9 @@ export class RegisterPersonComponent implements OnInit {
         error: (err) => {
           this.spinner.hide();
           console.log('searchDocumentOnReniec-error', err);
+          this.toastService.danger(err.error?.detail, err.error?.title);
+
+          this.reniecResponse = undefined;
         },
       });
     }
@@ -170,11 +176,14 @@ export class RegisterPersonComponent implements OnInit {
           this.spinner.hide();
           console.log('searchDocumentOnMigraciones-next', data);
 
-          this.reniecResponse = data;
+          this.migracionesResponse = data;
         },
         error: (err) => {
           this.spinner.hide();
           console.log('searchDocumentOnMigraciones-error', err);
+          this.toastService.danger(err.error?.detail, err.error?.title);
+
+          this.migracionesResponse = undefined;
         },
       });
     }
@@ -198,8 +207,9 @@ export class RegisterPersonComponent implements OnInit {
       return;
     }
 
-    this.registerRequest.applicationId = this.applicationId
-    this.registerRequest.sectorId = this.enumerado.TIPO_SECTOR_PERSONA.PESQUERIA;
+    this.registerRequest.applicationId = this.applicationId;
+    this.registerRequest.sectorId =
+      this.enumerado.TIPO_SECTOR_PERSONA.PESQUERIA;
     this.registerRequest.personType = this.enumerado.TIPO_PERSONA.JURIDICA;
 
     this.setReCAPTCHA();

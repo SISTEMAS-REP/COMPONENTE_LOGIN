@@ -12,6 +12,7 @@ import { ReniecResponse } from '../interfaces/response/reniec.response';
 import { RegisterCompanyRequest } from '../interfaces/request/register-company.request';
 import { MigracionesRequest } from '../interfaces/request/migraciones.request';
 import { MigracionesResponse } from '../interfaces/response/migraciones.response';
+import { AccountService } from 'src/app/services/account.service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,7 @@ export class RegisterRepository {
   constructor(
     private generalService: GeneralService,
     private extranetService: ExtranetService,
+    private accountService: AccountService,
     private appMapping: AppMapping
   ) {}
 
@@ -57,8 +59,8 @@ export class RegisterRepository {
     request: RegisterPersonRequest,
     recaptchaToken: string
   ): Observable<void> => {
-    return this.extranetService
-      .naturalRegister(request, recaptchaToken)
+    return this.accountService
+      .insertExtranetPersonAccount(request, recaptchaToken)
       .pipe(catchError(this.appMapping.throwError));
   };
 
@@ -66,8 +68,8 @@ export class RegisterRepository {
     request: RegisterCompanyRequest,
     recaptchaToken: string
   ): Observable<void> => {
-    return this.extranetService
-      .juridicalRegister(request, recaptchaToken)
+    return this.accountService
+      .insertExtranetCompanyAccount(request, recaptchaToken)
       .pipe(catchError(this.appMapping.throwError));
   };
 }

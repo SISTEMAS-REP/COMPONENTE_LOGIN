@@ -53,8 +53,8 @@ export class RegisterPersonFirstStepComponent implements OnInit {
       null,
       { validators: [Validators.required], updateOn: 'blur' },
     ],
-    firstName: [{ value: null, disabled: true }],
-    lastName: [{ value: null, disabled: true }],
+    firstName: [null, [Validators.required]],
+    lastName: [null, [Validators.required]],
 
     phoneNumber: [
       null,
@@ -92,6 +92,8 @@ export class RegisterPersonFirstStepComponent implements OnInit {
         this.setReniecFields(false);
       } else if (documentType == 7) {
         this.setMigracionesFields(false);
+      } else {
+        this.resetDocumentFields();
       }
 
       this.resetDocumentValidators();
@@ -248,6 +250,14 @@ export class RegisterPersonFirstStepComponent implements OnInit {
       ?.reset(isUpdate ? this.migracionesResponse?.lastName || null : null, {
         emitEvent: false,
       });
+  }
+
+  resetDocumentFields() {
+    console.log('resetDocumentFields');
+    this.myForm.get('personId')?.reset(0, { emitEvent: false });
+    this.myForm.get('documentNumber')?.reset(null, { emitEvent: false });
+    this.myForm.get('firstName')?.reset(null, { emitEvent: false });
+    this.myForm.get('lastName')?.reset(null, { emitEvent: false });
   }
 
   resetRucValidators(enableRuc: boolean) {

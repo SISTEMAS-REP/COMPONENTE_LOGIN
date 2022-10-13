@@ -4,9 +4,8 @@ using Nancy.Json;
 using Prod.LoginUnico.Application.Abstractions.Services;
 using Prod.LoginUnico.Application.Abstractions.Stores;
 using Prod.LoginUnico.Application.Common.Options;
-using Prod.LoginUnico.Application.Common.Wrapper;
+using Prod.LoginUnico.Application.Common.Wrappers;
 using Release.Helper;
-
 
 namespace Prod.LoginUnico.Application.Features.Extranet.Commands.ApplicationsUserList
 {
@@ -16,11 +15,11 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.ApplicationsUse
         private readonly IReCaptchaService _reCaptchaService;
         private readonly IApplicationUnitOfWork _applicationUnitOfWork;
         private readonly StaticFiles _staticFiles;
+
         public ApplicationsUserListHandler(
             IReCaptchaService reCaptchaService,
             IApplicationUnitOfWork applicationUnitOfWork,
-            IOptions<AppSettings> appSettings
-            )
+            IOptions<AppSettings> appSettings)
         {
             _reCaptchaService = reCaptchaService;
             _applicationUnitOfWork = applicationUnitOfWork;

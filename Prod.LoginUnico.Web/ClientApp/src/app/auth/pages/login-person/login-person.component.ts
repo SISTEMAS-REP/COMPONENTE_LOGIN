@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, isDevMode, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { LoginRequest } from '../../interfaces/request/login.request';
@@ -9,6 +9,7 @@ import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { LoginPersonFormComponent } from './components/login-person-form/login-person-form.component';
 import { enumerados } from 'src/app/enums/enumerados';
 import { ToastService } from '../../../services/toast.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login-person',
@@ -18,7 +19,7 @@ export class LoginPersonComponent implements OnInit {
   @ViewChild('loginForm') loginForm?: LoginPersonFormComponent;
 
   applicationId: number = 0;
-  returnUrl: string = "";
+  returnUrl: string = '';
   logo?: SafeUrl;
 
   loginRequest?: LoginRequest;
@@ -38,7 +39,7 @@ export class LoginPersonComponent implements OnInit {
   ngOnInit(): void {
     this.router.queryParams.subscribe((params) => {
       this.applicationId = params['applicationId'] || null;
-      this.returnUrl = params['returnUrl'] || "";
+      this.returnUrl = params['returnUrl'] || '';
       this.loadLogo();
     });
   }
@@ -106,11 +107,13 @@ export class LoginPersonComponent implements OnInit {
 
   evalLogIn() {
     if (!this.loginRequest) {
+      this.spinner.hide();
       console.log('evalLogIn', 'loginRequest is null or undefined');
       return;
     }
 
     if (!this.recaptchaToken) {
+      this.spinner.hide();
       console.log('evalLogIn', 'recaptchaToken is null or undefined');
       return;
     }
@@ -146,6 +149,9 @@ export class LoginPersonComponent implements OnInit {
   }
 
   onCancel() {
-    this.toastService.danger('Acción para cancelar el inicio de sesión.', 'Cancelar');
+    this.toastService.danger(
+      'Acción para cancelar el inicio de sesión.',
+      'Cancelar'
+    );
   }
 }

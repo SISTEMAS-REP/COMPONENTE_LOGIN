@@ -38,8 +38,8 @@ export class RegisterCompanyFirstStepComponent implements OnInit {
         updateOn: 'blur',
       },
     ],
-    businessName: [{ value: null, disabled: true }],
-    businessAddress: [{ value: null, disabled: true }],
+    businessName: [null, [Validators.required]],
+    businessAddress: [null, [Validators.required]],
   });
 
   constructor(private fb: FormBuilder) {

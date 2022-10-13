@@ -10,8 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
+var basePath = AppDomain.CurrentDomain.BaseDirectory; //#SDK 2.00
+
 var configBuilder = new ConfigurationBuilder()
-    .SetBasePath(Directory.GetCurrentDirectory())
+    .SetBasePath(basePath)
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .AddJsonFile($"appsettings.{env ?? "Production"}.json", optional: true)
     .AddEnvironmentVariables()

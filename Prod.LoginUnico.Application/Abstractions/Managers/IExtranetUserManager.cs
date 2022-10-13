@@ -7,6 +7,9 @@ public interface IExtranetUserManager
     Task<ExtranetUserEntity>
         FindByNameAsync(string userName);
 
+    Task<ExtranetUserEntity>
+        FindByIdAsync(string userId);
+
     Task<DateTimeOffset?>
         GetLockoutEndDateAsync(ExtranetUserEntity user);
 
@@ -15,4 +18,7 @@ public interface IExtranetUserManager
 
     Task<bool>
         AddPasswordAsync(ExtranetUserEntity user, string password);
+
+    Task<(bool status, string? errors)>
+        UpdateAsync(ExtranetUserEntity user);
 }

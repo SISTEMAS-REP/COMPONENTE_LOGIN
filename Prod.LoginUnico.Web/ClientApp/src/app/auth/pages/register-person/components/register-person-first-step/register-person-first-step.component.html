@@ -67,6 +67,7 @@
             [ngClass]="isInvalidField('documentType') ? ' is-invalid' : ''"
             id="documentType"
             formControlName="documentType"
+            [attr.disabled]="showRucNumberField ? true : null"
           >
             <option value="0">Seleccione</option>
 
@@ -95,6 +96,11 @@
             placeholder="Ej.: 15234687"
             formControlName="documentNumber"
             appOnlyNumbers
+            [attr.disabled]="
+              showRucNumberField || myForm.get('documentType')?.value == 0
+                ? true
+                : null
+            "
           />
 
           <div
@@ -122,11 +128,19 @@
 
           <input
             class="form-control"
+            [ngClass]="isInvalidField('lastName') ? ' is-invalid' : ''"
             type="text"
             id="lastName"
             placeholder="Ej.: Flores Sánchez"
             formControlName="lastName"
+            [attr.disabled]="true"
           />
+          <div
+            *ngIf="myForm.get('lastName')?.errors?.required"
+            class="invalid-feedback"
+          >
+            Verifique la información ingresada.
+          </div>
         </div>
       </div>
 
@@ -136,11 +150,19 @@
 
           <input
             class="form-control"
+            [ngClass]="isInvalidField('firstName') ? ' is-invalid' : ''"
             type="text"
             id="firstName"
             placeholder="Ej.: Camila"
             formControlName="firstName"
+            [attr.disabled]="true"
           />
+          <div
+            *ngIf="myForm.get('firstName')?.errors?.required"
+            class="invalid-feedback"
+          >
+            Verifique la información ingresada.
+          </div>
         </div>
       </div>
 
@@ -194,6 +216,9 @@
         <span>Value</span>
         <pre>{{ myForm.value | json }}</pre>
 
+        <span>personId</span>
+        <pre>{{ myForm.controls["personId"].errors | json }}</pre>
+
         <span>rucNumber</span>
         <pre>{{ myForm.controls["rucNumber"].errors | json }}</pre>
 
@@ -206,6 +231,8 @@
     </div> -->
 
     <button (click)="next()" class="btn btn-darker btn-block">Siguiente</button>
-    <button (click)="cancel()" class="btn btn-outline-dark btn-block">Cancelar</button>
+    <button (click)="cancel()" class="btn btn-outline-dark btn-block">
+      Cancelar
+    </button>
   </div>
 </form>

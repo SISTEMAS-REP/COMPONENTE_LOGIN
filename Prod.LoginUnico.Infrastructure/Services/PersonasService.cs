@@ -44,6 +44,36 @@ public class PersonasService : IPersonasService
     }
 
     public async Task<PersonasServiceResponse?>
+        FindPersonById(int personId)
+    {
+        var response = _personasServicio
+            .ObtenerPersona(new()
+            {
+                id_persona = personId
+            });
+
+        if (!response.Success || response.Data is null)
+        {
+            return null;
+        }
+
+        return await Task.FromResult(new PersonasServiceResponse()
+        {
+            id = response.Data.id_persona,
+            id_tipo_identificacion = response.Data.id_tipo_identificacion,
+            nro_documento = response.Data.nro_documento,
+            id_tipo_persona = response.Data.id_tipo_persona,
+            razon_social = response.Data.razon_social,
+            nombres = response.Data.nombres,
+            apellidos = response.Data.apellidos,
+            direccion = response.Data.direccion,
+            codigo_departamento = response.Data.codigo_departamento,
+            codigo_provincia = response.Data.codigo_provincia,
+            codigo_distrito = response.Data.codigo_distrito,
+        });
+    }
+
+    public async Task<PersonasServiceResponse?>
         FindNaturalPerson(string documentNumber)
     {
         var response = _personasServicio

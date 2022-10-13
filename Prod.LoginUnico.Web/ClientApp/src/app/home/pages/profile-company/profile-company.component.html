@@ -1,0 +1,232 @@
+<section class="py-6">
+  <div class="container-fluid">
+    <div class="row justify-content-center text-center">
+      <div class="col-lg-8 col-md-12">
+        <div class="card shadow-prod border-0">
+          <div class="row justify-content-center">
+            <div class="col-lg-3 order-lg-2">
+              <div class="card-profile-image">
+                <a href="javascript:void(0)">
+                  <img class="rounded-circle" src="assets/img/user.jpg" />
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="card-body pt-8">
+            <div class="form">
+              <div class="header" *ngIf="isVisiblePerfil">
+                <div class="circle">
+                  <div class="circleEditar">
+                    <img
+                      src="../../assets/img/icono_editar.png"
+                      alt="Editar"
+                      title="Editar"
+                      width="20"
+                      (click)="clickEditarImg()"
+                    />
+                  </div>
+                </div>
+                <div class="title">
+                  <h2>Mi perfil</h2>
+                  <h3>Persona Jurídica</h3>
+                </div>
+              </div>
+              <div class="personal" *ngIf="isVisiblePerfil">
+                <h5>Información de empresa</h5>
+                <p>RUC : {{ ruc }}</p>
+                <p>Razón social : {{ razon_social }}</p>
+                <p>Dirección : {{ direccion }}</p>
+              </div>
+              <div class="representante" *ngIf="isVisiblePerfil">
+                <h5>Información de persona</h5>
+                <div *ngIf="isVisibleRepresentante">
+                  <p>DNI : {{ dni }}</p>
+                  <p>Nombres y apellidos : {{ nombre_completo }}</p>
+                </div>
+              </div>
+              <div class="column" *ngIf="isVisibleEditarRepresentante">
+                <div class="left">
+                  <label for="tipoDoc">Tipo documento</label>
+                  <select
+                    type="tipoDoc"
+                    name="select"
+                    placeholder="Seleccionar"
+                    (change)="changeTipoDocumento($event)"
+                  >
+                    <option value="0">--Seleccionar--</option>
+                    <option value="1">DNI</option>
+                    <option value="2">Carnet de Extranjería</option>
+                  </select>
+                  <p class="validador" *ngIf="validadorTipoDocumento">
+                    Debe ingresar el tipo de documento.
+                  </p>
+                </div>
+
+                <div class="right">
+                  <label for="numeroDoc">N° documento</label>
+                  <input
+                    type="text"
+                    id="numeroDoc"
+                    name="numeroDoc"
+                    placeholder="Ej.:15234687"
+                    (change)="changeNroDocumento($event)"
+                    maxlength="12"
+                    (blur)="btnBuscarDNI()"
+                    [disabled]="isDisableNroDocumento"
+                    (keypress)="restrictNumeric($event)"
+                  />
+                  <p class="validador" *ngIf="validadorNroDocumento">
+                    Debe ingresar el N° de documento.
+                  </p>
+                </div>
+              </div>
+
+              <div *ngIf="isVisibleEditarRepresentante">
+                <div class="column">
+                  <div class="left">
+                    <label for="nombres">Nombres</label>
+                    <input
+                      type="text"
+                      id="nombres"
+                      name="nombres"
+                      placeholder="Ej.:Camila"
+                      (change)="changeNombres($event)"
+                      maxlength="150"
+                      disabled
+                    />
+                    <p class="validador" *ngIf="validadorNombres">
+                      Debe ingresar los nombres.
+                    </p>
+                  </div>
+
+                  <div class="right">
+                    <label for="apellidos">Apellidos</label>
+                    <input
+                      type="text"
+                      id="apellidos"
+                      name="apellidos"
+                      placeholder="Ejm:Flores Sánchez"
+                      (change)="changeApellidos($event)"
+                      maxlength="150"
+                      disabled
+                    />
+                    <p class="validador" *ngIf="validadorApellidos">
+                      Debe ingresar los apellidos.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="button">
+                  <button
+                    class="buttonSiguiente"
+                    (click)="btnGuardarRepresentante()"
+                  >
+                    Guardar cambios
+                  </button>
+                  <button
+                    class="buttonCancelar"
+                    (click)="clickCancelarRepresentante()"
+                  >
+                    Cancelar
+                  </button>
+                </div>
+              </div>
+
+              <div class="contacto" *ngIf="isVisiblePerfil">
+                <h5>
+                  Información de contacto
+                  <img
+                    src="../../assets/img/icono_editar.png"
+                    alt="Editar"
+                    title="Editar"
+                    width="20"
+                    (click)="clickEditarContacto()"
+                  />
+                </h5>
+                <div *ngIf="isVisibleContacto">
+                  <p>Celular : {{ celular }}</p>
+                  <p>Correo : {{ correo }}</p>
+                </div>
+              </div>
+
+              <div *ngIf="isVisibleEditarContacto">
+                <div>
+                  <label for="apellidos">Celular</label>
+                  <input
+                    type="text"
+                    id="apellidos"
+                    name="apellidos"
+                    placeholder="Ej.:999123045"
+                    (change)="changeCelular($event)"
+                    maxlength="9"
+                    (keypress)="restrictNumeric($event)"
+                  />
+                  <p class="validador" *ngIf="validadorCelular">
+                    Debe ingresar el celular.
+                  </p>
+                  <p class="validador" *ngIf="validadorCelularLength">
+                    El celular debe contener 9 digitos
+                  </p>
+                </div>
+                <div>
+                  <label for="nombres">Correo</label>
+                  <input
+                    type="text"
+                    id="nombres"
+                    name="nombres"
+                    placeholder="Ej.:camila.flores@ejemplo.com"
+                    (change)="changeCorreo($event)"
+                    maxlength="150"
+                  />
+                  <p class="validador" *ngIf="validadorCorreo">
+                    Debe ingresar el correo.
+                  </p>
+                  <p class="validador" *ngIf="validadorCorreoInvalido">
+                    Correo inválido.
+                  </p>
+                </div>
+                <div class="button">
+                  <button
+                    class="buttonSiguiente"
+                    (click)="btnGuardarContacto()"
+                  >
+                    Guardar cambios
+                  </button>
+                  <button
+                    class="buttonCancelar"
+                    (click)="clickCancelarContacto()"
+                  >
+                    Cancelar
+                  </button>
+                </div>
+              </div>
+
+              <div *ngIf="isVisibleEditarImg">
+                <h2 align="center">Editar foto</h2>
+                <div class="editar">
+                  <div class="circle"></div>
+                </div>
+                <input
+                  type="file"
+                  name="adjunto"
+                  accept=".pdf,.jpg,.png"
+                  multiple
+                />
+
+                <div class="button">
+                  <button class="buttonSiguiente">Guardar</button>
+                  <button class="buttonCancelar" (click)="clickCancelarImg()">
+                    Cancelar
+                  </button>
+                </div>
+              </div>
+              <button class="buttonRegresar" (click)="ClickRegresar()">
+                Regresar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

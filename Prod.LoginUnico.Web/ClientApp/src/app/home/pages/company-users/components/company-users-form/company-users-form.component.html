@@ -1,0 +1,78 @@
+<div class="card shadow-prod border-0">
+  <form [formGroup]="myForm" autocomplete="off" (ngSubmit)="save()">
+    <div class="card-header">
+      <div class="row align-items-center">
+        <div class="col-6">
+          <h5 class="h3 mb-0">Información de contacto</h5>
+        </div>
+
+        <div class="col-6 text-right">
+          <button class="btn btn-warning" type="submit">
+            <!-- <span class="btn-inner--icon">
+              <i class="fab fa-youtube"> </i>
+            </span> -->
+            {{ "ACTUALIZAR" }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="form-row">
+        <div class="col-md-12 col-lg-6">
+          <div class="form-group">
+            <label class="form-control-label" for="email">
+              Correo electrónico
+            </label>
+
+            <input
+              class="form-control"
+              [ngClass]="isInvalidField('email') ? ' is-invalid' : ''"
+              type="text"
+              id="email"
+              placeholder="Ej.: camila.flores@ejemplo.com"
+              formControlName="email"
+            />
+
+            <div *ngIf="isInvalidField('email')" class="invalid-feedback">
+              El formato de correo electrónico es inválido.
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12 col-lg-6">
+          <div class="form-group">
+            <label class="form-control-label" for="phoneNumber">
+              Número celular
+            </label>
+            <input
+              class="form-control"
+              [ngClass]="isInvalidField('phoneNumber') ? ' is-invalid' : ''"
+              type="text"
+              [maxlength]="phoneNumberLength"
+              id="phoneNumber"
+              placeholder="Ej.: 987964246"
+              formControlName="phoneNumber"
+              appOnlyNumbers
+            />
+
+            <div
+              *ngIf="myForm.get('phoneNumber')?.errors?.required"
+              class="invalid-feedback"
+            >
+              Debe ingresar un número celular.
+            </div>
+            <div
+              *ngIf="
+                !myForm.get('phoneNumber')?.errors?.required &&
+                myForm.get('phoneNumber')?.errors?.minlength
+              "
+              class="invalid-feedback"
+            >
+              El número celular debe tener {{ phoneNumberLength }} dígitos.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

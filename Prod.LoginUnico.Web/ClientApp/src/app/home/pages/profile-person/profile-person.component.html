@@ -1,0 +1,139 @@
+<section class="py-6">
+  <div class="container-fluid">
+    <div class="row justify-content-center text-center">
+      <div class="col-lg-8 col-md-12">
+        <div class="card shadow-prod border-0">
+          <div class="row justify-content-center">
+            <div class="col-lg-3 order-lg-2">
+              <div class="card-profile-image">
+                <a href="javascript:void(0)">
+                  <img class="rounded-circle" src="assets/img/user.jpg" />
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="card-body pt-8">
+            <div class="form">
+              <div class="header" *ngIf="isVisiblePerfil">
+                <div class="circle">
+                  <div class="circleEditar">
+                    <img
+                      src="../../assets/img/icono_editar.png"
+                      alt="Editar"
+                      title="Editar"
+                      width="20"
+                      (click)="clickEditarImg()"
+                    />
+                  </div>
+                </div>
+                <div class="title">
+                  <h2>Mi perfil</h2>
+                  <h3>Persona Natural</h3>
+                </div>
+              </div>
+              <div class="personal" *ngIf="isVisiblePerfil">
+                <h5>Información personal</h5>
+                <p>DNI : {{ dni }}</p>
+                <p>Nombres y apellidos : {{ nombre_completo }}</p>
+                <p>Dirección : {{ direccion }}</p>
+              </div>
+
+              <div class="contacto" *ngIf="isVisiblePerfil">
+                <h5>
+                  Información de contacto
+                  <img
+                    src="../../assets/img/icono_editar.png"
+                    alt="Editar"
+                    title="Editar"
+                    width="20"
+                    (click)="clickEditarContacto()"
+                  />
+                </h5>
+                <div *ngIf="isVisibleContacto">
+                  <p>Celular : {{ celular }}</p>
+                  <p>Correo : {{ correo }}</p>
+                </div>
+              </div>
+
+              <div *ngIf="isVisibleEditarContacto">
+                <div>
+                  <label for="apellidos">Celular</label>
+                  <input
+                    type="text"
+                    id="apellidos"
+                    name="apellidos"
+                    placeholder="Ej.:999123045"
+                    (change)="changeCelular($event)"
+                    maxlength="9"
+                    (keypress)="restrictNumeric($event)"
+                  />
+                  <p class="validador" *ngIf="validadorCelular">
+                    Debe ingresar el celular.
+                  </p>
+                  <p class="validador" *ngIf="validadorCelularLength">
+                    El celular debe contener 9 digitos
+                  </p>
+                </div>
+                <div>
+                  <label for="nombres">Correo</label>
+                  <input
+                    type="text"
+                    id="nombres"
+                    name="nombres"
+                    placeholder="Ej.:camila.flores@ejemplo.com"
+                    (change)="changeCorreo($event)"
+                    maxlength="150"
+                  />
+                  <p class="validador" *ngIf="validadorCorreo">
+                    Debe ingresar el correo.
+                  </p>
+                  <p class="validador" *ngIf="validadorCorreoInvalido">
+                    Correo inválido.
+                  </p>
+                </div>
+                <div class="button">
+                  <button
+                    class="buttonSiguiente"
+                    (click)="btnGuardarContacto()"
+                  >
+                    Guardar cambios
+                  </button>
+                  <button
+                    class="buttonCancelar"
+                    (click)="clickCancelarContacto()"
+                  >
+                    Cancelar
+                  </button>
+                </div>
+              </div>
+
+              <div *ngIf="isVisibleEditarImg">
+                <h2 align="center">Editar foto</h2>
+                <div class="editar">
+                  <div class="circle"></div>
+                </div>
+                <input
+                  type="file"
+                  name="adjunto"
+                  accept=".pdf,.jpg,.png"
+                  multiple
+                />
+
+                <div class="button">
+                  <button class="buttonSiguiente">Guardar</button>
+                  <button class="buttonCancelar" (click)="clickCancelarImg()">
+                    Cancelar
+                  </button>
+                </div>
+              </div>
+              <br />
+              <button class="buttonRegresar" (click)="ClickRegresar()">
+                Regresar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

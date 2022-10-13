@@ -1,1 +1,46 @@
-<p>applications works!</p>
+<div class="main-content">
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-12 col-md-12">
+        <div class="card shadow-prod border-0">
+          <div class="card-body">
+            <div class="col-12 text-center">
+              <h1 class="display-5">Mis aplicaciones</h1>
+            </div>
+
+            <div class="row justify-content-center mb-2">
+              <div class="col-sm-4" *ngFor="let app of applications">
+                <div class="box-app">
+                  <span class="categoria">{{ "" }}</span>
+                  <div class="box-app-content">
+                    <div class="img">
+                      <img [src]="app.url" alt="archivo" />
+                    </div>
+                    <span class="nombre">{{ app.name }}</span>
+                    <span class="descripcion">{{ app.description }}</span>
+                  </div>
+                  <div class="box-view">
+                    <a
+                      [attr.href]="app.urlExtranet"
+                      rel="tooltip"
+                      data-placement="bottom"
+                      title="Ir a aplicación"
+                    >
+                      <button class="buttonVer">
+                        Ver Aplicación
+                        <i
+                          class="fa fa-long-arrow-right"
+                          aria-hidden="true"
+                        ></i>
+                      </button>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

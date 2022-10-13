@@ -1,1 +1,84 @@
-<p>profile works!</p>
+<section class="py-6">
+  <div class="container-fluid">
+    <div class="row justify-content-center text-center">
+      <div class="col-md-12 col-lg-4">
+        <div class="card shadow-prod border-0">
+          <div class="row justify-content-center">
+            <div class="col-lg-3 order-lg-2">
+              <div class="card-profile-image">
+                <a href="javascript:void(0)">
+                  <img class="rounded-circle" src="assets/img/user.jpg" />
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="card-body pt-8">
+            <div>
+              <!-- <h3>
+                Persona {{ profile?.juridicPerson ? "Jurídica" : "Natural" }}
+              </h3> -->
+            </div>
+            <div class="container" *ngIf="profile?.juridicPerson">
+              <hr class="my-2" />
+              <h3 class="text-red">INFORMACIÓN DE EMPRESA</h3>
+              <dl class="row">
+                <dt class="col-sm-6 text-right">N° DE RUC:</dt>
+                <dd class="col-sm-6 text-left">
+                  {{ profile?.juridicPerson?.rucNumber }}
+                </dd>
+                <dt class="col-sm-6 text-right">RAZÓN SOCIAL:</dt>
+                <dd class="col-sm-6 text-left">
+                  {{ profile?.juridicPerson?.businessName }}
+                </dd>
+                <dt class="col-sm-6 text-right">DIRECCIÓN:</dt>
+                <dd class="col-sm-6 text-left">
+                  {{ profile?.juridicPerson?.businessAddress }}
+                </dd>
+              </dl>
+            </div>
+
+            <div class="container" *ngIf="profile?.naturalPerson">
+              <hr class="my-2" />
+              <h3 class="text-red">
+                {{
+                  profile?.juridicPerson
+                    ? "REPRESENTANTE LEGAL"
+                    : "INFORMACIÓN DE PERSONA"
+                }}
+              </h3>
+              <dl class="row">
+                <dt class="col-sm-6 text-right">N° DE DOCUMENTO:</dt>
+                <dd class="col-sm-6 text-left">
+                  {{ profile?.naturalPerson?.documentNumber }}
+                </dd>
+                <dt class="col-sm-6 text-right">APELLIDOS Y NOMBRES:</dt>
+                <dd class="col-sm-6 text-left">
+                  {{
+                    profile?.naturalPerson?.lastName +
+                      " " +
+                      profile?.naturalPerson?.firstName
+                  }}
+                </dd>
+                <dt class="col-sm-6 text-right">DIRECCIÓN:</dt>
+                <dd class="col-sm-6 text-left">
+                  {{ profile?.naturalPerson?.address }}
+                </dd>
+              </dl>
+            </div>
+
+            <div class="container" *ngIf="profile?.user">
+              <hr class="my-2" />
+              <h3 class="text-red">INFORMACIÓN DE CONTACTO</h3>
+              <app-profile-form [user]="profile?.user" (onSaveFormButton)="saveForm($event)" (onBackFormButton)="back()"></app-profile-form>
+            </div>
+          </div>
+          <!-- <div class="card-footer">
+            <button (click)="back()" class="btn btn-outline-dark btn-block">
+              Regresar
+            </button>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

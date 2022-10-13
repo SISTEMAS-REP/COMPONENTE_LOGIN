@@ -59,7 +59,7 @@ public class ExtranetUserStore :
                          CancellationToken cancellationToken)
     {
         var user = await _extranetUserUnitOfWork
-            .FindExtranetUser(email: normalizedEmail);
+            .Find(email: normalizedEmail);
         return await Task.FromResult(user);
     }
 
@@ -68,7 +68,7 @@ public class ExtranetUserStore :
                       CancellationToken cancellationToken)
     {
         var user = await _extranetUserUnitOfWork
-            .FindExtranetUser(extranetUserId: int.Parse(userId));
+            .Find(extranetUserId: int.Parse(userId));
 
         if (user is null)
         {
@@ -83,7 +83,7 @@ public class ExtranetUserStore :
                         CancellationToken cancellationToken)
     {
         var user = await _extranetUserUnitOfWork
-            .FindExtranetUser(userName: normalizedUserName);
+            .Find(userName: normalizedUserName);
 
         return user;
     }

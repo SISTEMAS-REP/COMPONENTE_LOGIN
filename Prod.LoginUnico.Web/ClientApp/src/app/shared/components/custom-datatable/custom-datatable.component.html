@@ -1,0 +1,162 @@
+<div class="card shadow-prod border-0">
+  <ngx-spinner
+    [name]="loaderName"
+    [fullScreen]="false"
+    type="ball-clip-rotate-multiple"
+    size="small"
+  >
+    <p class="loading text-white">Procesando su solicitud..</p>
+  </ngx-spinner>
+  <!-- Card header -->
+  <app-header-card
+    *ngIf="showHeader"
+    [headerTitle]="headerTitle"
+    [buttons]="headerButtons"
+    (onSendActionButton)="clickHeaderButton($event)"
+  ></app-header-card>
+
+  <div class="dataTables_wrapper">
+    <div class="row" *ngIf="showOptions || showSearch">
+      <div
+        [ngClass]="'col-sm-12 ' + (showSearch ? 'col-md-6' : 'col-md-12')"
+        *ngIf="showOptions"
+      >
+        <div class="dataTables_length" id="datatable_length">
+          <label>
+            Ver
+            <select
+              [(ngModel)]="pageSize"
+              (ngModelChange)="setPageSize($event)"
+              class="form-control form-control-sm"
+            >
+              <option
+                *ngFor="let limit of limitOptions"
+                [ngValue]="limit.value"
+              >
+                {{ limit.name }}
+              </option>
+            </select>
+            entradas
+          </label>
+        </div>
+      </div>
+      <div
+        [ngClass]="'col-sm-12 ' + (showOptions ? 'col-md-6' : 'col-md-12')"
+        *ngIf="showSearch"
+      >
+        <div id="datatable_filter" class="dataTables_filter">
+          <label>
+            <input
+              [(ngModel)]="searchInput"
+              type="search"
+              class="form-control form-control-sm"
+              placeholder="Buscar"
+              aria-controls="datatable"
+              (keyup)="search($event)"
+            />
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <ngx-datatable
+      #table
+      class="bootstrap selection-cell"
+      [rows]="tempData"
+      [columns]="columns"
+      [columnMode]="columnMode"
+      [rowHeight]="40"
+      [footerHeight]="100"
+      [scrollbarH]="showScrollBarH"
+      [limit]="pageSize != -1 ? pageSize : undefined"
+      [selected]="allSelected"
+      [selectionType]="selectionType"
+      [selectAllRowsOnPage]="false"
+      [messages]="messages"
+      [summaryRow]="showSummaryRow"
+      [summaryPosition]="'bottom'"
+      (select)="setSelectedItem($event)"
+      (sort)="sort($event)"
+    >
+      <ngx-datatable-column
+        *ngIf="isCheckBoxType()"
+        [width]="40"
+        [sortable]="false"
+        [canAutoResize]="false"
+        [draggable]="false"
+        [resizeable]="false"
+        [headerCheckboxable]="true"
+        [checkboxable]="true"
+        [frozenLeft]=""
+      >
+      </ngx-datatable-column>
+
+      <ngx-datatable-column
+        *ngIf="tableButtons.length > 0"
+        name="Acciones"
+        [width]="80 * tableButtons.length"
+        [sortable]="false"
+        [canAutoResize]="false"
+        [draggable]="false"
+        [resizeable]="false"
+        cellClass="text-center"
+      >
+        <ng-template let-column="column" ngx-datatable-header-template>
+          <span>{{ column.name }}</span>
+        </ng-template>
+
+        <ng-template
+          ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-row="row"
+        >
+          <span
+            *ngFor="let tableButton of tableButtons"
+            [title]="tableButton.tooltip || ''"
+            (click)="clickTableButton(tableButton.name, row)"
+            style="cursor: pointer"
+          >
+            <!-- evalCondition(
+                  row[tableButton.conditionValue],
+                  tableButton.conditionOperator
+                ) -->
+            <ng-container *ngIf="evalCondition(row, tableButton)">
+              <i [class]="tableButton.class"> </i>
+            </ng-container>
+          </span>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <!--  [cellClass]="getCellClass" -->
+      <ngx-datatable-column
+        *ngFor="let column of columns"
+        [name]="column.name!"
+        [width]="column.width!"
+        [cellClass]="column.cellClass!"
+        [pipe]="column.pipe!"
+        [prop]="column.prop!"
+        [summaryFunc]="column.summaryFunc!"
+      >
+        <ng-template let-column="column" ngx-datatable-header-template>
+          <span>{{ column.name }}</span>
+        </ng-template>
+
+        <ng-template
+          ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-value="value"
+          let-row="row"
+        >
+          <ng-container
+            *ngIf="formatSummaryColum(column.prop); else elseTemplate"
+          >
+            <span>{{ value | currency: "":"S/.":"1.2-2":"" }}</span>
+          </ng-container>
+          <ng-template #elseTemplate>
+            <span>{{ value }}</span>
+          </ng-template>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>

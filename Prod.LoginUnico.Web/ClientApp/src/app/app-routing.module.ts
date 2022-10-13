@@ -15,19 +15,17 @@ const routes: Routes = [
   },
   {
     path: 'auth',
-    loadChildren: () =>
-      import('./auth/auth.module').then((m) => m.AuthModule),
+    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {
-    path: '',
-    loadChildren: () =>
-      import('./home/home.module').then((m) => m.HomeModule),
-    canActivate: [AuthGuard],
+    path: 'home',
+    loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
+    /* canActivate: [AuthGuard], */
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes /* { useHash: true } */)],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

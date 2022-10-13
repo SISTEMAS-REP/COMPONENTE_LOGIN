@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Prod.LoginUnico.Application.Common.Exceptions;
-using Prod.LoginUnico.Application.Common.Wrapper;
+using Prod.LoginUnico.Application.Common.Wrappers;
 using Prod.ServiciosExternos;
 
 namespace Prod.LoginUnico.Application.Features.General.Commands.Reniec;
@@ -52,7 +52,8 @@ public class GeneralReniecCommandHandler
                 || !reniecResponse.Success
                 || reniecResponse.Data is null)
             {
-                throw new NotFoundException("");
+                throw new NotFoundException("Ocurrió un problema al validar el número de ruc ingresado, " +
+                    "verifique e inténtelo nuevamente");
             }
 
             // Volver a buscar info en la base de datos
@@ -66,7 +67,8 @@ public class GeneralReniecCommandHandler
             if (personResponse is null
             || personResponse.Data is null)
             {
-                throw new NotFoundException("");
+                throw new NotFoundException("Ocurrió un problema al validar el número de ruc ingresado, " +
+                    "verifique e inténtelo nuevamente");
             }
         }
 

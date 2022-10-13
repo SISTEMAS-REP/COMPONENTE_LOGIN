@@ -60,10 +60,10 @@ public static class InfrastructureExtensions
         services.AddScoped<IExtranetSignInManager, ExtranetSignInManager>();
         services.AddScoped<IPasswordHasher, PasswordHasher>();
 
-        services.AddHttpContextAccessor()
+        services.AddHttpContextAccessor()/*
             .AddResponseCompression()
             .AddMemoryCache()
-            .AddHealthChecks();
+            .AddHealthChecks()*/;
 
         services.AddCustomCors(options);
 
@@ -96,13 +96,17 @@ public static class InfrastructureExtensions
         services
             .AddIdentity<ExtranetUserEntity, RoleEntity>()
             .AddTokenProviders();
+            //.AddClaimsPrincipalFactory<ExtranetUserClaimsPrincipalFactory>();
+
+        /*services
+            .AddScoped<IUserClaimsPrincipalFactory<ExtranetUserEntity>, ExtranetUserClaimsPrincipalFactory>();*/
 
         services.AddTransient<IUserStore<ExtranetUserEntity>, ExtranetUserStore>();
         services.AddTransient<IRoleStore<RoleEntity>, RoleStore>();
         services.AddScoped<IPasswordHasher, PasswordHasher>();
 
         services.AddDataProtection()
-            .PersistKeysToFileSystem(new DirectoryInfo(appSettings.SecuritySettings.KeyDirectory))
+            .PersistKeysToFileSystem(new DirectoryInfo(appSettings.SecuritySettings!.KeyDirectory))
             .SetApplicationName(appSettings.SecuritySettings.ApplicationName);
 
         services.ConfigureApplicationCookie(options =>
@@ -111,7 +115,7 @@ public static class InfrastructureExtensions
             options.Cookie.SameSite = SameSiteMode.Lax;
         });
 
-        services.AddAntiforgery(o => o.SuppressXFrameOptionsHeader = true);
+        //services.AddAntiforgery(o => o.SuppressXFrameOptionsHeader = true);
 
         ConfigureOptions(services);
 

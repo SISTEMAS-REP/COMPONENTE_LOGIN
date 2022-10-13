@@ -27,28 +27,6 @@ export class ExtranetService extends ApiService {
     });
   };
 
-  naturalRegister = (
-    request: RegisterPersonRequest,
-    recaptchaToken: string
-  ): Observable<any> => {
-    return this.post('naturalperson', request, {
-      headers: {
-        'x-captcha-token': recaptchaToken,
-      },
-    });
-  };
-
-  juridicalRegister = (
-    request: RegisterCompanyRequest,
-    recaptchaToken: string
-  ): Observable<any> => {
-    return this.post('juridicalcompany', request, {
-      headers: {
-        'x-captcha-token': recaptchaToken,
-      },
-    });
-  };
-
   logout = (refreshToken: string): Observable<any> => {
     return this.post(
       'logout',
@@ -78,11 +56,11 @@ export class ExtranetService extends ApiService {
       },
     });
   };
-  
+
   ListApplicationsUser = (
     request: ListApplicationsRequest,
   ): Observable<any> => {
     debugger
     return this.post('ApplicationsUserList', request);
-  };  
+  };
 }

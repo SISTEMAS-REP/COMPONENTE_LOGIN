@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Prod.LoginUnico.Application.Abstractions.Managers;
-using Prod.LoginUnico.Application.Common.Wrapper;
+using Prod.LoginUnico.Application.Common.Wrappers;
 using Prod.LoginUnico.Application.Features.Extranet.Commands.Auth;
 using Prod.LoginUnico.Domain.Entities.ExtranetUser;
 using System.Text;
