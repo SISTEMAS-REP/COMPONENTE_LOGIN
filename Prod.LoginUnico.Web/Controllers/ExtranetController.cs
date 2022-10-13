@@ -4,6 +4,7 @@ using Prod.LoginUnico.Application.Features.Extranet.Commands.Auth;
 using Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordRecovery;
 using Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordChange;
 using Prod.LoginUnico.Application.Features.Extranet.Commands.ApplicationsUserList;
+using Prod.LoginUnico.Application.Features.Extranet.Commands.CheckMail;
 
 namespace Prod.LoginUnico.Web.Controllers;
 
@@ -50,9 +51,10 @@ public class ExtranetController : BaseApiController
     }
 
     [AllowAnonymous]
-    [HttpPost("Redirection")]
-    public async Task<IActionResult> Redirection([FromBody] PasswordChangeCommand request)
+    [HttpPost("checkMail")]
+    public async Task<IActionResult> CheckMail([FromBody] CheckMailCommand request)
     {
+        request.RecaptchaToken = HttpContext.Request.Headers["x-captcha-token"];
         var result = await Mediator.Send(request);
         return Ok(result);
     }

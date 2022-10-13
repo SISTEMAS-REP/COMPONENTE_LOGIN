@@ -41,11 +41,11 @@ export class ChangePasswordRepository {
       .pipe(catchError(this.appMapping.throwError));
   };
 
-  redirection = (
+  verificarCorreo = (
     request: ChangePasswordRequest
   ): Observable<void> => {
     return this.extranetService
-      .redirection(request)
+      .verificarCorreo(request)
       .pipe(catchError(this.appMapping.throwError));
   };
 

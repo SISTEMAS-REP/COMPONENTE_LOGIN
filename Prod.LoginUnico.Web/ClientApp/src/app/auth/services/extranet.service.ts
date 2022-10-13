@@ -57,14 +57,15 @@ export class ExtranetService extends ApiService {
     });
   };
 
-  redirection = (
+  verificarCorreo = (
     request: ChangePasswordRequest
   ): Observable<any> => {
-    return this.post('redirection', request);
+    debugger
+    return this.post('CheckMail', request);
   };
 
   ListApplicationsUser = (
-    request: ListApplicationsRequest,
+    request: ListApplicationsRequest,     
   ): Observable<any> => {
     debugger
     return this.post('ApplicationsUserList', request);

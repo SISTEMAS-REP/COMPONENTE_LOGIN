@@ -63,7 +63,7 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordRecover
                     if (request.email?.ToLower() == user.email.ToLower())
                     {
                         var guid = Guid.NewGuid();
-                        var resultChek = await _applicationUnitOfWork.SP_INS_UPD_VERIFICACION_RECUPERACION_PASSWORD(guid, request.email.ToLower(), 0);
+                        var resultChek = await _applicationUnitOfWork.SP_INS_UPD_VERIFICACION_RECUPERACION_PASSWORD(guid, request.email.ToLower(), false);
                         int pos = urlBase.IndexOf('[');
                         int posUlt = urlBase.IndexOf(']');
                         string userName = urlBase.Substring(pos + 1, posUlt - pos - 1);
@@ -74,7 +74,8 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordRecover
                         var query = new NameValueCollection()
                         {
                             {"applicationId",   request.applicationId.ToString() },
-                            {"UserName",        Functions.Encrypt(userName) }
+                            {"UserName",        Functions.Encrypt(userName) },
+                            {"identificador",        guid.ToString() },
                         };
                         var qs = ToQueryString(query);
                         url = urlBase + qs;
@@ -111,7 +112,7 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordRecover
                 else
                 {
                     var guid = Guid.NewGuid();
-                    var resultChek = await _applicationUnitOfWork.SP_INS_UPD_VERIFICACION_RECUPERACION_PASSWORD(guid, request.email.ToLower(), 0);
+                    var resultChek = await _applicationUnitOfWork.SP_INS_UPD_VERIFICACION_RECUPERACION_PASSWORD(guid, request.email.ToLower(), false    );
                     int pos = urlBase.IndexOf('[');
                     int posUlt = urlBase.IndexOf(']');
                     string userName = urlBase.Substring(pos + 1, posUlt - pos - 1);

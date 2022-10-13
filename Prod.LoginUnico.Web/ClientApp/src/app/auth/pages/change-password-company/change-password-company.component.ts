@@ -47,7 +47,7 @@ export class ChangePasswordCompanyComponent implements OnInit {
     });
   }
 
-  loadLogo() {
+  loadLogo() {  
     this.spinner.show();
     var request: LogoRequest = {
       applicationId: this.applicationId,

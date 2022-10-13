@@ -82,21 +82,21 @@ public class ApplicationUnitOfWork : UnitOfWork, IApplicationUnitOfWork
     }
 
     public async Task<int>
-       SP_INS_UPD_VERIFICACION_RECUPERACION_PASSWORD(Guid identificador, string correo, int verificado)
+       SP_INS_UPD_VERIFICACION_RECUPERACION_PASSWORD(Guid identificador, string correo, bool verificado)
     {
         var parms = new Parameter[]
         {
             new Parameter("@identificador_solicitud", identificador),
-            new Parameter("@correo_verificación ", correo),
-            new Parameter("@codigo_verificacion  ", identificador),
+            new Parameter("@correo_verificación", correo),
+            new Parameter("@codigo_verificacion", identificador),
             new Parameter("@verificado", verificado),
         };
 
-        var result = ExecuteScalar<int>(
+        var result = ExecuteScalar<decimal>(
             "usr_login_unico.SP_INS_UPD_VERIFICACION_RECUPERACION_PASSWORD",
             CommandType.StoredProcedure, ref parms);
 
-        return await Task.FromResult(result);
+        return await Task.FromResult(Convert.ToInt32(result));
     }
 
     public async Task<bool>

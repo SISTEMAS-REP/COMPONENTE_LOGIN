@@ -43,6 +43,7 @@ export class ChangePasswordPersonComponent implements OnInit {
       this.UserName = params['UserName'] || null;
       this.identificador = params['identificador'] || null;
       this.loadLogo();
+      this.verificarCorreo(); 
     });
   }
 
@@ -108,12 +109,18 @@ export class ChangePasswordPersonComponent implements OnInit {
   }
 
 
-  ir(){
+  verificarCorreo(){
+    let request: ChangePasswordRequest = {
+      identificador: this.identificador,
+      applicationId: this.applicationId,
+      password: ''
+    };
+
     this.ChangePasswordRepository
-      .redirection(this.ChangePasswordRequest!)
+      .verificarCorreo(request)
       .subscribe({
         next: (data : any) => {
-          window.location.href = data;
+          debugger
         },
         error: (err) => {
         
@@ -126,12 +133,17 @@ export class ChangePasswordPersonComponent implements OnInit {
     this.ChangePasswordRepository
       .changePasswordPerson(this.ChangePasswordRequest!, this.recaptchaToken!)
       .subscribe({
-        next: () => {
-          debugger;
+        next: (dato : any) => {
           this.spinner.hide();
-          console.log('changePasswordPerson-next', 'ChangePassword success');
-          this.isVisibleForm = false;
-          this.validaSuccess = true;
+          if(dato.succeeded){
+            console.log('changePasswordPerson-next', 'ChangePassword success');
+            this.isVisibleForm = false;
+            this.validaSuccess = true;
+          }
+          else{
+            this.toastService.danger("EL codigo ya no es posible usarlo", "Error");
+          }
+          
           //this.refresh();
          // this.toastService.success('ChangePassword success');
 
