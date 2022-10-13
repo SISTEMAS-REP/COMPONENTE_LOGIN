@@ -4,7 +4,7 @@ import { ToastService } from 'src/app/services/toast.service';
 import { ProfileRepository } from '../../repositories/profile.repository';
 import { ProfileResponse } from '../../interfaces/response/profile.response';
 import { ProfileRequest } from '../../interfaces/request/profile.request';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -15,20 +15,21 @@ export class ProfileComponent implements OnInit {
   profile?: ProfileResponse;
 
   applicationId: number = 0;
-  returnUrl: string = '';
+  returnUrl?: string;
 
   profileRequest?: ProfileRequest;
 
   constructor(
     private profileRepository: ProfileRepository,
-    private router: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
     private spinner: NgxSpinnerService,
     private toastService: ToastService
   ) {
-    this.router.queryParams.subscribe((params) => {
+    this.activatedRoute.queryParams.subscribe((params) => {
       console.log('queryParams', params);
       this.applicationId = params['applicationId'] || 0;
-      this.returnUrl = params['returnUrl'] || '';
+      this.returnUrl = params['returnUrl'];
     });
   }
 
@@ -84,6 +85,10 @@ export class ProfileComponent implements OnInit {
   }
 
   back() {
-    window.location.href = this.returnUrl;
+    if (this.returnUrl) {
+      window.location.href = this.returnUrl;
+    } else {
+      this.router.navigate(['presentation']);
+    }
   }
 }

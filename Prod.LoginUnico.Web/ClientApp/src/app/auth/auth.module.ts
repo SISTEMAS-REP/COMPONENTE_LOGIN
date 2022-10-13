@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { LoginPersonComponent } from './pages/login-person/login-person.component';
 import { LoginCompanyComponent } from './pages/login-company/login-company.component';
-import { LostPasswordComponent } from './pages/lost-password/lost-password.component';
 import { RegisterPersonComponent } from './pages/register-person/register-person.component';
 import { RegisterCompanyComponent } from './pages/register-company/register-company.component';
 import { AuthRoutingModule } from './auth-routing.module';
@@ -36,7 +35,6 @@ import { ListApplicationsUserComponent } from './pages/list-applications-user/li
     AuthComponent,
     LoginPersonComponent,
     LoginCompanyComponent,
-    LostPasswordComponent,
     RegisterPersonComponent,
     RegisterCompanyComponent,
     RegisterPersonFirstStepComponent,

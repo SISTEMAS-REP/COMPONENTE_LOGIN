@@ -1,1 +1,53 @@
-<p></p>
+<app-navbar></app-navbar>
+<div class="main-content">
+  <section class="py-6">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-sm-6">
+          <div class="card shadow-prod border-0">
+            <div class="card-header">
+              <h5 class="h3 mb-0">Iniciar sesión</h5>
+            </div>
+            <div class="card-body">
+              <button
+                [routerLink]="['/auth/login-person']"
+                queryParamsHandling="merge"
+                class="btn btn-outline-dark btn-block"
+              >
+                Persona natural
+              </button>
+              <button
+                [routerLink]="['/auth/login-company']"
+                queryParamsHandling="merge"
+                class="btn btn-outline-dark btn-block"
+              >
+                Persona jurídica
+              </button>
+            </div>
+          </div>
+
+          <div class="card shadow-prod border-0">
+            <div class="card-header"><h5 class="h3 mb-0">Registrarse</h5></div>
+            <div class="card-body">
+              <button
+                [routerLink]="['/auth/register-person']"
+                queryParamsHandling="merge"
+                class="btn btn-outline-dark btn-block"
+              >
+                Persona natural
+              </button>
+              <button
+                [routerLink]="['/auth/register-company']"
+                queryParamsHandling="merge"
+                class="btn btn-outline-dark btn-block"
+              >
+                Persona jurídica
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<app-footer></app-footer>

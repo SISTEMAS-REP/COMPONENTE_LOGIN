@@ -1,12 +1,20 @@
+import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
+  Router,
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, take, tap } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 
+@Injectable({
+  providedIn: 'root',
+})
 export class AuthGuard implements CanActivate {
+  constructor(private router: Router, private authService: AuthService) {}
+
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -15,7 +23,11 @@ export class AuthGuard implements CanActivate {
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
-    //throw new Error('Method not implemented.');
-    return true;
+    return this.authService.isLoggedIn().pipe(
+      take(1),
+      tap((loggedIn) => {
+        if (!loggedIn) this.router.navigate(['presentation']);
+      })
+    );
   }
 }

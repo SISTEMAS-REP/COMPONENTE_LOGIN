@@ -21,8 +21,4 @@
     <ProjectReference Include="..\Prod.LoginUnico.Domain\Prod.LoginUnico.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Auth\Queries\" />
-  </ItemGroup>
-
 </Project>

@@ -57,7 +57,7 @@ export class ExtranetService extends ApiService {
     });
   };
 
-  verificarCorreo = (
+ VerifyIdentifier = (
     request: ChangePasswordRequest
   ): Observable<any> => {
     debugger

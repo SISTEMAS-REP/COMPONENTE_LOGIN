@@ -31,6 +31,14 @@ const PROXY_CONFIG = [
       Connection: "Keep-Alive",
     },
   },
+  {
+    context: ["/api/auth"],
+    target: target,
+    secure: false,
+    headers: {
+      Connection: "Keep-Alive",
+    },
+  },
 ];
 
 module.exports = PROXY_CONFIG;

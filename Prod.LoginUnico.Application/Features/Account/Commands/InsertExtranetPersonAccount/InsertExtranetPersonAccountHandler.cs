@@ -3,6 +3,7 @@ using Microsoft.Extensions.Options;
 using Prod.LoginUnico.Application.Abstractions.Managers;
 using Prod.LoginUnico.Application.Abstractions.Services;
 using Prod.LoginUnico.Application.Abstractions.Stores;
+using Prod.LoginUnico.Application.Common;
 using Prod.LoginUnico.Application.Common.Exceptions;
 using Prod.LoginUnico.Application.Common.Options;
 using Prod.LoginUnico.Application.Models.Services;
@@ -17,7 +18,7 @@ public class InsertExtranetPersonAccountHandler
     private readonly IPersonasService _personsService;
     private readonly IExtranetUserManager _extranetUserManager;
     private readonly IReCaptchaService _reCaptchaService;
-
+    //private readonly IPasswordHasher _passwordHasher;
     private readonly AppSettings _options;
 
     public InsertExtranetPersonAccountHandler(
@@ -26,6 +27,7 @@ public class InsertExtranetPersonAccountHandler
         IPersonasService personsService,
         IExtranetUserManager extranetUserManager,
         IReCaptchaService reCaptchaService,
+        //IPasswordHasher passwordHasher,
         IOptions<AppSettings> options)
     {
         _roleUnitOfWork = roleUnitOfWork;
@@ -33,6 +35,7 @@ public class InsertExtranetPersonAccountHandler
         _personsService = personsService;
         _extranetUserManager = extranetUserManager;
         _reCaptchaService = reCaptchaService;
+        //_passwordHasher = passwordHasher;
         _options = options.Value;
     }
 
@@ -47,14 +50,14 @@ public class InsertExtranetPersonAccountHandler
 
         if (!recaptchaResult.Success)
         {
-            var errors = recaptchaResult.ErrorCodes
+            var errors = recaptchaResult.ErrorCodes?
                 .Select(e => e)
                 .Aggregate((i, j) => i + ", " + j);
             throw new BadRequestException($"ReCaptcha validation failed: {errors}");
         }
 
         // Validar hay roles activos para registrarse en la aplicación
-        var applicationRole = (await _roleUnitOfWork
+        var role = (await _roleUnitOfWork
             .FindRoles(new()
             {
                 id_aplicacion = request.ApplicationId,
@@ -62,7 +65,7 @@ public class InsertExtranetPersonAccountHandler
             }))
             .FirstOrDefault();
 
-        if (applicationRole is null)
+        if (role is null)
         {
             throw new BadRequestException("No puede registrarse en esta aplicación");
         }
@@ -81,17 +84,32 @@ public class InsertExtranetPersonAccountHandler
                 .FindExtranetUserRoles(new()
                 {
                     id_usuario_extranet = user.id_usuario_extranet,
-                    id_rol = applicationRole.id_rol,
-                    id_aplicacion = applicationRole.id_aplicacion,
+                    id_rol = role.id_rol,
+                    id_aplicacion = role.id_aplicacion,
                 });
 
             if (userRoles.Count() > 0)
             {
-                throw new BadRequestException("Usted ya se encuentra registrado " +
-                    "en la aplicación");
+                throw new BadRequestException("Ya existe una cuenta asociada al N° de documento.\r\n" +
+                "Intente recuperar su cuenta o Iniciar sesión");
+                /*throw new BadRequestException("Usted ya se encuentra registrado " +
+                    "en la aplicación");*/
             }
 
-            //var newPassword = _passwordHasher.HashPassword(user, request.Contrasena);
+            var resultId = await _extranetUserRoleUnitOfWork
+                .InsertExtranetUserRole(new()
+                {
+                    id_usuario_extranet = user.id_usuario_extranet,
+                    id_rol = role.id_rol
+                });
+
+            if (resultId <= 0)
+            {
+                throw new BadRequestException("No puede registrarse en esta aplicación");
+            }
+
+            /*var newPassword = _passwordHasher
+                .HashPassword(user, request.Password!);*/
             var passwordResult = await _extranetUserManager
                 .AddPasswordAsync(user, request.Password!);
 

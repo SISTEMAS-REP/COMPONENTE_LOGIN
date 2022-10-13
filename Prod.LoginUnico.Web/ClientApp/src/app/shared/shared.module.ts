@@ -17,8 +17,15 @@ import { FormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { HeaderCardComponent } from './components/header-card/header-card.component';
 import { CustomDatatableComponent } from './components/custom-datatable/custom-datatable.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { FooterComponent } from './components/footer/footer.component';
 @NgModule({
-  declarations: [HeaderCardComponent, CustomDatatableComponent],
+  declarations: [
+    NavbarComponent,
+    FooterComponent,
+    HeaderCardComponent,
+    CustomDatatableComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -29,7 +36,7 @@ import { CustomDatatableComponent } from './components/custom-datatable/custom-d
     NgxDatatableModule,
     NgxSpinnerModule,
   ],
-  exports: [CustomDatatableComponent],
+  exports: [NavbarComponent, FooterComponent, CustomDatatableComponent],
   providers: [
     {
       provide: PERFECT_SCROLLBAR_CONFIG,

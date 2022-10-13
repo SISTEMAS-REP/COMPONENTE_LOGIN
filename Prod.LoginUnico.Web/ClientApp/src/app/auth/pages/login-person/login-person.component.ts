@@ -1,5 +1,5 @@
 import { Component, isDevMode, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { LoginRequest } from '../../interfaces/request/login.request';
 import { LogoRequest } from '../../interfaces/request/logo.request';
@@ -19,7 +19,7 @@ export class LoginPersonComponent implements OnInit {
   @ViewChild('loginForm') loginForm?: LoginPersonFormComponent;
 
   applicationId: number = 0;
-  returnUrl: string = '';
+  returnUrl?: string = '';
   logo?: SafeUrl;
 
   loginRequest?: LoginRequest;
@@ -29,7 +29,8 @@ export class LoginPersonComponent implements OnInit {
 
   constructor(
     private spinner: NgxSpinnerService,
-    private router: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
     private sanitizer: DomSanitizer,
     private loginRepository: LoginRepository,
     private recaptchaV3Service: ReCaptchaV3Service,
@@ -37,9 +38,9 @@ export class LoginPersonComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.router.queryParams.subscribe((params) => {
+    this.activatedRoute.queryParams.subscribe((params) => {
       this.applicationId = params['applicationId'] || null;
-      this.returnUrl = params['returnUrl'] || '';
+      this.returnUrl = params['returnUrl'];
       this.loadLogo();
     });
   }
@@ -149,9 +150,10 @@ export class LoginPersonComponent implements OnInit {
   }
 
   onCancel() {
-    this.toastService.danger(
-      'Acción para cancelar el inicio de sesión.',
-      'Cancelar'
-    );
+    if (this.returnUrl) {
+      window.location.href = this.returnUrl;
+    } else {
+      this.router.navigate(['presentation']);
+    }
   }
 }

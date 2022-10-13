@@ -113,6 +113,8 @@ public static class InfrastructureExtensions
         {
             options.Cookie.Name = appSettings.SecuritySettings.CookieName;
             options.Cookie.SameSite = SameSiteMode.Lax;
+            //options.Cookie.SameSite = SameSiteMode.None;
+            //options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
         });
 
         //services.AddAntiforgery(o => o.SuppressXFrameOptionsHeader = true);

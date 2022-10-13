@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Prod.LoginUnico.Application.Features.Auth.Commands.AuthExtranet;
+using Prod.LoginUnico.Application.Features.Auth.Queries;
 
 namespace Prod.LoginUnico.Web.Controllers;
 
@@ -16,5 +17,13 @@ public class AuthController : BaseApiController
         await Mediator.Send(request);
 
         return Ok();
+    }
+
+    [HttpGet("check")]
+    public async Task<IActionResult>
+        Check()
+    {
+        var result = await Mediator.Send(new AuthCheckQuery());
+        return Ok(result);
     }
 }

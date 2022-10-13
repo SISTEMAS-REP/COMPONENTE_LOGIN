@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ChangePasswordRequest } from '../../interfaces/request/change-password.request';
 import { LogoRequest } from '../../interfaces/request/logo.request';
@@ -18,18 +18,23 @@ import { ToastService } from 'src/app/services/toast.service';
 export class ChangePasswordCompanyComponent implements OnInit {
   @ViewChild('changePasswordCompanyForm') changePasswordCompanyForm?: ChangePasswordCompanyFormComponent;
   applicationId: number = 0;
+  returnUrl?: string;
   UserName: string = "";
+  identificador: string = "";
   logo?: SafeUrl;
   ChangePasswordRequest?: ChangePasswordRequest;
   recaptchaToken?: string;
   enums = new enumerados();
 
-  isVisibleForm : boolean = true;
+  isVisibleForm : boolean = false;
   validaSuccess : boolean = false;
+  Verificador: boolean = false;
+  VerificaIdentificador : boolean = false;
 
   constructor(
     private spinner: NgxSpinnerService,
-    private router: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
     private ChangePasswordRepository: ChangePasswordRepository,
     private sanitizer: DomSanitizer,
     private recaptchaV3Service: ReCaptchaV3Service,
@@ -37,13 +42,16 @@ export class ChangePasswordCompanyComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.router.queryParams.subscribe((params) => {
+    this.activatedRoute.queryParams.subscribe((params) => {
       this.applicationId = params['applicationId'] || null;
+      this.returnUrl = params['returnUrl'];
       // this.Identificador = params['Identificador'] || null;
       // this.Code = params['Code'] || null;
       // this.Email = params['Email'] || null;
       this.UserName = params['UserName'] || null;
+      this.identificador = params['identificador'] || null;
       this.loadLogo();
+      this.VerifyIdentifier(); 
     });
   }
 
@@ -113,20 +121,51 @@ export class ChangePasswordCompanyComponent implements OnInit {
   }
 
 
+  
+  VerifyIdentifier(){
+    let request: ChangePasswordRequest = {
+      identificador: this.identificador,
+      applicationId: this.applicationId,
+      password: ''
+    };
+
+    this.ChangePasswordRepository
+      .VerifyIdentifier(request)
+      .subscribe({
+        next: (data : any) => {
+          debugger;
+          this.Verificador = data.succeeded;
+          if(this.Verificador){       
+            this.isVisibleForm = true;
+            this.VerificaIdentificador = false;
+          }   
+          else {
+            this.isVisibleForm = false;
+            this.VerificaIdentificador = true;
+          }      
+        },
+        error: (err) => {
+        
+        },
+      });
+  }
+
+
   changePasswordCompany() {
     debugger;
     this.ChangePasswordRepository
       .changePasswordCompany(this.ChangePasswordRequest!, this.recaptchaToken!)
       .subscribe({
-        next: () => {
+        next: () => {   
           this.spinner.hide();
-          console.log('changePasswordCompany-next', 'ChangePassword success');
-
-          this.isVisibleForm = false;
-          this.validaSuccess = true;
+          if(this.Verificador){
+            console.log('changePasswordCompany-next', 'ChangePassword success');
+            this.isVisibleForm = false;
+            this.validaSuccess = true;
+          }
           //this.refresh();
           //this.toastService.success('ChangePassword success');
-          
+
         },
         error: (err) => {
           this.spinner.hide()
@@ -137,7 +176,7 @@ export class ChangePasswordCompanyComponent implements OnInit {
         },
       });
   }
-  
+
 
   refreshRecaptchaToken() {
     this.recaptchaToken = undefined;
@@ -156,7 +195,11 @@ export class ChangePasswordCompanyComponent implements OnInit {
 
 
   sendCancel() {
-    this.toastService.danger('Cancel button pressed.', 'Cancel');
+    if (this.returnUrl) {
+      window.location.href = this.returnUrl;
+    } else {
+      this.router.navigate(['presentation']);
+    }
   }
 
 }

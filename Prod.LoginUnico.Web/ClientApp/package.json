@@ -29,6 +29,7 @@
     "bs-stepper": "^1.7.0",
     "ng-recaptcha": "^10.0.0",
     "ngx-bootstrap": "^9.0.0",
+    "ngx-cookie-service": "^14.0.1",
     "ngx-perfect-scrollbar": "^10.1.1",
     "ngx-spinner": "^14.0.0",
     "ngx-toastr": "^15.0.0",

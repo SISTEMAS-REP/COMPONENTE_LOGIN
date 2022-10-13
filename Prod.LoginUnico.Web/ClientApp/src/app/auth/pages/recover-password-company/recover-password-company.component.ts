@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { RecoverPasswordRequest } from '../../interfaces/request/recover-password.request';
 import { LogoRequest } from '../../interfaces/request/logo.request';
@@ -18,6 +18,7 @@ import { ToastService } from 'src/app/services/toast.service';
 export class RecoverPasswordCompanyComponent implements OnInit {
   @ViewChild('recoverPasswordForm') recoverPasswordForm?: RecoverPasswordCompanyFormComponent;
   applicationId: number = 0;
+  returnUrl?: string;
   logo?: SafeUrl;
   RecoverPasswordRequest?: RecoverPasswordRequest;
   recaptchaToken?: string;
@@ -29,7 +30,8 @@ export class RecoverPasswordCompanyComponent implements OnInit {
 
   constructor(
     private spinner: NgxSpinnerService,
-    private router: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
     private RecoverPasswordRepository: RecoverPasswordRepository,
     private sanitizer: DomSanitizer,
     private recaptchaV3Service: ReCaptchaV3Service,
@@ -37,8 +39,9 @@ export class RecoverPasswordCompanyComponent implements OnInit {
 ) { }
 
 ngOnInit(): void {
-this.router.queryParams.subscribe((params) => {
+this.activatedRoute.queryParams.subscribe((params) => {
   this.applicationId = params['applicationId'] || null;
+  this.returnUrl = params['returnUrl'];
   this.loadLogo();
 });
 }
@@ -144,7 +147,11 @@ this.refreshRecoverPasswordForm();
 
 
 sendCancel() {
-this.toastService.danger('Cancel button pressed.', 'Cancel');
+  if (this.returnUrl) {
+    window.location.href = this.returnUrl;
+  } else {
+    this.router.navigate(['presentation']);
+  }
 }
 
 }

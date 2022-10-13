@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ChangePasswordRequest } from '../../interfaces/request/change-password.request';
 import { LogoRequest } from '../../interfaces/request/logo.request';
@@ -18,6 +18,7 @@ import { ToastService } from 'src/app/services/toast.service';
 export class ChangePasswordPersonComponent implements OnInit {
   @ViewChild('changePasswordPersonForm') changePasswordPersonForm?: ChangePasswordPersonFormComponent;
   applicationId: number = 0;
+  returnUrl?: string;
   UserName: string = "";
   identificador: string = "";
   logo?: SafeUrl;
@@ -25,12 +26,15 @@ export class ChangePasswordPersonComponent implements OnInit {
   recaptchaToken?: string;
   enums = new enumerados();
 
-  isVisibleForm : boolean = true;
+  isVisibleForm : boolean = false;
   validaSuccess : boolean = false;
-  a: boolean = false;
+  Verificador: boolean = false;
+  VerificaIdentificador : boolean = false;
+
   constructor(
     private spinner: NgxSpinnerService,
-    private router: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
     private ChangePasswordRepository: ChangePasswordRepository,
     private sanitizer: DomSanitizer,
     private recaptchaV3Service: ReCaptchaV3Service,
@@ -38,12 +42,13 @@ export class ChangePasswordPersonComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.router.queryParams.subscribe((params) => {
+    this.activatedRoute.queryParams.subscribe((params) => {
       this.applicationId = params['applicationId'] || null;
+      this.returnUrl = params['returnUrl'];
       this.UserName = params['UserName'] || null;
       this.identificador = params['identificador'] || null;
       this.loadLogo();
-      this.verificarCorreo(); 
+      this.VerifyIdentifier(); 
     });
   }
 
@@ -109,7 +114,7 @@ export class ChangePasswordPersonComponent implements OnInit {
   }
 
 
-  verificarCorreo(){
+  VerifyIdentifier(){
     let request: ChangePasswordRequest = {
       identificador: this.identificador,
       applicationId: this.applicationId,
@@ -117,11 +122,19 @@ export class ChangePasswordPersonComponent implements OnInit {
     };
 
     this.ChangePasswordRepository
-      .verificarCorreo(request)
+      .VerifyIdentifier(request)
       .subscribe({
         next: (data : any) => {
-          debugger
-          this.a = data.succeeded;
+          debugger;
+          this.Verificador = data.succeeded;
+          if(this.Verificador){       
+            this.isVisibleForm = true;
+            this.VerificaIdentificador = false;
+          }   
+          else {
+            this.isVisibleForm = false;
+            this.VerificaIdentificador = true;
+          }      
         },
         error: (err) => {
         
@@ -136,7 +149,7 @@ export class ChangePasswordPersonComponent implements OnInit {
       .subscribe({
         next: (dato : any) => {
           this.spinner.hide();
-          if(this.a){
+          if(this.Verificador){
             console.log('changePasswordPerson-next', 'ChangePassword success');
             this.isVisibleForm = false;
             this.validaSuccess = true;
@@ -154,7 +167,7 @@ export class ChangePasswordPersonComponent implements OnInit {
         },
       });
   }
-  
+
 
   refreshRecaptchaToken() {
     this.recaptchaToken = undefined;
@@ -173,7 +186,11 @@ export class ChangePasswordPersonComponent implements OnInit {
 
 
   sendCancel() {
-    this.toastService.danger('Cancel button pressed.', 'Cancel');
+    if (this.returnUrl) {
+      window.location.href = this.returnUrl;
+    } else {
+      this.router.navigate(['presentation']);
+    }
   }
 
 }

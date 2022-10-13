@@ -51,7 +51,7 @@ public class InsertExtranetCompanyAccountUserHandler
         var operationDateTime = DateTime.Now;
 
         // Validar hay roles activos para registrarse en la aplicación
-        var applicationRole = (await _roleUnitOfWork
+        var role = (await _roleUnitOfWork
             .FindRoles(new()
             {
                 id_aplicacion = request.ApplicationId,
@@ -59,7 +59,7 @@ public class InsertExtranetCompanyAccountUserHandler
             }))
             .FirstOrDefault();
 
-        if (applicationRole is null)
+        if (role is null)
         {
             throw new BadRequestException("No puede registrarse en esta aplicación");
         }
@@ -78,17 +78,31 @@ public class InsertExtranetCompanyAccountUserHandler
                 .FindExtranetUserRoles(new()
                 {
                     id_usuario_extranet = user.id_usuario_extranet,
-                    id_rol = applicationRole.id_rol,
-                    id_aplicacion = applicationRole.id_aplicacion,
+                    id_rol = role.id_rol,
+                    id_aplicacion = role.id_aplicacion,
                 });
 
             if (userRoles.Count() > 0)
             {
-                throw new BadRequestException("Usted ya se encuentra registrado " +
-                    "en la aplicación");
+                throw new BadRequestException("Ya existe una cuenta asociada al N° de documento.");
+                /*throw new BadRequestException("Usted ya se encuentra registrado " +
+                    "en la aplicación");*/
             }
 
-            //var newPassword = _passwordHasher.HashPassword(user, request.Contrasena);
+            var resultId = await _extranetUserRoleUnitOfWork
+                .InsertExtranetUserRole(new()
+                {
+                    id_usuario_extranet = user.id_usuario_extranet,
+                    id_rol = role.id_rol
+                });
+
+            if (resultId <= 0)
+            {
+                throw new BadRequestException("No puede registrarse en esta aplicación");
+            }
+
+            /*var newPassword = _passwordHasher
+                .HashPassword(user, request.Password!);*/
             var passwordResult = await _extranetUserManager
                 .AddPasswordAsync(user, request.Password!);
 

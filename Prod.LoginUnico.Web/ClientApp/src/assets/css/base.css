@@ -14384,6 +14384,12 @@ a.btn-icon-only {
   box-shadow: none, 0 0 0 0 rgba(34, 34, 34, 0.5);
 }
 
+.card {
+  margin-bottom: 30px;
+  box-shadow: 0 0 2rem 0 rgba(136,152,170,.15);
+  border: 0
+}
+
 .card-translucent {
   background-color: rgba(18, 91, 152, 0.08);
 }
@@ -18447,7 +18453,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   cursor: pointer;
   border: 2px solid #58595B;
 }
-  
+
 
 
 .box-app-content .descripcion {
@@ -18486,6 +18492,6 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 }
 .box-view:hover a{
   color: #000!important;
-  
+
 }
 

@@ -8,7 +8,7 @@ import { ToastService } from 'src/app/services/toast.service';
 import { EnabledDisabledPipe } from '../../../pipes/enabled-disabled.pipe';
 import { CompanyUserRequest } from '../../interfaces/request/company-user.request';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-company-users',
@@ -20,7 +20,7 @@ export class CompanyUsersComponent implements OnInit {
   defaultModal: BsModalRef = new BsModalRef();
 
   applicationId: number = 0;
-  returnUrl: string = '';
+  returnUrl?: string;
 
   modalParams = {
     keyboard: true,
@@ -58,15 +58,16 @@ export class CompanyUsersComponent implements OnInit {
 
   constructor(
     private companyUsersRepository: CompanyUsersRepository,
-    private router: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
+    //private router: Router,
     private spinner: NgxSpinnerService,
     private toastService: ToastService,
     private modalService: BsModalService
   ) {
-    this.router.queryParams.subscribe((params) => {
+    this.activatedRoute.queryParams.subscribe((params) => {
       console.log('queryParams', params);
       this.applicationId = params['applicationId'] || 0;
-      this.returnUrl = params['returnUrl'] || '';
+      this.returnUrl = params['returnUrl'];
     });
   }
 

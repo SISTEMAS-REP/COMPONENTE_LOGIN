@@ -8,7 +8,7 @@
               <div class="col-sm-4">
                 <img
                   class="img-fluid"
-                  src="assets/img/logo_produce.PNG"
+                  src="assets/img/logo_produce.png"
                   alt="Produce"
                   title="Produce"
                 />
@@ -71,12 +71,18 @@
             </div>
 
             <div class="card-footer">
-              <a class="text-muted text-center" href="javascript:void(0)">
-                ¿Ya tienes una cuenta?
-              </a>
-              <a class="text-muted text-center" href="javascript:void(0)">
-                Ingresa aquí
-              </a>
+              <div class="row justify-content-center">
+                <p>¿Ya tienes una cuenta?</p>
+              </div>
+              <div class="row justify-content-center">
+                <a
+                  style="color: #000; border-bottom: 1px solid #000"
+                  [routerLink]="['/auth/login-person']"
+                  queryParamsHandling="merge"
+                >
+                  Ingresa aquí
+                </a>
+              </div>
             </div>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import Stepper from 'bs-stepper';
 import { RegisterRepository } from '../../repositories/register.repository';
 import { LogoRequest } from '../../interfaces/request/logo.request';
@@ -36,7 +36,7 @@ export class RegisterCompanyComponent implements OnInit {
   applicationId: number = 0;
   sectorId: number = 1;
   personType: number = 1;
-  returnUrl: string = '';
+  returnUrl?: string = '';
   logo?: SafeUrl;
 
   sunatResponse?: SunatResponse;
@@ -48,16 +48,17 @@ export class RegisterCompanyComponent implements OnInit {
 
   constructor(
     private registerRepository: RegisterRepository,
-    private router: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
     private spinner: NgxSpinnerService,
     private sanitizer: DomSanitizer,
     private recaptchaV3Service: ReCaptchaV3Service,
     private toastService: ToastService
   ) {
-    this.router.queryParams.subscribe((params) => {
+    this.activatedRoute.queryParams.subscribe((params) => {
       console.log('queryParams', params);
       this.applicationId = params['applicationId'] || 0;
-      this.returnUrl = params['returnUrl'] || '';
+      this.returnUrl = params['returnUrl'];
     });
   }
 
@@ -216,8 +217,9 @@ export class RegisterCompanyComponent implements OnInit {
       return;
     }
 
-    this.registerRequest.applicationId = this.applicationId
-    this.registerRequest.sectorId = this.enumerado.TIPO_SECTOR_PERSONA.PESQUERIA;
+    this.registerRequest.applicationId = this.applicationId;
+    this.registerRequest.sectorId =
+      this.enumerado.TIPO_SECTOR_PERSONA.PESQUERIA;
     this.registerRequest.personType = this.enumerado.TIPO_PERSONA.NATURAL;
 
     this.setReCAPTCHA();
@@ -280,6 +282,10 @@ export class RegisterCompanyComponent implements OnInit {
   }
 
   onCancel() {
-    this.toastService.warning('Acción para cancelar el registro.', 'Cancelar');
+    if (this.returnUrl) {
+      window.location.href = this.returnUrl;
+    } else {
+      this.router.navigate(['presentation']);
+    }
   }
 }

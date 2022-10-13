@@ -10,8 +10,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { HomeComponent } from './home.component';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
-import { FooterComponent } from './components/footer/footer.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProfileFormComponent } from './pages/profile/components/profile-form/profile-form.component';
 import { CompanyUsersComponent } from './pages/company-users/company-users.component';
 import { CompanyUsersFormComponent } from './pages/company-users/components/company-users-form/company-users-form.component';
@@ -28,8 +26,6 @@ import { BsModalService } from 'ngx-bootstrap/modal';
     ProfileComponent,
     ProfilePersonComponent,
     ProfileCompanyComponent,
-    FooterComponent,
-    NavbarComponent,
     ProfileFormComponent,
     CompanyUsersComponent,
     CompanyUsersFormComponent,

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastService } from 'src/app/services/toast.service';
 import { ListApplicationsRequest } from '../../interfaces/request/list-applications.request';
@@ -12,6 +12,8 @@ import { ListApplicationsRepository } from '../../repositories/list-applications
   templateUrl: './list-applications-user.component.html'
 })
 export class ListApplicationsUserComponent implements OnInit {
+  applicationId: number = 0;
+  returnUrl?: string;
   persona: any;
   listaAplicaciones: Array<any> = [];
   contentType: string = "image/png";
@@ -22,16 +24,19 @@ export class ListApplicationsUserComponent implements OnInit {
 
   constructor(
     private sanitizer: DomSanitizer,
-    private router: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
     private ListApplicationsRepository: ListApplicationsRepository,
     private spinner: NgxSpinnerService,
     private toastService: ToastService
   ) { }
 
   ngOnInit(): void {
-    this.router.queryParams.subscribe(params => {
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.applicationId = params['applicationId'] || null;
+      this.returnUrl = params['returnUrl'];
       //this.url = "W3Y9more8V78gBM5OXAoZVW0eieVjlgwIslash1zxVmAlDVKSIequal";
-       this.url = params['var'] || null; 
+       this.url = params['var'] || null;
     });
     this.listApplicationsUser();
   }
@@ -44,7 +49,7 @@ export class ListApplicationsUserComponent implements OnInit {
       url: this.url
     }
 
-   
+
 
     this.ListApplicationsRepository
       .listApplicationsUser(data)
@@ -77,7 +82,7 @@ export class ListApplicationsUserComponent implements OnInit {
         },
       });
   }
-  
+
 
 
 }

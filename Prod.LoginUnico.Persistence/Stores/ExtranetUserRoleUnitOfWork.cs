@@ -31,4 +31,20 @@ public class ExtranetUserRoleUnitOfWork : UnitOfWork, IExtranetUserRoleUnitOfWor
 
         return await Task.FromResult(result);
     }
+
+    public async Task<int>
+        InsertExtranetUserRole(ExtranetUserRoleEntity entity)
+    {
+        var parms = new Parameter[]
+        {
+            new Parameter("@id_usuario_extranet", entity.id_usuario_extranet),
+            new Parameter("@id_rol", entity.id_rol)
+        };
+
+        var result = ExecuteScalar<int>(
+            "usr_login_unico.MAE_USUARIO_ROL_EXTRANET_INSERTAR",
+            CommandType.StoredProcedure, ref parms);
+
+        return await Task.FromResult(result);
+    }
 }
