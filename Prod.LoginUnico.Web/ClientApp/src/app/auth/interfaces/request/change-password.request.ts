@@ -3,4 +3,5 @@ export interface ChangePasswordRequest {
   applicationId?: number;
   UserName?: string;
   password: string;
+  identificador: string;
 }

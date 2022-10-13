@@ -10,4 +10,6 @@ public interface IApplicationUnitOfWork : IUnitOfWork
     Task<int>RegistrationLogSessionExtranet(bool Estado, DateTime FechaHora, int IdUsuarioExtranet, string Ip, string InformacionHost, string PcName, bool navigation_valid);
     Task<string> ActualizarPassword(string user_name, byte[] password_hash);
     Task<List<ApplicationUserResponse>> GetListApplicationByUser(string user_name);
+    Task<int> SP_INS_UPD_VERIFICACION_RECUPERACION_PASSWORD(Guid identificador, string correo, int verificado);
+    Task<bool> SP_SEL_VERIFICACION_RECUPERACION_PASSWORD(Guid identificador);
 }

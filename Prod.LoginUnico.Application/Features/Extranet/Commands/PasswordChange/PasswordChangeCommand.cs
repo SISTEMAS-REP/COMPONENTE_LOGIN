@@ -14,5 +14,6 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordChange
         public string? RecaptchaToken { get; set; }
         public string? UserName { get; set; }
         public string? password { get; set; }
+        public string? identificador { get; set; }
     }
 }

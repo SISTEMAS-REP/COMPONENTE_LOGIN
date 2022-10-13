@@ -19,6 +19,7 @@ export class ChangePasswordPersonComponent implements OnInit {
   @ViewChild('changePasswordPersonForm') changePasswordPersonForm?: ChangePasswordPersonFormComponent;
   applicationId: number = 0;
   UserName: string = "";
+  identificador: string = "";
   logo?: SafeUrl;
   ChangePasswordRequest?: ChangePasswordRequest;
   recaptchaToken?: string;
@@ -40,6 +41,7 @@ export class ChangePasswordPersonComponent implements OnInit {
     this.router.queryParams.subscribe((params) => {
       this.applicationId = params['applicationId'] || null;
       this.UserName = params['UserName'] || null;
+      this.identificador = params['identificador'] || null;
       this.loadLogo();
     });
   }
@@ -69,7 +71,7 @@ export class ChangePasswordPersonComponent implements OnInit {
     this.ChangePasswordRequest.personType = this.enums.TIPO_PERSONA.NATURAL;
     this.ChangePasswordRequest.applicationId = this.applicationId;
     this.ChangePasswordRequest.UserName = this.UserName;
-    
+    this.ChangePasswordRequest.identificador = this.identificador;
     this.setReCAPTCHA();
   }
 

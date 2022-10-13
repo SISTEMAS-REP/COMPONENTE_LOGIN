@@ -14,6 +14,7 @@ using Prod.LoginUnico.Application.Common.Exceptions;
 using Microsoft.AspNetCore.Identity;
 using Prod.LoginUnico.Domain.Entities.ExtranetUser;
 using Prod.LoginUnico.Application.Common;
+using System;
 
 namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordChange
 {
@@ -52,22 +53,32 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordChange
                     .Aggregate((i, j) => i + ", " + j);
                 throw new BadRequestException($"ReCaptcha validation failed: {errors}");
             }
-            string Decr_user_name = Functions.Decrypt(request.UserName);
-            var pass = string.Join("",MD5.Create().ComputeHash(Encoding.ASCII.GetBytes(Decr_user_name + request.password)).Select(s => s.ToString("x2")));
-            var user = await _extranetUserManager.FindByNameAsync(Decr_user_name);
-            var hash = request.password != null ? passwordHasher.HashPassword(user, request.password) : null;
-            var pass_hash = Convert.FromBase64String(hash);
+            var resultChek = await _applicationUnitOfWork.SP_SEL_VERIFICACION_RECUPERACION_PASSWORD(Guid.Parse(request.identificador!));
+
+            if (resultChek)
+            {
+                var resultCshek = await _applicationUnitOfWork.SP_INS_UPD_VERIFICACION_RECUPERACION_PASSWORD(Guid.Parse(request.identificador!), "", 1);
+
+                string Decr_user_name = Functions.Decrypt(request.UserName);
+                var pass = string.Join("", MD5.Create().ComputeHash(Encoding.ASCII.GetBytes(Decr_user_name + request.password)).Select(s => s.ToString("x2")));
+                var user = await _extranetUserManager.FindByNameAsync(Decr_user_name);
+                var hash = request.password != null ? passwordHasher.HashPassword(user, request.password) : null;
+                var pass_hash = Convert.FromBase64String(hash);
+
+
+                if (user is null)
+                {
+                    throw new UnauthorizedAccessException("Usuario incorrecto.");
+                }
+                else
+                {
+                    var resd = await UserManager.GeneratePasswordResetTokenAsync(user);
+                    var res = await UserManager.ResetPasswordAsync(user, resd, request.password);
+                }
+            }
+
 
             
-            if (user is null)
-            {
-                throw new UnauthorizedAccessException("Usuario incorrecto.");
-            }
-            else
-            {
-                var resd = await UserManager.GeneratePasswordResetTokenAsync(user);
-                var res = await UserManager.ResetPasswordAsync(user, resd, request.password);
-            }
             return Unit.Value;
         }
     }

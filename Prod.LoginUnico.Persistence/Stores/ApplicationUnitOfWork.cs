@@ -80,4 +80,37 @@ public class ApplicationUnitOfWork : UnitOfWork, IApplicationUnitOfWork
 
         return await Task.FromResult(result);
     }
+
+    public async Task<int>
+       SP_INS_UPD_VERIFICACION_RECUPERACION_PASSWORD(Guid identificador, string correo, int verificado)
+    {
+        var parms = new Parameter[]
+        {
+            new Parameter("@identificador_solicitud", identificador),
+            new Parameter("@correo_verificación ", correo),
+            new Parameter("@codigo_verificacion  ", identificador),
+            new Parameter("@verificado", verificado),
+        };
+
+        var result = ExecuteScalar<int>(
+            "usr_login_unico.SP_INS_UPD_VERIFICACION_RECUPERACION_PASSWORD",
+            CommandType.StoredProcedure, ref parms);
+
+        return await Task.FromResult(result);
+    }
+
+    public async Task<bool>
+       SP_SEL_VERIFICACION_RECUPERACION_PASSWORD(Guid identificador)
+    {
+        var parms = new Parameter[]
+        {
+            new Parameter("@identificador_solicitud", identificador),
+        };
+
+        var result = ExecuteScalar<bool>(
+            "usr_login_unico.SP_SEL_VERIFICACION_RECUPERACION_PASSWORD",
+            CommandType.StoredProcedure, ref parms);
+
+        return await Task.FromResult(result);
+    }
 }

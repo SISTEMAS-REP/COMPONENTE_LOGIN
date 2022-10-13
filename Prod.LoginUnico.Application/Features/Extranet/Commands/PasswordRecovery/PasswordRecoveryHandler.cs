@@ -8,6 +8,7 @@ using Prod.LoginUnico.Application.Abstractions.Services;
 using Prod.LoginUnico.Application.Abstractions.Stores;
 using Prod.ServiciosExternos;
 using Release.Helper;
+using System;
 
 namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordRecovery
 {
@@ -61,7 +62,8 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordRecover
                 {
                     if (request.email?.ToLower() == user.email.ToLower())
                     {
-                        //var resultChek = await _applicationUnitOfWork.RegisterVerificationUserExtranet(guid, request.email.ToLower(), guid2);
+                        var guid = Guid.NewGuid();
+                        var resultChek = await _applicationUnitOfWork.SP_INS_UPD_VERIFICACION_RECUPERACION_PASSWORD(guid, request.email.ToLower(), 0);
                         int pos = urlBase.IndexOf('[');
                         int posUlt = urlBase.IndexOf(']');
                         string userName = urlBase.Substring(pos + 1, posUlt - pos - 1);
@@ -108,7 +110,8 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordRecover
                 }
                 else
                 {
-                    //var resultChek = await _applicationUnitOfWork.RegisterVerificationUserExtranet(guid, request.email.ToLower(), guid2);
+                    var guid = Guid.NewGuid();
+                    var resultChek = await _applicationUnitOfWork.SP_INS_UPD_VERIFICACION_RECUPERACION_PASSWORD(guid, request.email.ToLower(), 0);
                     int pos = urlBase.IndexOf('[');
                     int posUlt = urlBase.IndexOf(']');
                     string userName = urlBase.Substring(pos + 1, posUlt - pos - 1);
@@ -119,7 +122,8 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordRecover
                     var query = new NameValueCollection()
                         {
                             {"applicationId",   request.applicationId.ToString() },
-                            {"UserName",        Functions.Encrypt(userName) }
+                            {"UserName",        Functions.Encrypt(userName) },
+                            {"identificador",   guid.ToString() },
                         };
                     var qs = ToQueryString(query);
                     url = urlBase + qs;
