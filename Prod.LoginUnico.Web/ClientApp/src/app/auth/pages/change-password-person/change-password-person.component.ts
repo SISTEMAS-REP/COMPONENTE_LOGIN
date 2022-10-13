@@ -27,7 +27,7 @@ export class ChangePasswordPersonComponent implements OnInit {
 
   isVisibleForm : boolean = true;
   validaSuccess : boolean = false;
-
+  a: boolean = false;
   constructor(
     private spinner: NgxSpinnerService,
     private router: ActivatedRoute,
@@ -121,6 +121,7 @@ export class ChangePasswordPersonComponent implements OnInit {
       .subscribe({
         next: (data : any) => {
           debugger
+          this.a = data.succeeded;
         },
         error: (err) => {
         
@@ -135,15 +136,11 @@ export class ChangePasswordPersonComponent implements OnInit {
       .subscribe({
         next: (dato : any) => {
           this.spinner.hide();
-          if(dato.succeeded){
+          if(this.a){
             console.log('changePasswordPerson-next', 'ChangePassword success');
             this.isVisibleForm = false;
             this.validaSuccess = true;
           }
-          else{
-            this.toastService.danger("EL codigo ya no es posible usarlo", "Error");
-          }
-          
           //this.refresh();
          // this.toastService.success('ChangePassword success');
 
