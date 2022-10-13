@@ -106,6 +106,19 @@ export class ChangePasswordPersonComponent implements OnInit {
   }
 
 
+  ir(){
+    this.ChangePasswordRepository
+      .redirection(this.ChangePasswordRequest!)
+      .subscribe({
+        next: (data : any) => {
+          window.location.href = data;
+        },
+        error: (err) => {
+        
+        },
+      });
+  }
+
   changePasswordPerson() {
     debugger;
     this.ChangePasswordRepository

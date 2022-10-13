@@ -9,6 +9,7 @@ namespace Prod.LoginUnico.Web.Controllers;
 
 public class ExtranetController : BaseApiController
 {
+
     [AllowAnonymous]
     [HttpPost("auth")]
     [Consumes("application/x-www-form-urlencoded")]
@@ -44,6 +45,14 @@ public class ExtranetController : BaseApiController
     public async Task<IActionResult> ApplicationsUserList([FromBody] ApplicationsUserListCommand request)
     {
         request.RecaptchaToken = HttpContext.Request.Headers["x-captcha-token"];
+        var result = await Mediator.Send(request);
+        return Ok(result);
+    }
+
+    [AllowAnonymous]
+    [HttpPost("Redirection")]
+    public async Task<IActionResult> Redirection([FromBody] PasswordChangeCommand request)
+    {
         var result = await Mediator.Send(request);
         return Ok(result);
     }

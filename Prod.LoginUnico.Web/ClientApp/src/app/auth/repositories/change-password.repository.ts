@@ -41,7 +41,13 @@ export class ChangePasswordRepository {
       .pipe(catchError(this.appMapping.throwError));
   };
 
-
+  redirection = (
+    request: ChangePasswordRequest
+  ): Observable<void> => {
+    return this.extranetService
+      .redirection(request)
+      .pipe(catchError(this.appMapping.throwError));
+  };
 
 
 }

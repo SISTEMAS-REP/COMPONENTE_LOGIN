@@ -57,6 +57,12 @@ export class ExtranetService extends ApiService {
     });
   };
 
+  redirection = (
+    request: ChangePasswordRequest
+  ): Observable<any> => {
+    return this.post('redirection', request);
+  };
+
   ListApplicationsUser = (
     request: ListApplicationsRequest,
   ): Observable<any> => {
