@@ -79,12 +79,8 @@ export class ChangePasswordCompanyComponent implements OnInit {
 
     this.ChangePasswordRequest.personType = this.enums.TIPO_PERSONA.JURIDICA;
     this.ChangePasswordRequest.applicationId = this.applicationId;
-    // this.ChangePasswordRequest.Identificador = this.Identificador;
-    // this.ChangePasswordRequest.Code = this.Code;
-    // this.ChangePasswordRequest.Email = this.Email;
     this.ChangePasswordRequest.UserName = this.UserName;
-
-
+    this.ChangePasswordRequest.identificador = this.identificador;
     this.setReCAPTCHA();
   }
 
@@ -150,10 +146,12 @@ export class ChangePasswordCompanyComponent implements OnInit {
 
 
   changePasswordCompany() {
+    debugger;
     this.ChangePasswordRepository
       .changePasswordCompany(this.ChangePasswordRequest!, this.recaptchaToken!)
       .subscribe({
         next: () => {   
+          debugger;
           this.spinner.hide();
           if(this.Verificador){
             console.log('changePasswordCompany-next', 'ChangePassword success');
