@@ -107,7 +107,6 @@ this.recoverPasswordCompany();
 
 
 recoverPasswordCompany() {
-debugger;
 this.RecoverPasswordRepository
   .recoverPasswordCompany(this.RecoverPasswordRequest!, this.recaptchaToken!)
   .subscribe({

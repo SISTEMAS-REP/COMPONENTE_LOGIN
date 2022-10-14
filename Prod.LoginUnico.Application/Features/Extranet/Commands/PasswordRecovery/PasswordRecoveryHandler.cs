@@ -64,7 +64,7 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordRecover
                     if (request.email?.ToLower() == user.email.ToLower())
                     {
                         var guid = Guid.NewGuid();
-                        var resultChek = await _applicationUnitOfWork.SP_INS_UPD_VERIFICACION_RECUPERACION_PASSWORD(guid, request.email.ToLower(), false);
+                        var resultChek = await _applicationUnitOfWork.SP_INS_UPD_VERIFICACION_RECUPERACION_PASSWORD(guid, user.email.ToLower(), false);
                         int pos = urlBase.IndexOf('[');
                         int posUlt = urlBase.IndexOf(']');
                         string userName = urlBase.Substring(pos + 1, posUlt - pos - 1);
@@ -113,7 +113,7 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordRecover
                 else
                 {
                     var guid = Guid.NewGuid();
-                    var resultChek = await _applicationUnitOfWork.SP_INS_UPD_VERIFICACION_RECUPERACION_PASSWORD(guid, request.email.ToLower(), false    );
+                    var resultChek = await _applicationUnitOfWork.SP_INS_UPD_VERIFICACION_RECUPERACION_PASSWORD(guid, user.email.ToLower(), false    );
                     int pos = urlBase.IndexOf('[');
                     int posUlt = urlBase.IndexOf(']');
                     string userName = urlBase.Substring(pos + 1, posUlt - pos - 1);

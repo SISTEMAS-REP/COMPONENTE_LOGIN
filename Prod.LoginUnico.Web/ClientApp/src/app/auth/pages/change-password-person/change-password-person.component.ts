@@ -99,7 +99,6 @@ export class ChangePasswordPersonComponent implements OnInit {
   }
 
   evalChangePassword() {
-    debugger;
     if (!this.ChangePasswordRequest) {
       console.log('evalChangePassword', 'ChangePasswordRequest is null or undefined');
       return;
@@ -125,7 +124,6 @@ export class ChangePasswordPersonComponent implements OnInit {
       .VerifyIdentifier(request)
       .subscribe({
         next: (data : any) => {
-          debugger;
           this.Verificador = data.succeeded;
           if(this.Verificador){       
             this.isVisibleForm = true;
@@ -143,7 +141,6 @@ export class ChangePasswordPersonComponent implements OnInit {
   }
 
   changePasswordPerson() {
-    debugger;
     this.ChangePasswordRepository
       .changePasswordPerson(this.ChangePasswordRequest!, this.recaptchaToken!)
       .subscribe({

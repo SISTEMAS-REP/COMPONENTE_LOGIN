@@ -43,7 +43,6 @@ export class ListApplicationsUserComponent implements OnInit {
 
 
   listApplicationsUser() {
-    debugger;
     let data : ListApplicationsRequest = {
       UserName: this.url,
       url: this.url
@@ -55,7 +54,6 @@ export class ListApplicationsUserComponent implements OnInit {
       .listApplicationsUser(data)
       .subscribe({
         next: (dato:any) => {
-        debugger;
         this.listaAplicaciones = dato.data.applicationUser;
           if(dato.data.applicationUser.length != 0){
             for (var i = 0; i < dato.data.applicationUser.length; i++) {
