@@ -9,6 +9,7 @@ using Prod.LoginUnico.Application.Abstractions.Stores;
 using Prod.ServiciosExternos;
 using Release.Helper;
 using System;
+using Serilog;
 
 namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordRecovery
 {
@@ -97,7 +98,7 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordRecover
                         }
                         catch (Exception ex)
                         {
-
+                            Log.Error(ex.Message);
                         }
 
 
