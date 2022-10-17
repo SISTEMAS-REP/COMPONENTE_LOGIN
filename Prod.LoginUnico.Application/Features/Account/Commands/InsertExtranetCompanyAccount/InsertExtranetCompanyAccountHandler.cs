@@ -43,7 +43,8 @@ public class InsertExtranetCompanyAccountHandler
         // Fecha y hora en la que se realiza la transacción
         var operationDateTime = DateTime.Now;
 
-        var recaptchaResult = await _reCaptchaService.Validate(request.RecaptchaToken!);
+        var recaptchaResult = await _reCaptchaService
+            .Validate(request.RecaptchaToken!);
 
         if (!recaptchaResult.Success)
         {
@@ -86,10 +87,10 @@ public class InsertExtranetCompanyAccountHandler
 
             if (userRoles.Count() > 0)
             {
-                throw new BadRequestException("Ya existe una cuenta asociada al N° de documento.\r\n" +
-                "Intente recuperar su cuenta o Iniciar sesión");
-                /*throw new BadRequestException("Usted ya se encuentra registrado " +
-                    "en la aplicación");*/
+                /*throw new BadRequestException("Ya existe una cuenta asociada al N° de documento.\r\n" +
+                "Intente recuperar su cuenta o Iniciar sesión");*/
+                throw new BadRequestException("Usted ya se encuentra registrado " +
+                    "en la aplicación");
             }
 
             var resultId = await _extranetUserRoleUnitOfWork
@@ -166,6 +167,21 @@ public class InsertExtranetCompanyAccountHandler
             if (result.errors is not null)
             {
                 throw new BadRequestException(result.errors);
+            }
+
+            var userInserted = await _extranetUserManager
+               .FindByNameAsync(userName!);
+
+            var resultId = await _extranetUserRoleUnitOfWork
+                .InsertExtranetUserRole(new()
+                {
+                    id_usuario_extranet = userInserted.id_usuario_extranet,
+                    id_rol = role.id_rol
+                });
+
+            if (resultId <= 0)
+            {
+                throw new BadRequestException("No puede registrarse en esta aplicación");
             }
         }
 

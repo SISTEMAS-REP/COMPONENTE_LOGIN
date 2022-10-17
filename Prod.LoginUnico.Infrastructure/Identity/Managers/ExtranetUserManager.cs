@@ -50,14 +50,16 @@ public class ExtranetUserManager : IExtranetUserManager
             user: user,
             password: password);
 
-        if (result.Succeeded)
-            return (status: true, errors: null);
+        if (!result.Succeeded)
+        {
+            var errors = result.Errors
+                .Select(e => $"{e.Code} : {e.Description}")
+                .Aggregate((i, j) => i + "\n" + j);
 
-        var errors = result.Errors
-            .Select(e => $"{e.Code} : {e.Description}")
-            .Aggregate((i, j) => i + "\n" + j);
+            return (status: false, errors);
+        }
 
-        return (status: false, errors);
+        return (status: true, errors: null);
     }
 
     // Forzar la actualización de la contraseña para un usuario
@@ -77,13 +79,15 @@ public class ExtranetUserManager : IExtranetUserManager
         var result = await UserManager
             .UpdateAsync(user);
 
-        if (result.Succeeded)
-            return (status: true, errors: null);
+        if (!result.Succeeded)
+        {
+            var errors = result.Errors
+                .Select(e => $"{e.Code} : {e.Description}")
+                .Aggregate((i, j) => i + "\n" + j);
 
-        var errors = result.Errors
-            .Select(e => $"{e.Code} : {e.Description}")
-            .Aggregate((i, j) => i + "\n" + j);
+            return (status: false, errors);
+        }
 
-        return (status: false, errors);
+        return (status: true, errors: null);
     }
 }

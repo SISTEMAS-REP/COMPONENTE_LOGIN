@@ -67,7 +67,7 @@ public class ExtranetUserUnitOfWork : UnitOfWork, IExtranetUserUnitOfWork
             new Parameter("@lockout_end_date", entity.lockout_end_date),
             new Parameter("@lockout_enable", entity.lockout_enable),
             new Parameter("@access_failed_count", entity.access_failed_count),
-            //new Parameter("@id_contacto_extranet", entity.id_contacto_extranet),
+            new Parameter("@id_contacto_extranet", entity.id_contacto_extranet),
             new Parameter("@usuario_registro", entity.usuario_registro),
             new Parameter("@fecha_registro", entity.fecha_registro),
             new Parameter("@usuario_modificacion", entity.usuario_modificacion),

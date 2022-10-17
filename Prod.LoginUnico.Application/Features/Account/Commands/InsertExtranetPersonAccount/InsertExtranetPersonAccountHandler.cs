@@ -3,7 +3,6 @@ using Microsoft.Extensions.Options;
 using Prod.LoginUnico.Application.Abstractions.Managers;
 using Prod.LoginUnico.Application.Abstractions.Services;
 using Prod.LoginUnico.Application.Abstractions.Stores;
-using Prod.LoginUnico.Application.Common;
 using Prod.LoginUnico.Application.Common.Exceptions;
 using Prod.LoginUnico.Application.Common.Options;
 using Prod.LoginUnico.Application.Models.Services;
@@ -90,10 +89,10 @@ public class InsertExtranetPersonAccountHandler
 
             if (userRoles.Count() > 0)
             {
-                throw new BadRequestException("Ya existe una cuenta asociada al N° de documento.\r\n" +
-                "Intente recuperar su cuenta o Iniciar sesión");
-                /*throw new BadRequestException("Usted ya se encuentra registrado " +
-                    "en la aplicación");*/
+                /*throw new BadRequestException("Ya existe una cuenta asociada al N° de documento.\r\n" +
+                "Intente recuperar su cuenta o Iniciar sesión");*/
+                throw new BadRequestException("Usted ya se encuentra registrado " +
+                    "en la aplicación");
             }
 
             var resultId = await _extranetUserRoleUnitOfWork
@@ -144,7 +143,8 @@ public class InsertExtranetPersonAccountHandler
             }
 
             // Registrar usuario
-            var result = await _extranetUserManager.CreateAsync(
+            var result = await _extranetUserManager
+                .CreateAsync(
                 user: new()
                 {
                     id_persona_natural = request.PersonId,
@@ -168,6 +168,21 @@ public class InsertExtranetPersonAccountHandler
             if (result.errors is not null)
             {
                 throw new BadRequestException(result.errors);
+            }
+
+            var userInserted = await _extranetUserManager
+               .FindByNameAsync(userName!);
+
+            var resultId = await _extranetUserRoleUnitOfWork
+                .InsertExtranetUserRole(new()
+                {
+                    id_usuario_extranet = userInserted.id_usuario_extranet,
+                    id_rol = role.id_rol
+                });
+
+            if (resultId <= 0)
+            {
+                throw new BadRequestException("No puede registrarse en esta aplicación");
             }
         }
 

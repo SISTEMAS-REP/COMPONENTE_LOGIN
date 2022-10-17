@@ -137,7 +137,8 @@ public class InsertExtranetCompanyAccountUserHandler
             }
 
             // Registrar usuario
-            var result = await _extranetUserManager.CreateAsync(
+            var result = await _extranetUserManager
+                .CreateAsync(
                 user: new()
                 {
                     id_persona_natural = request.PersonId,
@@ -162,6 +163,21 @@ public class InsertExtranetCompanyAccountUserHandler
             if (result.errors is not null)
             {
                 throw new BadRequestException(result.errors);
+            }
+
+            var userInserted = await _extranetUserManager
+                .FindByNameAsync(userName!);
+
+            var resultId = await _extranetUserRoleUnitOfWork
+                .InsertExtranetUserRole(new()
+                {
+                    id_usuario_extranet = userInserted.id_usuario_extranet,
+                    id_rol = role.id_rol
+                });
+
+            if (resultId <= 0)
+            {
+                throw new BadRequestException("No puede registrarse en esta aplicación");
             }
         }
 
