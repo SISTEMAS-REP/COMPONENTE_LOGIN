@@ -4,7 +4,7 @@ import { HomeComponent } from './home.component';
 import { ApplicationsComponent } from './pages/applications/applications.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { CompanyUsersComponent } from './pages/company-users/company-users.component';
-import { ModificationPasswordPersonComponent } from './pages/modification-password-person/modification-password-person.component';
+import { ModificationPasswordComponent } from './pages/modification-password/modification-password.component';
 
 export const homeRoutes: Routes = [
   {
@@ -33,8 +33,8 @@ export const homeRoutes: Routes = [
         component: CompanyUsersComponent,
       },
       {
-        path: 'modification-password-person',
-        component: ModificationPasswordPersonComponent,
+        path: 'modification-password',
+        component: ModificationPasswordComponent,
       },
     ],
   },

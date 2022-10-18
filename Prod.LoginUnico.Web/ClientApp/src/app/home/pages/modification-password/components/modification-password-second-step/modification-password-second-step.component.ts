@@ -3,10 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { patternValidator,mustMatchValidator} from 'src/app/helpers/custom-validators';
 
 @Component({
-  selector: 'app-modification-password-person-second-step',
-  templateUrl: './modification-password-person-second-step.component.html'
+  selector: 'app-modification-password-second-step',
+  templateUrl: './modification-password-second-step.component.html'
 })
-export class ModificationPasswordPersonSecondStepComponent implements OnInit {
+export class ModificationPasswordSecondStepComponent implements OnInit {
   @Input() applicationId?: number;
   @Output() onNextFormButton: EventEmitter<any> = new EventEmitter();
   @Output() onPreviewFormButton: EventEmitter<any> = new EventEmitter();

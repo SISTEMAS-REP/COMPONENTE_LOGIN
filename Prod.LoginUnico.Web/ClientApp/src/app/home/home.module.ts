@@ -18,9 +18,9 @@ import { SharedModule } from '../shared/shared.module';
 import { RegisterCompanyUserFirstStepComponent } from './pages/company-users/components/register-company-user-first-step/register-company-user-first-step.component';
 import { RegisterCompanyUserSecondStepComponent } from './pages/company-users/components/register-company-user-second-step/register-company-user-second-step.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { ModificationPasswordPersonComponent } from './pages/modification-password-person/modification-password-person.component';
-import { ModificationPasswordPersonFirstStepComponent } from './pages/modification-password-person/components/modification-password-person-first-step/modification-password-person-first-step.component';
-import { ModificationPasswordPersonSecondStepComponent } from './pages/modification-password-person/components/modification-password-person-second-step/modification-password-person-second-step.component';
+import { ModificationPasswordComponent } from './pages/modification-password/modification-password.component';
+import { ModificationPasswordFirstStepComponent } from './pages/modification-password/components/modification-password-first-step/modification-password-first-step.component';
+import { ModificationPasswordSecondStepComponent } from './pages/modification-password/components/modification-password-second-step/modification-password-second-step.component';
 
 @NgModule({
   declarations: [
@@ -35,9 +35,9 @@ import { ModificationPasswordPersonSecondStepComponent } from './pages/modificat
     CompanyUsersModalComponent,
     RegisterCompanyUserFirstStepComponent,
     RegisterCompanyUserSecondStepComponent,
-    ModificationPasswordPersonComponent,
-    ModificationPasswordPersonFirstStepComponent,
-    ModificationPasswordPersonSecondStepComponent,
+    ModificationPasswordComponent,
+    ModificationPasswordFirstStepComponent,
+    ModificationPasswordSecondStepComponent,
   ],
   imports: [
     CollapseModule,

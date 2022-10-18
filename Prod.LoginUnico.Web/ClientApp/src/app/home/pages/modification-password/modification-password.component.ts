@@ -5,18 +5,18 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ModificationPasswordRequest } from '../../interfaces/request/Modification-password.request';
 import { LogoRequest } from '../../interfaces/request/logo.request';
 import { ModificationPasswordRepository } from '../../repositories/modification-password.repository';
-import { ModificationPasswordPersonFirstStepComponent } from './components/modification-password-person-first-step/modification-password-person-first-step.component';
-import { ModificationPasswordPersonSecondStepComponent } from './components/modification-password-person-second-step/modification-password-person-second-step.component';
+import { ModificationPasswordFirstStepComponent } from './components/modification-password-first-step/modification-password-first-step.component';
+import { ModificationPasswordSecondStepComponent } from './components/modification-password-second-step/modification-password-second-step.component';
 import { ProfileResponse } from '../../interfaces/response/profile.response';
 import { ProfileRepository } from '../../repositories/profile.repository';
 import Stepper from 'bs-stepper';
 import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
-  selector: 'app-modification-password-person',
-  templateUrl: './modification-password-person.component.html'
+  selector: 'app-modification-password',
+  templateUrl: './modification-password.component.html'
 })
-export class ModificationPasswordPersonComponent implements OnInit {
+export class ModificationPasswordComponent implements OnInit {
   applicationId: number = 0;
   returnUrl?: string;
   logo?: SafeUrl;
@@ -25,8 +25,8 @@ export class ModificationPasswordPersonComponent implements OnInit {
   validaSuccess : boolean = false;
 
 
-  @ViewChild('firstStep') firstStep?: ModificationPasswordPersonFirstStepComponent;
-  @ViewChild('secondStep') secondStep?: ModificationPasswordPersonSecondStepComponent;
+  @ViewChild('firstStep') firstStep?: ModificationPasswordFirstStepComponent;
+  @ViewChild('secondStep') secondStep?: ModificationPasswordSecondStepComponent;
   @ViewChild('stepper', { static: true }) steps: any;
   stepper?: Stepper;
 
@@ -133,7 +133,8 @@ export class ModificationPasswordPersonComponent implements OnInit {
             return;
           }
         }
-        debugger;
+        else 
+         this.toastService.danger("Revise la credencial ingresada", "Error");
         
       },
       error: (err) => {
@@ -161,10 +162,10 @@ export class ModificationPasswordPersonComponent implements OnInit {
 
     this.modificationPasswordRepository.modificationPassword(this.ModificationPasswordRequest, "").subscribe({
       next: (data: any) => {
-        debugger
-        this.validaSuccess = true;
-        debugger;
-        
+        //this.validaSuccess = true;  
+        this.refresh();
+        this.toastService.success('Update success');
+        this.onReturnUrl();
       },
       error: (err) => {
         console.log('getExtranetAccount-error', err);
@@ -178,32 +179,6 @@ export class ModificationPasswordPersonComponent implements OnInit {
   }
 
 
-
-
-
-  // changePasswordPerson() {
-  //   this.modificationPasswordRepository
-  //     .changePasswordPerson(this.ModificationPasswordRequest!)
-  //     .subscribe({
-  //       next: (dato : any) => {
-  //         this.spinner.hide();
-  //         if(this.Verificador){
-  //           console.log('changePasswordPerson-next', 'ChangePassword success');
-  //           this.isVisibleForm = false;
-  //           this.validaSuccess = true;
-  //         }
-  //         //this.refresh();
-  //        // this.toastService.success('ChangePassword success');
-
-  //       },
-  //       error: (err) => {
-  //         this.spinner.hide()
-  //         console.log('changePasswordPerson-error', err);
-
-  //         this.toastService.danger(err.error.detail, err.error.title);
-  //       },
-  //     });
-  // }
 
 
   refreshChangePasswordForm() {

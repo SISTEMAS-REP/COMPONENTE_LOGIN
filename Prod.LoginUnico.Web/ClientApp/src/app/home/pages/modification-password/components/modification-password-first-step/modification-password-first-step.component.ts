@@ -2,16 +2,15 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-modification-password-person-first-step',
-  templateUrl: './modification-password-person-first-step.component.html'
+  selector: 'app-modification-password-first-step',
+  templateUrl: './modification-password-first-step.component.html'
 })
-export class ModificationPasswordPersonFirstStepComponent implements OnInit {
+export class ModificationPasswordFirstStepComponent implements OnInit {
   @Input() applicationId?: number;
   @Output() onNextFormButton: EventEmitter<any> = new EventEmitter();
   @Output() onCancelFormButton: EventEmitter<any> = new EventEmitter();
 
   hidePassword: boolean = true;
-  hideRepeatPassword: boolean = true;
 
   myForm: FormGroup = this.fb.group(
     {     
