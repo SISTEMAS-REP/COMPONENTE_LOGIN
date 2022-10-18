@@ -1,8 +1,6 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Options;
 using Nancy.Json;
-using Prod.LoginUnico.Application.Abstractions;
-using Prod.LoginUnico.Application.Abstractions.Managers;
 using Prod.LoginUnico.Application.Abstractions.Services;
 using Prod.LoginUnico.Application.Abstractions.Stores;
 using Prod.LoginUnico.Application.Common.Options;
@@ -17,29 +15,27 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.ApplicationsUse
         private readonly IReCaptchaService _reCaptchaService;
         private readonly IApplicationUnitOfWork _applicationUnitOfWork;
         private readonly StaticFiles _staticFiles;
-        private readonly ICurrentUserService _currentUserService;
-        private readonly IExtranetUserManager _extranetUserManager;
+
         public ApplicationsUserListHandler(
             IReCaptchaService reCaptchaService,
             IApplicationUnitOfWork applicationUnitOfWork,
-            IOptions<AppSettings> appSettings,
-            ICurrentUserService currentUserService,
-            IExtranetUserManager extranetUserManager)
+            IOptions<AppSettings> appSettings)
         {
             _reCaptchaService = reCaptchaService;
             _applicationUnitOfWork = applicationUnitOfWork;
             _staticFiles = appSettings?.Value?.StaticFiles!;
-            _currentUserService = currentUserService;
-            _extranetUserManager = extranetUserManager;
         }
         public async Task<Response<ApplicationsUserResponse>>
         Handle(ApplicationsUserListCommand request, CancellationToken cancellationToken)
         {
-            var userId = _currentUserService.User?.UserId;
-            var user = await _extranetUserManager.FindByIdAsync(userId);
             List<ApplicationUserResponse> Listado = new List<ApplicationUserResponse>();
 
-            var listado_aplicacion = await _applicationUnitOfWork.GetListApplicationByUser(user.user_name);
+            string tokenDesEncrypted = Functions.Decrypt(request.url);
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            dynamic blogObject = js.Deserialize<dynamic>(tokenDesEncrypted);
+            string User_Name = blogObject["UserName"];
+
+            var listado_aplicacion = await _applicationUnitOfWork.GetListApplicationByUser(User_Name);
 
             foreach (var applicacion in listado_aplicacion)
             {
