@@ -20,6 +20,7 @@ public static class PersistenceExtensions
         services.AddScoped<IExtranetUserUnitOfWork, ExtranetUserUnitOfWork>();
         services.AddScoped<IRoleUnitOfWork, RoleUnitOfWork>();
         services.AddScoped<IExtranetUserRoleUnitOfWork, ExtranetUserRoleUnitOfWork>();
+        services.AddScoped<IDefaultRoleUnitOfWork, DefaultRoleUnitOfWork>();
         services.AddScoped<IApplicationUnitOfWork, ApplicationUnitOfWork>();
 
         return services;

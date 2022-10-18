@@ -7,6 +7,6 @@ public interface IExtranetUserRoleUnitOfWork
     Task<IEnumerable<ExtranetUserRoleEntity>>
         FindExtranetUserRoles(ExtranetUserRole request);
 
-    Task<int>
+    Task
         InsertExtranetUserRole(ExtranetUserRoleEntity entity);
 }

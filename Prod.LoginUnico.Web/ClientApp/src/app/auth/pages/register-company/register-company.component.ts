@@ -270,6 +270,7 @@ export class RegisterCompanyComponent implements OnInit {
 
           this.refresh();
           this.toastService.success('Registro realizado exitosamente', 'Éxito');
+          this.onNavigateTo('auth/login-company');
         },
         error: (err) => {
           this.spinner.hide();
@@ -281,11 +282,18 @@ export class RegisterCompanyComponent implements OnInit {
       });
   }
 
-  onCancel() {
-    if (this.returnUrl) {
-      window.location.href = this.returnUrl;
-    } else {
-      this.router.navigate(['presentation']);
+  onReturnUrl() {
+    if (!this.returnUrl) {
+      this.toastService.danger('Dirección de retorno inválida.');
+      return;
     }
+
+    window.location.href = this.returnUrl;
+  }
+
+  onNavigateTo(route: string) {
+    this.router.navigate([route], {
+      queryParamsHandling: 'preserve',
+    });
   }
 }

@@ -5,35 +5,37 @@ using Prod.LoginUnico.Application.Abstractions.Services;
 using Prod.LoginUnico.Application.Abstractions.Stores;
 using Prod.LoginUnico.Application.Common.Exceptions;
 using Prod.LoginUnico.Application.Common.Options;
-using Prod.LoginUnico.Application.Models.Services;
+using Prod.ServiciosExternos;
 
 namespace Prod.LoginUnico.Application.Features.Account.Commands.InsertExtranetCompanyAccount;
 
 public class InsertExtranetCompanyAccountHandler
     : IRequestHandler<InsertExtranetCompanyAccountCommand>
 {
-    private readonly IRoleUnitOfWork _roleUnitOfWork;
+    private readonly IDefaultRoleUnitOfWork _defaultRoleUnitOfWork;
     private readonly IExtranetUserRoleUnitOfWork _extranetUserRoleUnitOfWork;
-    private readonly IPersonasService _personsService;
+    private readonly IPersonasServicio _personasServicio;
     private readonly IExtranetUserManager _extranetUserManager;
     private readonly IReCaptchaService _reCaptchaService;
 
     private readonly AppSettings _options;
 
     public InsertExtranetCompanyAccountHandler(
-        IRoleUnitOfWork roleUnitOfWork,
+        IDefaultRoleUnitOfWork defaultRoleUnitOfWork,
         IExtranetUserRoleUnitOfWork extranetUserRoleUnitOfWork,
-        IPersonasService personsService,
+        IPersonasServicio personasServicio,
         IExtranetUserManager extranetUserManager,
         IReCaptchaService reCaptchaService,
-        IOptions<AppSettings> options)
+        IOptions<AppSettings> options
+        )
     {
-        _roleUnitOfWork = roleUnitOfWork;
+        _defaultRoleUnitOfWork = defaultRoleUnitOfWork;
         _extranetUserRoleUnitOfWork = extranetUserRoleUnitOfWork;
-        _personsService = personsService;
+        _personasServicio = personasServicio;
         _extranetUserManager = extranetUserManager;
         _reCaptchaService = reCaptchaService;
         _options = options.Value;
+        
     }
 
     public async Task<Unit>
@@ -43,6 +45,7 @@ public class InsertExtranetCompanyAccountHandler
         // Fecha y hora en la que se realiza la transacción
         var operationDateTime = DateTime.Now;
 
+        // Validar captcha
         var recaptchaResult = await _reCaptchaService
             .Validate(request.RecaptchaToken!);
 
@@ -55,17 +58,16 @@ public class InsertExtranetCompanyAccountHandler
         }
 
         // Validar hay roles activos para registrarse en la aplicación
-        var role = (await _roleUnitOfWork
-            .FindRoles(new()
-            {
-                id_aplicacion = request.ApplicationId,
-                nombre = "Administrado"
-            }))
+        var role = await _defaultRoleUnitOfWork
+            .FindExtranet(new());
+
+        var applicationRole = role
+            .Where(x => x.id_aplicacion == request.ApplicationId)
             .FirstOrDefault();
 
-        if (role is null)
+        if (applicationRole is null)
         {
-            throw new BadRequestException("No puede registrarse en esta aplicación");
+            throw new BadRequestException("No puede registrarse en esta aplicación.");
         }
 
         // Definir el user_name basado en el tipo de persona
@@ -81,44 +83,39 @@ public class InsertExtranetCompanyAccountHandler
                 .FindExtranetUserRoles(new()
                 {
                     id_usuario_extranet = user.id_usuario_extranet,
-                    id_rol = role.id_rol,
-                    id_aplicacion = role.id_aplicacion,
+                    id_rol = applicationRole.id_rol,
+                    id_aplicacion = applicationRole.id_aplicacion,
                 });
 
             if (userRoles.Count() > 0)
             {
-                /*throw new BadRequestException("Ya existe una cuenta asociada al N° de documento.\r\n" +
-                "Intente recuperar su cuenta o Iniciar sesión");*/
                 throw new BadRequestException("Usted ya se encuentra registrado " +
-                    "en la aplicación");
+                    "en la aplicación.");
             }
 
-            var resultId = await _extranetUserRoleUnitOfWork
+            // Registrar la aplicación al usuario existente
+            await _extranetUserRoleUnitOfWork
                 .InsertExtranetUserRole(new()
                 {
                     id_usuario_extranet = user.id_usuario_extranet,
-                    id_rol = role.id_rol
+                    id_rol = applicationRole.id_rol
                 });
 
-            if (resultId <= 0)
-            {
-                throw new BadRequestException("No puede registrarse en esta aplicación");
-            }
-
-            /*var newPassword = _passwordHasher
-                .HashPassword(user, request.Password!);*/
+            // Actualizar la contraseña del usuario existente
             var passwordResult = await _extranetUserManager
                 .AddPasswordAsync(user, request.Password!);
 
             if (!passwordResult)
             {
-                throw new ApiException();
+                throw new ApiException("Ocurrió un problema para actualizar su información. " +
+                    "Inténtelo nuevamente.");
             }
         }
         else
         {
             // Actualizar la información de la persona
-            var legalRequest = new PersonasServiceRequest()
+            var updateResponse = _personasServicio
+            .ActualizarPersonaById(new()
             {
                 id = request.JuridicalPersonId,
                 id_sector = request.SectorId,
@@ -130,14 +127,14 @@ public class InsertExtranetCompanyAccountHandler
                 usuario = _options?.UserAudit?.UserName!,
                 usuario_mod = _options?.UserAudit?.UserName!,
                 fecha_mod = operationDateTime
-            };
+            });
 
-            var juridicalPersonId = await _personsService
-                .UpsertLegalPerson(legalRequest);
-            if (juridicalPersonId == 0)
+            if (updateResponse is null
+            || !updateResponse.Success
+            || StringToInt(updateResponse.Value) <= 0)
             {
-                throw new ApiException("No se puede actualizar" +
-                    " la información de la persona jurídica.");
+                throw new ApiException("Ocurrió un problema durante el proceso de registro. " +
+                    "Inténtelo nuevamente.");
             }
 
             // Registrar usuario
@@ -154,7 +151,6 @@ public class InsertExtranetCompanyAccountHandler
                     email_confirmed = true,
                     phone_number = request.PhoneNumber,
                     phone_number_confirmed = !string.IsNullOrEmpty(request.PhoneNumber),
-                    //lockout_enable = true,
 
                     usuario_registro = _options?.UserAudit?.UserName!,
                     fecha_registro = operationDateTime,
@@ -169,22 +165,26 @@ public class InsertExtranetCompanyAccountHandler
                 throw new BadRequestException(result.errors);
             }
 
+            // Buscar usuario registrado recientemente
             var userInserted = await _extranetUserManager
                .FindByNameAsync(userName!);
 
-            var resultId = await _extranetUserRoleUnitOfWork
+            // Registrar la aplicación al usuario registrado recientemente
+            await _extranetUserRoleUnitOfWork
                 .InsertExtranetUserRole(new()
                 {
                     id_usuario_extranet = userInserted.id_usuario_extranet,
-                    id_rol = role.id_rol
+                    id_rol = applicationRole.id_rol
                 });
-
-            if (resultId <= 0)
-            {
-                throw new BadRequestException("No puede registrarse en esta aplicación");
-            }
         }
 
         return Unit.Value;
+    }
+
+    private static int StringToInt(string? stringValue)
+    {
+        return int.TryParse(stringValue, out int intValue)
+            ? intValue
+            : default;
     }
 }

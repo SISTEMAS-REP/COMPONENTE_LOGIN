@@ -20,6 +20,8 @@ public class GetExtranetCompanyAccountUsersResponse : IMapFrom<ExtranetUser>
 
     public string? Email { get; set; }
 
+    public bool Activo { get; set; }
+
     public void Mapping(Profile profile)
     {
         profile.CreateMap<ExtranetUser, GetExtranetCompanyAccountUsersResponse>()
@@ -29,6 +31,7 @@ public class GetExtranetCompanyAccountUsersResponse : IMapFrom<ExtranetUser>
            .ForMember(d => d.LastName, opt => opt.MapFrom(s => s.apellidos))
            .ForMember(d => d.FirstName, opt => opt.MapFrom(s => s.nombres))
            .ForMember(d => d.PhoneNumber, opt => opt.MapFrom(s => s.phone_number))
-           .ForMember(d => d.Email, opt => opt.MapFrom(s => s.email));
+           .ForMember(d => d.Email, opt => opt.MapFrom(s => s.email))
+           .ForMember(d => d.Activo, opt => opt.MapFrom(s => s.Activo));
     }
 }

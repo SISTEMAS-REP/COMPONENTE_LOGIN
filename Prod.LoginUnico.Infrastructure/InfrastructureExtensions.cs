@@ -16,7 +16,6 @@ using Prod.LoginUnico.Application.Abstractions.Services;
 using Prod.LoginUnico.Application.Abstractions.Managers;
 using Prod.LoginUnico.Infrastructure.Identity.Stores;
 using Prod.LoginUnico.Infrastructure.Identity.Managers;
-using Serilog;
 
 namespace Prod.LoginUnico.Infrastructure;
 
@@ -36,20 +35,14 @@ public static class InfrastructureExtensions
 
         services.AddScoped<IPersonasServicio>(s => 
             new PersonasServicio(options.Services?.UrlPersons));
-        services.AddScoped<IPersonasService, PersonasService>();
-
         services.AddScoped<ISunatServicio>(s =>
             new SunatServicio(options.Services?.UrlSunat));
-
         services.AddScoped<IReniecServicio>(s =>
-            new ReniecServicio(options.Services?.UrlReniec));
-        
+            new ReniecServicio(options.Services?.UrlReniec));        
         services.AddScoped<IMigracionesServicio>(s =>
             new MigracionesServicio(options.Services?.UrlMigraciones));
 
         var ff = AppDomain.CurrentDomain.BaseDirectory;
-       
-        
         var baseFolder = AppDomain.CurrentDomain.BaseDirectory; /*options.Urls.Url_domain_login_unico!;*/
         var rootTemplates = Path.Combine(baseFolder, "Plantillas");
         EmailSender.Templates = SenderManager.GetEmailTemplates(rootTemplates, EmailSender.Templates);

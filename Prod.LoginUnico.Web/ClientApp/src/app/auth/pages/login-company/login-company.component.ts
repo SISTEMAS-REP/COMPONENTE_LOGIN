@@ -127,14 +127,8 @@ export class LoginCompanyComponent implements OnInit {
           console.log('loginCompany-next', 'login success');
 
           this.refresh();
-
           this.toastService.success('Login success');
-
-          // window.location.href = this.returnUrl;
-
-          /*
-          TODO: REDIRECT
-          */
+          this.onReturnUrl();
         },
         error: (err) => {
           this.spinner.hide();
@@ -146,11 +140,12 @@ export class LoginCompanyComponent implements OnInit {
       });
   }
 
-  onCancel() {
-    if (this.returnUrl) {
-      window.location.href = this.returnUrl;
-    } else {
-      this.router.navigate(['presentation']);
+  onReturnUrl() {
+    if (!this.returnUrl) {
+      this.toastService.danger('Dirección de retorno inválida.');
+      return;
     }
+
+    window.location.href = this.returnUrl;
   }
 }
