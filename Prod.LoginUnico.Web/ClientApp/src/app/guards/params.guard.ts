@@ -34,7 +34,7 @@ export class ParamsGuard implements CanActivate {
     if (
       !urlParam ||
       urlParam === '' ||
-      !['http://', 'https://'].includes(urlParam)
+      !urlParam.includes('http')
     ) {
       return this.router.navigate(['presentation'], {
         queryParamsHandling: 'preserve',

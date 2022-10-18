@@ -5,6 +5,7 @@ import { ProfileRequest } from '../home/interfaces/request/profile.request';
 import { RegisterPersonRequest } from '../auth/interfaces/request/register-person.request';
 import { RegisterCompanyRequest } from '../auth/interfaces/request/register-company.request';
 import { CompanyUserRequest } from '../home/interfaces/request/company-user.request';
+import { ModificationPasswordRequest } from '../home/interfaces/request/Modification-password.request';
 
 @Injectable({
   providedIn: 'root',
@@ -67,4 +68,16 @@ export class AccountService extends ApiService {
   applications = (): Observable<any> => {
     return this.get('applications', { withCredentiales: true });
   };
+
+  modificationPassword = (
+    request: ModificationPasswordRequest,
+    recaptchaToken: string
+  ): Observable<any> => {
+    return this.post('ModificationPassword', request, {
+      headers: {
+        'x-captcha-token': recaptchaToken,
+      },
+    });
+  };
+
 }

@@ -49,7 +49,6 @@ export class ListApplicationsUserComponent implements OnInit {
     }
 
 
-
     this.ListApplicationsRepository
       .listApplicationsUser(data)
       .subscribe({
