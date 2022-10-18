@@ -80,4 +80,15 @@ export class AccountService extends ApiService {
     });
   };
 
+  validateCurrentPassword = (
+    request: ModificationPasswordRequest,
+    recaptchaToken: string
+  ): Observable<any> => {
+    return this.post('ValidateCurrentPassword', request, {
+      headers: {
+        'x-captcha-token': recaptchaToken,
+      },
+    });
+  };
+
 }

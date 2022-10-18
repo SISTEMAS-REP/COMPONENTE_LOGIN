@@ -23,7 +23,7 @@ export class ModificationPasswordRepository {
     );
   };
 
-  changePasswordPerson = (
+  modificationPassword = (
     request: ModificationPasswordRequest,
     recaptchaToken: string
   ): Observable<void> => {
@@ -32,12 +32,12 @@ export class ModificationPasswordRepository {
       .pipe(catchError(this.appMapping.throwError));
   };
 
-  changePasswordCompany = (
+  validateCurrentPassword = (
     request: ModificationPasswordRequest,
     recaptchaToken: string
   ): Observable<void> => {
     return this.accountService
-      .modificationPassword(request, recaptchaToken)
+      .validateCurrentPassword(request, recaptchaToken)
       .pipe(catchError(this.appMapping.throwError));
   };
 
