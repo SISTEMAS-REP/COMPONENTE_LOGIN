@@ -4,6 +4,7 @@ import { HomeComponent } from './home.component';
 import { ApplicationsComponent } from './pages/applications/applications.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { CompanyUsersComponent } from './pages/company-users/company-users.component';
+import { ModificationPasswordPersonComponent } from './pages/modification-password-person/modification-password-person.component';
 
 export const homeRoutes: Routes = [
   {
@@ -30,6 +31,10 @@ export const homeRoutes: Routes = [
       {
         path: 'company-users',
         component: CompanyUsersComponent,
+      },
+      {
+        path: 'modification-password-person',
+        component: ModificationPasswordPersonComponent,
       },
     ],
   },
