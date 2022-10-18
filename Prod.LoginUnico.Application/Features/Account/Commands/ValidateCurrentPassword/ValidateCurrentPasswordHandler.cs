@@ -38,7 +38,7 @@ namespace Prod.LoginUnico.Application.Features.Account.Commands.ValidateCurrentP
                 var result = await SignInManager
                 .PasswordSignInAsync(
                     user: user,
-                    password: request.current_password,
+                    password: request.password,
                     isPersistent: true,
                     lockoutOnFailure: true);
 

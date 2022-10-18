@@ -10,6 +10,6 @@ namespace Prod.LoginUnico.Application.Features.Account.Commands.ValidateCurrentP
 {
     public  class ValidateCurrentPasswordCommand : IRequest<Response<ValidateCurrentPasswordResponse>>
     {
-        public string current_password { get; set; }
+        public string password { get; set; }
     }
 }

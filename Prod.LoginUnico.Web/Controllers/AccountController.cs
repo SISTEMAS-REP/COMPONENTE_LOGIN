@@ -7,6 +7,7 @@ using Prod.LoginUnico.Application.Features.Account.Commands.InsertExtranetCompan
 using Prod.LoginUnico.Application.Features.Account.Queries.GetExtranetCompanyAccountUsers;
 using Prod.LoginUnico.Application.Features.Account.Commands.InsertExtranetCompanyAccountUser;
 using Prod.LoginUnico.Application.Features.Account.Commands.ValidateCurrentPassword;
+using Prod.LoginUnico.Application.Features.Account.Commands.ModificationPasswordCompany;
 
 namespace Prod.LoginUnico.Web.Controllers;
 
@@ -84,9 +85,10 @@ public class AccountController : BaseApiController
         return Ok(result);
     }
 
+    [AllowAnonymous]
     [HttpPost("modificationPasswordCompany")]
     public async Task<IActionResult>
-        ModificationPasswordCompany([FromBody] InsertExtranetCompanyAccountUserCommand request)
+        ModificationPasswordCompany([FromBody] ModificationPasswordCompanyCommand request)
     {
         var result = await Mediator.Send(request);
         return Ok(result);

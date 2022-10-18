@@ -73,7 +73,7 @@ export class AccountService extends ApiService {
     request: ModificationPasswordRequest,
     recaptchaToken: string
   ): Observable<any> => {
-    return this.post('ModificationPassword', request, {
+    return this.post('ModificationPasswordCompany', request, {
       headers: {
         'x-captcha-token': recaptchaToken,
       },

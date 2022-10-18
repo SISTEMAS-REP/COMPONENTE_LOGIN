@@ -4,4 +4,5 @@ export interface ModificationPasswordRequest {
   UserName?: string;
   password: string;
   identificador: string;
+  current_password?:string;
 }

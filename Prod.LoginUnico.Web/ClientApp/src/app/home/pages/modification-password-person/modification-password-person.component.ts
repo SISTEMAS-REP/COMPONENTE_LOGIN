@@ -122,11 +122,57 @@ export class ModificationPasswordPersonComponent implements OnInit {
       ...data,
     };
     console.log('onNextStep', this.ModificationPasswordRequest);
+    debugger
 
-    if (!$event.finish) {
-      this.stepper?.next();
-      return;
-    }
+    this.modificationPasswordRepository.validateCurrentPassword(this.ModificationPasswordRequest, "").subscribe({
+      next: (data: any) => {
+        if(data.succeeded)
+        {
+          if (!$event.finish) {
+            this.stepper?.next();
+            return;
+          }
+        }
+        debugger;
+        
+      },
+      error: (err) => {
+        console.log('getExtranetAccount-error', err);
+        this.toastService.danger(err.error.detail, err.error.title);
+      },
+    });
+
+   
+
+    this.ModificationPasswordRequest.applicationId = this.applicationId;
+  }
+
+
+
+  onNextStep2($event: any) {
+    var data = $event.data as ModificationPasswordRequest;
+
+    this.ModificationPasswordRequest = {
+      ...this.ModificationPasswordRequest,
+      ...data,
+    };
+    console.log('onNextStep', this.ModificationPasswordRequest);
+    debugger
+
+    this.modificationPasswordRepository.modificationPassword(this.ModificationPasswordRequest, "").subscribe({
+      next: (data: any) => {
+        debugger
+        this.validaSuccess = true;
+        debugger;
+        
+      },
+      error: (err) => {
+        console.log('getExtranetAccount-error', err);
+        this.toastService.danger(err.error.detail, err.error.title);
+      },
+    });
+
+   
 
     this.ModificationPasswordRequest.applicationId = this.applicationId;
   }
