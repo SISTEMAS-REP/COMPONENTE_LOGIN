@@ -22,7 +22,7 @@ export class ParamsGuard implements CanActivate {
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
     const appParam = route.queryParams['applicationId'];
-
+      
     if (!appParam || appParam === '' || appParam === '0') {
       return this.router.navigate(['presentation'], {
         queryParamsHandling: 'preserve',
@@ -34,7 +34,7 @@ export class ParamsGuard implements CanActivate {
     if (
       !urlParam ||
       urlParam === '' ||
-      !['http://', 'https://'].includes(urlParam)
+      !urlParam.includes('http')
     ) {
       return this.router.navigate(['presentation'], {
         queryParamsHandling: 'preserve',
