@@ -16,7 +16,7 @@ public class InsertExtranetPersonAccountCommand
 
     public int PersonId { get; set; } // De la búsqueda de la persona en Reniec
 
-    public bool enableRuc { get; set; } // Si digitó o no su ruc en el formulario
+    public bool? enableRuc { get; set; } // Si digitó o no su ruc en el formulario
 
     public string? RucNumber { get; set; } // Digitado (RUC 10)
 

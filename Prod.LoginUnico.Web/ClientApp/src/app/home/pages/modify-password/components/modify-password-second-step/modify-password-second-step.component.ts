@@ -2,12 +2,12 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { patternValidator,mustMatchValidator} from 'src/app/helpers/custom-validators';
 
+
 @Component({
-  selector: 'app-modification-password-second-step',
-  templateUrl: './modification-password-second-step.component.html'
+  selector: 'app-modify-password-second-step',
+  templateUrl: './modify-password-second-step.component.html'
 })
-export class ModificationPasswordSecondStepComponent implements OnInit {
-  @Input() applicationId?: number;
+export class ModifyPasswordSecondStepComponent implements OnInit {
   @Output() onNextFormButton: EventEmitter<any> = new EventEmitter();
   @Output() onPreviewFormButton: EventEmitter<any> = new EventEmitter();
 
@@ -41,10 +41,10 @@ export class ModificationPasswordSecondStepComponent implements OnInit {
     }
   );
 
-
   constructor(
     private fb: FormBuilder
   ) { }
+
 
   ngOnInit(): void {
   }
@@ -56,26 +56,22 @@ export class ModificationPasswordSecondStepComponent implements OnInit {
     });
   }
 
-  isInvalidField(campo: string) {
-    return (
-      this.myForm.controls[campo].errors && this.myForm.controls[campo].touched
-    );
-  }
-
   next() {
     if (this.myForm.invalid) {
       this.myForm.markAllAsTouched();
       return;
     }
 
-    this.onNextFormButton.emit({
-      finish: true,
-      data: this.myForm.getRawValue(),
-    });
+    this.onNextFormButton.emit({ data: this.myForm.getRawValue() });
   }
 
   preview() {
     this.onPreviewFormButton.emit();
   }
 
+  isInvalidField(campo: string) {
+    return (
+      this.myForm.controls[campo].errors && this.myForm.controls[campo].touched
+    );
+  }
 }

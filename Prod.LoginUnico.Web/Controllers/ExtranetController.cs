@@ -45,7 +45,6 @@ public class ExtranetController : BaseApiController
     [HttpPost("applicationsuserlist")]
     public async Task<IActionResult> ApplicationsUserList([FromBody] ApplicationsUserListCommand request)
     {
-        request.RecaptchaToken = HttpContext.Request.Headers["x-captcha-token"];
         var result = await Mediator.Send(request);
         return Ok(result);
     }

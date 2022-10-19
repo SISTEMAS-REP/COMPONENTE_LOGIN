@@ -24,14 +24,12 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordChange
         private readonly IReCaptchaService _reCaptchaService;
         private readonly IApplicationUnitOfWork _applicationUnitOfWork;
         private readonly IExtranetUserManager _extranetUserManager;
-        private readonly AppSettings _appSettings;
         private readonly IPasswordHasher passwordHasher;
         private UserManager<ExtranetUserEntity> UserManager { get; }
         public PasswordChangeHandler(
             IReCaptchaService reCaptchaService,            
             IApplicationUnitOfWork applicationUnitOfWork,
             IExtranetUserManager extranetUserManager,
-            IOptions<AppSettings> options,
             IPasswordHasher passwordHasher,
              UserManager<ExtranetUserEntity> userManager
             )
@@ -39,7 +37,6 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordChange
             _reCaptchaService = reCaptchaService;
             _extranetUserManager = extranetUserManager;
             _applicationUnitOfWork = applicationUnitOfWork;
-            _appSettings = options.Value;
             this.passwordHasher = passwordHasher;
             UserManager = userManager;
         }

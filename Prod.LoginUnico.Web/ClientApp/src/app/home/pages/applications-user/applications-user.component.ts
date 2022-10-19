@@ -8,10 +8,10 @@ import { ListApplicationsRepository } from '../../repositories/list-applications
 
 
 @Component({
-  selector: 'app-list-applications-user',
-  templateUrl: './list-applications-user.component.html'
+  selector: 'app-applications-user',
+  templateUrl: './applications-user.component.html'
 })
-export class ListApplicationsUserComponent implements OnInit {
+export class ApplicationsUserComponent implements OnInit {
   applicationId: number = 0;
   returnUrl?: string;
   persona: any;
@@ -35,8 +35,6 @@ export class ListApplicationsUserComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(params => {
       this.applicationId = params['applicationId'] || null;
       this.returnUrl = params['returnUrl'];
-      //this.url = "W3Y9more8V78gBM5OXAoZVW0eieVjlgwIslash1zxVmAlDVKSIequal";
-       this.url = params['var'] || null;
     });
     this.listApplicationsUser();
   }
@@ -44,8 +42,7 @@ export class ListApplicationsUserComponent implements OnInit {
 
   listApplicationsUser() {
     let data : ListApplicationsRequest = {
-      UserName: this.url,
-      url: this.url
+      returnUrl: this.returnUrl,
     }
 
 
@@ -53,6 +50,7 @@ export class ListApplicationsUserComponent implements OnInit {
       .listApplicationsUser(data)
       .subscribe({
         next: (dato:any) => {
+        debugger;
         this.listaAplicaciones = dato.data.applicationUser;
           if(dato.data.applicationUser.length != 0){
             for (var i = 0; i < dato.data.applicationUser.length; i++) {
@@ -79,7 +77,14 @@ export class ListApplicationsUserComponent implements OnInit {
         },
       });
   }
-
+  
+  sendCancel() {
+    if (this.returnUrl) {
+      window.location.href = this.returnUrl;
+    } else {
+      this.router.navigate(['presentation']);
+    }
+  }
 
 
 }

@@ -33,11 +33,11 @@ public class InsertExtranetPersonAccountValidator
             .GreaterThan(0)
             .WithMessage("{PropertyName} es ínválido.");
 
-        RuleFor(p => p)
-            .Must(p => p.enableRuc && p.DocumentNumber != null)
+        /*RuleFor(p => p)
+            .Must(p => (p.enableRuc ?? false) && p.DocumentNumber != null)
             .WithMessage("{PropertyName} es un valor obligatorio.")
-            .Must(p => p.enableRuc && p.DocumentNumber!.Trim() != string.Empty)
-            .WithMessage("{PropertyName} es ínválido.");
+            .Must(p => (p.enableRuc ?? false) && p.DocumentNumber!.Trim() != string.Empty)
+            .WithMessage("{PropertyName} es ínválido.");*/
 
         RuleFor(p => p.DocumentNumber)
             .Cascade(CascadeMode.Stop)

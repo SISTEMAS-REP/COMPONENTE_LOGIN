@@ -77,6 +77,7 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordRecover
                             {"applicationId",   request.applicationId.ToString() },
                             {"UserName",        Functions.Encrypt(userName) },
                             {"identificador",        guid.ToString() },
+                            {"returnUrl",   request.returnUrl.ToString() },
                         };
                         var qs = ToQueryString(query);
                         url = urlBase + qs;
@@ -126,6 +127,7 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordRecover
                             {"applicationId",   request.applicationId.ToString() },
                             {"UserName",        Functions.Encrypt(userName) },
                             {"identificador",   guid.ToString() },
+                            {"returnUrl",   request.returnUrl.ToString() },
                         };
                     var qs = ToQueryString(query);
                     url = urlBase + qs;

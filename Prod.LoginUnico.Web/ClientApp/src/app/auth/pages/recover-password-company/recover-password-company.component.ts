@@ -70,6 +70,7 @@ this.RecoverPasswordRequest = $event;
 
 this.RecoverPasswordRequest.personType = this.enums.TIPO_PERSONA.JURIDICA;
 this.RecoverPasswordRequest.applicationId = this.applicationId;
+this.RecoverPasswordRequest.returnUrl = this.returnUrl;
 
 this.setReCAPTCHA();
 }

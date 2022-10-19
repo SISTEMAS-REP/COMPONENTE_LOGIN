@@ -78,6 +78,7 @@ export class ChangePasswordPersonComponent implements OnInit {
     this.ChangePasswordRequest.applicationId = this.applicationId;
     this.ChangePasswordRequest.UserName = this.UserName;
     this.ChangePasswordRequest.identificador = this.identificador;
+    this.ChangePasswordRequest.returnUrl = this.returnUrl;
     this.setReCAPTCHA();
   }
 

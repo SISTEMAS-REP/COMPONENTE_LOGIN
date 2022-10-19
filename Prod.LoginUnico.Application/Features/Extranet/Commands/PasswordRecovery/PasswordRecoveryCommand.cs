@@ -15,6 +15,7 @@ namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordRecover
         public int? personType { get; set; }
         public string? email { get; set; }
         public int applicationId { get; set; }
-       
+        public string? returnUrl { get; set; }
+
     }
 }

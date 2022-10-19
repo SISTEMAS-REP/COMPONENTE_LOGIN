@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using Prod.LoginUnico.Application.Abstractions;
 using Prod.LoginUnico.Application.Abstractions.Managers;
+using Prod.LoginUnico.Application.Abstractions.Services;
 using Prod.LoginUnico.Application.Abstractions.Stores;
 using Prod.LoginUnico.Application.Common.Exceptions;
 using Prod.LoginUnico.Application.Common.Options;
@@ -17,8 +18,8 @@ public class InsertExtranetCompanyAccountUserHandler
     private readonly IPersonasServicio _personasServicio;
     private readonly IExtranetUserManager _extranetUserManager;
     private readonly ICurrentUserService _currentUserService;
-
     private readonly AppSettings _options;
+    private readonly IEmailService _emailService;
 
     public InsertExtranetCompanyAccountUserHandler(
         IDefaultRoleUnitOfWork defaultRoleUnitOfWork,
@@ -26,7 +27,8 @@ public class InsertExtranetCompanyAccountUserHandler
         IPersonasServicio personasServicio,
         IExtranetUserManager extranetUserManager,
         ICurrentUserService currentUserService,
-        IOptions<AppSettings> options)
+        IOptions<AppSettings> options,
+        IEmailService emailService)
     {
         _defaultRoleUnitOfWork = defaultRoleUnitOfWork;
         _extranetUserRoleUnitOfWork = extranetUserRoleUnitOfWork;
@@ -34,6 +36,7 @@ public class InsertExtranetCompanyAccountUserHandler
         _extranetUserManager = extranetUserManager;
         _currentUserService = currentUserService;
         _options = options.Value;
+        _emailService = emailService;
     }
 
     public async Task<Unit>
@@ -170,6 +173,10 @@ public class InsertExtranetCompanyAccountUserHandler
                     id_rol = applicationRole.id_rol
                 });
         }
+
+        await _emailService.CreatePersonAccount(request.Email!,
+            userName,
+            request.Password!);
 
         return Unit.Value;
     }

@@ -4,4 +4,5 @@ export interface ChangePasswordRequest {
   UserName?: string;
   password: string;
   identificador: string;
+  returnUrl?: string;
 }

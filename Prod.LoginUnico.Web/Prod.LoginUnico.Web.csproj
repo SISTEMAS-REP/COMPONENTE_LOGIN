@@ -42,6 +42,12 @@
   </ItemGroup>
 
   <ItemGroup>
+	<None Update="Plantillas\CreateCompanyAccount.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+	<None Update="Plantillas\CreatePersonAccount.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Plantillas\PasswordRecovery.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

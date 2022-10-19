@@ -5,7 +5,8 @@ import { ProfileRequest } from '../home/interfaces/request/profile.request';
 import { RegisterPersonRequest } from '../auth/interfaces/request/register-person.request';
 import { RegisterCompanyRequest } from '../auth/interfaces/request/register-company.request';
 import { CompanyUserRequest } from '../home/interfaces/request/company-user.request';
-import { ModificationPasswordRequest } from '../home/interfaces/request/Modification-password.request';
+import { ModificationPasswordRequest } from '../home/interfaces/request/modification-password.request';
+import { ListApplicationsRequest } from '../home/interfaces/request/list-applications.request';
 
 @Injectable({
   providedIn: 'root',
@@ -89,6 +90,14 @@ export class AccountService extends ApiService {
         'x-captcha-token': recaptchaToken,
       },
     });
+  };
+
+  
+  ListApplicationsUser = (
+    request: ListApplicationsRequest,     
+  ): Observable<any> => {
+    debugger
+    return this.post('ApplicationsUserList', request);
   };
 
 }

@@ -26,11 +26,11 @@ public class InsertExtranetCompanyAccountUserValidator
             .GreaterThan(0)
             .WithMessage("{PropertyName} es ínválido.");
 
-        RuleFor(p => p)
+        /*RuleFor(p => p)
             .Must(p => p.enableRuc && p.DocumentNumber != null)
             .WithMessage("{PropertyName} es un valor obligatorio.")
             .Must(p => p.enableRuc && p.DocumentNumber!.Trim() != string.Empty)
-            .WithMessage("{PropertyName} es ínválido.");
+            .WithMessage("{PropertyName} es ínválido.");*/
 
         RuleFor(p => p.DocumentNumber)
             .Cascade(CascadeMode.Stop)

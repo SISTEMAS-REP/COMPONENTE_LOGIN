@@ -10,9 +10,7 @@ using System.Threading.Tasks;
 namespace Prod.LoginUnico.Application.Features.Extranet.Commands.ApplicationsUserList
 {
     public class ApplicationsUserListCommand : IRequest<Response<ApplicationsUserResponse>>
-    {
-        public string? RecaptchaToken { get; set; }
-        public string? UserName { get; set; }
-        public string? url { get; set; }
+    { 
+        public string? returnUrl { get; set; }
     }
 }

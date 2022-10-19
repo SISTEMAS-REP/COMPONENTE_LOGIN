@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AccountService } from '../../services/account.service';
-import { catchError, map, mergeMap, Observable } from 'rxjs';
+import { catchError, map, Observable, tap } from 'rxjs';
 import AppMapping from 'src/app/helpers/app.mapping';
 import { LogoRequest } from '../interfaces/request/logo.request';
 import { GeneralService } from '../../auth/services/general.service';
-import { ModificationPasswordRequest } from '../interfaces/request/Modification-password.request';
+import { ModificationPasswordRequest } from '../interfaces/request/modification-password.request';
 
 @Injectable({
   providedIn: 'root',
@@ -23,13 +23,14 @@ export class ModificationPasswordRepository {
     );
   };
 
-  modificationPassword = (
-    request: ModificationPasswordRequest,
-    recaptchaToken: string
-  ): Observable<void> => {
-    return this.accountService
-      .modificationPassword(request, recaptchaToken)
-      .pipe(catchError(this.appMapping.throwError));
+  modificationPassword = (request: ModificationPasswordRequest ,
+    recaptchaToken: string): Observable<void> => {
+    return this.accountService.modificationPassword(request, recaptchaToken).pipe(
+      tap((response) =>
+        console.log('modify-password-repository/ModifyPasswordUser', response)
+      ),
+      catchError(this.appMapping.throwError)
+    );
   };
 
   validateCurrentPassword = (

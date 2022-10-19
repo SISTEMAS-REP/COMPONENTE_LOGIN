@@ -70,6 +70,7 @@ export class RecoverPasswordPersonComponent implements OnInit {
 
     this.RecoverPasswordRequest.personType = this.enums.TIPO_PERSONA.NATURAL;
     this.RecoverPasswordRequest.applicationId = this.applicationId;
+    this.RecoverPasswordRequest.returnUrl = this.returnUrl;
 
     this.setReCAPTCHA();
   }

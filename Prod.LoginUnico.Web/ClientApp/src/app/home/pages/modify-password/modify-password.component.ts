@@ -1,34 +1,37 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { ModificationPasswordRequest } from '../../interfaces/request/Modification-password.request';
-import { LogoRequest } from '../../interfaces/request/logo.request';
-import { ModificationPasswordRepository } from '../../repositories/modification-password.repository';
-import { ModificationPasswordFirstStepComponent } from './components/modification-password-first-step/modification-password-first-step.component';
-import { ModificationPasswordSecondStepComponent } from './components/modification-password-second-step/modification-password-second-step.component';
-import { ProfileResponse } from '../../interfaces/response/profile.response';
-import { ProfileRepository } from '../../repositories/profile.repository';
 import Stepper from 'bs-stepper';
+import { LogoRequest } from '../../interfaces/request/logo.request';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { ModifyPasswordFirstStepComponent } from './components/modify-password-first-step/modify-password-first-step.component';
+import { ModifyPasswordSecondStepComponent } from './components/modify-password-second-step/modify-password-second-step.component';
+import { ModifyPasswordSuccessStepComponent } from './components/modify-password-success-step/modify-password-success-step.component';
 import { ToastService } from 'src/app/services/toast.service';
+import { enumerados } from 'src/app/enums/enumerados';
+import { ProfileRepository } from '../../repositories/profile.repository';
+import { ProfileResponse } from '../../interfaces/response/profile.response';
+import { ModificationPasswordRequest } from '../../interfaces/request/modification-password.request';
+import { ModificationPasswordRepository } from '../../repositories/modification-password.repository';
+
 
 @Component({
-  selector: 'app-modification-password',
-  templateUrl: './modification-password.component.html'
+  selector: 'app-modify-password',
+  templateUrl: './modify-password.component.html'
 })
-export class ModificationPasswordComponent implements OnInit {
-  applicationId: number = 0;
-  returnUrl?: string;
-  logo?: SafeUrl;
-  ModificationPasswordRequest?: ModificationPasswordRequest;
-  profile?: ProfileResponse;
-  validaSuccess : boolean = false;
-
-
-  @ViewChild('firstStep') firstStep?: ModificationPasswordFirstStepComponent;
-  @ViewChild('secondStep') secondStep?: ModificationPasswordSecondStepComponent;
+export class ModifyPasswordComponent implements OnInit {
+  @ViewChild('firstStep') firstStep?: ModifyPasswordFirstStepComponent;
+  @ViewChild('secondStep') secondStep?: ModifyPasswordSecondStepComponent;
+  @ViewChild('successStep') successStep?: ModifyPasswordSuccessStepComponent;
   @ViewChild('stepper', { static: true }) steps: any;
   stepper?: Stepper;
+  enumerado: enumerados = new enumerados();
+  profileResponse?: ProfileResponse;
+  applicationId: number = 0;
+  returnUrl?: string = '';
+  logo?: SafeUrl;
+  ModificationPasswordRequest?: ModificationPasswordRequest;
+  validaSuccess : boolean = true;
 
 
   constructor(
@@ -39,19 +42,21 @@ export class ModificationPasswordComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private toastService: ToastService,
     private profileRepository: ProfileRepository,
-  ) {}
+  ) {
+    this.activatedRoute.queryParams.subscribe((params) => {
+      console.log('queryParams', params);
+      this.applicationId = params['applicationId'] || 0;
+      this.returnUrl = params['returnUrl'];
+    });
+  }
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe((params) => {
-      this.applicationId = params['applicationId'] || null;
-      this.returnUrl = params['returnUrl'];
-      this.stepper = new Stepper(this.steps.nativeElement, {
-        linear: true,
-        animation: true,
-      });
-      this.loadLogo();
-      this.findProfile();
+    this.stepper = new Stepper(this.steps.nativeElement, {
+      linear: true,
+      animation: true,
     });
+    this.loadLogo();
+    this.findProfile();
   }
 
   loadLogo() {
@@ -73,6 +78,7 @@ export class ModificationPasswordComponent implements OnInit {
     });
   }
 
+
   findProfile() {
     debugger;
     this.spinner.show();
@@ -80,7 +86,7 @@ export class ModificationPasswordComponent implements OnInit {
       next: (data: ProfileResponse) => {
         debugger;
         this.spinner.hide();
-        this.profile = data;
+        this.profileResponse = data;
       },
       error: (err) => {
         this.spinner.hide();
@@ -90,29 +96,24 @@ export class ModificationPasswordComponent implements OnInit {
       },
     });
   }
-
+ 
+  
   sendForm($event: ModificationPasswordRequest) {
     this.ModificationPasswordRequest = $event;
     this.ModificationPasswordRequest.applicationId = this.applicationId;
   }
-
 
   evalChangePassword() {
     if (!this.ModificationPasswordRequest) {
       console.log('evalChangePassword', 'ChangePasswordRequest is null or undefined');
       return;
     }
-
-    //this.changePasswordPerson();
   }
 
 
   onPreviewStep() {
     this.stepper?.previous();
   }
-
-
-
 
   onNextStep($event: any) {
     var data = $event.data as ModificationPasswordRequest;
@@ -122,10 +123,10 @@ export class ModificationPasswordComponent implements OnInit {
       ...data,
     };
     console.log('onNextStep', this.ModificationPasswordRequest);
-    debugger
 
     this.modificationPasswordRepository.validateCurrentPassword(this.ModificationPasswordRequest, "").subscribe({
       next: (data: any) => {
+        debugger;
         if(data.succeeded)
         {
           if (!$event.finish) {
@@ -142,13 +143,7 @@ export class ModificationPasswordComponent implements OnInit {
         this.toastService.danger(err.error.detail, err.error.title);
       },
     });
-
-   
-
-    this.ModificationPasswordRequest.applicationId = this.applicationId;
   }
-
-
 
   onNextStep2($event: any) {
     var data = $event.data as ModificationPasswordRequest;
@@ -158,49 +153,26 @@ export class ModificationPasswordComponent implements OnInit {
       ...data,
     };
     console.log('onNextStep', this.ModificationPasswordRequest);
-    debugger
 
     this.modificationPasswordRepository.modificationPassword(this.ModificationPasswordRequest, "").subscribe({
-      next: (data: any) => {
-        //this.validaSuccess = true;  
-        this.refresh();
-        this.toastService.success('Update success');
-        this.onReturnUrl();
+      next: () => {
+        this.spinner.hide();
+        console.log('registerPerson-next', 'register success');
+        if (!$event.finish) {
+          debugger;
+          this.stepper?.next();
+          this.validaSuccess = false;  
+          return;
+        }     
       },
       error: (err) => {
-        console.log('getExtranetAccount-error', err);
-        this.toastService.danger(err.error.detail, err.error.title);
+        this.spinner.hide();
+        console.log('modifyPassword-error', err);
+        this.toastService.danger(err.error?.detail, err.error?.title);
       },
     });
-
+}
    
-
-    this.ModificationPasswordRequest.applicationId = this.applicationId;
-  }
-
-
-
-
-  refreshChangePasswordForm() {
-    console.log('refreshLoginForm', 'clear all parameters of stepper form');
-    this.firstStep?.resetFormFields();
-    this.secondStep?.resetFormFields();
-  }
-
-
-
-  refresh() {
-    this.refreshChangePasswordForm();
-  }
-
-
-  sendCancel() {
-    if (this.returnUrl) {
-      window.location.href = this.returnUrl;
-    } else {
-      this.router.navigate(['presentation']);
-    }
-  }
 
   onReturnUrl() {
     if (!this.returnUrl) {
@@ -211,5 +183,10 @@ export class ModificationPasswordComponent implements OnInit {
     window.location.href = this.returnUrl;
   }
 
+  onNavigateTo(route: string) {
+    this.router.navigate([route], {
+      queryParamsHandling: 'preserve',
+    });
+  }
 }
 

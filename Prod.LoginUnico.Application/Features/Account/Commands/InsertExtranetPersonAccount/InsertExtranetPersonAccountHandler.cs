@@ -18,6 +18,7 @@ public class InsertExtranetPersonAccountHandler
     private readonly IExtranetUserManager _extranetUserManager;
     private readonly IReCaptchaService _reCaptchaService;
     private readonly AppSettings _options;
+    private readonly IEmailService _emailService;
 
     public InsertExtranetPersonAccountHandler(
         IDefaultRoleUnitOfWork defaultRoleUnitOfWork,
@@ -25,7 +26,8 @@ public class InsertExtranetPersonAccountHandler
         IPersonasServicio personasServicio,
         IExtranetUserManager extranetUserManager,
         IReCaptchaService reCaptchaService,
-        IOptions<AppSettings> options)
+        IOptions<AppSettings> options,
+        IEmailService emailService)
     {
         _defaultRoleUnitOfWork = defaultRoleUnitOfWork;
         _extranetUserRoleUnitOfWork = extranetUserRoleUnitOfWork;
@@ -33,6 +35,7 @@ public class InsertExtranetPersonAccountHandler
         _extranetUserManager = extranetUserManager;
         _reCaptchaService = reCaptchaService;
         _options = options.Value;
+        _emailService = emailService;
     }
 
     public async Task<Unit>
@@ -173,6 +176,10 @@ public class InsertExtranetPersonAccountHandler
                     id_rol = applicationRole.id_rol
                 });
         }
+
+        await _emailService.CreatePersonAccount(request.Email!, 
+            userName, 
+            request.Password!);
 
         return Unit.Value;
     }

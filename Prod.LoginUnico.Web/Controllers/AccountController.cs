@@ -8,6 +8,7 @@ using Prod.LoginUnico.Application.Features.Account.Queries.GetExtranetCompanyAcc
 using Prod.LoginUnico.Application.Features.Account.Commands.InsertExtranetCompanyAccountUser;
 using Prod.LoginUnico.Application.Features.Account.Commands.ValidateCurrentPassword;
 using Prod.LoginUnico.Application.Features.Account.Commands.ModificationPasswordCompany;
+using Prod.LoginUnico.Application.Features.Extranet.Commands.ApplicationsUserList;
 
 namespace Prod.LoginUnico.Web.Controllers;
 
@@ -90,6 +91,14 @@ public class AccountController : BaseApiController
     public async Task<IActionResult>
         ModificationPasswordCompany([FromBody] ModificationPasswordCompanyCommand request)
     {
+        var result = await Mediator.Send(request);
+        return Ok(result);
+    }
+
+    [AllowAnonymous]
+    [HttpPost("applicationsuserlist")]
+    public async Task<IActionResult> ApplicationsUserList([FromBody] ApplicationsUserListCommand request)
+    {     
         var result = await Mediator.Send(request);
         return Ok(result);
     }
