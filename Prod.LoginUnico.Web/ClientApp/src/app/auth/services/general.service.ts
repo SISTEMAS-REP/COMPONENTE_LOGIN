@@ -20,6 +20,12 @@ export class GeneralService extends ApiService {
     });
   };
 
+  validateCookies = (request?: any): Observable<any> => {
+    return this.get('validateCookies', {
+      params: request ? this.setParams(request) : {},
+    });
+  };
+
   sunat = (request: SunatRequest): Observable<any> => {
     return this.post('sunat', request);
   };

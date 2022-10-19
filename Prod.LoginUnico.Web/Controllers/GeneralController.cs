@@ -4,6 +4,7 @@ using Prod.LoginUnico.Application.Features.General.Commands.Migraciones;
 using Prod.LoginUnico.Application.Features.General.Commands.Reniec;
 using Prod.LoginUnico.Application.Features.General.Commands.Sunat;
 using Prod.LoginUnico.Application.Features.General.Queries.Logo;
+using Prod.LoginUnico.Application.Features.General.Queries.ValidateCookies;
 
 namespace Prod.LoginUnico.Web.Controllers;
 
@@ -12,6 +13,14 @@ public class GeneralController : BaseApiController
     [AllowAnonymous]
     [HttpGet("logo")]
     public async Task<IActionResult> Logo([FromQuery] GeneralLogoQuery request)
+    {
+        var result = await Mediator.Send(request);
+        return Ok(result);
+    }
+
+    [AllowAnonymous]
+    [HttpGet("validateCookies")]
+    public async Task<IActionResult> ValidateCookies([FromQuery] ValidateCookiesQuery request)
     {
         var result = await Mediator.Send(request);
         return Ok(result);

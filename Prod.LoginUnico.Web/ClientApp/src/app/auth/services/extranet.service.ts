@@ -60,14 +60,12 @@ export class ExtranetService extends ApiService {
  VerifyIdentifier = (
     request: ChangePasswordRequest
   ): Observable<any> => {
-    debugger
     return this.post('CheckMail', request);
   };
 
   ListApplicationsUser = (
     request: ListApplicationsRequest,     
   ): Observable<any> => {
-    debugger
     return this.post('ApplicationsUserList', request);
   };
 }

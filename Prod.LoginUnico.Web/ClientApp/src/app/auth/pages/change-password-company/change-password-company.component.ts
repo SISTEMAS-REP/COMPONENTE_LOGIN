@@ -147,12 +147,10 @@ export class ChangePasswordCompanyComponent implements OnInit {
 
 
   changePasswordCompany() {
-    debugger;
     this.ChangePasswordRepository
       .changePasswordCompany(this.ChangePasswordRequest!, this.recaptchaToken!)
       .subscribe({
-        next: () => {   
-          debugger;
+        next: () => { 
           this.spinner.hide();
           if(this.Verificador){
             console.log('changePasswordCompany-next', 'ChangePassword success');

@@ -80,11 +80,9 @@ export class ModifyPasswordComponent implements OnInit {
 
 
   findProfile() {
-    debugger;
     this.spinner.show();
     this.profileRepository.findProfile().subscribe({
       next: (data: ProfileResponse) => {
-        debugger;
         this.spinner.hide();
         this.profileResponse = data;
       },
@@ -126,7 +124,6 @@ export class ModifyPasswordComponent implements OnInit {
 
     this.modificationPasswordRepository.validateCurrentPassword(this.ModificationPasswordRequest, "").subscribe({
       next: (data: any) => {
-        debugger;
         if(data.succeeded)
         {
           if (!$event.finish) {
@@ -159,7 +156,6 @@ export class ModifyPasswordComponent implements OnInit {
         this.spinner.hide();
         console.log('registerPerson-next', 'register success');
         if (!$event.finish) {
-          debugger;
           this.stepper?.next();
           this.validaSuccess = false;  
           return;

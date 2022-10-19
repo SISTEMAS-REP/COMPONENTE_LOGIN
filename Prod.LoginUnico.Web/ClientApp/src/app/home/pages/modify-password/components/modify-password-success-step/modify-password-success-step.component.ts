@@ -59,7 +59,6 @@ export class ModifyPasswordSuccessStepComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    debugger;
     this.profileResponse
   }
 

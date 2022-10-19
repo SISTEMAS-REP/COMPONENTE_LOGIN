@@ -41,6 +41,7 @@ export class LoginPersonComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe((params) => {
       this.applicationId = params['applicationId'] || null;
       this.returnUrl = params['returnUrl'];
+      this.loadValidateCookies();
       this.loadLogo();
     });
   }
@@ -59,6 +60,30 @@ export class LoginPersonComponent implements OnInit {
     this.refreshRecaptchaToken();
     this.refreshLoginForm();
   }
+
+  loadValidateCookies() {
+    this.spinner.show();
+    var request: any = {
+      applicationId: this.applicationId,
+    };
+
+    this.loginRepository.validateCookies(request).subscribe({
+      next: (data) => {
+       if(data){
+        if (this.returnUrl) {
+          window.location.href = this.returnUrl;
+        } else {
+          this.router.navigate(['presentation']);
+        }
+       }
+      },
+      error: (err) => {
+        this.spinner.hide();
+        console.log('loadLogo-error', err);
+      },
+    });
+  }
+
 
   loadLogo() {
     this.spinner.show();

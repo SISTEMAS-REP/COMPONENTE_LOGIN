@@ -23,6 +23,13 @@ export class LoginRepository {
     );
   };
 
+  validateCookies = (request?: any): Observable<any> => {
+    return this.generalService.validateCookies(request).pipe(
+      map((response) => response.data),
+      catchError(this.appMapping.throwError)
+    );
+  };
+
   loginPerson = (
     request: LoginRequest,
     recaptchaToken: string

@@ -96,7 +96,6 @@ export class AccountService extends ApiService {
   ListApplicationsUser = (
     request: ListApplicationsRequest,     
   ): Observable<any> => {
-    debugger
     return this.post('ApplicationsUserList', request);
   };
 
