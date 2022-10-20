@@ -9,6 +9,8 @@ import { EnabledDisabledPipe } from '../../../pipes/enabled-disabled.pipe';
 import { CompanyUserRequest } from '../../interfaces/request/company-user.request';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ProfileRepository } from '../../repositories/profile.repository';
+import { ProfileResponse } from '../../interfaces/response/profile.response';
 
 @Component({
   selector: 'app-company-users',
@@ -28,6 +30,7 @@ export class CompanyUsersComponent implements OnInit {
   };
 
   companyUsers: CompanyUser[] = [];
+  profileResponse?: ProfileResponse;
 
   columns: TableColumn[] = [
     { name: 'Nro. Documento', prop: 'documentNumber', width: 50 },
@@ -62,7 +65,9 @@ export class CompanyUsersComponent implements OnInit {
     //private router: Router,
     private spinner: NgxSpinnerService,
     private toastService: ToastService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private profileRepository: ProfileRepository,
+    private router: Router
   ) {
     this.activatedRoute.queryParams.subscribe((params) => {
       console.log('queryParams', params);
@@ -73,6 +78,7 @@ export class CompanyUsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.findCompanyUsers();
+    this.findProfile();
   }
 
   refresh() {
@@ -84,6 +90,25 @@ export class CompanyUsersComponent implements OnInit {
   refreshCompanyUser() {
     this.companyUserSelected = undefined;
     this.companyUserRequest = undefined;
+  }
+
+  findProfile() {
+    this.spinner.show();
+    this.profileRepository.findProfile().subscribe({
+      next: (data: ProfileResponse) => {
+        this.spinner.hide();
+        this.profileResponse = data;
+        if (!this.profileResponse.juridicPerson) {
+          this.router.navigate(['presentation']);
+        }
+      },
+      error: (err) => {
+        this.spinner.hide();
+        console.log('getExtranetAccount-error', err);
+
+        this.toastService.danger(err.error.detail, err.error.title);
+      },
+    });
   }
 
   findCompanyUsers() {
@@ -156,4 +181,14 @@ export class CompanyUsersComponent implements OnInit {
   closeModal() {
     this.defaultModal.hide();
   }
+
+  onReturnUrl() {
+    if (!this.returnUrl) {
+      this.toastService.danger('Dirección de retorno inválida.');
+      return;
+    }
+
+    window.location.href = this.returnUrl;
+  }
+
 }
