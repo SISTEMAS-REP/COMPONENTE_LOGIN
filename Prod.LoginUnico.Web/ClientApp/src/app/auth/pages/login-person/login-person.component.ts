@@ -26,6 +26,7 @@ export class LoginPersonComponent implements OnInit {
   recaptchaToken?: string;
 
   enums = new enumerados();
+  viewLogin : boolean = false;
 
   constructor(
     private spinner: NgxSpinnerService,
@@ -75,6 +76,9 @@ export class LoginPersonComponent implements OnInit {
         } else {
           this.router.navigate(['presentation']);
         }
+       }
+       else {
+        this.viewLogin = true;  
        }
       },
       error: (err) => {
