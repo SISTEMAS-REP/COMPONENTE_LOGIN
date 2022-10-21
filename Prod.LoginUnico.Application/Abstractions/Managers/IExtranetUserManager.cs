@@ -17,6 +17,9 @@ public interface IExtranetUserManager
         CreateAsync(ExtranetUserEntity user, string password);
 
     Task<bool>
+        CheckPasswordAsync(ExtranetUserEntity user, string password);
+
+    Task<bool>
         AddPasswordAsync(ExtranetUserEntity user, string password);
 
     Task<(bool status, string? errors)>

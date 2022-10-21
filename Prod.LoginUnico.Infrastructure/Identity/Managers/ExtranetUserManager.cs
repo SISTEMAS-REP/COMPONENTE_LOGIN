@@ -22,7 +22,6 @@ public class ExtranetUserManager : IExtranetUserManager
         return user;
     }
 
-
     // Buscar usuario por user_name
     public async Task<ExtranetUserEntity>
         FindByIdAsync(string userId)
@@ -60,6 +59,16 @@ public class ExtranetUserManager : IExtranetUserManager
         }
 
         return (status: true, errors: null);
+    }
+
+    // Validar contraseña
+    public async Task<bool>
+        CheckPasswordAsync(ExtranetUserEntity user, string password)
+    {
+        var result = await UserManager
+            .CheckPasswordAsync(user, password);
+
+        return result;
     }
 
     // Forzar la actualización de la contraseña para un usuario

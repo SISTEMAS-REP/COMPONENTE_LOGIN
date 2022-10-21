@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Identity;
 using Prod.LoginUnico.Domain.Entities.ExtranetUser;
 using Prod.LoginUnico.Application.Common;
 using System;
-using Prod.LoginUnico.Application.Common.Wrapper;
+using Prod.LoginUnico.Application.Common.Wrappers;
 
 namespace Prod.LoginUnico.Application.Features.Extranet.Commands.PasswordChange
 {

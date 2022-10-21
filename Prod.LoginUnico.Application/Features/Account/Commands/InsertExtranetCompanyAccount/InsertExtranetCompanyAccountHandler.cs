@@ -116,19 +116,19 @@ public class InsertExtranetCompanyAccountHandler
         {
             // Actualizar la información de la persona
             var updateResponse = _personasServicio
-            .ActualizarPersonaById(new()
-            {
-                id = request.JuridicalPersonId,
-                id_sector = request.SectorId,
-                id_tipo_persona = request.PersonType,
+                .ActualizarPersonaById(new()
+                {
+                    id = request.JuridicalPersonId,
+                    id_sector = request.SectorId,
+                    id_tipo_persona = request.PersonType,
 
-                email = request.Email!,
-                celular = request.PhoneNumber!,
+                    email = request.Email!,
+                    celular = request.PhoneNumber!,
 
-                usuario = _options?.UserAudit?.UserName!,
-                usuario_mod = _options?.UserAudit?.UserName!,
-                fecha_mod = operationDateTime
-            });
+                    usuario = _options?.UserAudit?.UserName!,
+                    usuario_mod = _options?.UserAudit?.UserName!,
+                    fecha_mod = operationDateTime
+                });
 
             if (updateResponse is null
             || !updateResponse.Success
@@ -139,7 +139,8 @@ public class InsertExtranetCompanyAccountHandler
             }
 
             // Registrar usuario
-            var result = await _extranetUserManager.CreateAsync(
+            var result = await _extranetUserManager
+                .CreateAsync(
                 user: new()
                 {
                     id_persona_natural = request.NaturalPersonId,
@@ -179,7 +180,8 @@ public class InsertExtranetCompanyAccountHandler
                 });
         }
 
-        await _emailService.CreateCompanyAccount(request.Email!,
+        await _emailService
+            .CreateCompanyAccount(request.Email!,
             request.RucNumber!,
             request.DocumentNumber!,
             request.Password!);

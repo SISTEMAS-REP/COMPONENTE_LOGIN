@@ -1,14 +1,6 @@
 ﻿using MediatR;
-using Microsoft.Extensions.Options;
 using Prod.LoginUnico.Application.Abstractions;
-using Prod.LoginUnico.Application.Common.Options;
-using Prod.LoginUnico.Application.Common.Wrapper;
-using Prod.LoginUnico.Application.Features.General.Queries.Logo;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Prod.LoginUnico.Application.Common.Wrappers;
 
 namespace Prod.LoginUnico.Application.Features.General.Queries.ValidateCookies
 {

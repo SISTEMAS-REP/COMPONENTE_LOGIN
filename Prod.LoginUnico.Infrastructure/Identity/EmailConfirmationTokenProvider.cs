@@ -17,6 +17,7 @@ public class EmailConfirmationTokenProvider<TUser>
     }
 }
 
-public class EmailConfirmationTokenProviderOptions : DataProtectionTokenProviderOptions
+public class EmailConfirmationTokenProviderOptions 
+    : DataProtectionTokenProviderOptions
 {
 }

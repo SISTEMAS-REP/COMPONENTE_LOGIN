@@ -14,4 +14,12 @@ public interface IEmailService
         string rucNumber,
         string documentNumber,
         string password);
+
+    Task
+        PasswordRecovery(string email,
+        string urlBase,
+        int applicationId,
+        string userName,
+        Guid guid,
+        string returnUrl);
 }

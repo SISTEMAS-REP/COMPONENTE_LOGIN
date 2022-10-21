@@ -1,5 +1,6 @@
 ﻿using Prod.LoginUnico.Application.Abstractions.Services;
 using Prod.ServiciosExternos;
+using Release.Helper;
 using System.Collections.Specialized;
 using System.Web;
 
@@ -7,7 +8,8 @@ namespace Prod.LoginUnico.Infrastructure.Email;
 
 public class EmailService : EmailSender, IEmailService
 {
-    public EmailService(string rootTemplates, string route) : base(route)
+    public EmailService(string rootTemplates, string route) 
+        : base(route)
     {
         Templates = SenderManager.GetEmailTemplates(rootTemplates, Templates);
     }
@@ -55,6 +57,40 @@ public class EmailService : EmailSender, IEmailService
                 isBodyHtml = true,
                 subject = "LOGIN ÚNICO - Creación de Usuario"
             },
+            data: data);
+
+        return Task.CompletedTask;
+    }
+
+    public Task 
+        PasswordRecovery(string email,
+        string urlBase,
+        int applicationId, 
+        string userName, 
+        Guid guid, 
+        string returnUrl)
+    {
+        var query = new NameValueCollection()
+        {
+            { "applicationId", applicationId.ToString() },
+            { "UserName", Functions.Encrypt(userName) },
+            { "identificador", guid.ToString() },
+            { "returnUrl", returnUrl },
+        };
+        var qs = ToQueryString(query);
+
+        var data = new
+        {
+            url = urlBase + qs
+        };
+
+        Send(templateName: "PasswordRecovery",
+            request: new()
+            {
+                to = email,
+                isBodyHtml = true,
+                subject = "LOGIN UNICO - Reiniciar Contraseña"
+            }, 
             data: data);
 
         return Task.CompletedTask;

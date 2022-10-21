@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Prod.LoginUnico.Application.Common.Wrapper;
+using Prod.LoginUnico.Application.Common.Wrappers;
 using Prod.LoginUnico.Application.Features.Extranet.Commands.Auth;
 using System;
 using System.Collections.Generic;
