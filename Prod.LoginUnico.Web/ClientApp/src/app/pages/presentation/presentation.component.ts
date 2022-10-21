@@ -23,30 +23,5 @@ export class PresentationComponent implements OnInit {
     private loginRepository: LoginRepository,
   ) { }
 
-  ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe((params) => {
-      this.applicationId = params['applicationId'] || null;
-      this.loadLogo();
-    });
-  }
-
-  loadLogo() {
-    this.spinner.show();
-    var request: LogoRequest = {
-      applicationId: this.applicationId,
-    };
-
-    this.loginRepository.logo(request).subscribe({
-      next: (data) => {
-        this.spinner.hide();
-        let objectURL = 'data:image/png;base64,' + data;
-        this.logo = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-      },
-      error: (err) => {
-        this.spinner.hide();
-        console.log('loadLogo-error', err);
-      },
-    });
-  }
-
+  ngOnInit(): void {}
 }

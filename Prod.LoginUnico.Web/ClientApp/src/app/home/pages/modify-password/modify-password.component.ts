@@ -178,11 +178,5 @@ export class ModifyPasswordComponent implements OnInit {
 
     window.location.href = this.returnUrl;
   }
-
-  onNavigateTo(route: string) {
-    this.router.navigate([route], {
-      queryParamsHandling: 'preserve',
-    });
-  }
 }
 

@@ -26,6 +26,7 @@ export class AuthGuard implements CanActivate {
     return this.authService.isLoggedIn().pipe(
       take(1),
       tap((loggedIn) => {
+        debugger
         if (!loggedIn) {
           this.router.navigate(['presentation'], {
             queryParamsHandling: 'preserve',
